@@ -1,9 +1,9 @@
-import { styled } from "@/styles";
+import { styled } from '@/styles'
 
-const Button = styled("button", {
-  backgroundColor: "$green500",
-});
+const Button = styled('button', {
+  backgroundColor: '$green500',
+})
 
 export default function Home() {
-  return <Button>Enviar</Button>;
+  return <Button>Enviar</Button>
 }
