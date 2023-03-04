@@ -1,10 +1,7 @@
-
-
 export default function Sucess() {
-    return (
-      <>
-        <h1>Sucess</h1>
-      </>
-    )
-  }
-  
+  return (
+    <>
+      <h1>Sucess</h1>
+    </>
+  );
+}
