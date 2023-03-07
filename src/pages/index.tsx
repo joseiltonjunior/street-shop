@@ -33,7 +33,7 @@ export default function Home({ products }: HomeProps) {
 
           <footer>
             <strong>{product.name}</strong>
-            <span>R$ {product.price}</span>
+            <span>{product.price}</span>
           </footer>
         </Product>
       ))}
