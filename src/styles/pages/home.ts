@@ -15,8 +15,8 @@ export const ContentWeb = styled('div', {
 export const ContentMobile = styled('div', {
   display: 'none',
 
-  padding: '1rem',
-  height: 'calc(100vh - 10rem)',
+  padding: '0 1rem',
+  height: 'calc(100vh - 11rem)',
 
   '@media (max-width: 900px)': {
     display: 'block',

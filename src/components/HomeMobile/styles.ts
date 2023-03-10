@@ -11,30 +11,34 @@ export const Product = styled('a', {
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
   borderRadius: 8,
   cursor: 'pointer',
-  position: 'relative',
-  overflow: 'hidden',
-  height: 'auto',
+
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
+  padding: '0.5rem',
+
+  div: {
+    display: 'flex',
+    height: '100%',
+    position: 'relative',
+  },
 
   img: {
     objectFit: 'cover',
+
+    height: '100%',
+    width: '100%',
   },
 
   footer: {
-    position: 'absolute',
-    bottom: '0.25rem',
-    left: '0.25rem',
-    right: '0.25rem',
     padding: '1rem',
 
     borderRadius: 6,
 
-    display: 'grid',
+    display: 'flex',
     alignItems: 'center',
-    gridTemplateColumns: '1fr auto',
-
+    justifyContent: 'space-between',
+    gap: '1rem',
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
     strong: {
@@ -48,4 +52,24 @@ export const Product = styled('a', {
       color: '$green300',
     },
   },
+})
+
+export const ButtonPrev = styled('button', {
+  border: 'none',
+
+  position: 'absolute',
+  left: 0,
+  top: '50%',
+  color: '$gray100',
+  background: 'transparent',
+})
+
+export const ButtonNext = styled('button', {
+  border: 'none',
+
+  position: 'absolute',
+  top: '50%',
+  right: 0,
+  color: '$gray100',
+  background: 'transparent',
 })
