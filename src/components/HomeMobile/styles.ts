@@ -31,10 +31,9 @@ export const Product = styled('a', {
 
     borderRadius: 6,
 
-    display: 'flex',
+    display: 'grid',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: '1rem',
+    gridTemplateColumns: '1fr auto',
 
     backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
