@@ -17,8 +17,8 @@ export function HomeWeb({ products }: HomeProps) {
         <Product
           key={product.id}
           className="keen-slider__slide"
-          // href={`/product/${product.id}`}
-          // prefetch={false}
+          href={`/product/${product.id}`}
+          prefetch={false}
         >
           <Image src={product.imageUrl} width={520} height={480} alt="" />
 
