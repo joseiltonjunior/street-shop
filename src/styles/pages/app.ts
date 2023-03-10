@@ -17,5 +17,6 @@ export const Header = styled('header', {
   '@media (max-width: 900px)': {
     display: 'flex',
     justifyContent: 'center',
+    padding: '1rem 0',
   },
 })
