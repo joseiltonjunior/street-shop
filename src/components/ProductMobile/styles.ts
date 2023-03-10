@@ -3,15 +3,9 @@ import { styled } from '@/styles/index'
 export const ProductContainer = styled('main', {
   display: 'flex',
   flexDirection: 'column',
-  width: '100%',
-  height: '100%',
-  //   background: 'red',
 })
 
 export const ImageContainer = styled('div', {
-  //   width: '100%',
-  //   maxWidth: 576,
-  //   height: '100%',
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
   borderRadius: 8,
   padding: '0.25rem',
@@ -22,13 +16,9 @@ export const ImageContainer = styled('div', {
 
   img: {
     objectFit: 'cover',
-    width: 'auto',
-    height: 'auto',
+    height: '100%',
+    width: '100%',
   },
-
-  //   '@media (min-height: 700px)': {
-  //     height: 656,
-  //   },
 })
 
 export const ProductDetails = styled('div', {
@@ -64,5 +54,25 @@ export const ProductDetails = styled('div', {
     cursor: 'pointer',
     fontWeight: 'bold',
     fontSize: '$md',
+  },
+
+  '@media (max-width: 900px)': {
+    h1: {
+      fontSize: '$xl',
+      marginTop: '1rem',
+    },
+
+    span: {
+      fontSize: '$lg',
+    },
+
+    p: {
+      fontSize: '1rem',
+      marginTop: '1rem',
+    },
+
+    button: {
+      marginTop: '1rem',
+    },
   },
 })

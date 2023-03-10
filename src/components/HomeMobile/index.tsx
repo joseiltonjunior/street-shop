@@ -20,12 +20,17 @@ export function HomeMobile({ products }: HomeProps) {
         <Product
           key={product.id}
           className="keen-slider__slide"
-          // href={`/product/${product.id}`}
-          // prefetch={false}
+          href={`/product/${product.id}`}
+          prefetch={false}
         >
           <div>
             {index !== 0 && (
-              <ButtonPrev onClick={() => instanceRef.current?.prev()}>
+              <ButtonPrev
+                onClick={(e) => {
+                  e.preventDefault()
+                  instanceRef.current?.prev()
+                }}
+              >
                 <Image src={caretLeft} alt="" />
               </ButtonPrev>
             )}
@@ -33,7 +38,12 @@ export function HomeMobile({ products }: HomeProps) {
             <Image src={product.imageUrl} width={520} height={480} alt="" />
 
             {index + 1 !== products.length && (
-              <ButtonNext onClick={() => instanceRef.current?.next()}>
+              <ButtonNext
+                onClick={(e) => {
+                  e.preventDefault()
+                  instanceRef.current?.next()
+                }}
+              >
                 <Image src={caretRight} alt="" />
               </ButtonNext>
             )}
