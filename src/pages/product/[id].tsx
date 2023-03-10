@@ -1,23 +1,13 @@
 import { stripe } from '@/lib/stripe'
-import {
-  ProductContainer,
-  ImageContainer,
-  ProductDetails,
-} from '@/styles/pages/product'
+import { ProductProps } from '@/types/product'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Image from 'next/image'
+
 import { useRouter } from 'next/router'
 import Stripe from 'stripe'
 
-interface ProductProps {
-  product: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-    description: string
-  }
-}
+import { Container, ContentMobile, ContentWeb } from '@/styles/pages/product'
+import { ProductWeb } from '@/components/ProductWeb'
+import { ProductMobile } from '@/components/ProductMobile'
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
@@ -27,19 +17,15 @@ export default function Product({ product }: ProductProps) {
   }
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image src={product.imageUrl} width={520} height={480} alt="" />
-      </ImageContainer>
-      <ProductDetails>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
+    <Container>
+      <ContentWeb>
+        <ProductWeb product={product} />
+      </ContentWeb>
 
-        <p>{product.description}</p>
-
-        <button>Comprar agora</button>
-      </ProductDetails>
-    </ProductContainer>
+      <ContentMobile>
+        <ProductMobile product={product} />
+      </ContentMobile>
+    </Container>
   )
 }
 
