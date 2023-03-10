@@ -56,20 +56,18 @@ export const Product = styled('a', {
 
 export const ButtonPrev = styled('button', {
   border: 'none',
-
   position: 'absolute',
   left: 0,
   top: '50%',
-  color: '$gray100',
+
   background: 'transparent',
 })
 
 export const ButtonNext = styled('button', {
   border: 'none',
-
   position: 'absolute',
   top: '50%',
   right: 0,
-  color: '$gray100',
+
   background: 'transparent',
 })

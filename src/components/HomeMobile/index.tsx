@@ -2,7 +2,9 @@ import { HomeProps } from '@/types/home'
 import { useKeenSlider } from 'keen-slider/react'
 import Image from 'next/image'
 import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
-import { CaretLeft, CaretRight } from '@phosphor-icons/react'
+
+import caretLeft from '@/assets/caret-left.svg'
+import caretRight from '@/assets/caret-right.svg'
 
 export function HomeMobile({ products }: HomeProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -24,7 +26,7 @@ export function HomeMobile({ products }: HomeProps) {
           <div>
             {index !== 0 && (
               <ButtonPrev onClick={() => instanceRef.current?.prev()}>
-                <CaretLeft size={30} />
+                <Image src={caretLeft} alt="" />
               </ButtonPrev>
             )}
 
@@ -32,7 +34,7 @@ export function HomeMobile({ products }: HomeProps) {
 
             {index + 1 !== products.length && (
               <ButtonNext onClick={() => instanceRef.current?.next()}>
-                <CaretRight size={30} />
+                <Image src={caretRight} alt="" />
               </ButtonNext>
             )}
           </div>
