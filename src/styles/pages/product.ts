@@ -2,9 +2,6 @@ import { styled } from '..'
 
 export const Container = styled('div', {
   width: '100%',
-  // height: 'calc(100vh - 7.25rem)',
-
-  // background: 'red',
 })
 
 export const ContentWeb = styled('div', {
