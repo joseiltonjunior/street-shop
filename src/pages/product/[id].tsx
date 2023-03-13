@@ -10,9 +10,27 @@ import { ProductWeb } from '@/components/ProductWeb'
 import { SkeletonProductWeb } from '@/components/ProductWeb/Skeleton'
 import { ProductMobile } from '@/components/ProductMobile'
 import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
+import axios from 'axios'
+import { useState } from 'react'
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+
+  async function handleBuyProduct() {
+    setIsLoading(true)
+
+    await axios
+      .post('/api/checkout', { priceId: product.defaultPriceId })
+      .then((result) => {
+        const { checkoutUrl } = result.data
+        window.location.href = checkoutUrl
+      })
+      .catch(() => {
+        setIsLoading(false)
+        alert('Falha ao redirecionar ao checkout!')
+      })
+  }
 
   if (isFallback) {
     return (
@@ -31,11 +49,19 @@ export default function Product({ product }: ProductProps) {
   return (
     <Container>
       <ContentWeb>
-        <ProductWeb product={product} />
+        <ProductWeb
+          product={product}
+          purchase={handleBuyProduct}
+          isLoading={isLoading}
+        />
       </ContentWeb>
 
       <ContentMobile>
-        <ProductMobile product={product} />
+        <ProductMobile
+          product={product}
+          purchase={handleBuyProduct}
+          isLoading={isLoading}
+        />
       </ContentMobile>
     </Container>
   )
@@ -70,6 +96,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
           currency: 'BRL',
         }).format(price.unit_amount! / 100),
         description: product.description,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour

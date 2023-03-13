@@ -1,8 +1,10 @@
-import { ProductProps } from '@/types/product'
+import { BuyProductProps } from '@/types/product'
 import Image from 'next/image'
+
+import { Button } from '../Button'
 import { ImageContainer, ProductContainer, ProductDetails } from './styles'
 
-export function ProductWeb({ product }: ProductProps) {
+export function ProductWeb({ product, purchase, isLoading }: BuyProductProps) {
   return (
     <ProductContainer>
       <ImageContainer>
@@ -14,7 +16,9 @@ export function ProductWeb({ product }: ProductProps) {
 
         <p>{product.description}</p>
 
-        <button>Comprar agora</button>
+        <Button onClick={purchase} isLoading={isLoading}>
+          Compar agora
+        </Button>
       </ProductDetails>
     </ProductContainer>
   )

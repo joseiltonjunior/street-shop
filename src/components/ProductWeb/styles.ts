@@ -64,8 +64,18 @@ export const ProductDetails = styled('div', {
     cursor: 'pointer',
     fontWeight: 'bold',
     fontSize: '$md',
-
+    height: '3.813rem',
     transition: 'background 0.3s',
+
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    div: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
 
     '&:hover': {
       background: '$green300',

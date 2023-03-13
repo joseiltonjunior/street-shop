@@ -5,5 +5,11 @@ export interface ProductProps {
     imageUrl: string
     price: string
     description: string
+    defaultPriceId: string
   }
+}
+
+export interface BuyProductProps extends ProductProps {
+  purchase(): void
+  isLoading: boolean
 }
