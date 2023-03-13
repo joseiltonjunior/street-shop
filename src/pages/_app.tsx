@@ -1,9 +1,12 @@
 import { globalStyles } from '@/styles/global'
 import type { AppProps } from 'next/app'
 import Image from 'next/image'
+import { SkeletonTheme } from 'react-loading-skeleton'
 import logoImg from '@/assets/logo.svg'
 import { Container, Header } from '@/styles/pages/app'
 import Head from 'next/head'
+
+import 'react-loading-skeleton/dist/skeleton.css'
 
 globalStyles()
 
@@ -25,7 +28,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Header>
         <Image src={logoImg} alt="logo" />
       </Header>
-      <Component {...pageProps} />
+      <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
+        <Component {...pageProps} />
+      </SkeletonTheme>
     </Container>
   )
 }

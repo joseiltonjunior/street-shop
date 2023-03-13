@@ -7,13 +7,25 @@ import Stripe from 'stripe'
 
 import { Container, ContentMobile, ContentWeb } from '@/styles/pages/product'
 import { ProductWeb } from '@/components/ProductWeb'
+import { SkeletonProductWeb } from '@/components/ProductWeb/Skeleton'
 import { ProductMobile } from '@/components/ProductMobile'
+import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
 
   if (isFallback) {
-    return <p>Loading...</p>
+    return (
+      <Container>
+        <ContentWeb>
+          <SkeletonProductWeb />
+        </ContentWeb>
+
+        <ContentMobile>
+          <SkeletonProductMobile />
+        </ContentMobile>
+      </Container>
+    )
   }
 
   return (
