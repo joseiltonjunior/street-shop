@@ -27,9 +27,9 @@ export default function Product({ product }: ProductProps) {
         window.location.href = checkoutUrl
       })
       .catch(() => {
-        setIsLoading(false)
         alert('Falha ao redirecionar ao checkout!')
       })
+      .finally(() => setIsLoading(false))
   }
 
   if (isFallback) {
