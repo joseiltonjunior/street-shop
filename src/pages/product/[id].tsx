@@ -23,7 +23,7 @@ export default function Product({ product }: ProductProps) {
     setIsLoading(true)
 
     await axios
-      .post('/api/checkout', { priceIdd: product.defaultPriceId })
+      .post('/api/checkout', { priceId: product.defaultPriceId })
       .then((result) => {
         const { checkoutUrl } = result.data
         window.location.href = checkoutUrl
