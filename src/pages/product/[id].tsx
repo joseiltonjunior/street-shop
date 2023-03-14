@@ -12,22 +12,24 @@ import { ProductMobile } from '@/components/ProductMobile'
 import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
 import axios from 'axios'
 import { useState } from 'react'
+import { Toast } from '@/components/Toast'
 
 export default function Product({ product }: ProductProps) {
   const { isFallback } = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [open, setOpen] = useState(false)
 
   async function handleBuyProduct() {
     setIsLoading(true)
 
     await axios
-      .post('/api/checkout', { priceId: product.defaultPriceId })
+      .post('/api/checkout', { priceIdd: product.defaultPriceId })
       .then((result) => {
         const { checkoutUrl } = result.data
         window.location.href = checkoutUrl
       })
       .catch(() => {
-        alert('Falha ao redirecionar ao checkout!')
+        setOpen(true)
       })
       .finally(() => setIsLoading(false))
   }
@@ -48,6 +50,12 @@ export default function Product({ product }: ProductProps) {
 
   return (
     <Container>
+      <Toast
+        message="Falha ao redirecionar ao checkout"
+        title="Atenção"
+        open={open}
+        setOpen={() => setOpen(false)}
+      />
       <ContentWeb>
         <ProductWeb
           product={product}
