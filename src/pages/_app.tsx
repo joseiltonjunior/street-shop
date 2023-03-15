@@ -5,6 +5,8 @@ import { SkeletonTheme } from 'react-loading-skeleton'
 import logoImg from '@/assets/logo.svg'
 import { Container, Header } from '@/styles/pages/app'
 import Head from 'next/head'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -30,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Header>
       <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
         <Component {...pageProps} />
+        <ToastContainer />
       </SkeletonTheme>
     </Container>
   )
