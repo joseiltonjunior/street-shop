@@ -9,18 +9,25 @@ import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
 import { HomeWeb } from '@/components/HomeWeb'
 import { HomeMobile } from '@/components/HomeMobile'
 import { HomeProps } from '@/types/home'
+import Head from 'next/head'
 
 export default function Home({ products }: HomeProps) {
   return (
-    <Container>
-      <ContentWeb>
-        <HomeWeb products={products} />
-      </ContentWeb>
+    <>
+      <Head>
+        <title>Home | Ignite Shop</title>
+      </Head>
 
-      <ContentMobile>
-        <HomeMobile products={products} />
-      </ContentMobile>
-    </Container>
+      <Container>
+        <ContentWeb>
+          <HomeWeb products={products} />
+        </ContentWeb>
+
+        <ContentMobile>
+          <HomeMobile products={products} />
+        </ContentMobile>
+      </Container>
+    </>
   )
 }
 

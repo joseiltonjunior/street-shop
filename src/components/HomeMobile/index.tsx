@@ -20,7 +20,7 @@ export function HomeMobile({ products }: HomeProps) {
         <Product
           key={product.id}
           className="keen-slider__slide"
-          href={`/product/${product.id}`}
+          href={`/product?id=${product.id}`}
           prefetch={false}
         >
           <div>
