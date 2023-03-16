@@ -18,6 +18,10 @@ export const Header = styled('header', {
   maxWidth: 1180,
   margin: '0 auto',
 
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem',
+
   '@media (max-width: 900px)': {
     display: 'flex',
     justifyContent: 'center',

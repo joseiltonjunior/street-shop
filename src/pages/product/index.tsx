@@ -1,8 +1,7 @@
 import { stripe } from '@/lib/stripe'
 import { ProductProps } from '@/types/product'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 
-import { useRouter } from 'next/router'
 import Stripe from 'stripe'
 
 import { Container, ContentMobile, ContentWeb } from '@/styles/pages/product'
@@ -14,9 +13,9 @@ import axios from 'axios'
 import { useState } from 'react'
 
 import { useToast } from '@/hooks/useToast'
+import Head from 'next/head'
 
 export default function Product({ product }: ProductProps) {
-  const { isFallback } = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
   const { showToast } = useToast()
@@ -39,7 +38,7 @@ export default function Product({ product }: ProductProps) {
       .finally(() => setIsLoading(false))
   }
 
-  if (isFallback) {
+  if (!product) {
     return (
       <Container>
         <ContentWeb>
@@ -54,58 +53,80 @@ export default function Product({ product }: ProductProps) {
   }
 
   return (
-    <Container>
-      <ContentWeb>
-        <ProductWeb
-          product={product}
-          purchase={handleBuyProduct}
-          isLoading={isLoading}
-        />
-      </ContentWeb>
+    <>
+      <Head>
+        <title>{`${product.name}  | Ignite Shop`}</title>
+      </Head>
+      <Container>
+        <ContentWeb>
+          <ProductWeb
+            product={product}
+            purchase={handleBuyProduct}
+            isLoading={isLoading}
+          />
+        </ContentWeb>
 
-      <ContentMobile>
-        <ProductMobile
-          product={product}
-          purchase={handleBuyProduct}
-          isLoading={isLoading}
-        />
-      </ContentMobile>
-    </Container>
+        <ContentMobile>
+          <ProductMobile
+            product={product}
+            purchase={handleBuyProduct}
+            isLoading={isLoading}
+          />
+        </ContentMobile>
+      </Container>
+    </>
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [{ params: { id: 'prod_NU05AWNJg8a0ky' } }],
-    fallback: true,
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  if (!query.id) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
   }
-}
 
-export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
-  params,
-}) => {
-  const productId = params!.id
+  const productId = String(query.id)
 
-  const product = await stripe.products.retrieve(productId, {
-    expand: ['default_price'],
-  })
+  let product = {} || null
 
-  const price = product.default_price as Stripe.Price
+  await stripe.products
+    .retrieve(productId, {
+      expand: ['default_price'],
+    })
+    .then((result) => {
+      const price = result.default_price as Stripe.Price
 
-  return {
-    props: {
-      product: {
-        id: product.id,
-        name: product.name,
-        imageUrl: product.images[0],
+      product = {
+        id: result.id,
+        name: result.name,
+        imageUrl: result.images[0],
         price: new Intl.NumberFormat('pt-BR', {
           style: 'currency',
           currency: 'BRL',
         }).format(price.unit_amount! / 100),
-        description: product.description,
+        description: result.description,
         defaultPriceId: price.id,
+      }
+    })
+    .catch(() => {
+      product = null
+    })
+
+  if (!product) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
       },
+    }
+  }
+
+  return {
+    props: {
+      product,
     },
-    revalidate: 60 * 60 * 1, // 1 hour
   }
 }
