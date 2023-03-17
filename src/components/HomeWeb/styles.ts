@@ -4,8 +4,8 @@ import Link from 'next/link'
 export const ButtonPrev = styled('div', {
   position: 'absolute',
   zIndex: '1000',
-  top: '55%',
-  left: 100,
+  top: '50%',
+  left: 10,
   cursor: 'pointer',
 })
 
@@ -23,7 +23,7 @@ export const HomeContainer = styled('main', {
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
   height: '100%',
-
+  position: 'relative',
   overflow: 'hidden',
 
   '@media (min-height: 700px)': {
