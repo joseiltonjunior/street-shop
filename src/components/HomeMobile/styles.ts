@@ -7,7 +7,7 @@ export const HomeContainer = styled('main', {
 })
 
 export const Product = styled(Link, {
-  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+  background: 'linear-gradient(180deg, $purple300 0%, $gray300 100%)',
   borderRadius: 8,
   cursor: 'pointer',
   textDecoration: 'none',
@@ -40,13 +40,13 @@ export const Product = styled(Link, {
 
     strong: {
       fontSize: '$lg',
-      color: '$gray100',
+      color: '$white',
     },
 
     span: {
       fontSize: '$xl',
       fontWeight: 'bold',
-      color: '$green300',
+      color: '$gray300',
     },
 
     '@media (max-width: 900px)': {

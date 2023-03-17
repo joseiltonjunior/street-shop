@@ -14,6 +14,7 @@ import { useState } from 'react'
 
 import { useToast } from '@/hooks/useToast'
 import Head from 'next/head'
+import { Breadcrumb } from '@/components/Bradcrum'
 
 export default function Product({ product }: ProductProps) {
   const [isLoading, setIsLoading] = useState(false)
@@ -55,8 +56,12 @@ export default function Product({ product }: ProductProps) {
   return (
     <>
       <Head>
+        <meta name="image" content={product.imageUrl} />
         <title>{`${product.name}  | Ignite Shop`}</title>
       </Head>
+
+      <Breadcrumb nameShirt={product.name} />
+
       <Container>
         <ContentWeb>
           <ProductWeb

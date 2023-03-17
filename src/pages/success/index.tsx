@@ -10,6 +10,8 @@ export default function Success({ salesInformation }: SuccessProps) {
   return (
     <>
       <Head>
+        <meta name="image" content={salesInformation.product.images[0]} />
+
         <title>Compra efetuada | Ignite Shop</title>
 
         <meta name="robots" content="noindex" />
