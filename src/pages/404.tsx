@@ -12,7 +12,9 @@ export default function Custom404() {
       <div>
         <Image src={notFound} width={250} height={250} alt="" />
         <p>Ooops... Essa página não existe</p>
-        <button onClick={() => router.replace('/')}>Retornar a home</button>
+        <button onClick={() => router.replace('/')}>
+          Retornar ao Catálogo
+        </button>
       </div>
     </Container>
   )
