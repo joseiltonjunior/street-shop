@@ -1,6 +1,22 @@
 import { styled } from '@/styles/index'
 import Link from 'next/link'
 
+export const ButtonPrev = styled('div', {
+  position: 'absolute',
+  zIndex: '1000',
+  top: '55%',
+  left: 100,
+  cursor: 'pointer',
+})
+
+export const ButtonNext = styled('div', {
+  position: 'absolute',
+  zIndex: '1000',
+  top: '55%',
+  right: 10,
+  cursor: 'pointer',
+})
+
 export const HomeContainer = styled('main', {
   display: 'flex',
   width: '100%',

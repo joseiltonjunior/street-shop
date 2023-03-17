@@ -1,10 +1,12 @@
 import { HomeProps } from '@/types/home'
 import { useKeenSlider } from 'keen-slider/react'
 import Image from 'next/image'
-import { HomeContainer, Product } from './styles'
+import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
+import arrowLeft from '@/assets/caret-left.svg'
+import arrowRight from '@/assets/caret-right.svg'
 
 export function HomeWeb({ products }: HomeProps) {
-  const [sliderRef] = useKeenSlider({
+  const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
@@ -13,6 +15,9 @@ export function HomeWeb({ products }: HomeProps) {
 
   return (
     <HomeContainer ref={sliderRef} className="ken-slider">
+      <ButtonPrev onClick={() => instanceRef.current?.prev()}>
+        <Image src={arrowLeft} alt="" />
+      </ButtonPrev>
       {products.map((product) => (
         <Product
           key={product.id}
@@ -28,6 +33,13 @@ export function HomeWeb({ products }: HomeProps) {
           </footer>
         </Product>
       ))}
+      <ButtonNext>
+        <Image
+          src={arrowRight}
+          alt=""
+          onClick={() => instanceRef.current?.next()}
+        />
+      </ButtonNext>
     </HomeContainer>
   )
 }
