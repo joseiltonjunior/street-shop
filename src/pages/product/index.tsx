@@ -15,9 +15,17 @@ import { useState } from 'react'
 import { useToast } from '@/hooks/useToast'
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/Bradcrum'
+import { Header } from '@/styles/pages/app'
+
+import { useSelector } from 'react-redux'
+import { reduxProps } from '@/storage'
+import { productProps } from '@/storage/modules/cart/action'
+import { CartButton } from '@/components/CartButton'
 
 export default function Product({ product }: ProductProps) {
   const [isLoading, setIsLoading] = useState(false)
+
+  const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
   const { showToast } = useToast()
 
@@ -60,7 +68,11 @@ export default function Product({ product }: ProductProps) {
         <title>{`${product.name}  | Ignite Shop`}</title>
       </Head>
 
-      <Breadcrumb nameShirt={product.name} />
+      <Header>
+        <Breadcrumb nameShirt={product.name} />
+
+        <CartButton productLenth={cart.length} />
+      </Header>
 
       <Container>
         <ContentWeb>

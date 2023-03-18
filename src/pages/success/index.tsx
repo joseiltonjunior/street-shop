@@ -1,10 +1,12 @@
 import { stripe } from '@/lib/stripe'
+import { Header } from '@/styles/pages/app'
 import { Container, ImageContainer } from '@/styles/pages/success'
 import { SuccessProps } from '@/types/success'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import logoIcon from '@/assets/logo.svg'
 
 export default function Success({ salesInformation }: SuccessProps) {
   return (
@@ -16,6 +18,10 @@ export default function Success({ salesInformation }: SuccessProps) {
 
         <meta name="robots" content="noindex" />
       </Head>
+
+      <Header>
+        <Image src={logoIcon} alt="" />
+      </Header>
 
       <Container>
         <h1>Compra efetuada!</h1>

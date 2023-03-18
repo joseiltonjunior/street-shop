@@ -1,13 +1,17 @@
+import { addProduct } from '@/storage/modules/cart/action'
 import { BuyProductProps } from '@/types/product'
 import Image from 'next/image'
+import { useDispatch } from 'react-redux'
 import { Button } from '../Button'
 import { ImageContainer, ProductContainer, ProductDetails } from './styles'
 
-export function ProductMobile({
-  product,
-  purchase,
-  isLoading,
-}: BuyProductProps) {
+export function ProductMobile({ product, isLoading }: BuyProductProps) {
+  const dispatch = useDispatch()
+
+  function addProductCart() {
+    dispatch(addProduct(product))
+  }
+
   return (
     <ProductContainer>
       <ImageContainer>
@@ -19,7 +23,7 @@ export function ProductMobile({
 
         <p>{product.description}</p>
 
-        <Button onClick={purchase} isLoading={isLoading}>
+        <Button onClick={addProductCart} isLoading={isLoading}>
           Compar agora
         </Button>
       </ProductDetails>

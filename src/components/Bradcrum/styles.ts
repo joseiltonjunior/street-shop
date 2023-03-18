@@ -3,12 +3,6 @@ import Link from 'next/link'
 
 export const Container = styled('div', {
   display: 'flex',
-  alignItems: 'center',
-
-  marginLeft: 'auto',
-  maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  width: '100%',
-  marginBottom: '1rem',
 })
 
 export const ActualPage = styled('div', {

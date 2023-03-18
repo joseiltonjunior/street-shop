@@ -20,6 +20,7 @@ export const Header = styled('header', {
 
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
   gap: '1rem',
 
   '@media (max-width: 900px)': {
