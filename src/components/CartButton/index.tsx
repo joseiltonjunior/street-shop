@@ -2,13 +2,15 @@ import Image from 'next/image'
 import { Container } from './styles'
 import cartIcon from '@/assets/shopping-cart-simple.svg'
 
-interface cartButtonProps {
+import { LinkProps } from 'next/link'
+
+interface cartButtonProps extends LinkProps {
   productLenth: number
 }
 
-export function CartButton({ productLenth }: cartButtonProps) {
+export function CartButton({ productLenth, ...rest }: cartButtonProps) {
   return (
-    <Container>
+    <Container {...rest}>
       <Image src={cartIcon} alt="" />
       <span>{productLenth}</span>
     </Container>

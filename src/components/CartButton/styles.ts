@@ -1,8 +1,8 @@
 import { styled } from '@/styles'
+import Link from 'next/link'
 
-export const Container = styled('button', {
-  background: 'transparent',
-  border: 'none',
+export const Container = styled(Link, {
   color: '$gray300',
+  textDecoration: 'none',
   cursor: 'pointer',
 })

@@ -24,6 +24,6 @@ export const Container = styled('button', {
   },
 
   '&:hover': {
-    background: '$purple300',
+    background: '$purple500',
   },
 })

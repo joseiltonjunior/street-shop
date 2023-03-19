@@ -10,6 +10,15 @@ const product: Reducer<productProps[]> = (state = INITIAL_STATE, action) => {
 
       return (state = [...state, product])
     }
+
+    case '@cart/REMOVE_PRODUCT': {
+      const { product } = action.payload
+
+      const newArray = state.filter((item) => item.id !== product.id)
+
+      return (state = newArray)
+    }
+
     default: {
       return state
     }

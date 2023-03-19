@@ -71,16 +71,12 @@ export default function Product({ product }: ProductProps) {
       <Header>
         <Breadcrumb nameShirt={product.name} />
 
-        <CartButton productLenth={cart.length} />
+        <CartButton productLenth={cart.length} href="/carrinho" />
       </Header>
 
       <Container>
         <ContentWeb>
-          <ProductWeb
-            product={product}
-            purchase={handleBuyProduct}
-            isLoading={isLoading}
-          />
+          <ProductWeb product={product} />
         </ContentWeb>
 
         <ContentMobile>

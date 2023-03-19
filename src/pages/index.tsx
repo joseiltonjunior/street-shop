@@ -31,7 +31,7 @@ export default function Home({ products }: HomeProps) {
       <Header>
         <Image src={logoIcon} alt="" />
 
-        <CartButton productLenth={cart.length} />
+        <CartButton productLenth={cart.length} href="/carrinho" />
       </Header>
 
       <Container>
