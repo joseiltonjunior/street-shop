@@ -1,4 +1,8 @@
 import { legacy_createStore as createStore } from 'redux'
+
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
 import { productProps } from './modules/cart/action'
 import rootReducer from './modules/rootReducer'
 
@@ -6,6 +10,15 @@ export interface reduxProps {
   cart: productProps[]
 }
 
-const store = createStore(rootReducer)
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['cart'],
+}
 
-export default store
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = createStore(persistedReducer)
+const persistor = persistStore(store)
+
+export { store, persistor }

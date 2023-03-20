@@ -1,6 +1,7 @@
 import { globalStyles } from '@/styles/global'
 import type { AppProps } from 'next/app'
-import store from '@/storage/index'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from '../storage'
 
 import { Provider } from 'react-redux'
 import { SkeletonTheme } from 'react-loading-skeleton'
@@ -34,10 +35,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Container>
         <Provider store={store}>
-          <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
-            <Component {...pageProps} />
-            <ToastContainer />
-          </SkeletonTheme>
+          <PersistGate loading={null} persistor={persistor}>
+            <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
+              <Component {...pageProps} />
+              <ToastContainer />
+            </SkeletonTheme>
+          </PersistGate>
         </Provider>
       </Container>
     </>
