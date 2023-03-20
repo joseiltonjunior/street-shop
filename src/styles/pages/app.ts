@@ -17,11 +17,12 @@ export const Header = styled('header', {
   width: '100%',
   maxWidth: 1180,
   margin: '0 auto',
-
+  // background: 'red',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '1rem',
+  position: 'relative',
 
   '@media (max-width: 900px)': {
     display: 'flex',

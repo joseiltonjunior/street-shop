@@ -4,6 +4,7 @@ export const Container = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
+  height: '100%',
   minHeight: 656,
 
   display: 'grid',
@@ -12,13 +13,55 @@ export const Container = styled('main', {
 
   borderTop: '1px solid $purple300',
   borderBottom: '1px solid $purple300',
+
+  '@media (max-width: 900px)': {
+    gridTemplateColumns: '1fr',
+    borderBottom: 'none',
+  },
 })
 
 export const Product = styled('div', {
-  display: 'grid',
-  gridTemplateColumns: '1fr 10rem 10rem 10rem',
-  alignItems: 'center',
-  padding: '1rem',
+  '.contentWeb': {
+    display: 'grid',
+    gridTemplateColumns: '1fr 10rem 10rem 10rem',
+    padding: '0.5rem 1rem',
+  },
+
+  '.contentMobile': {
+    display: 'none',
+    width: '100%',
+    gap: '1rem',
+    padding: '0.5rem 1rem',
+
+    '.contentInfo': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+
+      width: '100%',
+
+      div: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+      },
+    },
+  },
+
+  '@media (max-width: 900px)': {
+    display: 'flex',
+
+    '.contentWeb': {
+      display: 'none',
+    },
+
+    '.contentMobile': {
+      display: 'grid',
+
+      gridTemplateColumns: 'auto 1fr auto',
+    },
+  },
+
   div: {
     alignItems: 'center',
     display: 'flex',
@@ -49,7 +92,6 @@ export const Product = styled('div', {
 })
 
 export const TotalContent = styled('div', {
-  //   textAlign: 'center',
   display: 'flex',
   flexDirection: 'column',
   padding: '1rem',
@@ -57,8 +99,6 @@ export const TotalContent = styled('div', {
   background: '$gray800',
 
   div: {
-    with: '100%',
-    // background: 'red',
     justifyContent: 'space-between',
     alignItems: 'center',
     display: 'flex',

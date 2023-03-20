@@ -5,4 +5,7 @@ export const Container = styled(Link, {
   color: '$gray300',
   textDecoration: 'none',
   cursor: 'pointer',
+  // marginLeft: 'auto',
+  position: 'absolute',
+  right: 20,
 })

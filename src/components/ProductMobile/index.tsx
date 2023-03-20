@@ -1,16 +1,46 @@
-import { addProduct } from '@/storage/modules/cart/action'
-import { BuyProductProps } from '@/types/product'
+import { reduxProps } from '@/storage'
+import {
+  addProduct,
+  productProps,
+  removeProduct,
+} from '@/storage/modules/cart/action'
+import { ProductProps } from '@/types/product'
 import Image from 'next/image'
-import { useDispatch } from 'react-redux'
+import { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../Button'
 import { ImageContainer, ProductContainer, ProductDetails } from './styles'
 
-export function ProductMobile({ product, isLoading }: BuyProductProps) {
+export function ProductMobile({ product }: ProductProps) {
   const dispatch = useDispatch()
+  const [verifyProductAddCart, setVerifyProductAddCart] = useState(false)
 
-  function addProductCart() {
+  const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
+
+  const verifyProductCart = useCallback(() => {
+    const productToCart = cart.find((item) => item.id === product.id)
+
+    if (productToCart) {
+      setVerifyProductAddCart(true)
+      return
+    }
+
+    setVerifyProductAddCart(false)
+  }, [cart, product.id])
+
+  function handleProductCart() {
+    if (verifyProductAddCart) {
+      dispatch(removeProduct(product))
+      setVerifyProductAddCart(false)
+      return
+    }
+    setVerifyProductAddCart(true)
     dispatch(addProduct(product))
   }
+
+  useEffect(() => {
+    verifyProductCart()
+  }, [verifyProductCart])
 
   return (
     <ProductContainer>
@@ -23,8 +53,10 @@ export function ProductMobile({ product, isLoading }: BuyProductProps) {
 
         <p>{product.description}</p>
 
-        <Button onClick={addProductCart} isLoading={isLoading}>
-          Compar agora
+        <Button onClick={handleProductCart}>
+          {verifyProductAddCart
+            ? 'Remover do carrinho'
+            : 'Adicionar ao carrinho'}
         </Button>
       </ProductDetails>
     </ProductContainer>

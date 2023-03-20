@@ -19,6 +19,8 @@ import emptyCartIcon from '@/assets/emptyCart.png'
 import { Button } from '@/components/Button'
 import { useCallback, useEffect, useState } from 'react'
 
+import logoCoffeIcon from '@/assets/dcoffee-logo.png'
+
 export default function Carrinho() {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
@@ -56,34 +58,53 @@ export default function Carrinho() {
       </Head>
 
       <Header>
-        <Breadcrumb nameShirt="Meu carrinho" />
-
+        <Image src={logoCoffeIcon} alt="" width={150} />
         <Link href="/">
           <Image src={returnIcon} alt="" width={30} height={30} />
         </Link>
       </Header>
+
+      <Breadcrumb nameShirt="Meu carrinho" />
 
       {cart.length > 0 ? (
         <Container>
           <ProductsContent>
             {cart.map((product) => (
               <Product key={product.id}>
-                <div>
-                  <Image
-                    src={product.imageUrl}
-                    alt=""
-                    width={150}
-                    height={150}
-                  />
-
-                  <strong>{product.name}</strong>
+                <div className="contentMobile">
+                  <Image src={product.imageUrl} alt="" width={80} height={80} />
+                  <div className="contentInfo">
+                    <strong>{product.name}</strong>
+                    <div>
+                      <span>1</span>
+                      <strong>{product.price}</strong>
+                    </div>
+                  </div>
+                  <button
+                    title="Remover produto"
+                    onClick={() => dispatch(removeProduct(product))}
+                  >
+                    X
+                  </button>
                 </div>
+                <div className="contentWeb">
+                  <div>
+                    <Image
+                      src={product.imageUrl}
+                      alt=""
+                      width={150}
+                      height={150}
+                    />
 
-                <span>1</span>
-                <strong>{product.price}</strong>
-                <button onClick={() => dispatch(removeProduct(product))}>
-                  Remover
-                </button>
+                    <strong>{product.name}</strong>
+                  </div>
+
+                  <span>1</span>
+                  <strong>{product.price}</strong>
+                  <button onClick={() => dispatch(removeProduct(product))}>
+                    Remover
+                  </button>
+                </div>
               </Product>
             ))}
           </ProductsContent>

@@ -3,6 +3,9 @@ import Link from 'next/link'
 
 export const Container = styled('div', {
   display: 'flex',
+  width: '100%',
+  maxWidth: 1180,
+  margin: '0 auto 1rem',
 })
 
 export const ActualPage = styled('div', {

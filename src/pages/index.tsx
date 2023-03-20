@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import Stripe from 'stripe'
 import 'keen-slider/keen-slider.min.css'
 
-import logoIcon from '@/assets/logo.svg'
+import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 
 import { stripe } from '@/lib/stripe'
 
@@ -25,11 +25,11 @@ export default function Home({ products }: HomeProps) {
   return (
     <>
       <Head>
-        <title>Home | Ignite Shop</title>
+        <title>{`Home | D'Coffee Shop`}</title>
       </Head>
 
       <Header>
-        <Image src={logoIcon} alt="" />
+        <Image src={logoCoffeIcon} alt="" width={150} />
 
         <CartButton productLenth={cart.length} href="/carrinho" />
       </Header>
@@ -50,6 +50,7 @@ export default function Home({ products }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const response = await stripe.products.list({
     expand: ['data.default_price'],
+    active: true,
   })
 
   const products = response.data.map((product) => {
