@@ -2,7 +2,7 @@ import { Breadcrumb } from '@/components/Bradcrum'
 
 import { reduxProps } from '@/storage'
 import { productProps, removeProduct } from '@/storage/modules/cart/action'
-import { Header } from '@/styles/pages/app'
+import { ButtonPrev, Header } from '@/styles/pages/app'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
@@ -59,9 +59,9 @@ export default function Carrinho() {
 
       <Header>
         <Image src={logoCoffeIcon} alt="" width={150} />
-        <Link href="/">
+        <ButtonPrev href="/">
           <Image src={returnIcon} alt="" width={30} height={30} />
-        </Link>
+        </ButtonPrev>
       </Header>
 
       <Breadcrumb nameShirt="Meu carrinho" />

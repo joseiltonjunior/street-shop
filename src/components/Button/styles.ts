@@ -2,16 +2,16 @@ import { styled } from '@stitches/react'
 
 export const Container = styled('button', {
   marginTop: 'auto',
-  background: '$purple300',
+  background: '$orange500',
   border: 0,
-  color: '$white',
+  color: '$gray900',
   borderRadius: 8,
   padding: '1.25rem',
   cursor: 'pointer',
   fontWeight: 'bold',
   fontSize: '$md',
   height: '3.813rem',
-  transition: 'background 0.3s',
+  transition: 'all 0.3s',
 
   display: 'flex',
   alignItems: 'center',
@@ -24,6 +24,6 @@ export const Container = styled('button', {
   },
 
   '&:hover': {
-    background: '$purple500',
+    color: '$white',
   },
 })

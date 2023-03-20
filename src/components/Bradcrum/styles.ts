@@ -9,14 +9,14 @@ export const Container = styled('div', {
 })
 
 export const ActualPage = styled('div', {
-  color: '$gray300',
+  color: '$gray900',
   fontWeight: 'bold',
   padding: ' 0.5rem',
   left: '10px',
-  background: '$purple300',
+  background: '$orange500',
   position: 'relative',
   display: 'flex',
-  borderRight: '1px solid $purple300',
+  borderRight: '1px solid $orange500',
 
   '@media (max-width: 900px)': {
     width: 'calc(100% - 70px)',
@@ -55,7 +55,7 @@ export const ActualPage = styled('div', {
 
       borderLeft: '1rem solid transparent',
       borderRight: '1rem solid transparent',
-      borderBottom: '1rem solid $purple300',
+      borderBottom: '1rem solid $orange500',
     },
   },
 })
@@ -63,11 +63,11 @@ export const ActualPage = styled('div', {
 export const BreadCrumbLink = styled(Link, {
   cursor: 'pointer',
   textDecoration: 'none',
-  color: '$gray100',
+  color: '$gray900',
   fontWeight: 'bold',
   padding: ' 0.5rem',
-  borderRight: '1px solid $purple300',
-  background: '$purple300',
+  borderRight: '1px solid $orange500',
+  background: '$orange500',
 
   position: 'relative',
 
@@ -80,15 +80,10 @@ export const BreadCrumbLink = styled(Link, {
     zIndex: '1000',
     borderLeft: '1rem solid transparent',
     borderRight: '1rem solid transparent',
-    borderBottom: '1rem solid $purple300',
+    borderBottom: '1rem solid $orange500',
   },
 
   '&:hover': {
-    background: '$purple500',
-    borderRight: '1px solid $purple500',
-
-    '&::after': {
-      borderBottom: '1rem solid $purple500',
-    },
+    color: '$white',
   },
 })

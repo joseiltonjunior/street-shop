@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { styled } from '..'
 
 export const Container = styled('div', {
@@ -17,7 +18,7 @@ export const Header = styled('header', {
   width: '100%',
   maxWidth: 1180,
   margin: '0 auto',
-  // background: 'red',
+
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -29,4 +30,9 @@ export const Header = styled('header', {
     justifyContent: 'center',
     padding: '1rem 0',
   },
+})
+
+export const ButtonPrev = styled(Link, {
+  position: 'absolute',
+  right: 20,
 })

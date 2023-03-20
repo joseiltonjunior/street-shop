@@ -11,8 +11,8 @@ export const Container = styled('main', {
   gridTemplateColumns: '1fr 25rem',
   alignItems: 'flex-start',
 
-  borderTop: '1px solid $purple300',
-  borderBottom: '1px solid $purple300',
+  borderTop: '1px solid $orange500',
+  borderBottom: '1px solid $orange500',
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
@@ -121,7 +121,7 @@ export const TotalContent = styled('div', {
 
 export const ProductsContent = styled('div', {
   'div+div': {
-    borderTop: '1px solid $purple300',
+    borderTop: '1px solid $orange500',
   },
 })
 
@@ -143,8 +143,8 @@ export const EmptyCartContent = styled('div', {
   },
 
   a: {
-    background: '$purple300',
-    color: '$gray100',
+    background: '$orange500',
+    color: '$gray900',
     textDecoration: 'none',
     padding: '1rem',
     borderRadius: 8,
@@ -154,7 +154,7 @@ export const EmptyCartContent = styled('div', {
     marginTop: '4rem',
 
     '&:hover': {
-      background: '$purple500',
+      color: '$white',
     },
   },
 

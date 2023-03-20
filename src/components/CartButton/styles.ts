@@ -2,10 +2,10 @@ import { styled } from '@/styles'
 import Link from 'next/link'
 
 export const Container = styled(Link, {
-  color: '$gray300',
+  color: '$orange500',
   textDecoration: 'none',
   cursor: 'pointer',
-  // marginLeft: 'auto',
+
   position: 'absolute',
   right: 20,
 })

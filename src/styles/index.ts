@@ -23,7 +23,7 @@ export const {
       green500: '#00875f',
       greenNeon: '#c1fe05',
       greenSwamp: '#799f03',
-      orange500: '#ff8c00',
+      orange500: '#FFBA00',
       purple300: '#750592',
       purple500: '#58046e',
     },
