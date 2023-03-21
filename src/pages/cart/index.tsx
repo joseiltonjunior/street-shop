@@ -6,21 +6,23 @@ import { ButtonPrev, Header } from '@/styles/pages/app'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
+import { useCallback, useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import returnIcon from '@/assets/arrow-u-up-left.svg'
+import emptyCartIcon from '@/assets/emptyCart.png'
+import { Button } from '@/components/Button'
+
+import logoCoffeIcon from '@/assets/dcoffee-logo.png'
+
 import {
   Container,
   Product,
   TotalContent,
   ProductsContent,
   EmptyCartContent,
-} from './styles'
-import returnIcon from '@/assets/arrow-u-up-left.svg'
-import Link from 'next/link'
-import emptyCartIcon from '@/assets/emptyCart.png'
-import { Button } from '@/components/Button'
-import { useCallback, useEffect, useState } from 'react'
-
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
-import { useRouter } from 'next/router'
+} from '@/styles/pages/cart'
 
 export default function Carrinho() {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)

@@ -73,7 +73,7 @@ export default function Product({ product }: ProductProps) {
 
       <Header>
         <Image src={logoCoffeIcon} alt="" width={150} />
-        <CartButton productLenth={cart.length} href="/carrinho" />
+        <CartButton productLenth={cart.length} href="/cart" />
       </Header>
       <Breadcrumb nameShirt={product.name} />
 

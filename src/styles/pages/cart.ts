@@ -7,8 +7,6 @@ export const Container = styled('main', {
 
   height: 616,
 
-  // overflow: 'hidden',
-
   display: 'grid',
   gridTemplateColumns: '1fr 0.7fr',
   alignItems: 'flex-start',
@@ -20,7 +18,6 @@ export const Container = styled('main', {
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
     height: 'calc(100vh - 125px)',
-    // overflowY: 'scroll',
   },
 })
 
