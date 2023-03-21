@@ -4,80 +4,42 @@ export const Container = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
-  height: '100%',
-  minHeight: 656,
+
+  height: 616,
+
+  overflow: 'hidden',
 
   display: 'grid',
-  gridTemplateColumns: '1fr 25rem',
+  gridTemplateColumns: '1fr 0.7fr',
   alignItems: 'flex-start',
 
-  borderTop: '1px solid $orange500',
-  borderBottom: '1px solid $orange500',
+  '@media (max-height: 700px)': {
+    height: 450,
+  },
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    borderBottom: 'none',
+    height: 'calc(100vh - 125px)',
+    overflowY: 'scroll',
   },
 })
 
 export const Product = styled('div', {
-  '.contentWeb': {
-    display: 'grid',
-    gridTemplateColumns: '1fr 10rem 10rem 10rem',
-    padding: '0.5rem 1rem',
-  },
+  display: 'grid',
+  gridTemplateColumns: '150px auto 150px',
 
-  '.contentMobile': {
-    display: 'none',
-    width: '100%',
-    gap: '1rem',
-    padding: '0.5rem 1rem',
+  alignItems: 'center',
 
-    '.contentInfo': {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-
-      width: '100%',
-
-      div: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-      },
+  '.price': {
+    strong: {
+      color: '$orange500',
+      marginLeft: '1rem',
     },
-  },
-
-  '@media (max-width: 900px)': {
-    display: 'flex',
-
-    '.contentWeb': {
-      display: 'none',
-    },
-
-    '.contentMobile': {
-      display: 'grid',
-
-      gridTemplateColumns: 'auto 1fr auto',
-    },
-  },
-
-  div: {
-    alignItems: 'center',
-    display: 'flex',
-  },
-
-  span: {
-    textAlign: 'center',
-  },
-
-  strong: {
-    textAlign: 'center',
   },
 
   button: {
     background: 'transparent',
-    color: '$gray100',
+    color: '$orange500',
     fontWeight: 'bold',
 
     border: 'none',
@@ -86,7 +48,34 @@ export const Product = styled('div', {
     cursor: 'pointer',
 
     '&:hover': {
-      color: '$gray300',
+      color: '$white',
+    },
+
+    span: {
+      display: 'none',
+    },
+  },
+
+  '@media (max-width: 900px)': {
+    gridTemplateColumns: '25% 65% 10%',
+
+    '.info': {
+      textAlign: 'center',
+    },
+
+    img: {
+      width: '100%',
+      heigth: '100%',
+      objectFit: 'cover',
+    },
+
+    button: {
+      p: {
+        display: 'none',
+      },
+      span: {
+        display: 'block',
+      },
     },
   },
 })
@@ -94,19 +83,25 @@ export const Product = styled('div', {
 export const TotalContent = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  padding: '1rem',
   height: '100%',
+  marginTop: 'auto',
+  gap: '2rem',
+
+  padding: '1rem',
+
   background: '$gray800',
+  borderBottomLeftRadius: 8,
+  borderTopLeftRadius: 8,
+  width: '100%',
 
   div: {
     justifyContent: 'space-between',
     alignItems: 'center',
     display: 'flex',
+
     strong: {
       fontSize: '$md',
     },
-
-    marginTop: '2rem',
   },
 
   p: {
@@ -114,12 +109,21 @@ export const TotalContent = styled('div', {
     fontWeight: 'bold',
   },
 
-  button: {
-    marginTop: 'auto',
+  '@media (max-width: 900px)': {
+    borderRadius: 0,
+    height: 'auto',
   },
 })
 
 export const ProductsContent = styled('div', {
+  '&::-webkit-scrollbar': {
+    width: '3px',
+  },
+
+  '&::-webkit-scrollbar-thumb': {
+    background: '$orange500',
+  },
+
   'div+div': {
     borderTop: '1px solid $orange500',
   },
@@ -127,8 +131,7 @@ export const ProductsContent = styled('div', {
 
 export const EmptyCartContent = styled('div', {
   width: '100%',
-  maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  marginLeft: 'auto',
+
   minHeight: 656,
   height: '100%',
 
@@ -137,6 +140,10 @@ export const EmptyCartContent = styled('div', {
   justifyContent: 'center',
 
   flexDirection: 'column',
+
+  '@media (max-height: 900px)': {
+    minHeight: 500,
+  },
 
   img: {
     objectFit: 'cover',

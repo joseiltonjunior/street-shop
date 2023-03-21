@@ -25,10 +25,6 @@ export const HomeContainer = styled('main', {
   height: '100%',
   position: 'relative',
   overflow: 'hidden',
-
-  '@media (min-height: 700px)': {
-    minHeight: 656,
-  },
 })
 
 export const Product = styled(Link, {
@@ -37,30 +33,34 @@ export const Product = styled(Link, {
   cursor: 'pointer',
   position: 'relative',
   overflow: 'hidden',
-
+  height: 650,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+
+  '@media (max-height: 700px)': {
+    height: 500,
+  },
 
   img: {
     objectFit: 'cover',
   },
 
   footer: {
-    position: 'absolute',
     bottom: '0.25rem',
-    left: '0.25rem',
-    right: '0.25rem',
-    padding: '2rem',
 
-    borderRadius: 6,
+    padding: '1rem',
 
+    borderRadius: '0 0 6px 6px',
+    position: 'absolute',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: '100%',
+    height: '5rem',
 
     background:
-      'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 90%)',
+      'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%)',
 
     transform: 'translateY(110%)',
     opacity: 0,

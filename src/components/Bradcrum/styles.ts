@@ -5,11 +5,11 @@ export const Container = styled('div', {
   display: 'flex',
   width: '100%',
   maxWidth: 1180,
-  margin: '0 auto 1rem',
+  margin: '0 auto 0',
 })
 
 export const ActualPage = styled('div', {
-  color: '$gray900',
+  color: '$gray800',
   fontWeight: 'bold',
   padding: ' 0.5rem',
   left: '10px',
@@ -63,7 +63,7 @@ export const ActualPage = styled('div', {
 export const BreadCrumbLink = styled(Link, {
   cursor: 'pointer',
   textDecoration: 'none',
-  color: '$gray900',
+  color: '$gray800',
   fontWeight: 'bold',
   padding: ' 0.5rem',
   borderRight: '1px solid $orange500',

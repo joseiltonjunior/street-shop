@@ -13,9 +13,7 @@ export const Product = styled(Link, {
   textDecoration: 'none',
 
   display: 'grid',
-  gridTemplateRows: '1fr 4rem',
-
-  padding: '0.5rem',
+  gridTemplateRows: '1fr 6rem',
 
   div: {
     display: 'flex',
@@ -30,14 +28,14 @@ export const Product = styled(Link, {
 
   footer: {
     padding: '1rem',
-    borderRadius: 6,
+    borderRadius: '0 0 6px 6px',
 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: '1rem',
     background:
-      'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 90%)',
+      'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%)',
 
     strong: {
       fontSize: '$lg',

@@ -13,7 +13,7 @@ export const ProductContainer = styled('main', {
 export const ImageContainer = styled('div', {
   width: '100%',
   maxWidth: 576,
-  height: '100%',
+  height: 600,
   background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
   padding: '0.25rem',
@@ -26,8 +26,8 @@ export const ImageContainer = styled('div', {
     objectFit: 'cover',
   },
 
-  '@media (min-height: 700px)': {
-    height: 656,
+  '@media (max-height: 700px)': {
+    height: 450,
   },
 })
 
@@ -58,7 +58,7 @@ export const ProductDetails = styled('div', {
     marginTop: 'auto',
     background: '$orange500',
     border: 0,
-    color: '$gray900',
+    color: '$gray800',
     borderRadius: 8,
     padding: '1.25rem',
     cursor: 'pointer',

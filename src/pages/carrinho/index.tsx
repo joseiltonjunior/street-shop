@@ -20,11 +20,14 @@ import { Button } from '@/components/Button'
 import { useCallback, useEffect, useState } from 'react'
 
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
+import { useRouter } from 'next/router'
 
 export default function Carrinho() {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
   const [totalValueCart, setTotalValueCart] = useState<string>()
+
+  const router = useRouter()
 
   const dispatch = useDispatch()
 
@@ -59,7 +62,11 @@ export default function Carrinho() {
 
       <Header>
         <Image src={logoCoffeIcon} alt="" width={150} />
-        <ButtonPrev href="/">
+        <ButtonPrev
+          onClick={() => {
+            router.back()
+          }}
+        >
           <Image src={returnIcon} alt="" width={30} height={30} />
         </ButtonPrev>
       </Header>
@@ -71,40 +78,20 @@ export default function Carrinho() {
           <ProductsContent>
             {cart.map((product) => (
               <Product key={product.id}>
-                <div className="contentMobile">
-                  <Image src={product.imageUrl} alt="" width={80} height={80} />
-                  <div className="contentInfo">
-                    <strong>{product.name}</strong>
-                    <div>
-                      <span>1</span>
-                      <strong>{product.price}</strong>
-                    </div>
-                  </div>
-                  <button
-                    title="Remover produto"
-                    onClick={() => dispatch(removeProduct(product))}
-                  >
-                    X
-                  </button>
-                </div>
-                <div className="contentWeb">
-                  <div>
-                    <Image
-                      src={product.imageUrl}
-                      alt=""
-                      width={150}
-                      height={150}
-                    />
+                <Image src={product.imageUrl} alt="" width={150} height={150} />
 
-                    <strong>{product.name}</strong>
-                  </div>
+                <div className="info">
+                  <strong>{product.name}</strong>
 
-                  <span>1</span>
-                  <strong>{product.price}</strong>
-                  <button onClick={() => dispatch(removeProduct(product))}>
-                    Remover
-                  </button>
+                  <div className="price">
+                    <span>1</span>
+                    <strong>{product.price}</strong>
+                  </div>
                 </div>
+                <button onClick={() => dispatch(removeProduct(product))}>
+                  <p>Remover</p>
+                  <span>X</span>
+                </button>
               </Product>
             ))}
           </ProductsContent>

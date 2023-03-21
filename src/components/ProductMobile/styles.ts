@@ -6,7 +6,7 @@ export const ProductContainer = styled('main', {
 })
 
 export const ImageContainer = styled('div', {
-  background: 'linear-gradient(180deg, $orange500 0%, $white 100%)',
+  background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
   padding: '0.25rem',
 
