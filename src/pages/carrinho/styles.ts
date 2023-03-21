@@ -7,7 +7,7 @@ export const Container = styled('main', {
 
   height: 616,
 
-  overflow: 'hidden',
+  // overflow: 'hidden',
 
   display: 'grid',
   gridTemplateColumns: '1fr 0.7fr',
@@ -20,7 +20,7 @@ export const Container = styled('main', {
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
     height: 'calc(100vh - 125px)',
-    overflowY: 'scroll',
+    // overflowY: 'scroll',
   },
 })
 
@@ -120,12 +120,21 @@ export const ProductsContent = styled('div', {
     width: '3px',
   },
 
+  '&::-webkit-scrollbar-track': {
+    background: '$gray900',
+  },
+
   '&::-webkit-scrollbar-thumb': {
     background: '$orange500',
   },
 
   'div+div': {
     borderTop: '1px solid $orange500',
+  },
+
+  '@media (max-height: 700px) and (min-width: 900px)': {
+    overflowY: 'scroll',
+    height: '100%',
   },
 })
 

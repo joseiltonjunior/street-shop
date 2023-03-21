@@ -57,7 +57,7 @@ export default function Carrinho() {
   return (
     <>
       <Head>
-        <title>Meu carrinho | Ignite Shop</title>
+        <title>{`Meu carrinho | D'Coffee Shop`}</title>
       </Head>
 
       <Header>
