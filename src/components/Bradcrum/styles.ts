@@ -3,23 +3,20 @@ import Link from 'next/link'
 
 export const Container = styled('div', {
   display: 'flex',
-  alignItems: 'center',
-
-  marginLeft: 'auto',
-  maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   width: '100%',
-  marginBottom: '1rem',
+  maxWidth: 1180,
+  margin: '0 auto 0',
 })
 
 export const ActualPage = styled('div', {
-  color: '$gray300',
+  color: '$gray800',
   fontWeight: 'bold',
   padding: ' 0.5rem',
   left: '10px',
-  background: '$purple500',
+  background: '$orange500',
   position: 'relative',
   display: 'flex',
-  borderRight: '1px solid $purple500',
+  borderRight: '1px solid $orange500',
 
   '@media (max-width: 900px)': {
     width: 'calc(100% - 70px)',
@@ -58,7 +55,7 @@ export const ActualPage = styled('div', {
 
       borderLeft: '1rem solid transparent',
       borderRight: '1rem solid transparent',
-      borderBottom: '1rem solid $purple500',
+      borderBottom: '1rem solid $orange500',
     },
   },
 })
@@ -66,11 +63,11 @@ export const ActualPage = styled('div', {
 export const BreadCrumbLink = styled(Link, {
   cursor: 'pointer',
   textDecoration: 'none',
-  color: '$gray100',
+  color: '$gray800',
   fontWeight: 'bold',
   padding: ' 0.5rem',
-  borderRight: '1px solid $purple500',
-  background: '$purple500',
+  borderRight: '1px solid $orange500',
+  background: '$orange500',
 
   position: 'relative',
 
@@ -83,15 +80,10 @@ export const BreadCrumbLink = styled(Link, {
     zIndex: '1000',
     borderLeft: '1rem solid transparent',
     borderRight: '1rem solid transparent',
-    borderBottom: '1rem solid $purple500',
+    borderBottom: '1rem solid $orange500',
   },
 
   '&:hover': {
-    background: '$purple300',
-    borderRight: '1px solid $purple300',
-    color: '$gray900',
-    '&::after': {
-      borderBottom: '1rem solid $purple300',
-    },
+    color: '$white',
   },
 })

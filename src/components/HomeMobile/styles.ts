@@ -7,15 +7,13 @@ export const HomeContainer = styled('main', {
 })
 
 export const Product = styled(Link, {
-  background: 'linear-gradient(180deg, $purple300 0%, $gray300 100%)',
+  background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
   cursor: 'pointer',
   textDecoration: 'none',
 
   display: 'grid',
-  gridTemplateRows: '1fr 4rem',
-
-  padding: '0.5rem',
+  gridTemplateRows: '1fr 6rem',
 
   div: {
     display: 'flex',
@@ -30,13 +28,14 @@ export const Product = styled(Link, {
 
   footer: {
     padding: '1rem',
-    borderRadius: 6,
+    borderRadius: '0 0 6px 6px',
 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: '1rem',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    background:
+      'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%)',
 
     strong: {
       fontSize: '$lg',

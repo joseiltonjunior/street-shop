@@ -1,10 +1,12 @@
 import { globalStyles } from '@/styles/global'
 import type { AppProps } from 'next/app'
-import Image from 'next/image'
-import { SkeletonTheme } from 'react-loading-skeleton'
-import logoImg from '@/assets/logo.svg'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from '../storage'
 
-import { Container, Header } from '@/styles/pages/app'
+import { Provider } from 'react-redux'
+import { SkeletonTheme } from 'react-loading-skeleton'
+
+import { Container } from '@/styles/pages/app'
 
 import { ToastContainer } from 'react-toastify'
 
@@ -20,6 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
           content="Projeto Ignite Shop | Conteúdo do Modulo 04 | Rocketseat"
@@ -32,13 +35,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Ignite Shop</title>
       </Head>
       <Container>
-        <Header>
-          <Image src={logoImg} alt="logo" />
-        </Header>
-        <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
-          <Component {...pageProps} />
-          <ToastContainer />
-        </SkeletonTheme>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
+              <Component {...pageProps} />
+              <ToastContainer />
+            </SkeletonTheme>
+          </PersistGate>
+        </Provider>
       </Container>
     </>
   )

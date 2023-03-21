@@ -20,11 +20,21 @@ export const Header = styled('header', {
 
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
   gap: '1rem',
+  position: 'relative',
 
   '@media (max-width: 900px)': {
     display: 'flex',
     justifyContent: 'center',
     padding: '1rem 0',
   },
+})
+
+export const ButtonPrev = styled('button', {
+  position: 'absolute',
+  border: 'none',
+  background: 'transparent',
+  cursor: 'pointer',
+  right: 20,
 })

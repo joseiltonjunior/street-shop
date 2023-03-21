@@ -9,35 +9,46 @@ import { ProductWeb } from '@/components/ProductWeb'
 import { SkeletonProductWeb } from '@/components/ProductWeb/Skeleton'
 import { ProductMobile } from '@/components/ProductMobile'
 import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
-import axios from 'axios'
-import { useState } from 'react'
+// import axios from 'axios'
+// import { useState } from 'react'
 
-import { useToast } from '@/hooks/useToast'
+// import { useToast } from '@/hooks/useToast'
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/Bradcrum'
+import { Header } from '@/styles/pages/app'
+
+import logoCoffeIcon from '@/assets/dcoffee-logo.png'
+
+import { useSelector } from 'react-redux'
+import { reduxProps } from '@/storage'
+import { productProps } from '@/storage/modules/cart/action'
+import { CartButton } from '@/components/CartButton'
+import Image from 'next/image'
 
 export default function Product({ product }: ProductProps) {
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
 
-  const { showToast } = useToast()
+  const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
-  async function handleBuyProduct() {
-    setIsLoading(true)
+  // const { showToast } = useToast()
 
-    await axios
-      .post('/api/checkout', { priceId: product.defaultPriceId })
-      .then((result) => {
-        const { checkoutUrl } = result.data
-        window.location.href = checkoutUrl
-      })
-      .catch(() => {
-        showToast('Falha ao redirecionar ao checkout', {
-          type: 'error',
-          theme: 'colored',
-        })
-      })
-      .finally(() => setIsLoading(false))
-  }
+  // async function handleBuyProduct() {
+  //   setIsLoading(true)
+
+  //   await axios
+  //     .post('/api/checkout', { priceId: product.defaultPriceId })
+  //     .then((result) => {
+  //       const { checkoutUrl } = result.data
+  //       window.location.href = checkoutUrl
+  //     })
+  //     .catch(() => {
+  //       showToast('Falha ao redirecionar ao checkout', {
+  //         type: 'error',
+  //         theme: 'colored',
+  //       })
+  //     })
+  //     .finally(() => setIsLoading(false))
+  // }
 
   if (!product) {
     return (
@@ -57,26 +68,22 @@ export default function Product({ product }: ProductProps) {
     <>
       <Head>
         <meta name="image" content={product.imageUrl} />
-        <title>{`${product.name}  | Ignite Shop`}</title>
+        <title>{`${product.name}  | D'Coffee Shop`}</title>
       </Head>
 
+      <Header>
+        <Image src={logoCoffeIcon} alt="" width={150} />
+        <CartButton productLenth={cart.length} href="/cart" />
+      </Header>
       <Breadcrumb nameShirt={product.name} />
 
       <Container>
         <ContentWeb>
-          <ProductWeb
-            product={product}
-            purchase={handleBuyProduct}
-            isLoading={isLoading}
-          />
+          <ProductWeb product={product} />
         </ContentWeb>
 
         <ContentMobile>
-          <ProductMobile
-            product={product}
-            purchase={handleBuyProduct}
-            isLoading={isLoading}
-          />
+          <ProductMobile product={product} />
         </ContentMobile>
       </Container>
     </>

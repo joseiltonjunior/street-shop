@@ -25,41 +25,42 @@ export const HomeContainer = styled('main', {
   height: '100%',
   position: 'relative',
   overflow: 'hidden',
-
-  '@media (min-height: 700px)': {
-    minHeight: 656,
-  },
 })
 
 export const Product = styled(Link, {
-  background: 'linear-gradient(180deg, $purple300 0%, $gray300 100%)',
+  background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
   cursor: 'pointer',
   position: 'relative',
   overflow: 'hidden',
-
+  height: 650,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+
+  '@media (max-height: 700px)': {
+    height: 500,
+  },
 
   img: {
     objectFit: 'cover',
   },
 
   footer: {
-    position: 'absolute',
     bottom: '0.25rem',
-    left: '0.25rem',
-    right: '0.25rem',
-    padding: '2rem',
 
-    borderRadius: 6,
+    padding: '1rem',
 
+    borderRadius: '0 0 6px 6px',
+    position: 'absolute',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: '100%',
+    height: '5rem',
 
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    background:
+      'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%)',
 
     transform: 'translateY(110%)',
     opacity: 0,
@@ -73,7 +74,7 @@ export const Product = styled(Link, {
     span: {
       fontSize: '$xl',
       fontWeight: 'bold',
-      color: '$gray300',
+      color: '$orange500',
     },
   },
 

@@ -8,8 +8,3 @@ export interface ProductProps {
     defaultPriceId: string
   }
 }
-
-export interface BuyProductProps extends ProductProps {
-  purchase(): void
-  isLoading: boolean
-}

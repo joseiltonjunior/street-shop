@@ -6,7 +6,7 @@ export const ProductContainer = styled('main', {
 })
 
 export const ImageContainer = styled('div', {
-  background: 'linear-gradient(180deg, $purple300 0%, $white 100%)',
+  background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
   padding: '0.25rem',
 
@@ -34,7 +34,7 @@ export const ProductDetails = styled('div', {
     marginTop: '1rem',
     display: 'block',
     fontSize: '$2xl',
-    color: '$purple300',
+    color: '$orange500',
   },
 
   p: {
@@ -46,9 +46,9 @@ export const ProductDetails = styled('div', {
 
   button: {
     marginTop: 'auto',
-    background: '$purple300',
+    background: '$orange500',
     border: 0,
-    color: '$white',
+    color: '$gray900',
     borderRadius: 8,
     padding: '1.25rem',
     cursor: 'pointer',

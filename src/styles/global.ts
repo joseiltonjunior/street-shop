@@ -13,6 +13,13 @@ export const globalStyles = globalCss({
     '-webkit-font-smoothing': 'antialiased',
   },
 
+  'body::-webkit-scrollbar': {
+    width: '0.4rem',
+  },
+  'body::-webkit-scrollbar-thumb': {
+    background: '$gray800',
+  },
+
   'body, input, textarea, button': {
     fontFamily: 'Roboto',
     fontWeight: 400,

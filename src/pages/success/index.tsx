@@ -1,10 +1,12 @@
 import { stripe } from '@/lib/stripe'
+import { Header } from '@/styles/pages/app'
 import { Container, ImageContainer } from '@/styles/pages/success'
 import { SuccessProps } from '@/types/success'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 
 export default function Success({ salesInformation }: SuccessProps) {
   return (
@@ -12,10 +14,14 @@ export default function Success({ salesInformation }: SuccessProps) {
       <Head>
         <meta name="image" content={salesInformation.product.images[0]} />
 
-        <title>Compra efetuada | Ignite Shop</title>
+        <title>{`Compra efetuada | D'Coffee Shop`}</title>
 
         <meta name="robots" content="noindex" />
       </Head>
+
+      <Header>
+        <Image src={logoCoffeIcon} alt="" width={150} />
+      </Header>
 
       <Container>
         <h1>Compra efetuada!</h1>
@@ -35,7 +41,7 @@ export default function Success({ salesInformation }: SuccessProps) {
           sua casa.
         </p>
 
-        <Link href={`/`}>Voltar ao catálogo</Link>
+        <Link href={`/`}>Voltar a Home</Link>
       </Container>
     </>
   )

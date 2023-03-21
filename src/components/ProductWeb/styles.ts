@@ -13,8 +13,8 @@ export const ProductContainer = styled('main', {
 export const ImageContainer = styled('div', {
   width: '100%',
   maxWidth: 576,
-  height: '100%',
-  background: 'linear-gradient(180deg, $purple300 0%, $gray300 100%)',
+  height: 600,
+  background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
   padding: '0.25rem',
 
@@ -26,8 +26,8 @@ export const ImageContainer = styled('div', {
     objectFit: 'cover',
   },
 
-  '@media (min-height: 700px)': {
-    height: 656,
+  '@media (max-height: 700px)': {
+    height: 450,
   },
 })
 
@@ -44,7 +44,7 @@ export const ProductDetails = styled('div', {
     marginTop: '1rem',
     display: 'block',
     fontSize: '$2xl',
-    color: '$purple300',
+    color: '$orange500',
   },
 
   p: {
@@ -56,9 +56,9 @@ export const ProductDetails = styled('div', {
 
   button: {
     marginTop: 'auto',
-    background: '$purple300',
+    background: '$orange500',
     border: 0,
-    color: '$white',
+    color: '$gray800',
     borderRadius: 8,
     padding: '1.25rem',
     cursor: 'pointer',
@@ -78,8 +78,6 @@ export const ProductDetails = styled('div', {
     },
 
     '&:hover': {
-      background: '$purple500',
-      border: '1px solid $purple300',
       color: '$white',
     },
   },
