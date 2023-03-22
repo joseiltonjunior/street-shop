@@ -8,11 +8,24 @@ import Image from 'next/image'
 import Link from 'next/link'
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 
+import caretLeft from '@/assets/caret-left.svg'
+import caretRight from '@/assets/caret-right.svg'
+
+import { useKeenSlider } from 'keen-slider/react'
+import { ButtonNext, ButtonPrev } from '@/components/HomeMobile/styles'
+
 export default function Success({ salesInformation }: SuccessProps) {
+  const [sliderRef, instanceRef] = useKeenSlider({
+    slides: {
+      perView: 1,
+      spacing: 18,
+    },
+  })
+
   return (
     <>
       <Head>
-        <meta name="image" content={salesInformation.product.images[0]} />
+        {/* <meta name="image" content={salesInformation.product.images[0]} /> */}
 
         <title>{`Compra efetuada | D'Coffee Shop`}</title>
 
@@ -24,21 +37,51 @@ export default function Success({ salesInformation }: SuccessProps) {
       </Header>
 
       <Container>
-        <h1>Compra efetuada!</h1>
+        <h1>Detalhes da compra</h1>
+        <div ref={sliderRef} className="ken-slider">
+          {salesInformation.products.map((item, index) => (
+            <ImageContainer
+              key={item.product.name}
+              className="keen-slider__slide"
+            >
+              {index !== 0 && (
+                <ButtonPrev
+                  onClick={(e) => {
+                    e.preventDefault()
+                    instanceRef.current?.prev()
+                  }}
+                >
+                  <Image src={caretLeft} alt="" />
+                </ButtonPrev>
+              )}
+              <Image
+                src={item.product.images[0]}
+                alt=""
+                width={250}
+                height={250}
+              />
 
-        <ImageContainer>
-          <Image
-            src={salesInformation.product.images[0]}
-            alt=""
-            width={120}
-            height={110}
-          />
-        </ImageContainer>
+              {index + 1 !== salesInformation.products.length && (
+                <ButtonNext
+                  onClick={(e) => {
+                    e.preventDefault()
+                    instanceRef.current?.next()
+                  }}
+                >
+                  <Image src={caretRight} alt="" />
+                </ButtonNext>
+              )}
+            </ImageContainer>
+          ))}
+        </div>
 
         <p>
-          Uhuul <strong>{salesInformation.clientName}</strong>, sua{' '}
-          <strong>{salesInformation.product.name}</strong> já está a caminho da
-          sua casa.
+          Uhuul{' '}
+          <strong style={{ color: '#FFBA00' }}>
+            {salesInformation.clientName}
+          </strong>
+          , sua compra já está sendo processada e logo estará a caminho da sua
+          casa.
         </p>
 
         <Link href={`/`}>Voltar a Home</Link>
@@ -67,8 +110,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     })
     .then((result) => {
       const clientName = result.customer_details?.name
-      const product = result.line_items?.data[0].price?.product
-      salesInformation = { clientName, product }
+      const products = result.line_items?.data.map((item) => {
+        return { product: item.price?.product, quantity: item.quantity }
+      })
+
+      salesInformation = { clientName, products }
     })
     .catch(() => {
       salesInformation = null

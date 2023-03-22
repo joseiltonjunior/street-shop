@@ -10,6 +10,10 @@ import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import axios from 'axios'
+
+import { useToast } from '@/hooks/useToast'
+
 import returnIcon from '@/assets/arrow-u-up-left.svg'
 import emptyCartIcon from '@/assets/emptyCart.png'
 import { Button } from '@/components/Button'
@@ -28,14 +32,17 @@ export default function Carrinho() {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
   const [totalValueCart, setTotalValueCart] = useState<string>()
+  const [isLoading, setIsLoading] = useState(false)
 
   const router = useRouter()
-
+  const { showToast } = useToast()
   const dispatch = useDispatch()
 
   const handleValueCart = useCallback(() => {
     const filterPrice = cart.map((product) => {
-      return parseInt(product.price.replace('R$', ''))
+      const value = product.price.replace('R$', '').replace(',', '.')
+
+      return Number(value) * product.quantity
     })
 
     const total = filterPrice.reduce((total, numero) => {
@@ -49,6 +56,31 @@ export default function Carrinho() {
 
     setTotalValueCart(valueFormat)
   }, [cart])
+
+  async function handleBuyProduct() {
+    setIsLoading(true)
+
+    const newPurchase = cart.map((item) => {
+      return {
+        price: item.defaultPriceId,
+        quantity: item.quantity,
+      }
+    })
+
+    await axios
+      .post('/api/checkout', { newPurchase })
+      .then((result) => {
+        const { checkoutUrl } = result.data
+        window.location.href = checkoutUrl
+      })
+      .catch(() => {
+        showToast('Falha ao redirecionar ao checkout', {
+          type: 'error',
+          theme: 'colored',
+        })
+      })
+      .finally(() => setIsLoading(false))
+  }
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -79,18 +111,23 @@ export default function Carrinho() {
         <Container>
           <ProductsContent>
             {cart.map((product) => (
-              <Product key={product.id}>
+              <Product key={product.id} href={`/product?id=${product.id}`}>
                 <Image src={product.imageUrl} alt="" width={150} height={150} />
 
                 <div className="info">
                   <strong>{product.name}</strong>
 
                   <div className="price">
-                    <span>1</span>
+                    <span>Qtde: {product.quantity}</span>
                     <strong>{product.price}</strong>
                   </div>
                 </div>
-                <button onClick={() => dispatch(removeProduct(product))}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    dispatch(removeProduct(product))
+                  }}
+                >
                   <p>Remover</p>
                   <span>X</span>
                 </button>
@@ -106,7 +143,9 @@ export default function Carrinho() {
               <span>{totalValueCart}</span>
             </div>
 
-            <Button>Finalizar compra</Button>
+            <Button isLoading={isLoading} onClick={handleBuyProduct}>
+              Finalizar compra
+            </Button>
           </TotalContent>
         </Container>
       ) : (

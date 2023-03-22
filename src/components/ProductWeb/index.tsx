@@ -1,6 +1,7 @@
 import { reduxProps } from '@/storage'
 import {
   addProduct,
+  changeQuantity,
   productProps,
   removeProduct,
 } from '@/storage/modules/cart/action'
@@ -12,12 +13,14 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '../Button'
+import { ChangeQuantity } from '../ChangeQuantity'
 import { ImageContainer, ProductContainer, ProductDetails } from './styles'
 
 export function ProductWeb({ product }: ProductProps) {
   const dispatch = useDispatch()
 
   const [verifyProductAddCart, setVerifyProductAddCart] = useState(false)
+  const [quantity, setQuantity] = useState(1)
 
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
@@ -25,6 +28,7 @@ export function ProductWeb({ product }: ProductProps) {
     const productToCart = cart.find((item) => item.id === product.id)
 
     if (productToCart) {
+      setQuantity(productToCart.quantity)
       setVerifyProductAddCart(true)
       return
     }
@@ -38,13 +42,25 @@ export function ProductWeb({ product }: ProductProps) {
       setVerifyProductAddCart(false)
       return
     }
+
     setVerifyProductAddCart(true)
-    dispatch(addProduct(product))
+    dispatch(addProduct({ ...product, quantity }))
+  }
+
+  function handleQuantity(param: 'add' | 'sub') {
+    if (param === 'add' && quantity < 10) {
+      setQuantity(quantity + 1)
+      dispatch(changeQuantity({ ...product, quantity: quantity + 1 }))
+    } else if (param === 'sub' && quantity > 1) {
+      setQuantity(quantity - 1)
+      dispatch(changeQuantity({ ...product, quantity: quantity - 1 }))
+    }
   }
 
   useEffect(() => {
     verifyProductCart()
-  }, [verifyProductCart])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <ProductContainer>
@@ -55,7 +71,9 @@ export function ProductWeb({ product }: ProductProps) {
         <h1>{product.name}</h1>
         <span>{product.price}</span>
 
-        <p>{product.description}</p>
+        <p style={{ marginBottom: '1rem' }}>{product.description}</p>
+
+        <ChangeQuantity quantity={quantity} handleQuantity={handleQuantity} />
 
         <Button onClick={handleProductCart}>
           {verifyProductAddCart

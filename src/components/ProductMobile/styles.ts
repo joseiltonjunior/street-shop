@@ -31,9 +31,8 @@ export const ProductDetails = styled('div', {
   },
 
   span: {
-    marginTop: '1rem',
     display: 'block',
-    fontSize: '$2xl',
+    // fontSize: '$2xl',
     color: '$orange500',
   },
 
@@ -42,18 +41,6 @@ export const ProductDetails = styled('div', {
     fontSize: '$md',
     lineHeight: 1.6,
     color: '$gray300',
-  },
-
-  button: {
-    marginTop: 'auto',
-    background: '$orange500',
-    border: 0,
-    color: '$gray900',
-    borderRadius: 8,
-    padding: '1.25rem',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    fontSize: '$md',
   },
 
   '@media (max-width: 900px)': {
@@ -68,10 +55,6 @@ export const ProductDetails = styled('div', {
 
     p: {
       fontSize: '1rem',
-      marginTop: '1rem',
-    },
-
-    button: {
       marginTop: '1rem',
     },
   },

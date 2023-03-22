@@ -41,7 +41,7 @@ export const ProductDetails = styled('div', {
   },
 
   span: {
-    marginTop: '1rem',
+    // marginTop: '1rem',
     display: 'block',
     fontSize: '$2xl',
     color: '$orange500',
@@ -52,33 +52,5 @@ export const ProductDetails = styled('div', {
     fontSize: '$md',
     lineHeight: 1.6,
     color: '$gray300',
-  },
-
-  button: {
-    marginTop: 'auto',
-    background: '$orange500',
-    border: 0,
-    color: '$gray800',
-    borderRadius: 8,
-    padding: '1.25rem',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    fontSize: '$md',
-    height: '3.813rem',
-    transition: 'background 0.3s',
-
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    div: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-
-    '&:hover': {
-      color: '$white',
-    },
   },
 })

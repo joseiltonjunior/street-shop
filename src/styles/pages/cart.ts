@@ -1,4 +1,5 @@
 import { styled } from '@/styles'
+import Link from 'next/link'
 
 export const Container = styled('main', {
   width: '100%',
@@ -21,9 +22,11 @@ export const Container = styled('main', {
   },
 })
 
-export const Product = styled('div', {
+export const Product = styled(Link, {
   display: 'grid',
   gridTemplateColumns: '150px auto 150px',
+  textDecoration: 'none',
+  color: '$gray100',
 
   alignItems: 'center',
 
@@ -125,7 +128,7 @@ export const ProductsContent = styled('div', {
     background: '$orange500',
   },
 
-  'div+div': {
+  'a+a': {
     borderTop: '1px solid $orange500',
   },
 

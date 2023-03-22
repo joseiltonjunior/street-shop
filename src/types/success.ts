@@ -1,9 +1,12 @@
 export interface SuccessProps {
   salesInformation: {
     clientName: string
-    product: {
-      name: string
-      images: string[]
-    }
+    products: {
+      product: {
+        name: string
+        images: string[]
+      }
+      quantity: number
+    }[]
   }
 }
