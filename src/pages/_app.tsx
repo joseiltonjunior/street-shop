@@ -25,14 +25,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="Projeto Ignite Shop | Conteúdo do Modulo 04 | Rocketseat"
+          content="D'Coffee Shop | Cafés Gourmet | Colecionavéis | Copos e Garrafas"
         />
         <meta
           name="image"
           content="https://avatars.githubusercontent.com/u/47725788?v=4z"
         />
         <meta name="author" content="@dvlp.jr" />
-        <title>Ignite Shop</title>
+        <title>{`D'Coffee Shop`}</title>
       </Head>
       <Container>
         <Provider store={store}>
