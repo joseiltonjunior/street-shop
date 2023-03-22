@@ -11,9 +11,15 @@ export const Container = styled('main', {
     minHeight: 656,
   },
 
+  div: {
+    display: 'flex',
+    overflow: 'hidden',
+    width: '250px',
+  },
+
   h1: {
     fontSize: '$2xl',
-    color: '$white',
+    color: '$orange500',
   },
 
   p: {
@@ -29,27 +35,22 @@ export const Container = styled('main', {
     marginTop: '5rem',
     display: 'block',
     fontSize: '$lg',
-    color: '$purple300',
+    color: '$orange500',
     textDecoration: 'none',
     fontWeight: 'bold',
 
     '&:hover': {
-      color: '$purple500',
+      color: '$white',
     },
   },
 })
 
 export const ImageContainer = styled('div', {
   width: '100%',
-  maxWidth: 130,
-  height: 145,
-  background: 'linear-gradient(180deg, $purple300 0%, $gray300 100%)',
+
+  background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
-  padding: '0.25rem',
-  marginTop: '3rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  marginTop: '1rem',
 
   img: {
     objectFit: 'cover',

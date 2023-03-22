@@ -6,5 +6,6 @@ export interface ProductProps {
     price: string
     description: string
     defaultPriceId: string
+    quantity: number
   }
 }

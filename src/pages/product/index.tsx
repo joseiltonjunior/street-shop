@@ -9,10 +9,7 @@ import { ProductWeb } from '@/components/ProductWeb'
 import { SkeletonProductWeb } from '@/components/ProductWeb/Skeleton'
 import { ProductMobile } from '@/components/ProductMobile'
 import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
-// import axios from 'axios'
-// import { useState } from 'react'
 
-// import { useToast } from '@/hooks/useToast'
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/Bradcrum'
 import { Header } from '@/styles/pages/app'
@@ -26,29 +23,7 @@ import { CartButton } from '@/components/CartButton'
 import Image from 'next/image'
 
 export default function Product({ product }: ProductProps) {
-  // const [isLoading, setIsLoading] = useState(false)
-
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
-
-  // const { showToast } = useToast()
-
-  // async function handleBuyProduct() {
-  //   setIsLoading(true)
-
-  //   await axios
-  //     .post('/api/checkout', { priceId: product.defaultPriceId })
-  //     .then((result) => {
-  //       const { checkoutUrl } = result.data
-  //       window.location.href = checkoutUrl
-  //     })
-  //     .catch(() => {
-  //       showToast('Falha ao redirecionar ao checkout', {
-  //         type: 'error',
-  //         theme: 'colored',
-  //       })
-  //     })
-  //     .finally(() => setIsLoading(false))
-  // }
 
   if (!product) {
     return (

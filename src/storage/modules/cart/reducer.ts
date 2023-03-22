@@ -19,6 +19,14 @@ const product: Reducer<productProps[]> = (state = INITIAL_STATE, action) => {
       return (state = newArray)
     }
 
+    case '@cart/CHANGE_QUANTITY': {
+      const { product } = action.payload
+
+      const filterState = state.filter((item) => item.id !== product.id)
+
+      return (state = [...filterState, product])
+    }
+
     default: {
       return state
     }
