@@ -15,7 +15,7 @@ import axios from 'axios'
 import { useToast } from '@/hooks/useToast'
 
 import returnIcon from '@/assets/arrow-u-up-left.svg'
-import emptyCartIcon from '@/assets/emptyCart.png'
+import emptyCartIcon from '@/assets/luffy-rebaixado.png'
 import { Button } from '@/components/Button'
 
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
@@ -95,7 +95,9 @@ export default function Carrinho() {
       </Head>
 
       <Header>
-        <Image src={logoCoffeIcon} alt="" width={150} />
+        <Link href={'/'}>
+          <Image src={logoCoffeIcon} alt="" width={150} />
+        </Link>
         <ButtonPrev
           onClick={() => {
             router.back()
@@ -150,9 +152,9 @@ export default function Carrinho() {
         </Container>
       ) : (
         <EmptyCartContent>
-          <Image src={emptyCartIcon} alt="" width={250} height={250} />
+          <Image src={emptyCartIcon} alt="" width={250} height={300} />
           <strong>Ooops... seu carrinho está vázio.</strong>
-          <Link href="/">Buscar os melhores produtos</Link>
+          <Link href="/">Adicionar produtos ao carrinho</Link>
         </EmptyCartContent>
       )}
     </>

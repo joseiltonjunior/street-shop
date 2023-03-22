@@ -30,19 +30,6 @@ export const Container = styled('main', {
     marginTop: '2rem',
     lineHeight: 1.4,
   },
-
-  a: {
-    marginTop: '5rem',
-    display: 'block',
-    fontSize: '$lg',
-    color: '$orange500',
-    textDecoration: 'none',
-    fontWeight: 'bold',
-
-    '&:hover': {
-      color: '$white',
-    },
-  },
 })
 
 export const ImageContainer = styled('div', {
@@ -54,5 +41,20 @@ export const ImageContainer = styled('div', {
 
   img: {
     objectFit: 'cover',
+  },
+})
+
+export const ButtonClearCart = styled('button', {
+  background: 'transparent',
+  border: 'none',
+  cursor: 'pointer',
+
+  marginTop: '5rem',
+  fontSize: '$lg',
+  color: '$orange500',
+  fontWeight: 'bold',
+
+  '&:hover': {
+    color: '$white',
   },
 })

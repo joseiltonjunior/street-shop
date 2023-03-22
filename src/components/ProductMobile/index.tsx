@@ -24,6 +24,7 @@ export function ProductMobile({ product }: ProductProps) {
     const productToCart = cart.find((item) => item.id === product.id)
 
     if (productToCart) {
+      setQuantity(productToCart.quantity)
       setVerifyProductAddCart(true)
       return
     }
@@ -35,6 +36,7 @@ export function ProductMobile({ product }: ProductProps) {
     if (verifyProductAddCart) {
       dispatch(removeProduct(product))
       setVerifyProductAddCart(false)
+      setQuantity(1)
       return
     }
     setVerifyProductAddCart(true)
@@ -53,7 +55,8 @@ export function ProductMobile({ product }: ProductProps) {
 
   useEffect(() => {
     verifyProductCart()
-  }, [verifyProductCart])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <ProductContainer>
@@ -66,7 +69,9 @@ export function ProductMobile({ product }: ProductProps) {
 
         <span style={{ marginBottom: '1rem' }}>{product.price}</span>
 
-        <ChangeQuantity quantity={quantity} handleQuantity={handleQuantity} />
+        {verifyProductAddCart && (
+          <ChangeQuantity quantity={quantity} handleQuantity={handleQuantity} />
+        )}
 
         <p style={{ marginBottom: '1rem' }}>{product.description}</p>
 

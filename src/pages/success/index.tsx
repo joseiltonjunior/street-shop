@@ -1,11 +1,10 @@
 import { stripe } from '@/lib/stripe'
 import { Header } from '@/styles/pages/app'
-import { Container, ImageContainer } from '@/styles/pages/success'
 import { SuccessProps } from '@/types/success'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
+
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 
 import caretLeft from '@/assets/caret-left.svg'
@@ -13,6 +12,15 @@ import caretRight from '@/assets/caret-right.svg'
 
 import { useKeenSlider } from 'keen-slider/react'
 import { ButtonNext, ButtonPrev } from '@/components/HomeMobile/styles'
+import { useDispatch } from 'react-redux'
+import { clearCart } from '@/storage/modules/cart/action'
+import { useRouter } from 'next/router'
+
+import {
+  Container,
+  ImageContainer,
+  ButtonClearCart,
+} from '@/styles/pages/success'
 
 export default function Success({ salesInformation }: SuccessProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -22,11 +30,12 @@ export default function Success({ salesInformation }: SuccessProps) {
     },
   })
 
+  const dispatch = useDispatch()
+  const router = useRouter()
+
   return (
     <>
       <Head>
-        {/* <meta name="image" content={salesInformation.product.images[0]} /> */}
-
         <title>{`Compra efetuada | D'Coffee Shop`}</title>
 
         <meta name="robots" content="noindex" />
@@ -84,7 +93,14 @@ export default function Success({ salesInformation }: SuccessProps) {
           casa.
         </p>
 
-        <Link href={`/`}>Voltar a Home</Link>
+        <ButtonClearCart
+          onClick={() => {
+            dispatch(clearCart())
+            router.replace('/')
+          }}
+        >
+          Voltar a Home
+        </ButtonClearCart>
       </Container>
     </>
   )

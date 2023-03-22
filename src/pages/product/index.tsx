@@ -21,6 +21,7 @@ import { reduxProps } from '@/storage'
 import { productProps } from '@/storage/modules/cart/action'
 import { CartButton } from '@/components/CartButton'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Product({ product }: ProductProps) {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
@@ -47,7 +48,9 @@ export default function Product({ product }: ProductProps) {
       </Head>
 
       <Header>
-        <Image src={logoCoffeIcon} alt="" width={150} />
+        <Link href={'/'}>
+          <Image src={logoCoffeIcon} alt="" width={150} />
+        </Link>
         <CartButton productLenth={cart.length} href="/cart" />
       </Header>
       <Breadcrumb nameShirt={product.name} />
