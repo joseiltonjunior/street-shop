@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta
           name="image"
-          content="https://avatars.githubusercontent.com/u/47725788?v=4z"
+          content="https://i.ibb.co/jTQPhV8/C-pia-de-D-Coffee-Shop-3.png"
         />
         <meta name="author" content="@dvlp.jr" />
         <title>{`D'Coffee Shop`}</title>
