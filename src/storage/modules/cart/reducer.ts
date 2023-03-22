@@ -27,6 +27,10 @@ const product: Reducer<productProps[]> = (state = INITIAL_STATE, action) => {
       return (state = [...filterState, product])
     }
 
+    case '@cart/CLEAR_CART': {
+      return (state = [])
+    }
+
     default: {
       return state
     }

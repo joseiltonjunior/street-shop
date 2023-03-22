@@ -150,12 +150,14 @@ export const EmptyCartContent = styled('div', {
 
   flexDirection: 'column',
 
+  // background: 'red',
+
   '@media (max-height: 900px)': {
     minHeight: 500,
   },
 
   img: {
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
 
   a: {

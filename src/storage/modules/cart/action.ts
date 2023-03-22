@@ -43,3 +43,9 @@ export function changeQuantity(product: productProps) {
     },
   }
 }
+
+export function clearCart() {
+  return {
+    type: '@cart/CLEAR_CART',
+  }
+}

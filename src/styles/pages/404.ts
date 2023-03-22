@@ -6,6 +6,7 @@ export const Container = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  padding: '0 1rem',
 
   div: {
     display: 'flex',
@@ -19,7 +20,8 @@ export const Container = styled('div', {
   },
 
   img: {
-    objectFit: 'cover',
+    objectFit: 'contain',
+    width: '100%',
   },
 
   p: {
@@ -31,20 +33,19 @@ export const Container = styled('div', {
 
   button: {
     background: 'transparent',
-    border: '1px solid $gray100',
-    padding: '0.8rem',
-    color: '$gray100',
-    borderRadius: 8,
+    border: 'none',
+
+    color: '$orange500',
+
     cursor: 'pointer',
-    width: '100%',
-    fontSize: '$sm',
+
+    fontSize: '$lg',
     fontWeight: 'bold',
     marginTop: '5rem',
     transition: 'all 0.2s',
 
     '&:hover': {
-      background: '$gray100',
-      color: '$gray800',
+      color: '$white',
     },
   },
 })

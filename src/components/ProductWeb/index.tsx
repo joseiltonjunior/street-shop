@@ -40,6 +40,7 @@ export function ProductWeb({ product }: ProductProps) {
     if (verifyProductAddCart) {
       dispatch(removeProduct(product))
       setVerifyProductAddCart(false)
+      setQuantity(1)
       return
     }
 
@@ -73,7 +74,9 @@ export function ProductWeb({ product }: ProductProps) {
 
         <p style={{ marginBottom: '1rem' }}>{product.description}</p>
 
-        <ChangeQuantity quantity={quantity} handleQuantity={handleQuantity} />
+        {verifyProductAddCart && (
+          <ChangeQuantity quantity={quantity} handleQuantity={handleQuantity} />
+        )}
 
         <Button onClick={handleProductCart}>
           {verifyProductAddCart
