@@ -4,5 +4,6 @@ export interface HomeProps {
     name: string
     imageUrl: string
     price: string
+    unitLabel: string
   }[]
 }

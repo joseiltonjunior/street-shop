@@ -45,7 +45,7 @@ export const Product = styled(Link, {
     span: {
       fontSize: '$xl',
       fontWeight: 'bold',
-      color: '$gray300',
+      color: '$orange500',
     },
 
     '@media (max-width: 900px)': {

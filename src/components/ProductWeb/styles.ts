@@ -5,14 +5,9 @@ export const ProductContainer = styled('main', {
   gridTemplateColumns: '1fr 1fr',
   alignItems: 'stretch',
   gap: '4rem',
-
-  maxWidth: 1180,
-  margin: '0 auto',
 })
 
 export const ImageContainer = styled('div', {
-  width: '100%',
-  maxWidth: 576,
   height: 600,
   background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
@@ -41,7 +36,6 @@ export const ProductDetails = styled('div', {
   },
 
   span: {
-    // marginTop: '1rem',
     display: 'block',
     fontSize: '$2xl',
     color: '$orange500',

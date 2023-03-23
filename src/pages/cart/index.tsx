@@ -15,7 +15,7 @@ import axios from 'axios'
 import { useToast } from '@/hooks/useToast'
 
 import returnIcon from '@/assets/arrow-u-up-left.svg'
-import emptyCartIcon from '@/assets/luffy-rebaixado.png'
+import emptyCartIcon from '@/assets/luffy-confuso.png'
 import { Button } from '@/components/Button'
 
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
@@ -107,7 +107,7 @@ export default function Carrinho() {
         </ButtonPrev>
       </Header>
 
-      <Breadcrumb nameShirt="Meu carrinho" />
+      <Breadcrumb actualPage="Meu carrinho" />
 
       {cart.length > 0 ? (
         <Container>
@@ -152,7 +152,7 @@ export default function Carrinho() {
         </Container>
       ) : (
         <EmptyCartContent>
-          <Image src={emptyCartIcon} alt="" width={250} height={300} />
+          <Image src={emptyCartIcon} alt="" width={300} height={250} />
           <strong>Ooops... seu carrinho está vázio.</strong>
           <Link href="/">Adicionar produtos ao carrinho</Link>
         </EmptyCartContent>

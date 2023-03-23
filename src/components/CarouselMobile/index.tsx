@@ -6,7 +6,7 @@ import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
 import caretLeft from '@/assets/caret-left.svg'
 import caretRight from '@/assets/caret-right.svg'
 
-export function HomeMobile({ products }: HomeProps) {
+export function CarouselMobile({ products }: HomeProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 1,

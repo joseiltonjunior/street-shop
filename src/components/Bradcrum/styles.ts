@@ -6,6 +6,8 @@ export const Container = styled('div', {
   width: '100%',
   maxWidth: 1180,
   margin: '0 auto 0',
+
+  alignItems: 'center',
 })
 
 export const ActualPage = styled('div', {
@@ -19,7 +21,19 @@ export const ActualPage = styled('div', {
   borderRight: '1px solid $orange500',
 
   '@media (max-width: 900px)': {
-    width: 'calc(100% - 70px)',
+    width: 'calc(100vw - 70px)',
+  },
+
+  gap: '1rem',
+
+  select: {
+    background: 'transparent',
+    border: 'none',
+    fontWeight: 'bold',
+    color: '$gray900',
+    width: '100%',
+    fontSize: '$sm',
+    outline: 'none',
   },
 
   p: {

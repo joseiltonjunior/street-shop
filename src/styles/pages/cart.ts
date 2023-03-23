@@ -6,19 +6,19 @@ export const Container = styled('main', {
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
 
-  height: 616,
+  height: 600,
 
   display: 'grid',
   gridTemplateColumns: '1fr 0.7fr',
   alignItems: 'flex-start',
 
   '@media (max-height: 700px)': {
-    height: 450,
+    maxHeight: 450,
   },
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    height: 'calc(100vh - 125px)',
+    height: 'auto',
   },
 })
 
@@ -27,7 +27,7 @@ export const Product = styled(Link, {
   gridTemplateColumns: '150px auto 150px',
   textDecoration: 'none',
   color: '$gray100',
-
+  padding: '0 1rem',
   alignItems: 'center',
 
   '.price': {
@@ -57,7 +57,7 @@ export const Product = styled(Link, {
   },
 
   '@media (max-width: 900px)': {
-    gridTemplateColumns: '25% 65% 10%',
+    gridTemplateColumns: 'auto auto auto',
 
     '.info': {
       textAlign: 'center',
@@ -116,6 +116,9 @@ export const TotalContent = styled('div', {
 })
 
 export const ProductsContent = styled('div', {
+  overflowY: 'scroll',
+  height: '100%',
+
   '&::-webkit-scrollbar': {
     width: '3px',
   },
@@ -141,8 +144,7 @@ export const ProductsContent = styled('div', {
 export const EmptyCartContent = styled('div', {
   width: '100%',
 
-  minHeight: 656,
-  height: '100%',
+  height: 600,
 
   display: 'flex',
   alignItems: 'center',
@@ -150,10 +152,8 @@ export const EmptyCartContent = styled('div', {
 
   flexDirection: 'column',
 
-  // background: 'red',
-
-  '@media (max-height: 900px)': {
-    minHeight: 500,
+  '@media (max-height: 700px)': {
+    height: 450,
   },
 
   img: {

@@ -11,7 +11,7 @@ import caretLeft from '@/assets/caret-left.svg'
 import caretRight from '@/assets/caret-right.svg'
 
 import { useKeenSlider } from 'keen-slider/react'
-import { ButtonNext, ButtonPrev } from '@/components/HomeMobile/styles'
+import { ButtonNext, ButtonPrev } from '@/components/CarouselMobile/styles'
 import { useDispatch } from 'react-redux'
 import { clearCart } from '@/storage/modules/cart/action'
 import { useRouter } from 'next/router'

@@ -5,7 +5,7 @@ import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
 import arrowLeft from '@/assets/caret-left.svg'
 import arrowRight from '@/assets/caret-right.svg'
 
-export function HomeWeb({ products }: HomeProps) {
+export function CarouselWeb({ products }: HomeProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 3,

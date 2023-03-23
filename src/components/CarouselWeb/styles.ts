@@ -33,13 +33,13 @@ export const Product = styled(Link, {
   cursor: 'pointer',
   position: 'relative',
   overflow: 'hidden',
-  height: 650,
+  height: 600,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 
   '@media (max-height: 700px)': {
-    height: 500,
+    height: 450,
   },
 
   img: {
@@ -48,7 +48,7 @@ export const Product = styled(Link, {
 
   footer: {
     bottom: '0.25rem',
-
+    gap: '1rem',
     padding: '1rem',
 
     borderRadius: '0 0 6px 6px',

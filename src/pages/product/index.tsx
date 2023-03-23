@@ -53,7 +53,7 @@ export default function Product({ product }: ProductProps) {
         </Link>
         <CartButton productLenth={cart.length} href="/cart" />
       </Header>
-      <Breadcrumb nameShirt={product.name} />
+      <Breadcrumb actualPage={product.name} style={{ marginBottom: '1rem' }} />
 
       <Container>
         <ContentWeb>
