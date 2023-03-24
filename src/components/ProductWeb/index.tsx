@@ -8,6 +8,7 @@ import {
 import { ProductProps } from '@/types/product'
 
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,6 +19,7 @@ import { ImageContainer, ProductContainer, ProductDetails } from './styles'
 
 export function ProductWeb({ product }: ProductProps) {
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const [verifyProductAddCart, setVerifyProductAddCart] = useState(false)
   const [quantity, setQuantity] = useState(1)
@@ -38,9 +40,7 @@ export function ProductWeb({ product }: ProductProps) {
 
   function handleProductCart() {
     if (verifyProductAddCart) {
-      dispatch(removeProduct(product))
-      setVerifyProductAddCart(false)
-      setQuantity(1)
+      router.push('/')
       return
     }
 
@@ -55,6 +55,10 @@ export function ProductWeb({ product }: ProductProps) {
     } else if (param === 'sub' && quantity > 1) {
       setQuantity(quantity - 1)
       dispatch(changeQuantity({ ...product, quantity: quantity - 1 }))
+    } else if (param === 'sub' && quantity === 1) {
+      dispatch(removeProduct(product))
+      setVerifyProductAddCart(false)
+      setQuantity(1)
     }
   }
 
@@ -80,7 +84,7 @@ export function ProductWeb({ product }: ProductProps) {
 
         <Button onClick={handleProductCart}>
           {verifyProductAddCart
-            ? 'Remover do carrinho'
+            ? 'Adicionar novos produtos'
             : 'Adicionar ao carrinho'}
         </Button>
       </ProductDetails>

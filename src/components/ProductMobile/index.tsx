@@ -7,6 +7,7 @@ import {
 } from '@/storage/modules/cart/action'
 import { ProductProps } from '@/types/product'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../Button'
@@ -17,6 +18,7 @@ export function ProductMobile({ product }: ProductProps) {
   const dispatch = useDispatch()
   const [verifyProductAddCart, setVerifyProductAddCart] = useState(false)
   const [quantity, setQuantity] = useState(1)
+  const router = useRouter()
 
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
@@ -34,9 +36,7 @@ export function ProductMobile({ product }: ProductProps) {
 
   function handleProductCart() {
     if (verifyProductAddCart) {
-      dispatch(removeProduct(product))
-      setVerifyProductAddCart(false)
-      setQuantity(1)
+      router.push('/')
       return
     }
     setVerifyProductAddCart(true)
@@ -50,6 +50,10 @@ export function ProductMobile({ product }: ProductProps) {
     } else if (param === 'sub' && quantity > 1) {
       setQuantity(quantity - 1)
       dispatch(changeQuantity({ ...product, quantity: quantity - 1 }))
+    } else if (param === 'sub' && quantity === 1) {
+      dispatch(removeProduct(product))
+      setVerifyProductAddCart(false)
+      setQuantity(1)
     }
   }
 
@@ -77,7 +81,7 @@ export function ProductMobile({ product }: ProductProps) {
 
         <Button onClick={handleProductCart}>
           {verifyProductAddCart
-            ? 'Remover do carrinho'
+            ? 'Adicionar novos produtos'
             : 'Adicionar ao carrinho'}
         </Button>
       </ProductDetails>
