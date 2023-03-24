@@ -17,12 +17,6 @@ export const Container = styled('button', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  div: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
   '&:hover': {
     color: '$white',
   },

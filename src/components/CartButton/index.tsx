@@ -12,7 +12,7 @@ export function CartButton({ productLenth, ...rest }: cartButtonProps) {
   return (
     <Container {...rest}>
       <Image src={cartIcon} alt="" />
-      <span>{productLenth}</span>
+      {productLenth}
     </Container>
   )
 }

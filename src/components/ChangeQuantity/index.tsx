@@ -1,4 +1,4 @@
-import { Container } from './styles'
+import { Container, Button, ContentQuantity } from './styles'
 
 interface changeQuantityProps {
   quantity: number
@@ -11,15 +11,13 @@ export function ChangeQuantity({
 }: changeQuantityProps) {
   return (
     <Container>
-      <button className="sub" onClick={() => handleQuantity('sub')}>
+      <Button sub onClick={() => handleQuantity('sub')}>
         -
-      </button>
-      <div>
-        <span>{quantity}</span>
-      </div>
-      <button className="add" onClick={() => handleQuantity('add')}>
+      </Button>
+      <ContentQuantity>{quantity}</ContentQuantity>
+      <Button add onClick={() => handleQuantity('add')}>
         +
-      </button>
+      </Button>
     </Container>
   )
 }

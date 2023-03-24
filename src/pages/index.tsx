@@ -8,8 +8,8 @@ import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 import { stripe } from '@/lib/stripe'
 
 import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
-import { HomeWeb } from '@/components/HomeWeb'
-import { HomeMobile } from '@/components/HomeMobile'
+import { CarouselWeb } from '@/components/CarouselWeb'
+import { CarouselMobile } from '@/components/CarouselMobile'
 import { HomeProps } from '@/types/home'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -18,12 +18,37 @@ import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { productProps } from '@/storage/modules/cart/action'
 import { CartButton } from '@/components/CartButton'
+import { Breadcrumb } from '@/components/BreadCrumb'
+import { useCallback, useState } from 'react'
 
 export default function Home({ products }: HomeProps) {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
 
+  const [filterProducts, setFilterProducts] = useState<string>('')
+
+  const [productsWithFilter, setProductsWithFilter] = useState<HomeProps>({
+    products,
+  })
+
+  const addFilterProducts = useCallback(
+    (filter: string) => {
+      if (filter) {
+        const newArray = products.filter((item) => item.unitLabel === filter)
+
+        setFilterProducts(filter)
+        setProductsWithFilter({ products: newArray })
+
+        return
+      }
+
+      setFilterProducts(filter)
+      setProductsWithFilter({ products })
+    },
+    [products],
+  )
+
   return (
-    <>
+    <Container>
       <Head>
         <title>{`Home | D'Coffee Shop`}</title>
       </Head>
@@ -34,16 +59,31 @@ export default function Home({ products }: HomeProps) {
         <CartButton productLenth={cart.length} href="/cart" />
       </Header>
 
-      <Container>
-        <ContentWeb>
-          <HomeWeb products={products} />
-        </ContentWeb>
+      <Breadcrumb
+        setFilterProducts={addFilterProducts}
+        style={{ marginBottom: '1rem' }}
+      />
 
-        <ContentMobile>
-          <HomeMobile products={products} />
-        </ContentMobile>
-      </Container>
-    </>
+      <ContentWeb>
+        {filterProducts === '' && <CarouselWeb products={products} />}
+        {filterProducts === 'cafe' && (
+          <CarouselWeb products={productsWithFilter.products} />
+        )}
+        {filterProducts === 'copo' && (
+          <CarouselWeb products={productsWithFilter.products} />
+        )}
+      </ContentWeb>
+
+      <ContentMobile>
+        {filterProducts === '' && <CarouselMobile products={products} />}
+        {filterProducts === 'cafe' && (
+          <CarouselMobile products={productsWithFilter.products} />
+        )}
+        {filterProducts === 'copo' && (
+          <CarouselMobile products={productsWithFilter.products} />
+        )}
+      </ContentMobile>
+    </Container>
   )
 }
 
@@ -60,6 +100,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
+      unitLabel: product.unit_label,
       price: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',

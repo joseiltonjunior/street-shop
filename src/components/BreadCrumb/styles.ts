@@ -6,6 +6,8 @@ export const Container = styled('div', {
   width: '100%',
   maxWidth: 1180,
   margin: '0 auto 0',
+
+  alignItems: 'center',
 })
 
 export const ActualPage = styled('div', {
@@ -17,14 +19,13 @@ export const ActualPage = styled('div', {
   position: 'relative',
   display: 'flex',
   borderRight: '1px solid $orange500',
+  maxWidth: '250px',
 
-  '@media (max-width: 900px)': {
-    width: 'calc(100% - 70px)',
-  },
+  gap: '1rem',
 
   p: {
     overflow: 'hidden',
-    textAlign: 'center',
+
     display: '-webkit-box',
     '-webkit-line-clamp': '1',
     '-webkit-box-orient': 'vertical',
@@ -45,18 +46,16 @@ export const ActualPage = styled('div', {
     borderBottom: '1rem solid $gray900',
   },
 
-  '@media (min-width: 900px)': {
-    '&::after': {
-      content: '',
-      position: 'absolute',
-      transform: 'rotate(90deg)',
-      right: '-1.688rem',
-      padding: '1.7px',
+  '&::after': {
+    content: '',
+    position: 'absolute',
+    transform: 'rotate(90deg)',
+    right: '-1.688rem',
+    padding: '1.7px',
 
-      borderLeft: '1rem solid transparent',
-      borderRight: '1rem solid transparent',
-      borderBottom: '1rem solid $orange500',
-    },
+    borderLeft: '1rem solid transparent',
+    borderRight: '1rem solid transparent',
+    borderBottom: '1rem solid $orange500',
   },
 })
 

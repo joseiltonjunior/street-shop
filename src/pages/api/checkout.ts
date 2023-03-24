@@ -23,6 +23,10 @@ export default async function handler(
     cancel_url: cancelUrl,
     mode: 'payment',
     line_items: newPurchase,
+    shipping_address_collection: { allowed_countries: ['BR'] },
+    phone_number_collection: {
+      enabled: true,
+    },
   })
 
   return res.status(201).json({

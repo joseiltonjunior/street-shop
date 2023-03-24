@@ -3,6 +3,9 @@ import { styled } from '..'
 export const Container = styled('div', {
   width: '100%',
   marginTop: '1rem',
+
+  maxWidth: 1180,
+  margin: '0 auto',
 })
 
 export const ContentWeb = styled('div', {

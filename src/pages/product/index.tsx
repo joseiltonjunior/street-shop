@@ -11,7 +11,7 @@ import { ProductMobile } from '@/components/ProductMobile'
 import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
 
 import Head from 'next/head'
-import { Breadcrumb } from '@/components/Bradcrum'
+import { Breadcrumb } from '@/components/BreadCrumb'
 import { Header } from '@/styles/pages/app'
 
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
@@ -53,7 +53,7 @@ export default function Product({ product }: ProductProps) {
         </Link>
         <CartButton productLenth={cart.length} href="/cart" />
       </Header>
-      <Breadcrumb nameShirt={product.name} />
+      <Breadcrumb actualPage={product.name} style={{ marginBottom: '1rem' }} />
 
       <Container>
         <ContentWeb>
