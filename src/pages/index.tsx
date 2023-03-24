@@ -35,15 +35,14 @@ export default function Home({ products }: HomeProps) {
       if (filter) {
         const newArray = products.filter((item) => item.unitLabel === filter)
 
-        setProductsWithFilter({ products: newArray })
-
         setFilterProducts(filter)
+        setProductsWithFilter({ products: newArray })
 
         return
       }
 
-      setProductsWithFilter({ products })
       setFilterProducts(filter)
+      setProductsWithFilter({ products })
     },
     [products],
   )

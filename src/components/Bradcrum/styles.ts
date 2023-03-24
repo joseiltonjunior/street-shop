@@ -21,20 +21,10 @@ export const ActualPage = styled('div', {
   borderRight: '1px solid $orange500',
 
   '@media (max-width: 900px)': {
-    width: 'calc(100vw - 70px)',
+    // width: 'calc(100vw - 70px)',
   },
 
   gap: '1rem',
-
-  select: {
-    background: 'transparent',
-    border: 'none',
-    fontWeight: 'bold',
-    color: '$gray900',
-    width: '100%',
-    fontSize: '$sm',
-    outline: 'none',
-  },
 
   p: {
     overflow: 'hidden',
@@ -59,18 +49,16 @@ export const ActualPage = styled('div', {
     borderBottom: '1rem solid $gray900',
   },
 
-  '@media (min-width: 900px)': {
-    '&::after': {
-      content: '',
-      position: 'absolute',
-      transform: 'rotate(90deg)',
-      right: '-1.688rem',
-      padding: '1.7px',
+  '&::after': {
+    content: '',
+    position: 'absolute',
+    transform: 'rotate(90deg)',
+    right: '-1.688rem',
+    padding: '1.7px',
 
-      borderLeft: '1rem solid transparent',
-      borderRight: '1rem solid transparent',
-      borderBottom: '1rem solid $orange500',
-    },
+    borderLeft: '1rem solid transparent',
+    borderRight: '1rem solid transparent',
+    borderBottom: '1rem solid $orange500',
   },
 })
 

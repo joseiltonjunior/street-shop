@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react'
+import { Select } from '../Select'
 
 import { Container, ActualPage, BreadCrumbLink } from './styles'
 
@@ -26,15 +27,14 @@ export function Breadcrumb({
 
       {filterProducts !== null && setFilterProducts && (
         <ActualPage>
-          <select
-            name="products"
-            value={filterProducts}
-            onChange={(e) => setFilterProducts(e.currentTarget.value)}
-          >
-            <option value="">Categorias</option>
-            <option value="cafe">Cafés</option>
-            <option value="copo">Copos e Garrafas</option>
-          </select>
+          <Select
+            onAction={(e) => setFilterProducts(e.value)}
+            itens={[
+              { name: 'Categoria', value: '' },
+              { name: 'Café', value: 'cafe' },
+              { name: 'Copos e Garrafas', value: 'copo' },
+            ]}
+          />
         </ActualPage>
       )}
     </Container>
