@@ -18,7 +18,7 @@ export const Container = styled('main', {
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    height: 'auto',
+    height: 'calc(100vh - 129px)',
   },
 })
 
@@ -56,11 +56,24 @@ export const Product = styled(Link, {
     },
   },
 
-  '@media (max-width: 900px)': {
-    gridTemplateColumns: 'auto auto auto',
+  'div.info': {
+    button: {
+      display: 'none',
+    },
+  },
 
-    '.info': {
+  '@media (max-width: 900px)': {
+    gridTemplateColumns: '120px auto',
+
+    'div.info': {
       textAlign: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+
+      button: {
+        display: 'block',
+        marginTop: '1rem',
+      },
     },
 
     img: {
@@ -69,13 +82,8 @@ export const Product = styled(Link, {
       objectFit: 'cover',
     },
 
-    button: {
-      p: {
-        display: 'none',
-      },
-      span: {
-        display: 'block',
-      },
+    'button.button-web': {
+      display: 'none',
     },
   },
 })
@@ -116,9 +124,6 @@ export const TotalContent = styled('div', {
 })
 
 export const ProductsContent = styled('div', {
-  overflowY: 'scroll',
-  height: '100%',
-
   '&::-webkit-scrollbar': {
     width: '3px',
   },

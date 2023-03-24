@@ -19,16 +19,13 @@ export const ActualPage = styled('div', {
   position: 'relative',
   display: 'flex',
   borderRight: '1px solid $orange500',
-
-  '@media (max-width: 900px)': {
-    // width: 'calc(100vw - 70px)',
-  },
+  maxWidth: '250px',
 
   gap: '1rem',
 
   p: {
     overflow: 'hidden',
-    textAlign: 'center',
+
     display: '-webkit-box',
     '-webkit-line-clamp': '1',
     '-webkit-box-orient': 'vertical',

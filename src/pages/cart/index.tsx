@@ -1,4 +1,4 @@
-import { Breadcrumb } from '@/components/Bradcrum'
+import { Breadcrumb } from '@/components/BreadCrumb'
 
 import { reduxProps } from '@/storage'
 import { productProps, removeProduct } from '@/storage/modules/cart/action'
@@ -123,15 +123,24 @@ export default function Carrinho() {
                     <span>Qtde: {product.quantity}</span>
                     <strong>{product.price}</strong>
                   </div>
+
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      dispatch(removeProduct(product))
+                    }}
+                  >
+                    Remover
+                  </button>
                 </div>
                 <button
+                  className="button-web"
                   onClick={(e) => {
                     e.preventDefault()
                     dispatch(removeProduct(product))
                   }}
                 >
-                  <p>Remover</p>
-                  <span>X</span>
+                  Remover
                 </button>
               </Product>
             ))}

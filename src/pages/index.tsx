@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { productProps } from '@/storage/modules/cart/action'
 import { CartButton } from '@/components/CartButton'
-import { Breadcrumb } from '@/components/Bradcrum'
+import { Breadcrumb } from '@/components/BreadCrumb'
 import { useCallback, useState } from 'react'
 
 export default function Home({ products }: HomeProps) {

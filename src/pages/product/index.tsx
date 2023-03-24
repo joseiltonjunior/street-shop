@@ -11,7 +11,7 @@ import { ProductMobile } from '@/components/ProductMobile'
 import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
 
 import Head from 'next/head'
-import { Breadcrumb } from '@/components/Bradcrum'
+import { Breadcrumb } from '@/components/BreadCrumb'
 import { Header } from '@/styles/pages/app'
 
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
