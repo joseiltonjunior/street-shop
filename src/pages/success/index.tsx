@@ -21,6 +21,7 @@ import {
   ImageContainer,
   ButtonClearCart,
 } from '@/styles/pages/success'
+import { Button } from '@/components/Button'
 
 export default function Success({ salesInformation }: SuccessProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -32,6 +33,10 @@ export default function Success({ salesInformation }: SuccessProps) {
 
   const dispatch = useDispatch()
   const router = useRouter()
+
+  const nameClient = salesInformation.clientName.split(' ', 1).toString()
+  const nameFormart =
+    nameClient[0].toUpperCase() + nameClient.slice(1).toLowerCase()
 
   return (
     <>
@@ -46,7 +51,6 @@ export default function Success({ salesInformation }: SuccessProps) {
       </Header>
 
       <Container>
-        <h1>Detalhes da compra</h1>
         <div ref={sliderRef} className="ken-slider">
           {salesInformation.products.map((item, index) => (
             <ImageContainer
@@ -66,8 +70,8 @@ export default function Success({ salesInformation }: SuccessProps) {
               <Image
                 src={item.product.images[0]}
                 alt=""
-                width={250}
-                height={250}
+                width={520}
+                height={480}
               />
 
               {index + 1 !== salesInformation.products.length && (
@@ -84,23 +88,32 @@ export default function Success({ salesInformation }: SuccessProps) {
           ))}
         </div>
 
-        <p>
-          Uhuul{' '}
-          <strong style={{ color: '#FFBA00' }}>
-            {salesInformation.clientName}
-          </strong>
-          , sua compra já está sendo processada e logo estará a caminho da sua
-          casa.
-        </p>
+        <div className="info">
+          <h1>Compra efetuada com sucesso</h1>
+          <p>
+            Uhuul <strong style={{ color: '#FFBA00' }}>{nameFormart}</strong>,
+            sua compra já está sendo processada e logo estará a caminho da sua
+            casa.
+          </p>
 
-        <ButtonClearCart
-          onClick={() => {
-            dispatch(clearCart())
-            router.replace('/')
-          }}
-        >
-          Voltar a Home
-        </ButtonClearCart>
+          <Button
+            onClick={() => {
+              dispatch(clearCart())
+              router.replace('/detalhes')
+            }}
+          >
+            Detalhes da compra
+          </Button>
+
+          <ButtonClearCart
+            onClick={() => {
+              dispatch(clearCart())
+              router.replace('/')
+            }}
+          >
+            Voltar a Home
+          </ButtonClearCart>
+        </div>
       </Container>
     </>
   )

@@ -140,7 +140,7 @@ export const ProductsContent = styled('div', {
     borderTop: '1px solid $orange500',
   },
 
-  '@media (max-height: 700px) and (min-width: 900px)': {
+  '@media (min-width: 900px)': {
     overflowY: 'scroll',
     height: '100%',
   },
