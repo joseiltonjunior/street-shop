@@ -8,6 +8,7 @@ import rootReducer from './modules/rootReducer'
 
 export interface reduxProps {
   cart: productProps[]
+  products: productProps[]
 }
 
 const persistConfig = {

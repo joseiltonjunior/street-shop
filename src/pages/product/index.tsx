@@ -12,16 +12,11 @@ import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
 
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/BreadCrumb'
-import { Header } from '@/styles/pages/app'
-
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
+import { Header } from '@/components/Header'
 
 import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { productProps } from '@/storage/modules/cart/action'
-import { CartButton } from '@/components/CartButton'
-import Image from 'next/image'
-import Link from 'next/link'
 
 export default function Product({ product }: ProductProps) {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
@@ -47,12 +42,8 @@ export default function Product({ product }: ProductProps) {
         <title>{`${product.name}  | D'Coffee Shop`}</title>
       </Head>
 
-      <Header>
-        <Link href={'/'}>
-          <Image src={logoCoffeIcon} alt="" width={150} />
-        </Link>
-        <CartButton productLenth={cart.length} href="/cart" />
-      </Header>
+      <Header buttonCart={cart.length} inputSearch />
+
       <Breadcrumb actualPage={product.name} style={{ marginBottom: '1rem' }} />
 
       <Container>

@@ -11,6 +11,7 @@ export function CarouselWeb({ products }: HomeProps) {
       perView: 3,
       spacing: 48,
     },
+    loop: true,
   })
 
   return (

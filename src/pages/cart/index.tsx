@@ -2,23 +2,19 @@ import { Breadcrumb } from '@/components/BreadCrumb'
 
 import { reduxProps } from '@/storage'
 import { productProps, removeProduct } from '@/storage/modules/cart/action'
-import { ButtonPrev, Header } from '@/styles/pages/app'
+
 import Head from 'next/head'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import axios from 'axios'
 
 import { useToast } from '@/hooks/useToast'
 
-import returnIcon from '@/assets/arrow-u-up-left.svg'
 import emptyCartIcon from '@/assets/luffy-confuso.png'
 import { Button } from '@/components/Button'
-
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 
 import {
   Container,
@@ -27,6 +23,7 @@ import {
   ProductsContent,
   EmptyCartContent,
 } from '@/styles/pages/cart'
+import { Header } from '@/components/Header'
 
 export default function Carrinho() {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
@@ -34,7 +31,6 @@ export default function Carrinho() {
   const [totalValueCart, setTotalValueCart] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
 
-  const router = useRouter()
   const { showToast } = useToast()
   const dispatch = useDispatch()
 
@@ -94,18 +90,7 @@ export default function Carrinho() {
         <title>{`Meu carrinho | D'Coffee Shop`}</title>
       </Head>
 
-      <Header>
-        <Link href={'/'}>
-          <Image src={logoCoffeIcon} alt="" width={150} />
-        </Link>
-        <ButtonPrev
-          onClick={() => {
-            router.back()
-          }}
-        >
-          <Image src={returnIcon} alt="" width={30} height={30} />
-        </ButtonPrev>
-      </Header>
+      <Header buttonPrev />
 
       <Breadcrumb actualPage="Meu carrinho" />
 

@@ -11,30 +11,3 @@ export const Container = styled('div', {
     justifyContent: 'flex-start',
   },
 })
-
-export const Header = styled('header', {
-  padding: '2rem 0',
-  width: '100%',
-  maxWidth: 1180,
-  margin: '0 auto',
-
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  gap: '1rem',
-  position: 'relative',
-
-  '@media (max-width: 900px)': {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '1rem 0',
-  },
-})
-
-export const ButtonPrev = styled('button', {
-  position: 'absolute',
-  border: 'none',
-  background: 'transparent',
-  cursor: 'pointer',
-  right: 20,
-})

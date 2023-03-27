@@ -13,12 +13,12 @@ export const Container = styled('main', {
   alignItems: 'flex-start',
 
   '@media (max-height: 700px)': {
-    maxHeight: 450,
+    maxHeight: 465,
   },
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    height: 'calc(100vh - 129px)',
+    height: 'calc(100vh - 102px)',
   },
 })
 

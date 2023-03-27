@@ -3,8 +3,6 @@ import { GetStaticProps } from 'next'
 import Stripe from 'stripe'
 import 'keen-slider/keen-slider.min.css'
 
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
-
 import { stripe } from '@/lib/stripe'
 
 import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
@@ -12,17 +10,21 @@ import { CarouselWeb } from '@/components/CarouselWeb'
 import { CarouselMobile } from '@/components/CarouselMobile'
 import { HomeProps } from '@/types/home'
 import Head from 'next/head'
-import Image from 'next/image'
-import { Header } from '@/styles/pages/app'
-import { useSelector } from 'react-redux'
+
+import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { productProps } from '@/storage/modules/cart/action'
-import { CartButton } from '@/components/CartButton'
+
+import { useCallback, useEffect, useState } from 'react'
+
+import { Header } from '@/components/Header'
 import { Breadcrumb } from '@/components/BreadCrumb'
-import { useCallback, useState } from 'react'
+import { setProducts } from '@/storage/modules/products/action'
 
 export default function Home({ products }: HomeProps) {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
+
+  const dispatch = useDispatch()
 
   const [filterProducts, setFilterProducts] = useState<string>('')
 
@@ -46,6 +48,9 @@ export default function Home({ products }: HomeProps) {
     },
     [products],
   )
+  useEffect(() => {
+    if (products) dispatch(setProducts(products))
+  }, [dispatch, products])
 
   return (
     <Container>
@@ -53,11 +58,7 @@ export default function Home({ products }: HomeProps) {
         <title>{`Home | D'Coffee Shop`}</title>
       </Head>
 
-      <Header>
-        <Image src={logoCoffeIcon} alt="" width={150} />
-
-        <CartButton productLenth={cart.length} href="/cart" />
-      </Header>
+      <Header buttonCart={cart.length} inputSearch />
 
       <Breadcrumb
         setFilterProducts={addFilterProducts}
