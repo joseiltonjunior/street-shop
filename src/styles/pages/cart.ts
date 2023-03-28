@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const Container = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  marginLeft: 'auto',
+  margin: '0 auto',
 
   height: 600,
 
@@ -98,8 +98,7 @@ export const TotalContent = styled('div', {
   padding: '1rem',
 
   background: '$gray800',
-  borderBottomLeftRadius: 8,
-  borderTopLeftRadius: 8,
+  borderRadius: 8,
   width: '100%',
 
   div: {

@@ -3,15 +3,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const Container = styled('div', {
-  padding: '2rem 0',
+  padding: '1rem 2rem 0.5rem',
   width: '100%',
-  maxWidth: 1180,
-  margin: '0 auto',
+  // maxWidth: 1180,
+  // margin: '0 auto',
+  marginBottom: '1rem',
 
-  //   background: 'red',
+  background: '$orange500',
 
   display: 'flex',
-  alignItems: 'center',
+  // alignItems: 'center',
   //   justifyContent: 'space-between',
   gap: '1rem',
   //   position: 'relative',
@@ -50,14 +51,20 @@ export const MenuButton = styled('button', {
   background: 'transparent',
   cursor: 'pointer',
 
+  display: 'none',
+
   img: {
     width: '30px',
     height: '30px',
   },
+
+  '@media (max-width: 900px)': {
+    display: 'block',
+  },
 })
 
 export const CartButton = styled(Link, {
-  color: '$gray900',
+  color: '$orange500',
   textDecoration: 'none',
   cursor: 'pointer',
 
@@ -67,13 +74,14 @@ export const CartButton = styled(Link, {
 
   div: {
     position: 'absolute',
-    bottom: 20,
+    top: -5,
+
     left: 20,
     fontSize: '12px',
 
     fontWeight: 'bold',
     borderRadius: '10px',
-    background: '$orange500',
+    background: '$gray800',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -84,5 +92,19 @@ export const CartButton = styled(Link, {
   img: {
     width: '30px',
     height: '30px',
+  },
+})
+
+export const ContentLinks = styled('div', {
+  gap: 10,
+  display: 'flex',
+  flexDirection: 'column',
+
+  'div.links': {
+    '@media (max-width: 900px)': {
+      'div, a': {
+        display: 'none',
+      },
+    },
   },
 })

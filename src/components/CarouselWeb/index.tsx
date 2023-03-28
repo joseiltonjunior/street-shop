@@ -26,7 +26,7 @@ export function CarouselWeb({ products }: HomeProps) {
           href={`/product?id=${product.id}`}
           prefetch={false}
         >
-          <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <Image src={product.imageUrl} width={480} height={400} alt="" />
 
           <footer>
             <strong>{product.name}</strong>

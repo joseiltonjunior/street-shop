@@ -4,7 +4,7 @@ export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  justifyContent: 'center',
+  // justifyContent: 'center',
   minHeight: '100vh',
 
   '@media (max-width: 900px)': {

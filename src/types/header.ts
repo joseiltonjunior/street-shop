@@ -3,4 +3,5 @@ export interface HeaderProps {
   buttonPrev?: boolean
   inputSearch?: boolean
   buttonMenu?: boolean
+  isLink?: boolean
 }

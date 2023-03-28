@@ -1,19 +1,16 @@
 import { styled } from '@/styles'
 
 export const Container = styled('div', {
-  //   background: 'red',
-  width: '150px',
+  width: '6rem',
+  position: 'relative',
 })
 
 export const DropdownSelection = styled('button', {
   backgroundColor: 'transparent',
-  height: 'auto',
-  borderRadius: '8px',
+
   width: '100%',
   cursor: 'pointer',
   border: 'none',
-  boxShadow: 'none',
-  position: 'relative',
 
   '::before': {
     content: '',
@@ -61,10 +58,6 @@ export const DropdownItem = styled('div', {
   fontSize: '16px',
   margiBottom: '0.5rem',
   color: '$gray800',
-
-  '&:hover > div': {
-    fontWeight: '600',
-  },
 })
 
 export const DropdownItemName = styled('div', {
@@ -75,8 +68,6 @@ export const DropdownItemName = styled('div', {
       true: {
         background: '$gray900',
         color: '$white',
-        borderRadius: '6px',
-        width: 'fit-content',
         fontWeight: 600,
       },
     },
@@ -86,17 +77,15 @@ export const DropdownItemName = styled('div', {
 export const DropdownContainer = styled('div', {
   position: 'absolute',
   backgroundColor: '$orange500',
-  border: '1px solid $gray900',
+  borderBottom: '1px solid $gray900',
+  borderRight: '1px solid $gray900',
+  borderLeft: '1px solid $gray900',
 
-  borderRadius: '8px',
-  marginTop: '1rem',
-  right: 0,
+  width: '9rem',
 
-  padding: '0.6rem',
+  borderRadius: '0 0 6px 6px',
+  top: 27,
+  right: -5,
 
   zIndex: '1000',
-})
-
-export const DropdownItensContainer = styled('div', {
-  overflow: 'auto',
 })

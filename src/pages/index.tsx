@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { GetStaticProps } from 'next'
 
 import Stripe from 'stripe'
@@ -5,86 +6,106 @@ import 'keen-slider/keen-slider.min.css'
 
 import { stripe } from '@/lib/stripe'
 
-import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
 import { CarouselWeb } from '@/components/CarouselWeb'
 import { CarouselMobile } from '@/components/CarouselMobile'
-import { HomeProps } from '@/types/home'
+import { HomeProps, ProductInfoProps } from '@/types/home'
 import Head from 'next/head'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { productProps } from '@/storage/modules/cart/action'
 
-import { useCallback, useEffect, useState } from 'react'
-
 import { Header } from '@/components/Header'
-import { Breadcrumb } from '@/components/BreadCrumb'
+
 import { setProducts } from '@/storage/modules/products/action'
+import { CardProduct } from '@/components/CardProduct'
+
+import {
+  Container,
+  ContentWeb,
+  ContentMobile,
+  ContentProducts,
+} from '@/styles/pages/home'
 
 export default function Home({ products }: HomeProps) {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
+  const [cupsCategory, setCupsCategory] = useState<ProductInfoProps[]>()
+  const [coffeeCategory, setCoffeeCategory] = useState<ProductInfoProps[]>()
 
   const dispatch = useDispatch()
 
-  const [filterProducts, setFilterProducts] = useState<string>('')
-
-  const [productsWithFilter, setProductsWithFilter] = useState<HomeProps>({
-    products,
-  })
-
-  const addFilterProducts = useCallback(
-    (filter: string) => {
-      if (filter) {
-        const newArray = products.filter((item) => item.unitLabel === filter)
-
-        setFilterProducts(filter)
-        setProductsWithFilter({ products: newArray })
-
-        return
-      }
-
-      setFilterProducts(filter)
-      setProductsWithFilter({ products })
-    },
-    [products],
-  )
   useEffect(() => {
-    if (products) dispatch(setProducts(products))
+    console.log(products)
+    dispatch(setProducts(products))
+
+    const cupsList = products.filter(
+      (product) =>
+        product.unitLabel === 'copo' || product.unitLabel === 'garrafa',
+    )
+
+    const coffeeList = products.filter(
+      (product) => product.unitLabel === 'cafe',
+    )
+
+    setCoffeeCategory(coffeeList)
+    setCupsCategory(cupsList)
   }, [dispatch, products])
 
   return (
-    <Container>
+    <>
       <Head>
         <title>{`Home | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart={cart.length} inputSearch />
+      <Header buttonCart={cart.length} inputSearch isLink />
 
-      <Breadcrumb
-        setFilterProducts={addFilterProducts}
-        style={{ marginBottom: '1rem' }}
-      />
+      <Container>
+        <h3>Mais vendidos</h3>
+        <ContentWeb>
+          <CarouselWeb products={products} />
+        </ContentWeb>
 
-      <ContentWeb>
-        {filterProducts === '' && <CarouselWeb products={products} />}
-        {filterProducts === 'cafe' && (
-          <CarouselWeb products={productsWithFilter.products} />
-        )}
-        {filterProducts === 'copo' && (
-          <CarouselWeb products={productsWithFilter.products} />
-        )}
-      </ContentWeb>
+        <ContentMobile>
+          <CarouselMobile products={products} />
+        </ContentMobile>
 
-      <ContentMobile>
-        {filterProducts === '' && <CarouselMobile products={products} />}
-        {filterProducts === 'cafe' && (
-          <CarouselMobile products={productsWithFilter.products} />
-        )}
-        {filterProducts === 'copo' && (
-          <CarouselMobile products={productsWithFilter.products} />
-        )}
-      </ContentMobile>
-    </Container>
+        {/* <h3>Action Figures</h3>
+        <ContentProducts>
+          {products.map((product) => (
+            <CardProduct
+              key={product.id}
+              imgUrl={product.imageUrl}
+              name={product.name}
+              price={product.price}
+            />
+          ))}
+        </ContentProducts> */}
+        <h3>Cafés</h3>
+        <ContentProducts>
+          {coffeeCategory?.map((product) => (
+            <CardProduct
+              key={product.id}
+              imgUrl={product.imageUrl}
+              name={product.name}
+              price={product.price}
+              href={`/product?id=${product.id}`}
+            />
+          ))}
+        </ContentProducts>
+        <h3>Copos, Canecas e Garrafas</h3>
+        <ContentProducts>
+          {cupsCategory?.map((product) => (
+            <CardProduct
+              key={product.id}
+              imgUrl={product.imageUrl}
+              name={product.name}
+              price={product.price}
+              href={`/product?id=${product.id}`}
+            />
+          ))}
+        </ContentProducts>
+      </Container>
+    </>
   )
 }
 

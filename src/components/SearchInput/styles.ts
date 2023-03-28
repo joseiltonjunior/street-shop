@@ -4,7 +4,7 @@ export const Container = styled('div', {
   display: 'flex',
   background: '$white',
   alignItems: 'center',
-  width: '500px',
+  width: '100%',
   //   padding: '10px',
   //   paddingRight: '0.5rem',
   borderRadius: 5,
@@ -14,7 +14,7 @@ export const Container = styled('div', {
   //   overflow: 'hidden',
 
   '@media (min-width: 900px)': {
-    position: 'relative',
+    // position: 'relative',
   },
 
   img: {

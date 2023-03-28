@@ -42,7 +42,7 @@ export default function Product({ product }: ProductProps) {
         <title>{`${product.name}  | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart={cart.length} inputSearch />
+      <Header buttonCart={cart.length} inputSearch isLink />
 
       <Breadcrumb actualPage={product.name} style={{ marginBottom: '1rem' }} />
 

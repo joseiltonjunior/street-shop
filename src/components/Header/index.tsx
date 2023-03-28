@@ -17,15 +17,18 @@ import {
   CartButton,
   LogoMobile,
   LogoWeb,
+  ContentLinks,
   PrevButton,
 } from './styles'
 import Link from 'next/link'
+import { Select } from '../Select'
 
 export function Header({
   buttonPrev,
   inputSearch,
   buttonCart,
   buttonMenu,
+  isLink,
 }: HeaderProps) {
   const router = useRouter()
 
@@ -37,7 +40,43 @@ export function Header({
         <LogoMobile src={logoCoffeOnlyIcon} alt="" width={30} />
       </Link>
 
-      {inputSearch && <SearchInput />}
+      {isLink && (
+        <ContentLinks>
+          {inputSearch && <SearchInput />}
+
+          <div style={{ display: 'flex', gap: 30 }} className="links">
+            <Select
+              name="Categoria"
+              onAction={(e) => console.log(e.value)}
+              itens={[
+                { name: 'Todos', value: '' },
+                { name: 'Café', value: 'cafe' },
+                { name: 'Copos e Garrafas', value: 'copo' },
+              ]}
+            />
+            <Link
+              href={'/contact'}
+              style={{
+                textDecoration: 'none',
+                color: '#121214',
+                fontWeight: ' bold',
+              }}
+            >
+              Contato
+            </Link>
+            <Link
+              href={'/about'}
+              style={{
+                textDecoration: 'none',
+                color: '#121214',
+                fontWeight: ' bold',
+              }}
+            >
+              Sobre
+            </Link>
+          </div>
+        </ContentLinks>
+      )}
 
       {buttonPrev && (
         <PrevButton onClick={() => router.back()}>
@@ -52,11 +91,9 @@ export function Header({
         </CartButton>
       )}
 
-      {buttonMenu && (
-        <MenuButton>
-          <Image src={listIcon} alt="" width={30} />
-        </MenuButton>
-      )}
+      <MenuButton>
+        <Image src={listIcon} alt="" width={30} />
+      </MenuButton>
     </Container>
   )
 }

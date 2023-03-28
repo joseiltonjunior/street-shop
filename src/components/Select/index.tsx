@@ -1,9 +1,8 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, SelectHTMLAttributes, useState } from 'react'
 
 import {
   Container,
   DropdownContainer,
-  DropdownItensContainer,
   SelectedItem,
   DropdownSelection,
   DropdownItem,
@@ -16,16 +15,12 @@ type ItensDropdownProps = {
   name: ReactNode
 }
 
-type SelectProps = {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   itens: ItensDropdownProps[]
   onAction(key: ItensDropdownProps): void
 }
 
-export function Select({
-  itens,
-
-  onAction,
-}: SelectProps) {
+export function Select({ itens, onAction, name }: SelectProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [selectedItemIndex, setSelectedItemIndex] = useState(0)
 
@@ -36,34 +31,30 @@ export function Select({
       }}
     >
       <DropdownSelection
-        onClick={() => {
-          setIsDropdownOpen(!isDropdownOpen)
-        }}
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         isOpen={isDropdownOpen}
       >
         <SelectedItem>
-          <SelectedItemName>{itens[selectedItemIndex]?.name}</SelectedItemName>
+          <SelectedItemName>{name}</SelectedItemName>
         </SelectedItem>
       </DropdownSelection>
 
       {isDropdownOpen && (
         <DropdownContainer>
-          <DropdownItensContainer>
-            {itens.map((item, index) => (
-              <DropdownItem
-                key={item.value}
-                onClick={() => {
-                  setSelectedItemIndex(index)
-                  onAction(item)
-                  setIsDropdownOpen(false)
-                }}
-              >
-                <DropdownItemName isSelected={index === selectedItemIndex}>
-                  {item.name}
-                </DropdownItemName>
-              </DropdownItem>
-            ))}
-          </DropdownItensContainer>
+          {itens.map((item, index) => (
+            <DropdownItem
+              key={item.value}
+              onClick={() => {
+                setSelectedItemIndex(index)
+                onAction(item)
+                setIsDropdownOpen(false)
+              }}
+            >
+              <DropdownItemName isSelected={index === selectedItemIndex}>
+                {item.name}
+              </DropdownItemName>
+            </DropdownItem>
+          ))}
         </DropdownContainer>
       )}
     </Container>
