@@ -6,8 +6,8 @@ import 'keen-slider/keen-slider.min.css'
 
 import { stripe } from '@/lib/stripe'
 
-import { CarouselWeb } from '@/components/CarouselWeb'
-import { CarouselMobile } from '@/components/CarouselMobile'
+import { BestSellerCarousel } from '@/components/BestSellerCarousel'
+import { BestSellerCarouselMobile } from '@/components/BestSellerCarouselMobile'
 import { HomeProps, ProductInfoProps } from '@/types/home'
 import Head from 'next/head'
 
@@ -21,6 +21,7 @@ import { setProducts } from '@/storage/modules/products/action'
 
 import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
 import { CarouselProducts } from '@/components/CarouselProducts'
+import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 
 export default function Home({ products }: HomeProps) {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
@@ -68,11 +69,11 @@ export default function Home({ products }: HomeProps) {
           <div style={{ marginTop: '2rem' }}>
             <h3>Mais vendidos</h3>
             <ContentWeb>
-              <CarouselWeb products={bestSeller} />
+              <BestSellerCarousel products={bestSeller} />
             </ContentWeb>
 
             <ContentMobile>
-              <CarouselMobile products={bestSeller} />
+              <BestSellerCarouselMobile products={bestSeller} />
             </ContentMobile>
           </div>
         )}
@@ -80,21 +81,36 @@ export default function Home({ products }: HomeProps) {
         {actionFigureCategory && (
           <div style={{ marginTop: '4rem' }}>
             <h3>Action Figures</h3>
-            <CarouselProducts products={actionFigureCategory} />
+            <ContentWeb>
+              <CarouselProducts products={actionFigureCategory} />
+            </ContentWeb>
+            <ContentMobile>
+              <CarouselProductsMobile products={actionFigureCategory} />
+            </ContentMobile>
           </div>
         )}
 
         {coffeeCategory && (
           <div style={{ marginTop: '4rem' }}>
             <h3>Cafés</h3>
-            <CarouselProducts products={coffeeCategory} />
+            <ContentWeb>
+              <CarouselProducts products={coffeeCategory} />
+            </ContentWeb>
+            <ContentMobile>
+              <CarouselProductsMobile products={coffeeCategory} />
+            </ContentMobile>
           </div>
         )}
 
         {cupsCategory && (
           <div style={{ marginTop: '4rem' }}>
             <h3>Copos, Canecas e Garrafas</h3>
-            <CarouselProducts products={cupsCategory} />
+            <ContentWeb>
+              <CarouselProducts products={cupsCategory} />
+            </ContentWeb>
+            <ContentMobile>
+              <CarouselProductsMobile products={cupsCategory} />
+            </ContentMobile>
           </div>
         )}
       </Container>

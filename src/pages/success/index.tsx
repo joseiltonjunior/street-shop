@@ -1,17 +1,18 @@
 import { stripe } from '@/lib/stripe'
-import { Header } from '@/styles/pages/app'
+
 import { SuccessProps } from '@/types/success'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
-
 import caretLeft from '@/assets/caret-left.svg'
 import caretRight from '@/assets/caret-right.svg'
 
 import { useKeenSlider } from 'keen-slider/react'
-import { ButtonNext, ButtonPrev } from '@/components/CarouselMobile/styles'
+import {
+  ButtonNext,
+  ButtonPrev,
+} from '@/components/BestSellerCarouselMobile/styles'
 import { useDispatch } from 'react-redux'
 import { clearCart } from '@/storage/modules/cart/action'
 import { useRouter } from 'next/router'
@@ -22,6 +23,7 @@ import {
   ButtonClearCart,
 } from '@/styles/pages/success'
 import { Button } from '@/components/Button'
+import { Header } from '@/components/Header'
 
 export default function Success({ salesInformation }: SuccessProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -46,9 +48,7 @@ export default function Success({ salesInformation }: SuccessProps) {
         <meta name="robots" content="noindex" />
       </Head>
 
-      <Header>
-        <Image src={logoCoffeIcon} alt="" width={150} />
-      </Header>
+      <Header />
 
       <Container>
         <div ref={sliderRef} className="ken-slider">

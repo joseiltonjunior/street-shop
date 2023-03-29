@@ -45,12 +45,8 @@ export const Product = styled(Link, {
   alignItems: 'center',
   justifyContent: 'center',
 
-  // '@media (max-height: 700px)': {
-  //   height: 450,
-  // },
-
   img: {
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
 
   footer: {
@@ -76,12 +72,6 @@ export const Product = styled(Link, {
     strong: {
       fontSize: '$lg',
       color: '$white',
-
-      overflow: 'hidden',
-
-      display: '-webkit-box',
-      '-webkit-line-clamp': '1',
-      '-webkit-box-orient': 'vertical',
     },
 
     span: {
