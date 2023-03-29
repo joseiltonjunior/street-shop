@@ -8,23 +8,27 @@ import { stripe } from '@/lib/stripe'
 
 import { BestSellerCarousel } from '@/components/BestSellerCarousel'
 import { BestSellerCarouselMobile } from '@/components/BestSellerCarouselMobile'
-import { HomeProps, ProductInfoProps } from '@/types/home'
+
 import Head from 'next/head'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
-import { productProps } from '@/storage/modules/cart/action'
 
 import { Header } from '@/components/Header'
 
 import { setProducts } from '@/storage/modules/products/action'
 
-import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
+import { Container } from '@/styles/pages/home'
 import { CarouselProducts } from '@/components/CarouselProducts'
 import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
+import { ContentWeb } from '@/components/ContentWeb'
+import { ContentMobile } from '@/components/ContentMobile'
+import { ProductInfoProps, ProductsProps } from '@/types/product'
 
-export default function Home({ products }: HomeProps) {
-  const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
+export default function Home({ products }: ProductsProps) {
+  const cart = useSelector<reduxProps, ProductInfoProps[]>(
+    (state) => state.cart,
+  )
   const [cupsCategory, setCupsCategory] = useState<ProductInfoProps[]>()
   const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
   const [coffeeCategory, setCoffeeCategory] = useState<ProductInfoProps[]>()
@@ -62,7 +66,7 @@ export default function Home({ products }: HomeProps) {
         <title>{`Home | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart={cart.length} inputSearch isLink />
+      <Header buttonCart lengthCart={cart.length} inputSearch isLink />
 
       <Container>
         {bestSeller && (

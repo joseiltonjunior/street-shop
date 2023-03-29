@@ -1,7 +1,7 @@
 export interface HeaderProps {
-  buttonCart?: number
+  buttonCart?: boolean
+  lengthCart?: number
   buttonPrev?: boolean
   inputSearch?: boolean
-  buttonMenu?: boolean
   isLink?: boolean
 }

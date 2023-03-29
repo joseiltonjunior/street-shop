@@ -27,7 +27,7 @@ export function Header({
   buttonPrev,
   inputSearch,
   buttonCart,
-  buttonMenu,
+  lengthCart,
   isLink,
 }: HeaderProps) {
   const router = useRouter()
@@ -87,7 +87,7 @@ export function Header({
       {buttonCart && (
         <CartButton href="/cart">
           <Image src={cartIcon} alt="" />
-          <div>{buttonCart}</div>
+          <div>{lengthCart}</div>
         </CartButton>
       )}
 

@@ -1,6 +1,8 @@
 import React, { HTMLAttributes } from 'react'
 import { Select } from '../Select'
 
+import separator from '@/assets/separator.png'
+
 import { Container, ActualPage, BreadCrumbLink, Separator } from './styles'
 
 interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
@@ -19,7 +21,7 @@ export function Breadcrumb({
     <Container {...rest}>
       <BreadCrumbLink href={'/'}>Voltar</BreadCrumbLink>
 
-      <Separator />
+      <Separator src={separator} alt="" width={30} height={30} />
 
       {actualPage && (
         <ActualPage>

@@ -1,4 +1,5 @@
 import { styled } from '@stitches/react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const Container = styled('div', {
@@ -33,7 +34,7 @@ export const ActualPage = styled('div', {
   },
 })
 
-export const Separator = styled('div', {})
+export const Separator = styled(Image, {})
 
 export const BreadCrumbLink = styled(Link, {
   cursor: 'pointer',

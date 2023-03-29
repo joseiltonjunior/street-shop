@@ -1,7 +1,7 @@
+import { ProductContainer, ProductDetails } from '@/styles/pages/product'
 import Skeleton from 'react-loading-skeleton'
-import { ProductContainer, ProductDetails } from '../styles'
 
-export function SkeletonProductWeb() {
+export function SkeletonProduct() {
   return (
     <ProductContainer>
       <Skeleton width={520} height={480} />

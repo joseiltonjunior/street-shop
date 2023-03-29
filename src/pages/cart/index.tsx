@@ -1,7 +1,7 @@
 import { Breadcrumb } from '@/components/BreadCrumb'
 
 import { reduxProps } from '@/storage'
-import { productProps, removeProduct } from '@/storage/modules/cart/action'
+import { removeProduct } from '@/storage/modules/cart/action'
 
 import Head from 'next/head'
 import Image from 'next/image'
@@ -24,9 +24,12 @@ import {
   EmptyCartContent,
 } from '@/styles/pages/cart'
 import { Header } from '@/components/Header'
+import { ProductInfoProps } from '@/types/product'
 
 export default function Carrinho() {
-  const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
+  const cart = useSelector<reduxProps, ProductInfoProps[]>(
+    (state) => state.cart,
+  )
 
   const [totalValueCart, setTotalValueCart] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
@@ -90,7 +93,7 @@ export default function Carrinho() {
         <title>{`Meu carrinho | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonPrev />
+      <Header />
 
       <Breadcrumb actualPage="Meu carrinho" />
 

@@ -14,19 +14,3 @@ export const Container = styled('div', {
     margin: '1rem 0',
   },
 })
-
-export const ContentWeb = styled('div', {
-  display: 'block',
-
-  '@media (max-width: 900px)': {
-    display: 'none',
-  },
-})
-
-export const ContentMobile = styled('div', {
-  display: 'none',
-
-  '@media (max-width: 900px)': {
-    display: 'block',
-  },
-})

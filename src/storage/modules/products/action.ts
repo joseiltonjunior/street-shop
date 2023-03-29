@@ -1,10 +1,6 @@
-export interface productProps {
-  id: string
-  name: string
-  imageUrl: string
-}
+import { ProductInfoProps } from '@/types/product'
 
-export function setProducts(products: productProps[]) {
+export function setProducts(products: ProductInfoProps[]) {
   return {
     type: '@products/SET_PRODUCTS',
     payload: {

@@ -10,11 +10,11 @@ export const Container = styled('div', {
 
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
 
   gap: '1rem',
 
   '@media (max-width: 900px)': {
-    justifyContent: 'center',
     padding: '1rem',
   },
 })
