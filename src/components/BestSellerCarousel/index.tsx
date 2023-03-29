@@ -1,11 +1,11 @@
-import { HomeProps } from '@/types/home'
 import { useKeenSlider } from 'keen-slider/react'
 import Image from 'next/image'
 import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
 import arrowLeft from '@/assets/caret-left.svg'
 import arrowRight from '@/assets/caret-right.svg'
+import { ProductsProps } from '@/types/product'
 
-export function BestSellerCarousel({ products }: HomeProps) {
+export function BestSellerCarousel({ products }: ProductsProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 3,
