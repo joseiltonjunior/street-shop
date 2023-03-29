@@ -5,17 +5,11 @@ export const Container = styled('div', {
   background: '$white',
   alignItems: 'center',
   width: '100%',
-  //   padding: '10px',
-  //   paddingRight: '0.5rem',
+
   borderRadius: 5,
   height: '35px',
 
-  // position: 'relative',
-  //   overflow: 'hidden',
-
-  '@media (min-width: 900px)': {
-    // position: 'relative',
-  },
+  position: 'relative',
 
   img: {
     objectFit: 'cover',
@@ -23,7 +17,6 @@ export const Container = styled('div', {
   },
 
   input: {
-    // background: 'red',
     height: '100%',
 
     borderRadius: 5,
@@ -48,7 +41,7 @@ export const Container = styled('div', {
     left: 0,
     width: '100%',
 
-    zIndex: 9999,
+    zIndex: 1000,
 
     '@media (max-width: 900px)': {
       top: 60,

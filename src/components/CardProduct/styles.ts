@@ -5,12 +5,14 @@ export const Container = styled(Link, {
   height: 300,
   width: '100%',
   background: '$gray800',
+  borderRadius: 3,
 
   display: 'grid',
   gridTemplateRows: 'auto 80px',
 
+  textDecoration: 'none',
+
   '.img': {
-    // background: 'red',
     borderBottom: '1px solid $gray900',
 
     display: 'flex',

@@ -1,7 +1,7 @@
 import { styled } from '@/styles'
 
 export const Container = styled('div', {
-  width: '6rem',
+  width: '5.31rem',
   position: 'relative',
 })
 
@@ -77,9 +77,10 @@ export const DropdownItemName = styled('div', {
 export const DropdownContainer = styled('div', {
   position: 'absolute',
   backgroundColor: '$orange500',
-  borderBottom: '1px solid $gray900',
-  borderRight: '1px solid $gray900',
-  borderLeft: '1px solid $gray900',
+  borderBottom: '1px solid $gray800',
+  borderRight: '1px solid $gray800',
+  borderLeft: '1px solid $gray800',
+  overflow: 'hidden',
 
   width: '9rem',
 

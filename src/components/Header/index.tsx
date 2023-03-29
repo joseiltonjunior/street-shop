@@ -44,7 +44,7 @@ export function Header({
         <ContentLinks>
           {inputSearch && <SearchInput />}
 
-          <div style={{ display: 'flex', gap: 30 }} className="links">
+          <div className="links">
             <Select
               name="Categoria"
               onAction={(e) => console.log(e.value)}

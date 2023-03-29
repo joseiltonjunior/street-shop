@@ -18,24 +18,21 @@ import { productProps } from '@/storage/modules/cart/action'
 import { Header } from '@/components/Header'
 
 import { setProducts } from '@/storage/modules/products/action'
-import { CardProduct } from '@/components/CardProduct'
 
-import {
-  Container,
-  ContentWeb,
-  ContentMobile,
-  ContentProducts,
-} from '@/styles/pages/home'
+import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
+import { CarouselProducts } from '@/components/CarouselProducts'
 
 export default function Home({ products }: HomeProps) {
   const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
   const [cupsCategory, setCupsCategory] = useState<ProductInfoProps[]>()
+  const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
   const [coffeeCategory, setCoffeeCategory] = useState<ProductInfoProps[]>()
+  const [actionFigureCategory, setActionFigureCategory] =
+    useState<ProductInfoProps[]>()
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(products)
     dispatch(setProducts(products))
 
     const cupsList = products.filter(
@@ -47,6 +44,13 @@ export default function Home({ products }: HomeProps) {
       (product) => product.unitLabel === 'cafe',
     )
 
+    const actionFigureList = products.filter(
+      (product) => product.unitLabel === 'actionFigure',
+    )
+
+    setBestSeller([coffeeList[0], coffeeList[1], cupsList[0], cupsList[1]])
+
+    setActionFigureCategory(actionFigureList)
     setCoffeeCategory(coffeeList)
     setCupsCategory(cupsList)
   }, [dispatch, products])
@@ -60,50 +64,39 @@ export default function Home({ products }: HomeProps) {
       <Header buttonCart={cart.length} inputSearch isLink />
 
       <Container>
-        <h3>Mais vendidos</h3>
-        <ContentWeb>
-          <CarouselWeb products={products} />
-        </ContentWeb>
+        {bestSeller && (
+          <div style={{ marginTop: '2rem' }}>
+            <h3>Mais vendidos</h3>
+            <ContentWeb>
+              <CarouselWeb products={bestSeller} />
+            </ContentWeb>
 
-        <ContentMobile>
-          <CarouselMobile products={products} />
-        </ContentMobile>
+            <ContentMobile>
+              <CarouselMobile products={bestSeller} />
+            </ContentMobile>
+          </div>
+        )}
 
-        {/* <h3>Action Figures</h3>
-        <ContentProducts>
-          {products.map((product) => (
-            <CardProduct
-              key={product.id}
-              imgUrl={product.imageUrl}
-              name={product.name}
-              price={product.price}
-            />
-          ))}
-        </ContentProducts> */}
-        <h3>Cafés</h3>
-        <ContentProducts>
-          {coffeeCategory?.map((product) => (
-            <CardProduct
-              key={product.id}
-              imgUrl={product.imageUrl}
-              name={product.name}
-              price={product.price}
-              href={`/product?id=${product.id}`}
-            />
-          ))}
-        </ContentProducts>
-        <h3>Copos, Canecas e Garrafas</h3>
-        <ContentProducts>
-          {cupsCategory?.map((product) => (
-            <CardProduct
-              key={product.id}
-              imgUrl={product.imageUrl}
-              name={product.name}
-              price={product.price}
-              href={`/product?id=${product.id}`}
-            />
-          ))}
-        </ContentProducts>
+        {actionFigureCategory && (
+          <div style={{ marginTop: '4rem' }}>
+            <h3>Action Figures</h3>
+            <CarouselProducts products={actionFigureCategory} />
+          </div>
+        )}
+
+        {coffeeCategory && (
+          <div style={{ marginTop: '4rem' }}>
+            <h3>Cafés</h3>
+            <CarouselProducts products={coffeeCategory} />
+          </div>
+        )}
+
+        {cupsCategory && (
+          <div style={{ marginTop: '4rem' }}>
+            <h3>Copos, Canecas e Garrafas</h3>
+            <CarouselProducts products={cupsCategory} />
+          </div>
+        )}
       </Container>
     </>
   )

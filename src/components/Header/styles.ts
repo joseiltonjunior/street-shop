@@ -5,17 +5,15 @@ import Link from 'next/link'
 export const Container = styled('div', {
   padding: '1rem 2rem 0.5rem',
   width: '100%',
-  // maxWidth: 1180,
-  // margin: '0 auto',
-  marginBottom: '1rem',
+
+  // marginBottom: '1rem',
 
   background: '$orange500',
 
   display: 'flex',
-  // alignItems: 'center',
-  //   justifyContent: 'space-between',
+  alignItems: 'center',
+
   gap: '1rem',
-  //   position: 'relative',
 
   '@media (max-width: 900px)': {
     justifyContent: 'center',
@@ -96,11 +94,17 @@ export const CartButton = styled(Link, {
 })
 
 export const ContentLinks = styled('div', {
-  gap: 10,
+  gap: 5,
   display: 'flex',
   flexDirection: 'column',
 
+  width: '100%',
+  maxWidth: 500,
+
   'div.links': {
+    display: 'flex',
+    gap: 10,
+
     '@media (max-width: 900px)': {
       'div, a': {
         display: 'none',

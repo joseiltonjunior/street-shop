@@ -44,7 +44,7 @@ export default function Product({ product }: ProductProps) {
 
       <Header buttonCart={cart.length} inputSearch isLink />
 
-      <Breadcrumb actualPage={product.name} style={{ marginBottom: '1rem' }} />
+      <Breadcrumb actualPage={product.name} />
 
       <Container>
         <ContentWeb>

@@ -5,7 +5,7 @@ export const Container = styled('div', {
   display: 'flex',
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  margin: '0 auto',
+  margin: '1rem auto 0',
   // background: 'red',
   alignItems: 'center',
 })
