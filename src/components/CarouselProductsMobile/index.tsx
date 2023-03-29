@@ -1,10 +1,10 @@
 import { useKeenSlider } from 'keen-slider/react'
-import { HomeProps } from '@/types/home'
 
 import { Container } from './styles'
 import { CardProduct } from '../CardProduct'
+import { ProductsProps } from '@/types/product'
 
-export function CarouselProductsMobile({ products }: HomeProps) {
+export function CarouselProductsMobile({ products }: ProductsProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 1,

@@ -8,12 +8,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
-import { productProps } from '@/storage/modules/cart/action'
+import { ProductInfoProps } from '@/types/product'
 
 export function SearchInput() {
-  const [listProducts, setListProducts] = useState<productProps[]>()
+  const [listProducts, setListProducts] = useState<ProductInfoProps[]>()
 
-  const products = useSelector<reduxProps, productProps[]>(
+  const products = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.products,
   )
 
