@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="D'Coffee Shop | Cafés Gourmet | Colecionavéis | Copos e Garrafas"
+          content="Cafés Gourmet | Colecionavéis | Copos e Garrafas"
         />
         <meta
           name="image"
@@ -39,6 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <PersistGate loading={null} persistor={persistor}>
             <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
               <Component {...pageProps} />
+
               <ToastContainer />
             </SkeletonTheme>
           </PersistGate>

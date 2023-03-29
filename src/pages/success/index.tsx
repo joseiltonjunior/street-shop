@@ -1,17 +1,18 @@
 import { stripe } from '@/lib/stripe'
-import { Header } from '@/styles/pages/app'
+
 import { SuccessProps } from '@/types/success'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
-
 import caretLeft from '@/assets/caret-left.svg'
 import caretRight from '@/assets/caret-right.svg'
 
 import { useKeenSlider } from 'keen-slider/react'
-import { ButtonNext, ButtonPrev } from '@/components/CarouselMobile/styles'
+import {
+  ButtonNext,
+  ButtonPrev,
+} from '@/components/BestSellerCarouselMobile/styles'
 import { useDispatch } from 'react-redux'
 import { clearCart } from '@/storage/modules/cart/action'
 import { useRouter } from 'next/router'
@@ -21,6 +22,8 @@ import {
   ImageContainer,
   ButtonClearCart,
 } from '@/styles/pages/success'
+import { Button } from '@/components/Button'
+import { Header } from '@/components/Header'
 
 export default function Success({ salesInformation }: SuccessProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -33,6 +36,10 @@ export default function Success({ salesInformation }: SuccessProps) {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  const nameClient = salesInformation.clientName.split(' ', 1).toString()
+  const nameFormart =
+    nameClient[0].toUpperCase() + nameClient.slice(1).toLowerCase()
+
   return (
     <>
       <Head>
@@ -41,12 +48,9 @@ export default function Success({ salesInformation }: SuccessProps) {
         <meta name="robots" content="noindex" />
       </Head>
 
-      <Header>
-        <Image src={logoCoffeIcon} alt="" width={150} />
-      </Header>
+      <Header />
 
       <Container>
-        <h1>Detalhes da compra</h1>
         <div ref={sliderRef} className="ken-slider">
           {salesInformation.products.map((item, index) => (
             <ImageContainer
@@ -66,8 +70,8 @@ export default function Success({ salesInformation }: SuccessProps) {
               <Image
                 src={item.product.images[0]}
                 alt=""
-                width={250}
-                height={250}
+                width={520}
+                height={480}
               />
 
               {index + 1 !== salesInformation.products.length && (
@@ -84,23 +88,32 @@ export default function Success({ salesInformation }: SuccessProps) {
           ))}
         </div>
 
-        <p>
-          Uhuul{' '}
-          <strong style={{ color: '#FFBA00' }}>
-            {salesInformation.clientName}
-          </strong>
-          , sua compra já está sendo processada e logo estará a caminho da sua
-          casa.
-        </p>
+        <div className="info">
+          <h1>Compra efetuada com sucesso</h1>
+          <p>
+            Uhuul <strong style={{ color: '#FFBA00' }}>{nameFormart}</strong>,
+            sua compra já está sendo processada e logo estará a caminho da sua
+            casa.
+          </p>
 
-        <ButtonClearCart
-          onClick={() => {
-            dispatch(clearCart())
-            router.replace('/')
-          }}
-        >
-          Voltar a Home
-        </ButtonClearCart>
+          <Button
+            onClick={() => {
+              dispatch(clearCart())
+              router.replace('/detalhes')
+            }}
+          >
+            Detalhes da compra
+          </Button>
+
+          <ButtonClearCart
+            onClick={() => {
+              dispatch(clearCart())
+              router.replace('/')
+            }}
+          >
+            Voltar a Home
+          </ButtonClearCart>
+        </div>
       </Container>
     </>
   )

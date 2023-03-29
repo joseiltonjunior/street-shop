@@ -1,89 +1,124 @@
+import { useEffect, useState } from 'react'
 import { GetStaticProps } from 'next'
 
 import Stripe from 'stripe'
 import 'keen-slider/keen-slider.min.css'
 
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
-
 import { stripe } from '@/lib/stripe'
 
-import { Container, ContentWeb, ContentMobile } from '@/styles/pages/home'
-import { CarouselWeb } from '@/components/CarouselWeb'
-import { CarouselMobile } from '@/components/CarouselMobile'
-import { HomeProps } from '@/types/home'
+import { BestSellerCarousel } from '@/components/BestSellerCarousel'
+import { BestSellerCarouselMobile } from '@/components/BestSellerCarouselMobile'
+
 import Head from 'next/head'
-import Image from 'next/image'
-import { Header } from '@/styles/pages/app'
-import { useSelector } from 'react-redux'
+
+import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
-import { productProps } from '@/storage/modules/cart/action'
-import { CartButton } from '@/components/CartButton'
-import { Breadcrumb } from '@/components/BreadCrumb'
-import { useCallback, useState } from 'react'
 
-export default function Home({ products }: HomeProps) {
-  const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
+import { Header } from '@/components/Header'
 
-  const [filterProducts, setFilterProducts] = useState<string>('')
+import { setProducts } from '@/storage/modules/products/action'
 
-  const [productsWithFilter, setProductsWithFilter] = useState<HomeProps>({
-    products,
-  })
+import { Container } from '@/styles/pages/home'
+import { CarouselProducts } from '@/components/CarouselProducts'
+import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
+import { ContentWeb } from '@/components/ContentWeb'
+import { ContentMobile } from '@/components/ContentMobile'
+import { ProductInfoProps, ProductsProps } from '@/types/product'
 
-  const addFilterProducts = useCallback(
-    (filter: string) => {
-      if (filter) {
-        const newArray = products.filter((item) => item.unitLabel === filter)
-
-        setFilterProducts(filter)
-        setProductsWithFilter({ products: newArray })
-
-        return
-      }
-
-      setFilterProducts(filter)
-      setProductsWithFilter({ products })
-    },
-    [products],
+export default function Home({ products }: ProductsProps) {
+  const cart = useSelector<reduxProps, ProductInfoProps[]>(
+    (state) => state.cart,
   )
+  const [cupsCategory, setCupsCategory] = useState<ProductInfoProps[]>()
+  const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
+  const [coffeeCategory, setCoffeeCategory] = useState<ProductInfoProps[]>()
+  const [actionFigureCategory, setActionFigureCategory] =
+    useState<ProductInfoProps[]>()
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setProducts(products))
+
+    const cupsList = products.filter(
+      (product) =>
+        product.unitLabel === 'copo' || product.unitLabel === 'garrafa',
+    )
+
+    const coffeeList = products.filter(
+      (product) => product.unitLabel === 'cafe',
+    )
+
+    const actionFigureList = products.filter(
+      (product) => product.unitLabel === 'actionFigure',
+    )
+
+    setBestSeller([coffeeList[0], coffeeList[1], cupsList[0], cupsList[1]])
+
+    setActionFigureCategory(actionFigureList)
+    setCoffeeCategory(coffeeList)
+    setCupsCategory(cupsList)
+  }, [dispatch, products])
 
   return (
-    <Container>
+    <>
       <Head>
         <title>{`Home | D'Coffee Shop`}</title>
       </Head>
 
-      <Header>
-        <Image src={logoCoffeIcon} alt="" width={150} />
+      <Header buttonCart lengthCart={cart.length} inputSearch isLink />
 
-        <CartButton productLenth={cart.length} href="/cart" />
-      </Header>
+      <Container>
+        {bestSeller && (
+          <div style={{ marginTop: '2rem' }}>
+            <h3>Mais vendidos</h3>
+            <ContentWeb>
+              <BestSellerCarousel products={bestSeller} />
+            </ContentWeb>
 
-      <Breadcrumb
-        setFilterProducts={addFilterProducts}
-        style={{ marginBottom: '1rem' }}
-      />
+            <ContentMobile>
+              <BestSellerCarouselMobile products={bestSeller} />
+            </ContentMobile>
+          </div>
+        )}
 
-      <ContentWeb>
-        {filterProducts === '' && <CarouselWeb products={products} />}
-        {filterProducts === 'cafe' && (
-          <CarouselWeb products={productsWithFilter.products} />
+        {actionFigureCategory && (
+          <div style={{ marginTop: '4rem' }}>
+            <h3>Action Figures</h3>
+            <ContentWeb>
+              <CarouselProducts products={actionFigureCategory} />
+            </ContentWeb>
+            <ContentMobile>
+              <CarouselProductsMobile products={actionFigureCategory} />
+            </ContentMobile>
+          </div>
         )}
-        {filterProducts === 'copo' && (
-          <CarouselWeb products={productsWithFilter.products} />
-        )}
-      </ContentWeb>
 
-      <ContentMobile>
-        {filterProducts === '' && <CarouselMobile products={products} />}
-        {filterProducts === 'cafe' && (
-          <CarouselMobile products={productsWithFilter.products} />
+        {coffeeCategory && (
+          <div style={{ marginTop: '4rem' }}>
+            <h3>Cafés</h3>
+            <ContentWeb>
+              <CarouselProducts products={coffeeCategory} />
+            </ContentWeb>
+            <ContentMobile>
+              <CarouselProductsMobile products={coffeeCategory} />
+            </ContentMobile>
+          </div>
         )}
-        {filterProducts === 'copo' && (
-          <CarouselMobile products={productsWithFilter.products} />
+
+        {cupsCategory && (
+          <div style={{ marginTop: '4rem' }}>
+            <h3>Copos, Canecas e Garrafas</h3>
+            <ContentWeb>
+              <CarouselProducts products={cupsCategory} />
+            </ContentWeb>
+            <ContentMobile>
+              <CarouselProductsMobile products={cupsCategory} />
+            </ContentMobile>
+          </div>
         )}
-      </ContentMobile>
-    </Container>
+      </Container>
+    </>
   )
 }
 

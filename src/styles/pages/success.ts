@@ -1,46 +1,73 @@
 import { styled } from '..'
 
 export const Container = styled('main', {
-  display: 'flex',
-  flexDirection: 'column',
+  display: 'grid',
 
+  gridTemplateColumns: '590px 590px',
+
+  padding: '1rem',
   alignItems: 'center',
+  justifyContent: 'center',
   margin: '0 auto',
 
-  '@media (min-height: 700px)': {
-    minHeight: 656,
+  maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
+
+  'div.ken-slider': {
+    display: 'flex',
+    height: '100%',
+    overflow: 'hidden',
+
+    width: '100%',
   },
 
-  div: {
+  'div.info': {
+    height: '100%',
+    padding: '2rem',
     display: 'flex',
-    overflow: 'hidden',
-    width: '250px',
+    flexDirection: 'column',
   },
 
   h1: {
     fontSize: '$2xl',
     color: '$orange500',
+    textAlign: 'center',
   },
 
   p: {
     fontSize: '$xl',
     color: '$gray300',
-    maxWidth: 500,
+
     textAlign: 'center',
-    marginTop: '2rem',
+    margin: '2rem 0',
     lineHeight: 1.4,
+  },
+
+  '@media (max-width: 900px)': {
+    gridTemplateColumns: '1fr',
+
+    h1: {
+      fontSize: '$xl',
+    },
+
+    p: {
+      fontSize: '$md',
+      maxWidth: 300,
+    },
   },
 })
 
 export const ImageContainer = styled('div', {
-  width: '100%',
-
   background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
-  marginTop: '1rem',
+
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 
   img: {
-    objectFit: 'cover',
+    objectFit: 'contain',
+    width: '100%',
+    height: '100%',
   },
 })
 
@@ -49,8 +76,8 @@ export const ButtonClearCart = styled('button', {
   border: 'none',
   cursor: 'pointer',
 
-  marginTop: '5rem',
-  fontSize: '$lg',
+  marginTop: '1rem',
+  fontSize: '$md',
   color: '$orange500',
   fontWeight: 'bold',
 

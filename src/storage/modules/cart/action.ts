@@ -1,14 +1,6 @@
-export interface productProps {
-  id: string
-  name: string
-  imageUrl: string
-  price: string
-  description: string
-  defaultPriceId: string
-  quantity: number
-}
+import { ProductInfoProps } from '@/types/product'
 
-export function addProduct(product: productProps) {
+export function addProduct(product: ProductInfoProps) {
   return {
     type: '@cart/ADD_PRODUCT',
     payload: {
@@ -17,7 +9,7 @@ export function addProduct(product: productProps) {
   }
 }
 
-export function removeProduct(product: productProps) {
+export function removeProduct(product: ProductInfoProps) {
   return {
     type: '@cart/REMOVE_PRODUCT',
     payload: {
@@ -26,7 +18,7 @@ export function removeProduct(product: productProps) {
   }
 }
 
-export function addQuantity(product: productProps) {
+export function addQuantity(product: ProductInfoProps) {
   return {
     type: '@cart/ADD_QUANTITY',
     payload: {
@@ -35,7 +27,7 @@ export function addQuantity(product: productProps) {
   }
 }
 
-export function changeQuantity(product: productProps) {
+export function changeQuantity(product: ProductInfoProps) {
   return {
     type: '@cart/CHANGE_QUANTITY',
     payload: {

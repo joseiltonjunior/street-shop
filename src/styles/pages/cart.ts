@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const Container = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  marginLeft: 'auto',
+  margin: '0 auto',
 
   height: 600,
 
@@ -13,12 +13,12 @@ export const Container = styled('main', {
   alignItems: 'flex-start',
 
   '@media (max-height: 700px)': {
-    maxHeight: 450,
+    maxHeight: 465,
   },
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    height: 'calc(100vh - 129px)',
+    height: 'calc(100vh - 102px)',
   },
 })
 
@@ -98,8 +98,7 @@ export const TotalContent = styled('div', {
   padding: '1rem',
 
   background: '$gray800',
-  borderBottomLeftRadius: 8,
-  borderTopLeftRadius: 8,
+  borderRadius: 8,
   width: '100%',
 
   div: {
@@ -140,7 +139,7 @@ export const ProductsContent = styled('div', {
     borderTop: '1px solid $orange500',
   },
 
-  '@media (max-height: 700px) and (min-width: 900px)': {
+  '@media (min-width: 900px)': {
     overflowY: 'scroll',
     height: '100%',
   },

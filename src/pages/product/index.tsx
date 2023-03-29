@@ -1,41 +1,105 @@
 import { stripe } from '@/lib/stripe'
-import { ProductProps } from '@/types/product'
+import { ProductProps, ProductInfoProps } from '@/types/product'
 import { GetServerSideProps } from 'next'
 
 import Stripe from 'stripe'
 
-import { Container, ContentMobile, ContentWeb } from '@/styles/pages/product'
-import { ProductWeb } from '@/components/ProductWeb'
-import { SkeletonProductWeb } from '@/components/ProductWeb/Skeleton'
-import { ProductMobile } from '@/components/ProductMobile'
-import { SkeletonProductMobile } from '@/components/ProductMobile/Skeleton'
+import {
+  Container,
+  ProductContainer,
+  ImageContainer,
+  ProductDetails,
+} from '@/styles/pages/product'
+
+import { SkeletonProduct } from '@/components/SkeletonProduct'
 
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/BreadCrumb'
-import { Header } from '@/styles/pages/app'
+import { Header } from '@/components/Header'
 
-import logoCoffeIcon from '@/assets/dcoffee-logo.png'
-
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
-import { productProps } from '@/storage/modules/cart/action'
-import { CartButton } from '@/components/CartButton'
+import {
+  addProduct,
+  changeQuantity,
+  removeProduct,
+} from '@/storage/modules/cart/action'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
+import { ChangeQuantity } from '@/components/ChangeQuantity'
+import { Button } from '@/components/Button'
+import { CarouselProducts } from '@/components/CarouselProducts'
+import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
+import { ContentWeb } from '@/components/ContentWeb'
+import { ContentMobile } from '@/components/ContentMobile'
 
 export default function Product({ product }: ProductProps) {
-  const cart = useSelector<reduxProps, productProps[]>((state) => state.cart)
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  const [verifyProductAddCart, setVerifyProductAddCart] = useState(false)
+  const [quantity, setQuantity] = useState(1)
+  const [someProducts, setSomeProducts] = useState<ProductInfoProps[]>()
+
+  const cart = useSelector<reduxProps, ProductInfoProps[]>(
+    (state) => state.cart,
+  )
+
+  const products = useSelector<reduxProps, ProductInfoProps[]>(
+    (state) => state.products,
+  )
+
+  const verifyProductCart = useCallback(() => {
+    const productToCart = cart.find((item) => item.id === product.id)
+
+    if (productToCart) {
+      setQuantity(productToCart.quantity)
+      setVerifyProductAddCart(true)
+      return
+    }
+
+    setVerifyProductAddCart(false)
+  }, [cart, product.id])
+
+  function handleProductCart() {
+    if (verifyProductAddCart) {
+      router.push('/')
+      return
+    }
+
+    setVerifyProductAddCart(true)
+    dispatch(addProduct({ ...product, quantity }))
+  }
+
+  function handleQuantity(param: 'add' | 'sub') {
+    if (param === 'add' && quantity < 10) {
+      setQuantity(quantity + 1)
+      dispatch(changeQuantity({ ...product, quantity: quantity + 1 }))
+    } else if (param === 'sub' && quantity > 1) {
+      setQuantity(quantity - 1)
+      dispatch(changeQuantity({ ...product, quantity: quantity - 1 }))
+    } else if (param === 'sub' && quantity === 1) {
+      dispatch(removeProduct(product))
+      setVerifyProductAddCart(false)
+      setQuantity(1)
+    }
+  }
+
+  useEffect(() => {
+    verifyProductCart()
+
+    const someProductsList = products.filter(
+      (item) => item.unitLabel === product.unitLabel,
+    )
+
+    setSomeProducts(someProductsList)
+  }, [product.unitLabel, products, verifyProductCart])
 
   if (!product) {
     return (
       <Container>
-        <ContentWeb>
-          <SkeletonProductWeb />
-        </ContentWeb>
-
-        <ContentMobile>
-          <SkeletonProductMobile />
-        </ContentMobile>
+        <SkeletonProduct />
       </Container>
     )
   }
@@ -47,22 +111,49 @@ export default function Product({ product }: ProductProps) {
         <title>{`${product.name}  | D'Coffee Shop`}</title>
       </Head>
 
-      <Header>
-        <Link href={'/'}>
-          <Image src={logoCoffeIcon} alt="" width={150} />
-        </Link>
-        <CartButton productLenth={cart.length} href="/cart" />
-      </Header>
-      <Breadcrumb actualPage={product.name} style={{ marginBottom: '1rem' }} />
+      <Header buttonCart lengthCart={cart.length} inputSearch isLink />
+
+      <Breadcrumb actualPage={product.name} />
 
       <Container>
-        <ContentWeb>
-          <ProductWeb product={product} />
-        </ContentWeb>
+        <ProductContainer>
+          <ImageContainer>
+            <Image src={product.imageUrl} width={520} height={480} alt="" />
+          </ImageContainer>
+          <ProductDetails>
+            <h1>{product.name}</h1>
+            <span>{product.price}</span>
 
-        <ContentMobile>
-          <ProductMobile product={product} />
-        </ContentMobile>
+            <p style={{ marginBottom: '1rem' }}>{product.description}</p>
+
+            {verifyProductAddCart && (
+              <ChangeQuantity
+                quantity={quantity}
+                handleQuantity={handleQuantity}
+              />
+            )}
+
+            <div className="button">
+              <Button onClick={handleProductCart}>
+                {verifyProductAddCart
+                  ? 'Adicionar novos produtos'
+                  : 'Adicionar ao carrinho'}
+              </Button>
+            </div>
+          </ProductDetails>
+        </ProductContainer>
+
+        {someProducts && (
+          <div style={{ marginTop: '4rem' }}>
+            <h3>Produtos Similiares</h3>
+            <ContentWeb>
+              <CarouselProducts products={someProducts} />
+            </ContentWeb>
+            <ContentMobile>
+              <CarouselProductsMobile products={someProducts} />
+            </ContentMobile>
+          </div>
+        )}
       </Container>
     </>
   )
@@ -99,6 +190,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         }).format(price.unit_amount! / 100),
         description: result.description,
         defaultPriceId: price.id,
+        unitLabel: result.unit_label,
       }
     })
     .catch(() => {

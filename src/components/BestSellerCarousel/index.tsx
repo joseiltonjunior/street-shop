@@ -1,16 +1,17 @@
-import { HomeProps } from '@/types/home'
 import { useKeenSlider } from 'keen-slider/react'
 import Image from 'next/image'
 import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
 import arrowLeft from '@/assets/caret-left.svg'
 import arrowRight from '@/assets/caret-right.svg'
+import { ProductsProps } from '@/types/product'
 
-export function CarouselWeb({ products }: HomeProps) {
+export function BestSellerCarousel({ products }: ProductsProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
     },
+    loop: true,
   })
 
   return (
@@ -25,7 +26,7 @@ export function CarouselWeb({ products }: HomeProps) {
           href={`/product?id=${product.id}`}
           prefetch={false}
         >
-          <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <Image src={product.imageUrl} width={480} height={400} alt="" />
 
           <footer>
             <strong>{product.name}</strong>

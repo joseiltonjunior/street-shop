@@ -7,6 +7,10 @@ export const ButtonPrev = styled('div', {
   top: '50%',
   left: 10,
   cursor: 'pointer',
+
+  background: '$gray800',
+  padding: '1rem',
+  borderRadius: '50%',
 })
 
 export const ButtonNext = styled('div', {
@@ -15,13 +19,16 @@ export const ButtonNext = styled('div', {
   top: '55%',
   right: 10,
   cursor: 'pointer',
+
+  background: '$gray800',
+  padding: '1rem',
+  borderRadius: '50%',
 })
 
 export const HomeContainer = styled('main', {
   display: 'flex',
   width: '100%',
-  maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  marginLeft: 'auto',
+
   height: '100%',
   position: 'relative',
   overflow: 'hidden',
@@ -33,17 +40,13 @@ export const Product = styled(Link, {
   cursor: 'pointer',
   position: 'relative',
   overflow: 'hidden',
-  height: 600,
+  // height: 400,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 
-  '@media (max-height: 700px)': {
-    height: 450,
-  },
-
   img: {
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
 
   footer: {
