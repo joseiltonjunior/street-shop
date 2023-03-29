@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react'
 import { Select } from '../Select'
 
-import { Container, ActualPage, BreadCrumbLink } from './styles'
+import { Container, ActualPage, BreadCrumbLink, Separator } from './styles'
 
 interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
   actualPage?: string
@@ -17,7 +17,9 @@ export function Breadcrumb({
 }: BreadcrumbProps) {
   return (
     <Container {...rest}>
-      <BreadCrumbLink href={'/'}>Home</BreadCrumbLink>
+      <BreadCrumbLink href={'/'}>Voltar</BreadCrumbLink>
+
+      <Separator />
 
       {actualPage && (
         <ActualPage>

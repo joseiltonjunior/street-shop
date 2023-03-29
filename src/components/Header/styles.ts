@@ -6,8 +6,6 @@ export const Container = styled('div', {
   padding: '1rem 2rem 0.5rem',
   width: '100%',
 
-  // marginBottom: '1rem',
-
   background: '$orange500',
 
   display: 'flex',

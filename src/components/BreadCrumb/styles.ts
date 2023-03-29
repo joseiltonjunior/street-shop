@@ -5,43 +5,41 @@ export const Container = styled('div', {
   display: 'flex',
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  margin: '1rem auto 0',
-  // background: 'red',
+  margin: '2rem auto 0.5rem',
+
   alignItems: 'center',
+
+  padding: '0 1rem',
+
+  gap: '0.5rem',
 })
 
 export const ActualPage = styled('div', {
   color: '$gray300',
   fontWeight: 'bold',
-  padding: ' 0.5rem',
-  left: '10px',
-  // background: '$orange500',
-  position: 'relative',
-  display: 'flex',
-
-  maxWidth: '250px',
 
   gap: '1rem',
 
-  p: {
-    overflow: 'hidden',
+  '@media (max-width: 900px)': {
+    maxWidth: '300px',
 
-    display: '-webkit-box',
-    '-webkit-line-clamp': '1',
-    '-webkit-box-orient': 'vertical',
+    p: {
+      overflow: 'hidden',
+
+      display: '-webkit-box',
+      '-webkit-line-clamp': '1',
+      '-webkit-box-orient': 'vertical',
+    },
   },
 })
+
+export const Separator = styled('div', {})
 
 export const BreadCrumbLink = styled(Link, {
   cursor: 'pointer',
   textDecoration: 'none',
   color: '$orange500',
   fontWeight: 'bold',
-  padding: ' 0.5rem',
-
-  // background: '$orange500',
-
-  position: 'relative',
 
   '&:hover': {
     color: '$white',

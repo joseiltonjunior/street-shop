@@ -3,16 +3,13 @@ import { styled } from '@/styles/index'
 export const ProductContainer = styled('main', {
   display: 'flex',
   flexDirection: 'column',
+
+  // width: '100%',
 })
 
 export const ImageContainer = styled('div', {
   background: 'linear-gradient(180deg, $orange500 0%, $gray900 100%)',
   borderRadius: 8,
-  padding: '0.25rem',
-
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
 
   img: {
     objectFit: 'cover',

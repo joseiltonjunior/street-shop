@@ -2,7 +2,8 @@ import { styled } from '..'
 
 export const Container = styled('div', {
   width: '100%',
-  // marginTop: '1rem',
+
+  padding: '0 1rem 1rem',
 
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
 
@@ -19,7 +20,6 @@ export const ContentWeb = styled('div', {
 
 export const ContentMobile = styled('div', {
   display: 'none',
-  padding: '0 1rem 1rem',
 
   '@media (max-width: 900px)': {
     display: 'block',
