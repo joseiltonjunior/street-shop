@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { GetStaticProps } from 'next'
 
 import Stripe from 'stripe'
@@ -29,6 +29,7 @@ export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
+
   const [cupsCategory, setCupsCategory] = useState<ProductInfoProps[]>()
   const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
   const [coffeeCategory, setCoffeeCategory] = useState<ProductInfoProps[]>()
@@ -37,9 +38,7 @@ export default function Home({ products }: ProductsProps) {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(setProducts(products))
-
+  const filterProducts = useCallback(() => {
     const cupsList = products.filter(
       (product) =>
         product.unitLabel === 'copo' || product.unitLabel === 'garrafa',
@@ -58,7 +57,12 @@ export default function Home({ products }: ProductsProps) {
     setActionFigureCategory(actionFigureList)
     setCoffeeCategory(coffeeList)
     setCupsCategory(cupsList)
-  }, [dispatch, products])
+  }, [products])
+
+  useEffect(() => {
+    dispatch(setProducts(products))
+    filterProducts()
+  }, [dispatch, filterProducts, products])
 
   return (
     <>

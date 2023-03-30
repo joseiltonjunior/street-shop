@@ -9,7 +9,9 @@ export const Container = styled('div', {
   borderRadius: 5,
   height: '35px',
 
-  position: 'relative',
+  '@media (min-width: 900px)': {
+    position: 'relative',
+  },
 
   img: {
     objectFit: 'cover',
