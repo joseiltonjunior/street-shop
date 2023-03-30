@@ -1,5 +1,5 @@
 import { styled } from '@/styles'
-import Image from 'next/image'
+
 import Link from 'next/link'
 
 export const Container = styled('div', {
@@ -16,22 +16,10 @@ export const Container = styled('div', {
 
   '@media (max-width: 900px)': {
     padding: '1rem',
-  },
-})
 
-export const LogoMobile = styled(Image, {
-  display: 'none',
-  width: '35px',
-  height: '35px',
-
-  '@media (max-width: 900px)': {
-    display: 'block',
-  },
-})
-
-export const LogoWeb = styled(Image, {
-  '@media (max-width: 900px)': {
-    display: 'none',
+    '.logo': {
+      display: 'none',
+    },
   },
 })
 
@@ -47,15 +35,14 @@ export const MenuButton = styled('button', {
   background: 'transparent',
   cursor: 'pointer',
 
+  overflow: 'hidden',
+
   display: 'none',
 
-  img: {
-    width: '30px',
-    height: '30px',
-  },
-
   '@media (max-width: 900px)': {
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
 
@@ -84,11 +71,6 @@ export const CartButton = styled(Link, {
     width: 16,
     height: 16,
   },
-
-  img: {
-    width: '30px',
-    height: '30px',
-  },
 })
 
 export const ContentLinks = styled('div', {
@@ -99,9 +81,15 @@ export const ContentLinks = styled('div', {
   width: '100%',
   maxWidth: 500,
 
+  a: {
+    color: '$gray900',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+  },
+
   'div.links': {
     display: 'flex',
-    gap: 10,
+    gap: '1rem',
 
     '@media (max-width: 900px)': {
       'div, a': {

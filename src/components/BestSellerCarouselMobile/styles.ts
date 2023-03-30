@@ -63,17 +63,21 @@ export const Product = styled(Link, {
 export const ButtonPrev = styled('button', {
   border: 'none',
   position: 'absolute',
-  left: 0,
+  left: 10,
   top: '50%',
 
-  background: 'transparent',
+  background: '$gray800',
+  padding: '0.3rem',
+  borderRadius: '50%',
 })
 
 export const ButtonNext = styled('button', {
   border: 'none',
   position: 'absolute',
   top: '50%',
-  right: 0,
+  right: 10,
 
-  background: 'transparent',
+  background: '$gray800',
+  padding: '0.3rem',
+  borderRadius: '50%',
 })

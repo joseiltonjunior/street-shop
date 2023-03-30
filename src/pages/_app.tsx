@@ -15,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Head from 'next/head'
+import { SideMenu } from '@/components/SideMenu'
+import { Overlay } from '@/components/Overlay'
 
 globalStyles()
 
@@ -39,6 +41,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <PersistGate loading={null} persistor={persistor}>
             <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
               <Component {...pageProps} />
+
+              <SideMenu />
+
+              <Overlay />
 
               <ToastContainer />
             </SkeletonTheme>

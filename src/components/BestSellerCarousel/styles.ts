@@ -3,25 +3,25 @@ import Link from 'next/link'
 
 export const ButtonPrev = styled('div', {
   position: 'absolute',
-  zIndex: '1000',
+  zIndex: 999,
   top: '50%',
   left: 10,
   cursor: 'pointer',
 
   background: '$gray800',
-  padding: '1rem',
+  padding: '0.5rem',
   borderRadius: '50%',
 })
 
 export const ButtonNext = styled('div', {
   position: 'absolute',
-  zIndex: '1000',
+  zIndex: 999,
   top: '55%',
   right: 10,
   cursor: 'pointer',
 
   background: '$gray800',
-  padding: '1rem',
+  padding: '0.5rem',
   borderRadius: '50%',
 })
 
