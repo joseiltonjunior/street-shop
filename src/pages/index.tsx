@@ -87,7 +87,7 @@ export default function Home({ products }: ProductsProps) {
         )}
 
         {actionFigureCategory && (
-          <div style={{ marginTop: '4rem' }}>
+          <div style={{ marginTop: '3rem' }}>
             <h3>Action Figures</h3>
             <ContentWeb>
               <CarouselProducts products={actionFigureCategory} />
@@ -99,7 +99,7 @@ export default function Home({ products }: ProductsProps) {
         )}
 
         {coffeeCategory && (
-          <div style={{ marginTop: '4rem' }}>
+          <div style={{ marginTop: '3rem' }}>
             <h3>Cafés</h3>
             <ContentWeb>
               <CarouselProducts products={coffeeCategory} />
@@ -111,7 +111,7 @@ export default function Home({ products }: ProductsProps) {
         )}
 
         {cupsCategory && (
-          <div style={{ marginTop: '4rem' }}>
+          <div style={{ marginTop: '3rem' }}>
             <h3>Copos, Canecas e Garrafas</h3>
             <ContentWeb>
               <CarouselProducts products={cupsCategory} />

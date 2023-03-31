@@ -1,46 +1,61 @@
 import { useKeenSlider } from 'keen-slider/react'
 import Image from 'next/image'
-import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
-import arrowLeft from '@/assets/caret-left.svg'
-import arrowRight from '@/assets/caret-right.svg'
+import { HomeContainer, Product } from './styles'
+
 import { ProductsProps } from '@/types/product'
+import { ButtonCarousel } from '../ButtonCarousel'
+import { useState } from 'react'
+import { DotCorousel } from '../DotCarousel'
 
 export function BestSellerCarousel({ products }: ProductsProps) {
+  const [currentSlide, setCurrentSlide] = useState(0)
+
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
     },
     loop: true,
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel)
+    },
   })
 
   return (
-    <HomeContainer ref={sliderRef} className="ken-slider">
-      <ButtonPrev onClick={() => instanceRef.current?.prev()}>
-        <Image src={arrowLeft} alt="" />
-      </ButtonPrev>
-      {products.map((product) => (
-        <Product
-          key={product.id}
-          className="keen-slider__slide"
-          href={`/product?id=${product.id}`}
-          prefetch={false}
-        >
-          <Image src={product.imageUrl} width={480} height={400} alt="" />
+    <>
+      <HomeContainer ref={sliderRef} className="ken-slider">
+        <ButtonCarousel
+          orietation="Left"
+          onClick={() => instanceRef.current?.prev()}
+        />
 
-          <footer>
-            <strong>{product.name}</strong>
-            <span>{product.price}</span>
-          </footer>
-        </Product>
-      ))}
-      <ButtonNext>
-        <Image
-          src={arrowRight}
-          alt=""
+        {products.map((product) => (
+          <Product
+            key={product.id}
+            className="keen-slider__slide"
+            href={`/product?id=${product.id}`}
+            prefetch={false}
+          >
+            <Image src={product.imageUrl} width={480} height={400} alt="" />
+
+            <footer>
+              <strong>{product.name}</strong>
+              <span>{product.price}</span>
+            </footer>
+          </Product>
+        ))}
+
+        <ButtonCarousel
+          orietation="Right"
           onClick={() => instanceRef.current?.next()}
         />
-      </ButtonNext>
-    </HomeContainer>
+      </HomeContainer>
+
+      <DotCorousel
+        instanceRef={instanceRef}
+        currentSlide={currentSlide}
+        products={products}
+      />
+    </>
   )
 }
