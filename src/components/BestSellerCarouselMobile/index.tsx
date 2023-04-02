@@ -5,56 +5,69 @@ import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
 import caretLeft from '@/assets/caret-left.svg'
 import caretRight from '@/assets/caret-right.svg'
 import { ProductsProps } from '@/types/product'
+import { useState } from 'react'
+import { DotCorousel } from '../DotCarousel'
 
 export function BestSellerCarouselMobile({ products }: ProductsProps) {
+  const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 1,
       spacing: 18,
     },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel)
+    },
   })
 
   return (
-    <HomeContainer ref={sliderRef} className="ken-slider">
-      {products.map((product, index) => (
-        <Product
-          key={product.id}
-          className="keen-slider__slide"
-          href={`/product?id=${product.id}`}
-          prefetch={false}
-        >
-          <div>
-            {index !== 0 && (
-              <ButtonPrev
-                onClick={(e) => {
-                  e.preventDefault()
-                  instanceRef.current?.prev()
-                }}
-              >
-                <Image src={caretLeft} alt="" />
-              </ButtonPrev>
-            )}
+    <>
+      <HomeContainer ref={sliderRef} className="ken-slider">
+        {products.map((product, index) => (
+          <Product
+            key={product.id}
+            className="keen-slider__slide"
+            href={`/product?id=${product.id}`}
+            prefetch={false}
+          >
+            <div>
+              {index !== 0 && (
+                <ButtonPrev
+                  onClick={(e) => {
+                    e.preventDefault()
+                    instanceRef.current?.prev()
+                  }}
+                >
+                  <Image src={caretLeft} alt="" />
+                </ButtonPrev>
+              )}
 
-            <Image src={product.imageUrl} width={520} height={480} alt="" />
+              <Image src={product.imageUrl} width={520} height={480} alt="" />
 
-            {index + 1 !== products.length && (
-              <ButtonNext
-                onClick={(e) => {
-                  e.preventDefault()
-                  instanceRef.current?.next()
-                }}
-              >
-                <Image src={caretRight} alt="" />
-              </ButtonNext>
-            )}
-          </div>
+              {index + 1 !== products.length && (
+                <ButtonNext
+                  onClick={(e) => {
+                    e.preventDefault()
+                    instanceRef.current?.next()
+                  }}
+                >
+                  <Image src={caretRight} alt="" />
+                </ButtonNext>
+              )}
+            </div>
 
-          <footer>
-            <strong>{product.name}</strong>
-            <span>{product.price}</span>
-          </footer>
-        </Product>
-      ))}
-    </HomeContainer>
+            <footer>
+              <strong>{product.name}</strong>
+              <span>{product.price}</span>
+            </footer>
+          </Product>
+        ))}
+      </HomeContainer>
+      <DotCorousel
+        instanceRef={instanceRef}
+        currentSlide={currentSlide}
+        products={products}
+      />
+    </>
   )
 }

@@ -3,9 +3,10 @@ import { useKeenSlider } from 'keen-slider/react'
 import { Container } from './styles'
 import { CardProduct } from '../CardProduct'
 import { ProductsProps } from '@/types/product'
+import { ButtonCarousel } from '../ButtonCarousel'
 
 export function CarouselProducts({ products }: ProductsProps) {
-  const [sliderRef] = useKeenSlider({
+  const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 4,
       spacing: 48,
@@ -14,6 +15,12 @@ export function CarouselProducts({ products }: ProductsProps) {
 
   return (
     <Container ref={sliderRef} className="keen-slider">
+      {products.length > 4 && (
+        <ButtonCarousel
+          orietation="Left"
+          onClick={() => instanceRef.current?.prev()}
+        />
+      )}
       {products.map((product) => (
         <CardProduct
           className="keen-slider__slide"
@@ -24,6 +31,12 @@ export function CarouselProducts({ products }: ProductsProps) {
           href={`/product?id=${product.id}`}
         />
       ))}
+      {products.length > 4 && (
+        <ButtonCarousel
+          orietation="Right"
+          onClick={() => instanceRef.current?.next()}
+        />
+      )}
     </Container>
   )
 }

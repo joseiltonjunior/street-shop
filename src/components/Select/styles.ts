@@ -63,6 +63,8 @@ export const DropdownItem = styled('div', {
 export const DropdownItemName = styled('div', {
   padding: '0.2rem 0.5rem',
 
+  fontSize: '$md',
+
   variants: {
     isSelected: {
       true: {
@@ -82,7 +84,7 @@ export const DropdownContainer = styled('div', {
   borderLeft: '1px solid $gray800',
   overflow: 'hidden',
 
-  width: '9rem',
+  width: '10rem',
 
   borderRadius: '0 0 6px 6px',
   top: 27,

@@ -1,4 +1,5 @@
 import { styled } from '@/styles'
+import Link from 'next/link'
 
 export const Container = styled('div', {
   width: 300,
@@ -47,7 +48,7 @@ export const ContentDown = styled('div', {
   alignItems: 'flex-end',
 })
 
-export const Item = styled('button', {
+export const Item = styled(Link, {
   width: '100%',
   border: 'none',
   height: 40,
@@ -56,6 +57,7 @@ export const Item = styled('button', {
   gap: '0.5rem',
   background: 'transparent',
   marginBottom: '1px',
+  textDecoration: 'none',
 
   padding: '0.5rem',
 
@@ -114,11 +116,12 @@ export const ContentItemList = styled('div', {
   flexDirection: 'column',
   alignItems: 'flex-start',
 
-  span: {
+  a: {
     color: '$gray300',
     padding: '0.5rem 1.5rem',
     width: '100%',
     fontSize: '$sm',
+    textDecoration: 'none',
 
     textAlign: 'left',
   },

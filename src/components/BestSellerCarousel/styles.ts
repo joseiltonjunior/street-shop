@@ -16,7 +16,7 @@ export const ButtonPrev = styled('div', {
 export const ButtonNext = styled('div', {
   position: 'absolute',
   zIndex: 999,
-  top: '55%',
+  top: '50%',
   right: 10,
   cursor: 'pointer',
 
