@@ -12,7 +12,7 @@ import caretDown from '@/assets/caret-down.svg'
 
 import {
   Container,
-  Item,
+  // Item,
   ContentGroupItem,
   ContentItemList,
   GroupItem,
@@ -22,6 +22,7 @@ import {
 } from './styles'
 import Image from 'next/image'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export function SideMenu() {
   const { isVisible } = useSelector<reduxProps, sideMenuProps>(
@@ -35,7 +36,12 @@ export function SideMenu() {
   return (
     <Container isVisible={isVisible}>
       <ContentTop>
-        <Image src={logoCoffeIcon} alt="" width={100} />
+        <Link
+          href={'/'}
+          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+        >
+          <Image src={logoCoffeIcon} alt="" width={100} />
+        </Link>
         <button onClick={() => dispatch(setSideMenu({ isVisible: false }))}>
           <Image src={closeSideMenu} alt="" width={30} />
         </button>
@@ -56,20 +62,41 @@ export function SideMenu() {
             isVisible={isVisibleItemList}
             onClick={(e) => e.preventDefault()}
           >
-            <span>Action Figure</span>
-            <span>Café</span>
-            <span>Copos, Canecas e Garrafas</span>
+            <Link
+              href={`/products/actionFigure`}
+              onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+            >
+              Action Figure
+            </Link>
+            <Link
+              href={`/products/cafe`}
+              onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+            >
+              Café
+            </Link>
+            <Link
+              href={`/products/copo`}
+              onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+            >
+              Copos e Garrafas
+            </Link>
           </ContentItemList>
         </ContentGroupItem>
-        <Item onClick={() => dispatch(setSideMenu({ isVisible: false }))}>
+        {/* <Item
+          href={'/contant'}
+          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+        >
           <Image src={separator} alt="" width={30} />
           <strong>Contato</strong>
         </Item>
 
-        <Item onClick={() => dispatch(setSideMenu({ isVisible: false }))}>
+        <Item
+          href={'/about'}
+          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+        >
           <Image src={separator} alt="" width={30} />
           <strong>Sobre</strong>
-        </Item>
+        </Item> */}
       </ContentMain>
 
       <ContentDown>

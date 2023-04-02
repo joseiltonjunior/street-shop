@@ -49,15 +49,15 @@ export function Header({
           <div className="links">
             <Select
               name="Categoria"
-              onAction={(e) => console.log(e.value)}
+              onAction={(e) => router.push(`/products/${e.value}`)}
               itens={[
-                { name: 'Todos', value: '' },
+                { name: 'Action Figure', value: 'actionFigure' },
                 { name: 'Café', value: 'cafe' },
                 { name: 'Copos e Garrafas', value: 'copo' },
               ]}
             />
-            <Link href={'/contact'}>Contato</Link>
-            <Link href={'/about'}>Sobre</Link>
+            {/* <Link href={'/contact'}>Contato</Link>
+            <Link href={'/about'}>Sobre</Link> */}
           </div>
         </ContentLinks>
       )}

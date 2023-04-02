@@ -38,6 +38,8 @@ export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  // const [productReload, setProductReload] = useState<ProductInfoProps | null>()
+
   const [verifyProductAddCart, setVerifyProductAddCart] = useState(false)
   const [quantity, setQuantity] = useState(1)
   const [someProducts, setSomeProducts] = useState<ProductInfoProps[]>()
@@ -87,14 +89,16 @@ export default function Product({ product }: ProductProps) {
   }
 
   useEffect(() => {
-    verifyProductCart()
-
     const someProductsList = products.filter(
       (item) => item.unitLabel === product.unitLabel,
     )
 
     setSomeProducts(someProductsList)
-  }, [product.unitLabel, products, verifyProductCart])
+  }, [product.id, product.unitLabel, products])
+
+  useEffect(() => {
+    verifyProductCart()
+  }, [verifyProductCart])
 
   if (!product) {
     return (
@@ -145,7 +149,7 @@ export default function Product({ product }: ProductProps) {
 
         {someProducts && (
           <div style={{ marginTop: '4rem' }}>
-            <h3>Produtos Similiares</h3>
+            <h3>Produtos similares</h3>
             <ContentWeb>
               <CarouselProducts products={someProducts} />
             </ContentWeb>
