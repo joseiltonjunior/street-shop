@@ -33,6 +33,7 @@ import { CarouselProducts } from '@/components/CarouselProducts'
 import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 import { ContentWeb } from '@/components/ContentWeb'
 import { ContentMobile } from '@/components/ContentMobile'
+import { formartValue } from '@/utils/formartValue'
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
@@ -94,7 +95,7 @@ export default function Product({ product }: ProductProps) {
     )
 
     setSomeProducts(someProductsList)
-  }, [product.id, product.unitLabel, products])
+  }, [product.unitLabel, products])
 
   useEffect(() => {
     verifyProductCart()
@@ -188,10 +189,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         id: result.id,
         name: result.name,
         imageUrl: result.images[0],
-        price: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(price.unit_amount! / 100),
+        price: formartValue(price.unit_amount!),
         description: result.description,
         defaultPriceId: price.id,
         unitLabel: result.unit_label,

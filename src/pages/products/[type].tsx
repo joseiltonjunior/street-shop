@@ -8,6 +8,7 @@ import { Breadcrumb } from '@/components/BreadCrumb'
 import { ProductEnum } from '@/utils/productsEnum'
 import { useEffect, useState } from 'react'
 import { CardProduct } from '@/components/CardProduct'
+import Head from 'next/head'
 
 export default function Products() {
   const { query } = useRouter()
@@ -42,6 +43,10 @@ export default function Products() {
 
   return (
     <>
+      <Head>
+        <title>{`Produtos | D'Coffee Shop`}</title>
+      </Head>
+
       <Header buttonCart lengthCart={cart.length} inputSearch isLink />
       <Breadcrumb actualPage={title} />
       <Container>

@@ -4,6 +4,7 @@ import { Container } from './styles'
 import { CardProduct } from '../CardProduct'
 import { ProductsProps } from '@/types/product'
 import { ButtonCarousel } from '../ButtonCarousel'
+import { useEffect } from 'react'
 
 export function CarouselProducts({ products }: ProductsProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -12,6 +13,10 @@ export function CarouselProducts({ products }: ProductsProps) {
       spacing: 48,
     },
   })
+
+  useEffect(() => {
+    instanceRef?.current?.update()
+  }, [instanceRef, products])
 
   return (
     <Container ref={sliderRef} className="keen-slider">

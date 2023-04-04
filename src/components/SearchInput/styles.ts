@@ -49,21 +49,25 @@ export const Container = styled('div', {
       top: 60,
     },
 
-    a: {
+    button: {
       padding: 5,
       display: 'flex',
       alignItems: 'center',
-      textDecoration: 'none',
+      background: 'transparent',
+      border: 'none',
+      width: '100%',
+      // textDecoration: 'none',
       color: '$gray900',
       gap: '1rem',
       fontSize: '$sm',
+      fontWeight: 'normal',
 
       '&:hover': {
         background: '$gray100',
       },
     },
 
-    'a+a': {
+    'button+button': {
       borderTop: '1px solid $gray100',
     },
   },

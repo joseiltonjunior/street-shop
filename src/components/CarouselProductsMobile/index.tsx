@@ -3,21 +3,27 @@ import { useKeenSlider } from 'keen-slider/react'
 import { Container } from './styles'
 import { CardProduct } from '../CardProduct'
 import { ProductsProps } from '@/types/product'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DotCorousel } from '../DotCarousel'
 import { ButtonCarousel } from '../ButtonCarousel'
 
 export function CarouselProductsMobile({ products }: ProductsProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
+
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 1,
       spacing: 18,
     },
+
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel)
     },
   })
+
+  useEffect(() => {
+    instanceRef?.current?.update()
+  }, [instanceRef, products])
 
   return (
     <>

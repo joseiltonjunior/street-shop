@@ -3,7 +3,7 @@ import { Reducer } from 'redux'
 
 const INITIAL_STATE: ProductInfoProps[] = []
 
-const product: Reducer<ProductInfoProps[]> = (
+const products: Reducer<ProductInfoProps[]> = (
   state = INITIAL_STATE,
   action,
 ) => {
@@ -20,4 +20,4 @@ const product: Reducer<ProductInfoProps[]> = (
   }
 }
 
-export default product
+export default products

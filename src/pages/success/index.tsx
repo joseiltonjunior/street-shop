@@ -99,7 +99,7 @@ export default function Success({ salesInformation }: SuccessProps) {
           <Button
             onClick={() => {
               dispatch(clearCart())
-              router.replace('/detalhes')
+              router.replace(`/details?id=${salesInformation.id}`)
             }}
           >
             Detalhes da compra
@@ -111,7 +111,7 @@ export default function Success({ salesInformation }: SuccessProps) {
               router.replace('/')
             }}
           >
-            Voltar a Home
+            Voltar a página inicial
           </ButtonClearCart>
         </div>
       </Container>
@@ -143,7 +143,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         return { product: item.price?.product, quantity: item.quantity }
       })
 
-      salesInformation = { clientName, products }
+      salesInformation = { clientName, products, id: result.id }
     })
     .catch(() => {
       salesInformation = null

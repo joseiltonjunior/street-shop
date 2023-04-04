@@ -24,6 +24,7 @@ import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 import { ContentWeb } from '@/components/ContentWeb'
 import { ContentMobile } from '@/components/ContentMobile'
 import { ProductInfoProps, ProductsProps } from '@/types/product'
+import { formartValue } from '@/utils/formartValue'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
@@ -140,10 +141,7 @@ export const getStaticProps: GetStaticProps = async () => {
       name: product.name,
       imageUrl: product.images[0],
       unitLabel: product.unit_label,
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format(price.unit_amount! / 100),
+      price: formartValue(price.unit_amount!),
     }
   })
 
