@@ -1,7 +1,7 @@
 import { Breadcrumb } from '@/components/BreadCrumb'
 
 import { reduxProps } from '@/storage'
-import { removeProduct } from '@/storage/modules/cart/action'
+import { changeQuantity, removeProduct } from '@/storage/modules/cart/action'
 
 import Head from 'next/head'
 import Image from 'next/image'
@@ -14,7 +14,12 @@ import axios from 'axios'
 import { useToast } from '@/hooks/useToast'
 
 import emptyCartIcon from '@/assets/luffy-confuso.png'
+
 import { Button } from '@/components/Button'
+
+import { Header } from '@/components/Header'
+import { ProductInfoProps } from '@/types/product'
+import arrowIcon from '@/assets/caret-left-triangle.svg'
 
 import {
   Container,
@@ -22,9 +27,13 @@ import {
   TotalContent,
   ProductsContent,
   EmptyCartContent,
+  ButtonQuantity,
+  ButtonRemoveProduct,
+  ProductInfoContent,
+  QuantityContent,
+  RowContent,
+  NameProduct,
 } from '@/styles/pages/cart'
-import { Header } from '@/components/Header'
-import { ProductInfoProps } from '@/types/product'
 
 export default function Carrinho() {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
@@ -81,6 +90,16 @@ export default function Carrinho() {
       .finally(() => setIsLoading(false))
   }
 
+  function handleQuantity(param: 'add' | 'sub', product: ProductInfoProps) {
+    if (param === 'add' && product.quantity < 10) {
+      dispatch(changeQuantity({ ...product, quantity: product.quantity + 1 }))
+    } else if (param === 'sub' && product.quantity > 1) {
+      dispatch(changeQuantity({ ...product, quantity: product.quantity - 1 }))
+    } else if (param === 'sub' && product.quantity === 1) {
+      dispatch(removeProduct(product))
+    }
+  }
+
   useEffect(() => {
     if (cart.length > 0) {
       handleValueCart()
@@ -100,38 +119,57 @@ export default function Carrinho() {
       {cart.length > 0 ? (
         <Container>
           <ProductsContent>
-            {cart.map((product) => (
-              <Product key={product.id} href={`/product?id=${product.id}`}>
-                <Image src={product.imageUrl} alt="" width={150} height={150} />
+            {cart
+              .sort((a, b) => (a.name > b.name ? 1 : -1))
+              .map((product) => (
+                <Product key={product.id} href={`/product?id=${product.id}`}>
+                  <Image
+                    src={product.imageUrl}
+                    alt=""
+                    width={100}
+                    height={100}
+                  />
 
-                <div className="info">
-                  <strong>{product.name}</strong>
+                  <ProductInfoContent>
+                    <RowContent>
+                      <NameProduct>{product.name}</NameProduct>
+                      <strong>{product.price}</strong>
+                    </RowContent>
 
-                  <div className="price">
-                    <span>Qtde: {product.quantity}</span>
-                    <strong>{product.price}</strong>
-                  </div>
+                    <RowContent>
+                      <QuantityContent>
+                        <ButtonQuantity
+                          onClick={(e) => {
+                            e.preventDefault()
+                            handleQuantity('sub', product)
+                          }}
+                        >
+                          <Image src={arrowIcon} alt="" />
+                        </ButtonQuantity>
+                        <span>Qtde: {product.quantity}</span>
+                        <ButtonQuantity
+                          increment
+                          onClick={(e) => {
+                            e.preventDefault()
+                            handleQuantity('add', product)
+                          }}
+                        >
+                          <Image src={arrowIcon} alt="" />
+                        </ButtonQuantity>
+                      </QuantityContent>
 
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault()
-                      dispatch(removeProduct(product))
-                    }}
-                  >
-                    Remover
-                  </button>
-                </div>
-                <button
-                  className="button-web"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    dispatch(removeProduct(product))
-                  }}
-                >
-                  Remover
-                </button>
-              </Product>
-            ))}
+                      <ButtonRemoveProduct
+                        onClick={(e) => {
+                          e.preventDefault()
+                          dispatch(removeProduct(product))
+                        }}
+                      >
+                        Remover
+                      </ButtonRemoveProduct>
+                    </RowContent>
+                  </ProductInfoContent>
+                </Product>
+              ))}
           </ProductsContent>
 
           <TotalContent>

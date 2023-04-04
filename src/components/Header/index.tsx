@@ -39,7 +39,7 @@ export function Header({
       <MenuButton onClick={() => dispatch(setSideMenu({ isVisible: true }))}>
         <Image src={listIcon} alt="" />
       </MenuButton>
-      <Link href={'/'} className="logo">
+      <Link href={'/'} className="logo" title="Ir para a home">
         <Image src={logoCoffeIcon} alt="" width={130} />
       </Link>
       {isLink && (
@@ -48,7 +48,7 @@ export function Header({
 
           <div className="links">
             <Select
-              name="Categoria"
+              name="Categorias"
               onAction={(e) => router.push(`/products/${e.value}`)}
               itens={[
                 { name: 'Action Figure', value: 'actionFigure' },
@@ -67,7 +67,7 @@ export function Header({
         </PrevButton>
       )}
       {buttonCart && (
-        <CartButton href="/cart">
+        <CartButton href="/cart" title="Abrir carrinho">
           <Image src={cartIcon} alt="" />
           <div>{lengthCart}</div>
         </CartButton>

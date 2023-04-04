@@ -8,7 +8,7 @@ export const Container = styled('main', {
   padding: '1rem',
   alignItems: 'center',
   justifyContent: 'center',
-  margin: '0 auto',
+  margin: '1rem auto',
 
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
 

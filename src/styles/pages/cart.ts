@@ -5,97 +5,90 @@ export const Container = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   margin: '0 auto',
-
-  height: 600,
+  gap: '1rem',
 
   display: 'grid',
   gridTemplateColumns: '1fr 0.7fr',
-  alignItems: 'flex-start',
 
-  '@media (max-height: 700px)': {
-    maxHeight: 465,
-  },
+  height: 'calc(100vh - 152px)',
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    height: 'calc(100vh - 102px)',
+    height: '100%',
   },
 })
 
 export const Product = styled(Link, {
   display: 'grid',
-  gridTemplateColumns: '150px auto 150px',
+  gridTemplateColumns: '100px auto',
   textDecoration: 'none',
   color: '$gray100',
-  padding: '0 1rem',
+
   alignItems: 'center',
 
-  '.price': {
-    strong: {
-      color: '$orange500',
-      marginLeft: '1rem',
-    },
-  },
-
-  button: {
-    background: 'transparent',
-    color: '$orange500',
-    fontWeight: 'bold',
-
-    border: 'none',
-    fontSize: '$sm',
-
-    cursor: 'pointer',
-
-    '&:hover': {
-      color: '$white',
-    },
-
-    span: {
-      display: 'none',
-    },
-  },
-
-  'div.info': {
-    button: {
-      display: 'none',
-    },
-  },
-
   '@media (max-width: 900px)': {
-    gridTemplateColumns: '120px auto',
+    paddingRight: '1rem',
+  },
+})
 
-    'div.info': {
-      textAlign: 'center',
-      display: 'flex',
-      flexDirection: 'column',
+export const ButtonRemoveProduct = styled('button', {
+  background: 'transparent',
+  color: '$orange500',
+  fontWeight: 'bold',
 
-      button: {
-        display: 'block',
-        marginTop: '1rem',
+  border: 'none',
+  fontSize: '$sm',
+
+  cursor: 'pointer',
+
+  '&:hover': {
+    color: '$white',
+  },
+})
+
+export const ProductInfoContent = styled('div', {
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+})
+
+export const ButtonQuantity = styled('button', {
+  background: 'transparent',
+  width: '20px',
+  height: '20px',
+  cursor: 'pointer',
+  border: 'none',
+
+  variants: {
+    increment: {
+      true: {
+        transform: 'rotate(180deg)',
+        bottom: 15,
       },
     },
-
-    img: {
-      width: '100%',
-      heigth: '100%',
-      objectFit: 'cover',
-    },
-
-    'button.button-web': {
-      display: 'none',
-    },
   },
+})
+
+export const QuantityContent = styled('div', {
+  display: 'flex',
+})
+
+export const NameProduct = styled('strong', {
+  overflow: 'hidden',
+
+  display: '-webkit-box',
+  '-webkit-line-clamp': '2',
+  '-webkit-box-orient': 'vertical',
 })
 
 export const TotalContent = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  height: '100%',
-  marginTop: 'auto',
-  gap: '2rem',
 
+  gap: '2rem',
   padding: '1rem',
+
+  height: '20rem',
 
   background: '$gray800',
   borderRadius: 8,
@@ -119,46 +112,36 @@ export const TotalContent = styled('div', {
   '@media (max-width: 900px)': {
     borderRadius: 0,
     height: 'auto',
+    marginTop: 'auto',
   },
 })
 
 export const ProductsContent = styled('div', {
-  '&::-webkit-scrollbar': {
-    width: '3px',
-  },
-
-  '&::-webkit-scrollbar-track': {
-    background: '$gray900',
-  },
-
-  '&::-webkit-scrollbar-thumb': {
-    background: '$orange500',
-  },
-
   'a+a': {
     borderTop: '1px solid $orange500',
   },
+})
 
-  '@media (min-width: 900px)': {
-    overflowY: 'scroll',
-    height: '100%',
-  },
+export const RowContent = styled('div', {
+  display: 'flex',
+
+  width: '100%',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+
+  gap: '1rem',
 })
 
 export const EmptyCartContent = styled('div', {
   width: '100%',
 
-  height: 600,
-
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 
-  flexDirection: 'column',
+  height: '500px',
 
-  '@media (max-height: 700px)': {
-    height: 450,
-  },
+  flexDirection: 'column',
 
   img: {
     objectFit: 'contain',
