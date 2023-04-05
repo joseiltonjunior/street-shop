@@ -33,13 +33,11 @@ import { CarouselProducts } from '@/components/CarouselProducts'
 import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 import { ContentWeb } from '@/components/ContentWeb'
 import { ContentMobile } from '@/components/ContentMobile'
-import { formartValue } from '@/utils/formartValue'
+import { formatValue } from '@/utils/formatValue'
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
   const router = useRouter()
-
-  // const [productReload, setProductReload] = useState<ProductInfoProps | null>()
 
   const [verifyProductAddCart, setVerifyProductAddCart] = useState(false)
   const [quantity, setQuantity] = useState(1)
@@ -95,7 +93,7 @@ export default function Product({ product }: ProductProps) {
     )
 
     setSomeProducts(someProductsList)
-  }, [product.unitLabel, products])
+  }, [product.id, product.unitLabel, products])
 
   useEffect(() => {
     verifyProductCart()
@@ -116,7 +114,7 @@ export default function Product({ product }: ProductProps) {
         <title>{`${product.name}  | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart lengthCart={cart.length} inputSearch isLink />
+      <Header buttonCart lengthCart={cart.length} isLink inputSearch />
 
       <Breadcrumb actualPage={product.name} />
 
@@ -189,7 +187,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         id: result.id,
         name: result.name,
         imageUrl: result.images[0],
-        price: formartValue(price.unit_amount!),
+        price: formatValue(price.unit_amount!),
         description: result.description,
         defaultPriceId: price.id,
         unitLabel: result.unit_label,

@@ -15,9 +15,10 @@ import {
 } from '@/styles/pages/details'
 import Image from 'next/image'
 import { Button } from '@/components/Button'
-import { formartValue } from '@/utils/formartValue'
+import { formatValue } from '@/utils/formatValue'
 import { useRouter } from 'next/router'
-import { formartCep } from '@/utils/formartCep'
+import { formatCep } from '@/utils/formatCep'
+import { formatPhone } from '@/utils/formartPhone'
 
 export default function Details({ salesInformation }: DetailsProps) {
   const router = useRouter()
@@ -60,6 +61,24 @@ export default function Details({ salesInformation }: DetailsProps) {
             <div>
               {salesInformation.shippingDetails?.address && (
                 <div className="topContent">
+                  <p>Dados do Cliente</p>
+                  <RowContent>
+                    <strong>Nome</strong>
+                    <span>{salesInformation.clientName}</span>
+                  </RowContent>
+
+                  <RowContent>
+                    <strong>E-mail</strong>
+                    <span>{salesInformation.shippingDetails.email}</span>
+                  </RowContent>
+
+                  <RowContent>
+                    <strong>Telefone</strong>
+                    <span>
+                      {formatPhone(salesInformation.shippingDetails.phone)}
+                    </span>
+                  </RowContent>
+
                   <p>Endereço para entrega</p>
 
                   <RowContent>
@@ -79,7 +98,7 @@ export default function Details({ salesInformation }: DetailsProps) {
                   <RowContent>
                     <strong>CEP</strong>
                     <span>
-                      {formartCep(
+                      {formatCep(
                         salesInformation.shippingDetails.address.postal_code,
                       )}
                     </span>
@@ -129,15 +148,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         return {
           product: item.price?.product,
           quantity: item.quantity,
-          price: formartValue(item.amount_total),
+          price: formatValue(item.amount_total),
         }
       })
 
       salesInformation = {
         clientName,
         products,
-        shippingDetails: result.shipping_details,
-        amountTotal: formartValue(result.amount_total!),
+        shippingDetails: result.customer_details,
+        amountTotal: formatValue(result.amount_total!),
       }
     })
     .catch(() => {

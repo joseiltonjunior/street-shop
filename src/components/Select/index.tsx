@@ -22,7 +22,6 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 export function Select({ itens, onAction, name }: SelectProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [selectedItemIndex, setSelectedItemIndex] = useState(0)
 
   return (
     <Container
@@ -49,14 +48,11 @@ export function Select({ itens, onAction, name }: SelectProps) {
             <DropdownItem
               key={item.value}
               onClick={() => {
-                setSelectedItemIndex(index)
                 onAction(item)
                 setIsDropdownOpen(false)
               }}
             >
-              <DropdownItemName isSelected={index === selectedItemIndex}>
-                {item.name}
-              </DropdownItemName>
+              <DropdownItemName>{item.name}</DropdownItemName>
             </DropdownItem>
           ))}
         </DropdownContainer>

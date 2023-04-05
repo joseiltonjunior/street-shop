@@ -19,6 +19,7 @@ import {
   ContentTop,
   ContentMain,
   ContentDown,
+  Item,
 } from './styles'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -47,6 +48,13 @@ export function SideMenu() {
         </button>
       </ContentTop>
       <ContentMain>
+        <Item
+          href={'/'}
+          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+        >
+          <Image src={separator} alt="" width={30} />
+          <strong>Início</strong>
+        </Item>
         <ContentGroupItem>
           <GroupItem
             isVisible={isVisibleItemList}

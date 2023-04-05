@@ -1,4 +1,4 @@
-export function formartValue(value: number) {
+export function formatValue(value: number) {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
