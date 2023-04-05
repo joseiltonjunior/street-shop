@@ -26,8 +26,8 @@ export function Select({ itens, onAction, name }: SelectProps) {
 
   return (
     <Container
-      onBlur={() => {
-        setTimeout(() => setIsDropdownOpen(false), 200)
+      onMouseEnter={() => {
+        setIsDropdownOpen(true)
       }}
     >
       <DropdownSelection
@@ -40,7 +40,11 @@ export function Select({ itens, onAction, name }: SelectProps) {
       </DropdownSelection>
 
       {isDropdownOpen && (
-        <DropdownContainer>
+        <DropdownContainer
+          onMouseLeave={() => {
+            setIsDropdownOpen(false)
+          }}
+        >
           {itens.map((item, index) => (
             <DropdownItem
               key={item.value}

@@ -39,7 +39,7 @@ export function Header({
       <MenuButton onClick={() => dispatch(setSideMenu({ isVisible: true }))}>
         <Image src={listIcon} alt="" />
       </MenuButton>
-      <Link href={'/'} className="logo" title="Ir para a home">
+      <Link href={'/'} className="logo" title="Ir para a página inicial">
         <Image src={logoCoffeIcon} alt="" width={130} />
       </Link>
       {isLink && (

@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import searchIcon from '@/assets/usopp.png'
+
 import xIcon from '@/assets/x-circle.svg'
 
-import { Container } from './styles'
+import { Container, Input, List } from './styles'
 
 import { useState } from 'react'
 
@@ -14,6 +14,7 @@ import { useRouter } from 'next/router'
 
 export function SearchInput() {
   const [listProducts, setListProducts] = useState<ProductInfoProps[]>()
+  const [showList, setShowList] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -34,61 +35,69 @@ export function SearchInput() {
       product.name.toUpperCase().includes(key.toUpperCase()),
     )
 
-    setListProducts(filter)
+    if (filter.length > 0) {
+      setListProducts(filter)
+      setShowList(true)
+    }
   }
 
   return (
-    <Container>
-      <input
-        name="search"
-        type="text"
-        placeholder="Busque aqui"
-        value={valueFilter}
-        autoComplete="off"
-        onFocus={() => handleSearchProduct(valueFilter)}
-        onChange={(e) => {
-          dispatch(filterProducts(e.currentTarget.value))
-          handleSearchProduct(e.currentTarget.value)
-        }}
-      />
-
-      {valueFilter.length > 0 && (
-        <button
-          title="Limpar"
+    <Container onMouseLeave={() => setShowList(!setShowList)}>
+      <Input listIsVisible={showList}>
+        <input
+          name="search"
+          type="text"
+          placeholder="Busque aqui"
+          value={valueFilter}
+          autoComplete="off"
           onClick={() => {
-            dispatch(filterProducts(''))
-            setListProducts([])
+            handleSearchProduct(valueFilter)
           }}
-          style={{
-            marginRight: 10,
-
-            border: 'none',
-            background: 'transparent',
-            fontSize: '1rem',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
+          onChange={(e) => {
+            dispatch(filterProducts(e.currentTarget.value))
+            handleSearchProduct(e.currentTarget.value)
           }}
-        >
-          <Image src={xIcon} alt="" width={20} height={20} />
-        </button>
-      )}
+        />
 
-      <Image src={searchIcon} alt="" width={60} />
-
-      <div className="result">
-        {listProducts?.map((product) => (
+        {valueFilter.length > 0 && (
           <button
-            key={product.id}
+            title="Limpar"
             onClick={() => {
-              router.push(`/product?id=${product.id}`)
+              dispatch(filterProducts(''))
+              setListProducts([])
+              setShowList(false)
+            }}
+            style={{
+              marginRight: 10,
+
+              border: 'none',
+              background: 'transparent',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
-            <Image src={product.imageUrl} alt="" width={30} height={30} />
-            <p>{product.name}</p>
+            <Image src={xIcon} alt="" width={20} height={20} />
           </button>
-        ))}
-      </div>
+        )}
+      </Input>
+
+      <List>
+        {showList &&
+          listProducts?.map((product) => (
+            <button
+              key={product.id}
+              onClick={() => {
+                setShowList(!setShowList)
+                router.push(`/product?id=${product.id}`)
+              }}
+            >
+              <Image src={product.imageUrl} alt="" width={30} height={30} />
+              <p>{product.name}</p>
+            </button>
+          ))}
+      </List>
     </Container>
   )
 }

@@ -14,7 +14,8 @@ export const Container = styled('main', {
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    height: '100%',
+    // gridTemplateRows: '100% auto',
+    height: 'calc(100vh - 132px)',
   },
 })
 
@@ -77,7 +78,7 @@ export const NameProduct = styled('strong', {
   overflow: 'hidden',
 
   display: '-webkit-box',
-  '-webkit-line-clamp': '2',
+  '-webkit-line-clamp': '1',
   '-webkit-box-orient': 'vertical',
 })
 
