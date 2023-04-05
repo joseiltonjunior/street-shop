@@ -69,15 +69,6 @@ export const DropdownItemName = styled('div', {
   padding: '0.2rem 0.5rem',
 
   fontSize: '$md',
-
-  // variants: {
-  //   isSelected: {
-  //     true: {
-  //       background: '$gray900',
-  //       color: '$white',
-  //     },
-  //   },
-  // },
 })
 
 export const DropdownContainer = styled('div', {
