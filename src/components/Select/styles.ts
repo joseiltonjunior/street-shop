@@ -58,6 +58,11 @@ export const DropdownItem = styled('div', {
   fontSize: '16px',
   margiBottom: '0.5rem',
   color: '$gray800',
+
+  '&:hover': {
+    background: '$gray800',
+    color: '$orange500',
+  },
 })
 
 export const DropdownItemName = styled('div', {
@@ -70,14 +75,13 @@ export const DropdownItemName = styled('div', {
       true: {
         background: '$gray900',
         color: '$white',
-        fontWeight: 600,
       },
     },
   },
 })
 
 export const DropdownContainer = styled('div', {
-  position: 'absolute',
+  position: 'fixed',
   backgroundColor: '$orange500',
   borderBottom: '1px solid $gray800',
   borderRight: '1px solid $gray800',
@@ -87,8 +91,7 @@ export const DropdownContainer = styled('div', {
   width: '10rem',
 
   borderRadius: '0 0 6px 6px',
-  top: 27,
-  right: -5,
+  top: '83px',
 
   zIndex: '1000',
 })

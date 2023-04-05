@@ -1,5 +1,5 @@
 import Image from 'next/image'
-// import searchIcon from '@/assets/usopp.png'
+
 import xIcon from '@/assets/x-circle.svg'
 
 import { Container, Input, List } from './styles'
@@ -35,12 +35,14 @@ export function SearchInput() {
       product.name.toUpperCase().includes(key.toUpperCase()),
     )
 
-    setListProducts(filter)
-    setShowList(true)
+    if (filter.length > 0) {
+      setListProducts(filter)
+      setShowList(true)
+    }
   }
 
   return (
-    <Container onMouseLeave={() => setShowList(false)}>
+    <Container onMouseLeave={() => setShowList(!setShowList)}>
       <Input listIsVisible={showList}>
         <input
           name="search"
@@ -48,7 +50,9 @@ export function SearchInput() {
           placeholder="Busque aqui"
           value={valueFilter}
           autoComplete="off"
-          onClick={() => setShowList(true)}
+          onClick={() => {
+            handleSearchProduct(valueFilter)
+          }}
           onChange={(e) => {
             dispatch(filterProducts(e.currentTarget.value))
             handleSearchProduct(e.currentTarget.value)
@@ -85,7 +89,7 @@ export function SearchInput() {
             <button
               key={product.id}
               onClick={() => {
-                setShowList(false)
+                setShowList(!setShowList)
                 router.push(`/product?id=${product.id}`)
               }}
             >

@@ -48,7 +48,7 @@ export default function Success({ salesInformation }: SuccessProps) {
         <meta name="robots" content="noindex" />
       </Head>
 
-      <Header />
+      <Header noMenu />
 
       <Container>
         <div ref={sliderRef} className="ken-slider">
