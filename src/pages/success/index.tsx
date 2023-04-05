@@ -24,6 +24,8 @@ import {
 } from '@/styles/pages/success'
 import { Button } from '@/components/Button'
 import { Header } from '@/components/Header'
+import { useEffect } from 'react'
+import { filterProducts } from '@/storage/modules/filterProducts/action'
 
 export default function Success({ salesInformation }: SuccessProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -37,8 +39,13 @@ export default function Success({ salesInformation }: SuccessProps) {
   const router = useRouter()
 
   const nameClient = salesInformation.clientName.split(' ', 1).toString()
-  const nameFormart =
+  const nameformat =
     nameClient[0].toUpperCase() + nameClient.slice(1).toLowerCase()
+
+  useEffect(() => {
+    dispatch(clearCart())
+    dispatch(filterProducts(''))
+  }, [dispatch])
 
   return (
     <>
@@ -91,14 +98,13 @@ export default function Success({ salesInformation }: SuccessProps) {
         <div className="info">
           <h1>Compra efetuada com sucesso</h1>
           <p>
-            Uhuul <strong style={{ color: '#FFBA00' }}>{nameFormart}</strong>,
+            Uhuul <strong style={{ color: '#FFBA00' }}>{nameformat}</strong>,
             sua compra já está sendo processada e logo estará a caminho da sua
             casa.
           </p>
 
           <Button
             onClick={() => {
-              dispatch(clearCart())
               router.replace(`/details?id=${salesInformation.id}`)
             }}
           >
@@ -107,7 +113,6 @@ export default function Success({ salesInformation }: SuccessProps) {
 
           <ButtonClearCart
             onClick={() => {
-              dispatch(clearCart())
               router.replace('/')
             }}
           >

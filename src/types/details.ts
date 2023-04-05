@@ -19,7 +19,9 @@ export interface DetailsProps {
         postal_code: string
         state: string
       }
+      email: string
       name: string
+      phone: string
     }
     amountTotal: number
   }

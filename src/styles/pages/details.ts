@@ -11,8 +11,8 @@ export const Container = styled('main', {
 
   '.content': {
     background: '$gray800',
-    gap: '1rem',
     marginTop: '0.5rem',
+    overflow: 'hidden',
 
     borderRadius: 6,
 
@@ -45,9 +45,7 @@ export const Product = styled('div', {
   color: '$gray100',
   alignItems: 'center',
 
-  '@media (max-width: 900px)': {
-    paddingRight: '1rem',
-  },
+  paddingRight: '1rem',
 })
 
 export const ProductInfoContent = styled('div', {
@@ -68,18 +66,37 @@ export const TotalContent = styled('div', {
   flexDirection: 'column',
   padding: '1rem',
 
+  background: '$orange500',
+
   button: {
     width: '100%',
+    background: '$gray800',
+    color: '$gray100',
   },
 
   '.bottomContent': {
     marginTop: '2rem',
   },
 
+  strong: {
+    color: '$gray800',
+  },
+
+  span: {
+    color: '$gray900',
+    overflow: 'hidden',
+
+    textAlign: 'right',
+
+    display: '-webkit-box',
+    '-webkit-line-clamp': '1',
+    '-webkit-box-orient': 'vertical',
+  },
+
   p: {
     fontSize: '$lg',
     fontWeight: 'bold',
-    color: '$orange500',
+    color: '$gray800',
     margin: '1rem 0',
   },
 

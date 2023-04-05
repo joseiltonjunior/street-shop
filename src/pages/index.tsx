@@ -24,7 +24,7 @@ import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 import { ContentWeb } from '@/components/ContentWeb'
 import { ContentMobile } from '@/components/ContentMobile'
 import { ProductInfoProps, ProductsProps } from '@/types/product'
-import { formartValue } from '@/utils/formartValue'
+import { formatValue } from '@/utils/formatValue'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
@@ -141,7 +141,7 @@ export const getStaticProps: GetStaticProps = async () => {
       name: product.name,
       imageUrl: product.images[0],
       unitLabel: product.unit_label,
-      price: formartValue(price.unit_amount!),
+      price: formatValue(price.unit_amount!),
     }
   })
 

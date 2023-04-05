@@ -31,6 +31,7 @@ export function BestSellerCarousel({ products }: ProductsProps) {
 
         {products.map((product) => (
           <Product
+            title="Abrir produto"
             key={product.id}
             className="keen-slider__slide"
             href={`/product?id=${product.id}`}

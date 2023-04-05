@@ -70,23 +70,25 @@ export const DropdownItemName = styled('div', {
 
   fontSize: '$md',
 
-  variants: {
-    isSelected: {
-      true: {
-        background: '$gray900',
-        color: '$white',
-      },
-    },
-  },
+  // variants: {
+  //   isSelected: {
+  //     true: {
+  //       background: '$gray900',
+  //       color: '$white',
+  //     },
+  //   },
+  // },
 })
 
 export const DropdownContainer = styled('div', {
   position: 'fixed',
   backgroundColor: '$orange500',
-  borderBottom: '1px solid $gray800',
-  borderRight: '1px solid $gray800',
-  borderLeft: '1px solid $gray800',
+  border: '1px solid $gray800',
   overflow: 'hidden',
+
+  boxShadow: '-1px 5px 5px 0px rgba(0,0,0,0.3)',
+  '-webkitBoxShadow': '-1px 5px 5px 0px rgba(0,0,0,0.3)',
+  '-mozBoxShadow': '-1px 5px 5px 0px rgba(0,0,0,0.3)',
 
   width: '10rem',
 

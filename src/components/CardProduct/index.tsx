@@ -18,7 +18,7 @@ export function CardProduct({
   ...rest
 }: CardProductProps) {
   return (
-    <Container {...rest} href={href} prefetch={false}>
+    <Container {...rest} href={href} title="Abrir produto">
       <div className="img">
         <Image src={imgUrl} width={200} height={200} alt="" />
       </div>
