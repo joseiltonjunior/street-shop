@@ -1,76 +1,85 @@
-import { useKeenSlider } from 'keen-slider/react'
+import { useTransition, animated, useSpringRef } from '@react-spring/web'
 
 import { Container, Card } from './styles'
-// import { CardProduct } from '../CardProduct'
+
 import { ProductsProps } from '@/types/product'
-import { useEffect, useState } from 'react'
-import { DotCorousel } from '../DotCarousel'
-import { ButtonCarousel } from '../ButtonCarousel'
+
 import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import { ButtonCarousel } from '../ButtonCarousel'
+import { DotCorousel } from '../DotCarousel'
 
 export function CarouselProductsMobile({ products }: ProductsProps) {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [index, setIndex] = useState(0)
+  const [direction, setDirection] = useState(1)
 
-  const [sliderRef, instanceRef] = useKeenSlider({
-    slides: {
-      perView: 1,
-      spacing: 18,
-    },
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel)
-    },
+  const transRef = useSpringRef()
+  const transitions = useTransition(products[index], {
+    key: products[index]?.id,
+    ref: transRef,
+    config: { duration: 300 },
+    from: { opacity: 0, transform: `translateX(${100 * direction}%)` },
+    enter: { opacity: 1, transform: 'translateX(0%)' },
+    leave: { opacity: 1, transform: `translateX(${-100 * direction}%)` },
   })
 
+  function handlePrev() {
+    setDirection(-1)
+    setIndex((index - 1 + products.length) % products.length)
+  }
+
+  function handleNext() {
+    setDirection(1)
+    setIndex((index + 1) % products.length)
+  }
+
   useEffect(() => {
-    instanceRef?.current?.update()
-  }, [instanceRef])
+    transRef.start()
+  }, [index, transRef, products])
 
   return (
     <>
-      <Container ref={sliderRef} className="keen-slider">
-        {products.map((product, index) => (
-          <Card
-            href={`/product?id=${product.id}`}
-            title="Abrir produto"
-            key={product.id}
-            className="keen-slider__slide"
-          >
-            {index !== 0 && (
-              <ButtonCarousel
-                orietation="Left"
-                onClick={(e) => {
-                  e.preventDefault()
-                  instanceRef.current?.prev()
-                }}
-              />
-            )}
-            <div className="img">
-              <Image src={product.imageUrl} width={200} height={200} alt="" />
-            </div>
-            <div className="info">
-              <strong>{product.price}</strong>
-              <span>{product.name}</span>
-            </div>
+      <Container>
+        {transitions((style, item) => (
+          <animated.div style={{ ...style }}>
+            <Card
+              href={`/product?id=${item.id}`}
+              title="Abrir produto"
+              key={item.id}
+            >
+              {index !== 0 && (
+                <ButtonCarousel
+                  orietation="Left"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handlePrev()
+                  }}
+                />
+              )}
+              <div className="img">
+                <Image src={item.imageUrl} width={200} height={200} alt="" />
+              </div>
+              <div className="info">
+                <strong>{item.price}</strong>
+                <span>{item.name}</span>
+              </div>
 
-            {index + 1 !== products.length && (
-              <ButtonCarousel
-                orietation="Right"
-                onClick={(e) => {
-                  e.preventDefault()
-                  instanceRef.current?.next()
-                }}
-              />
-            )}
-          </Card>
+              {index + 1 !== products.length && (
+                <ButtonCarousel
+                  orietation="Right"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNext()
+                  }}
+                />
+              )}
+            </Card>
+          </animated.div>
         ))}
       </Container>
 
       {products.length > 1 && (
-        <DotCorousel
-          instanceRef={instanceRef}
-          currentSlide={currentSlide}
-          products={products}
-        />
+        <DotCorousel currentSlide={index} products={products} />
       )}
     </>
   )

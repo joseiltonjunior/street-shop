@@ -89,7 +89,7 @@ export default function Product({ product }: ProductProps) {
 
   useEffect(() => {
     const someProductsList = products.filter(
-      (item) => item.unitLabel === product.unitLabel,
+      (item) => item.unitLabel === product.unitLabel && item.id !== product.id,
     )
 
     setSomeProducts(someProductsList)

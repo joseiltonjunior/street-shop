@@ -2,15 +2,26 @@ import { styled } from '@/styles'
 import Link from 'next/link'
 
 export const Container = styled('div', {
-  display: 'flex',
   overflow: 'hidden',
+  position: 'relative',
+  height: 300,
+  borderRadius: 8,
+  background: '$gray800',
+
+  div: {
+    '.carousel-item': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+    },
+  },
 })
 
 export const Card = styled(Link, {
   height: 300,
-  width: '100%',
+
   background: '$gray800',
-  borderRadius: 3,
 
   display: 'grid',
   gridTemplateRows: 'auto 80px',
