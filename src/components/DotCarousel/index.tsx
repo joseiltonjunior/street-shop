@@ -4,7 +4,7 @@ import { MutableRefObject } from 'react'
 import { Container, Dot } from './styles'
 
 interface DotCarouselProps extends ProductsProps {
-  instanceRef: MutableRefObject<KeenSliderInstance<
+  instanceRef?: MutableRefObject<KeenSliderInstance<
     {},
     {},
     KeenSliderHooks
@@ -23,7 +23,7 @@ export function DotCorousel({
         <Dot
           currentSlide={currentSlide === index}
           key={product.id}
-          onClick={() => instanceRef.current?.moveToIdx(index)}
+          onClick={() => instanceRef && instanceRef.current?.moveToIdx(index)}
         />
       ))}
     </Container>

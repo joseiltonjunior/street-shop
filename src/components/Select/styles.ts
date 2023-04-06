@@ -12,6 +12,8 @@ export const DropdownSelection = styled('button', {
   cursor: 'pointer',
   border: 'none',
 
+  position: 'relative',
+
   '::before': {
     content: '',
     position: 'absolute',
@@ -72,7 +74,7 @@ export const DropdownItemName = styled('div', {
 })
 
 export const DropdownContainer = styled('div', {
-  position: 'fixed',
+  position: 'absolute',
   backgroundColor: '$orange500',
   border: '1px solid $gray800',
   overflow: 'hidden',
@@ -83,8 +85,8 @@ export const DropdownContainer = styled('div', {
 
   width: '10rem',
 
-  borderRadius: '0 0 6px 6px',
-  top: '83px',
+  borderRadius: 6,
+  top: '20px',
 
   zIndex: '1000',
 })
