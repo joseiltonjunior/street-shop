@@ -175,9 +175,19 @@ export default function Carrinho() {
           <TotalContent>
             <p>Resumo da compra</p>
 
-            <div>
+            <div className="value">
               <strong>Total</strong>
               <span>{totalValueCart}</span>
+            </div>
+
+            <div className="alert">
+              <strong>Atenção: </strong>
+              <span>
+                A compra e os produtos são fictícios e para testar o fluxo de
+                pagamento, na hora de preencher os dados do cartão utilizar o
+                número de cartão 4242 4242 4242 4242 (Cartão teste), os outros
+                campos podem ser dados aleartórios válidos.
+              </span>
             </div>
 
             <Button isLoading={isLoading} onClick={handleBuyProduct}>

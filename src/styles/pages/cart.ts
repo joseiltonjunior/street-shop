@@ -95,7 +95,16 @@ export const TotalContent = styled('div', {
   borderRadius: 8,
   width: '100%',
 
-  div: {
+  'div.alert': {
+    // display: 'flex',
+
+    strong: {
+      fontSize: '$md',
+      color: '$orange500',
+    },
+  },
+
+  'div.value': {
     justifyContent: 'space-between',
     alignItems: 'center',
     display: 'flex',

@@ -25,6 +25,7 @@ import { ContentWeb } from '@/components/ContentWeb'
 import { ContentMobile } from '@/components/ContentMobile'
 import { ProductInfoProps, ProductsProps } from '@/types/product'
 import { formatValue } from '@/utils/formatValue'
+import { Footer } from '@/components/Footer'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
@@ -123,6 +124,7 @@ export default function Home({ products }: ProductsProps) {
           </div>
         )}
       </Container>
+      <Footer />
     </>
   )
 }
