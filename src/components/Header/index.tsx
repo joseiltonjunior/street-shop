@@ -47,6 +47,7 @@ export function Header({
           {inputSearch && <SearchInput />}
 
           <div className="links">
+            <Link href={'/'}>Início</Link>
             <Select
               name="Categorias"
               onAction={(e) => router.push(`/products/${e.value}`)}
@@ -56,8 +57,6 @@ export function Header({
                 { name: 'Copos e Garrafas', value: 'copo' },
               ]}
             />
-            {/* <Link href={'/contact'}>Contato</Link>
-            <Link href={'/about'}>Sobre</Link> */}
           </div>
         </ContentLinks>
       )}
