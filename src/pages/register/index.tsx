@@ -111,14 +111,7 @@ export default function Register() {
     await axios
       .post('/api/customer', { ...newCustomer })
       .then((result) => {
-        const user = {
-          id: result.data.customer.id,
-          address: result.data.customer.address,
-          name: result.data.customer.name,
-          email: result.data.customer.email,
-          phone: result.data.customer.phone,
-        }
-        dispatch(setDataUser(user))
+        dispatch(setDataUser({ id: result.data.customer.id }))
         router.push('/cart')
       })
       .catch((e) => {

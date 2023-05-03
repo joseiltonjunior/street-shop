@@ -1,14 +1,14 @@
-import { userDataProps } from '@/types/user'
+import { userProps } from '@/types/user'
 import { Reducer } from 'redux'
 
-const INITIAL_STATE: userDataProps = {}
+const INITIAL_STATE: userProps = {}
 
-const user: Reducer<userDataProps> = (state = INITIAL_STATE, action) => {
+const user: Reducer<userProps> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case '@user/SET_ADD_USER': {
-      const { user } = action.payload
+      const { id } = action.payload
 
-      return (state = user)
+      return (state = id)
     }
 
     default: {

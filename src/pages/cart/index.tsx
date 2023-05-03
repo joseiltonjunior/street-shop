@@ -41,7 +41,9 @@ export default function Carrinho() {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
-  const user = useSelector<reduxProps, userProps>((state) => state.user)
+  const { id: userId } = useSelector<reduxProps, userProps>(
+    (state) => state.user,
+  )
 
   const [totalValueCart, setTotalValueCart] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
@@ -70,7 +72,7 @@ export default function Carrinho() {
   }, [cart])
 
   async function handleBuyProduct() {
-    if (!user.id) {
+    if (!userId) {
       router.push('/register')
 
       return
@@ -113,11 +115,11 @@ export default function Carrinho() {
   }
 
   useEffect(() => {
-    console.log(user)
+    console.log(userId)
     if (cart.length > 0) {
       handleValueCart()
     }
-  }, [cart.length, handleValueCart, user])
+  }, [cart.length, handleValueCart, userId])
 
   return (
     <>
