@@ -12,7 +12,6 @@ export const Container = styled('main', {
   border: '1.5px solid $gray100',
 
   overflow: 'hidden',
-  padding: '0 1rem',
 
   svg: {
     fill: '$gray100',
@@ -26,6 +25,7 @@ export const Container = styled('main', {
     outline: 'none',
     color: '$gray100',
     fontSize: '0.9rem',
+    padding: '0 1rem',
 
     '&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &textarea:-webkit-autofill, &textarea:-webkit-autofill:hover, &textarea:-webkit-autofill:focus, &select:-webkit-autofill, &select:-webkit-autofill:hover, &select:-webkit-autofill:focus':
       {

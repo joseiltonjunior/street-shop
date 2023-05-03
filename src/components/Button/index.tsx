@@ -11,7 +11,7 @@ export function Button({ children, isLoading, ...rest }: ButtonProps) {
   return (
     <Container {...rest}>
       {isLoading ? (
-        <ReactLoading type="bars" color={'#fff'} width={40} />
+        <ReactLoading type="bars" color={'#fff'} width={40} height={40} />
       ) : (
         children
       )}

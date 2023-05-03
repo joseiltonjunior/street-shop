@@ -2,6 +2,7 @@ import { Container } from './styles'
 
 import { FieldError, UseFormRegister } from 'react-hook-form'
 import { InputHTMLAttributes, useState } from 'react'
+import InputMask from 'react-input-mask'
 
 import { IconType } from 'react-icons'
 
@@ -11,6 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: IconType
   label: string
   register: UseFormRegister<any>
+  mask?: string
 }
 
 export function Input({
@@ -19,6 +21,7 @@ export function Input({
   register,
   icon: Icon,
   name,
+  mask,
   disabled,
   ...rest
 }: InputProps) {
@@ -27,14 +30,27 @@ export function Input({
   return (
     <Container isError={!!error} isFocused={isFocused} isDisabled={disabled}>
       {Icon && <Icon size={22} />}
-      <input
-        {...register(name)}
-        {...rest}
-        placeholder={label}
-        onBlur={() => setIsFocused(false)}
-        onFocus={() => setIsFocused(true)}
-        disabled={disabled}
-      />
+      {mask ? (
+        <InputMask
+          {...register(name)}
+          mask={mask}
+          {...rest}
+          maskPlaceholder={null}
+          placeholder={label}
+          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsFocused(true)}
+          disabled={disabled}
+        />
+      ) : (
+        <input
+          {...register(name)}
+          {...rest}
+          placeholder={label}
+          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsFocused(true)}
+          disabled={disabled}
+        />
+      )}
     </Container>
   )
 }

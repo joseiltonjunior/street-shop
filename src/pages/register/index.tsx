@@ -1,17 +1,21 @@
 import { Breadcrumb } from '@/components/BreadCrumb'
 import { Header } from '@/components/Header'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 
 import { useToast } from '@/hooks/useToast'
-// import { useEffect } from 'react'
+
 import { Container } from '@/styles/pages/register'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { registerValidatorSchema } from './formValidator'
-// import { useState } from 'react'
+import axios from 'axios'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setDataUser } from '@/storage/modules/user/action'
+import { useRouter } from 'next/router'
 
 interface customerProps {
   name: string
@@ -23,6 +27,7 @@ interface customerProps {
   state: string
   zipCode: string
   line1: string
+  line2: string
 }
 
 export default function Register() {
@@ -38,10 +43,13 @@ export default function Register() {
     resolver: yupResolver(registerValidatorSchema),
   })
 
+  const [isLoading, setIsLoading] = useState(false)
+  const dispatch = useDispatch()
+  const router = useRouter()
   const { showToast } = useToast()
 
   async function handleAddressWithZipCode(zipCode: string) {
-    if (zipCode.length < 8) {
+    if (zipCode.length < 9) {
       setValue('city', '')
       setValue('line1', '')
       setValue('state', '')
@@ -79,20 +87,47 @@ export default function Register() {
       })
   }
 
-  async function createCustomer(newCustomer: FieldValues) {
-    return console.log(newCustomer)
+  async function createCustomer(form: customerProps) {
+    setIsLoading(true)
 
-    // await axios
-    //   .post('/api/customer', { newCustomer })
-    //   .then((result) => {
-    //     console.log(result.data)
-    //   })
-    //   .catch((e) => {
-    //     showToast('Falha ao salvar dados', {
-    //       type: 'error',
-    //       theme: 'colored',
-    //     })
-    //   })
+    const newCustomer = {
+      address: {
+        city: form.city,
+        country: form.country,
+        line1: form.line1,
+        line2: form.line2,
+        postal_code: form.zipCode.replace('-', ''),
+        state: form.state,
+      },
+      name: form.name,
+      email: form.email,
+      phone: form.phone
+        .replace('(', '')
+        .replace(')', '')
+        .replace(' ', '')
+        .replace('-', ''),
+    }
+
+    await axios
+      .post('/api/customer', { ...newCustomer })
+      .then((result) => {
+        const user = {
+          id: result.data.customer.id,
+          address: result.data.customer.address,
+          name: result.data.customer.name,
+          email: result.data.customer.email,
+          phone: result.data.customer.phone,
+        }
+        dispatch(setDataUser(user))
+        router.push('/cart')
+      })
+      .catch((e) => {
+        showToast('Falha ao salvar dados', {
+          type: 'error',
+          theme: 'colored',
+        })
+      })
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -101,11 +136,11 @@ export default function Register() {
         <title>{`Registrar | D'Coffee Shop`}</title>
       </Head>
       <Header />
-      <Breadcrumb actualPage="Registrar usuário" />
+      <Breadcrumb actualPage="Cadastrar cliente" />
 
       <Container>
         <form onSubmit={handleSubmit(createCustomer)}>
-          <strong>Cadastrar dados</strong>
+          <strong>Cadastrar cliente</strong>
           <Input
             label="Nome"
             name="name"
@@ -124,7 +159,7 @@ export default function Register() {
               name="phone"
               register={register}
               error={errors.phone}
-              maxLength={11}
+              mask="(99) 9999-9999"
             />
             <Input
               label="E-mail"
@@ -137,15 +172,15 @@ export default function Register() {
             style={{
               display: 'grid',
               gap: '1rem',
-              gridTemplateColumns: '200px auto',
+              gridTemplateColumns: '200px auto 100px',
             }}
           >
             <Input
               label="CEP"
               name="zipCode"
+              mask="99999-999"
               register={register}
               error={errors.zipCode}
-              maxLength={9}
               onChange={(e) => {
                 setValue('zipCode', e.currentTarget.value)
                 handleAddressWithZipCode(e.currentTarget.value)
@@ -156,6 +191,13 @@ export default function Register() {
               name="line1"
               register={register}
               error={errors.line1}
+            />
+            <Input
+              label="Número"
+              name="line2"
+              register={register}
+              error={errors.line1}
+              maxLength={6}
             />
           </div>
 
@@ -184,7 +226,9 @@ export default function Register() {
             />
           </div>
 
-          <Button type="submit">Salvar</Button>
+          <Button type="submit" isLoading={isLoading}>
+            Cadastrar
+          </Button>
         </form>
       </Container>
     </>

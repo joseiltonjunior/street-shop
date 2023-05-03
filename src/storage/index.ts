@@ -6,18 +6,20 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './modules/rootReducer'
+import { userProps } from '@/types/user'
 
 export interface reduxProps {
   cart: ProductInfoProps[]
   products: ProductInfoProps[]
   sideMenu: sideMenuProps
   filterProducts: string
+  user: userProps
 }
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart', 'products', 'sideMenu', 'filterProducts'],
+  whitelist: ['cart', 'products', 'sideMenu', 'filterProducts', 'user'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

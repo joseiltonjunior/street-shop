@@ -12,4 +12,5 @@ export const registerValidatorSchema = yup.object().shape({
   country: yup.string().required('Este campo é obrigatório'),
   state: yup.string().required('Este campo é obrigatório'),
   line1: yup.string().required('Este campo é obrigatório'),
+  line2: yup.string().required('Este campo é obrigatório'),
 })

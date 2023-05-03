@@ -34,17 +34,21 @@ import {
   RowContent,
   NameProduct,
 } from '@/styles/pages/cart'
+import { userProps } from '@/types/user'
+import { useRouter } from 'next/router'
 
 export default function Carrinho() {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
+  const user = useSelector<reduxProps, userProps>((state) => state.user)
 
   const [totalValueCart, setTotalValueCart] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
 
   const { showToast } = useToast()
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const handleValueCart = useCallback(() => {
     const filterPrice = cart.map((product) => {
@@ -66,6 +70,12 @@ export default function Carrinho() {
   }, [cart])
 
   async function handleBuyProduct() {
+    if (!user.id) {
+      router.push('/register')
+
+      return
+    }
+
     setIsLoading(true)
 
     const newPurchase = cart.map((item) => {
@@ -103,10 +113,11 @@ export default function Carrinho() {
   }
 
   useEffect(() => {
+    console.log(user)
     if (cart.length > 0) {
       handleValueCart()
     }
-  }, [cart.length, handleValueCart])
+  }, [cart.length, handleValueCart, user])
 
   return (
     <>
