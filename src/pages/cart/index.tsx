@@ -78,10 +78,12 @@ export default function Carrinho() {
     await axios
       .post('/api/checkout', { newPurchase })
       .then((result) => {
-        const { checkoutUrl } = result.data
-        window.location.href = checkoutUrl
+        // const { checkoutUrl } = result.data
+        console.log(result.data)
+        // window.location.href = checkoutUrl
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e)
         showToast('Falha ao redirecionar ao checkout', {
           type: 'error',
           theme: 'colored',

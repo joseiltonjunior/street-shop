@@ -26,6 +26,8 @@ export const {
       orange500: '#FFBA00',
       purple300: '#750592',
       purple500: '#58046e',
+
+      red500: '#ff4040',
     },
 
     fontSizes: {

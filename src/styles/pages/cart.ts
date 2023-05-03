@@ -5,7 +5,7 @@ export const Container = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   margin: '0 auto',
-  gap: '1rem',
+  gap: '5rem',
 
   display: 'grid',
   gridTemplateColumns: '1fr 0.7fr',
@@ -14,7 +14,7 @@ export const Container = styled('main', {
 
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
-    // gridTemplateRows: '100% auto',
+    gap: 0,
     height: 'calc(100vh - 132px)',
   },
 })
