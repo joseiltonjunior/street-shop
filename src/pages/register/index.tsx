@@ -2,10 +2,8 @@ import { Breadcrumb } from '@/components/BreadCrumb'
 import { Header } from '@/components/Header'
 import { FieldValues, useForm } from 'react-hook-form'
 import Head from 'next/head'
-// import { useState } from 'react'
-import { BiUser } from 'react-icons/bi'
-// import axios from 'axios'
-// import { useToast } from '@/hooks/useToast'
+
+import { useToast } from '@/hooks/useToast'
 // import { useEffect } from 'react'
 import { Container } from '@/styles/pages/register'
 import { Input } from '@/components/Input'
@@ -13,45 +11,73 @@ import { Button } from '@/components/Button'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { registerValidatorSchema } from './formValidator'
-import { useEffect } from 'react'
-
-// import iconUser from '@/assets/user.svg'
+// import { useState } from 'react'
 
 interface customerProps {
   name: string
   email: string
   phone: string
-  address: {
-    city: string
-    country: string
-    state: string
-    zipCode: string
-    line1: string
-  }
+
+  city: string
+  country: string
+  state: string
+  zipCode: string
+  line1: string
 }
 
 export default function Register() {
   const {
     register,
     handleSubmit,
+    setError,
+
+    setValue,
+    clearErrors,
     formState: { errors },
   } = useForm<customerProps>({
     resolver: yupResolver(registerValidatorSchema),
   })
-  //   const { showToast } = useToast()
 
-  //   async function handleAddressWithZipCode() {
-  //     await fetch('/viacep.com.br/ws/01001000/json/')
-  //       .then((result) => {
-  //         console.log(result)
-  //       })
-  //       .catch(() => {
-  //         showToast('Falha ao buscar endereço', {
-  //           type: 'error',
-  //           theme: 'colored',
-  //         })
-  //       })
-  //   }
+  const { showToast } = useToast()
+
+  async function handleAddressWithZipCode(zipCode: string) {
+    if (zipCode.length < 8) {
+      setValue('city', '')
+      setValue('line1', '')
+      setValue('state', '')
+      setValue('country', '')
+      clearErrors('zipCode')
+
+      return
+    }
+
+    await fetch(`https://viacep.com.br/ws/${zipCode}/json/`)
+      .then(async (data) => {
+        const result = await data.json()
+
+        if (result.erro) {
+          setError('zipCode', { message: '' })
+          return
+        }
+
+        setValue('city', result.localidade)
+        setValue('line1', result.logradouro)
+        setValue('state', result.uf)
+        setValue('country', 'Brasil')
+
+        clearErrors('city')
+        clearErrors('line1')
+        clearErrors('state')
+        clearErrors('country')
+        clearErrors('zipCode')
+      })
+      .catch(() => {
+        showToast('Falha ao buscar endereço', {
+          type: 'error',
+          theme: 'colored',
+        })
+      })
+  }
 
   async function createCustomer(newCustomer: FieldValues) {
     return console.log(newCustomer)
@@ -69,14 +95,6 @@ export default function Register() {
     //   })
   }
 
-  //   useEffect(() => {
-  //     handleAddressWithZipCode()
-  //   }, [])
-
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
-
   return (
     <>
       <Head>
@@ -86,77 +104,89 @@ export default function Register() {
       <Breadcrumb actualPage="Registrar usuário" />
 
       <Container>
-        <strong>Cadastrar dados</strong>
-        <form
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            width: '100%',
-            maxWidth: 400,
-          }}
-          onSubmit={handleSubmit(createCustomer)}
-        >
+        <form onSubmit={handleSubmit(createCustomer)}>
+          <strong>Cadastrar dados</strong>
           <Input
             label="Nome"
-            icon={BiUser}
             name="name"
             register={register}
             error={errors.name}
           />
-          <Input
-            label="E-mail"
-            icon={BiUser}
-            name="email"
-            register={register}
-          />
-          <Input
-            label="CEP"
-            icon={BiUser}
-            name="address.zipCode"
-            register={register}
-          />
+          <div
+            style={{
+              display: 'grid',
+              gap: '1rem',
+              gridTemplateColumns: '200px auto',
+            }}
+          >
+            <Input
+              label="Telefone"
+              name="phone"
+              register={register}
+              error={errors.phone}
+              maxLength={11}
+            />
+            <Input
+              label="E-mail"
+              name="email"
+              register={register}
+              error={errors.email}
+            />
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gap: '1rem',
+              gridTemplateColumns: '200px auto',
+            }}
+          >
+            <Input
+              label="CEP"
+              name="zipCode"
+              register={register}
+              error={errors.zipCode}
+              maxLength={9}
+              onChange={(e) => {
+                setValue('zipCode', e.currentTarget.value)
+                handleAddressWithZipCode(e.currentTarget.value)
+              }}
+            />
+            <Input
+              label="Logradouro"
+              name="line1"
+              register={register}
+              error={errors.line1}
+            />
+          </div>
 
-          <Input
-            label="Cidade"
-            icon={BiUser}
-            name="address.city"
-            register={register}
-          />
-          <Input
-            label="País"
-            icon={BiUser}
-            name="address.country"
-            register={register}
-          />
-          <Input
-            label="Estado"
-            icon={BiUser}
-            name="address.state"
-            register={register}
-          />
-          <Input
-            label="Logradouro"
-            icon={BiUser}
-            name="address.line1"
-            register={register}
-          />
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            <Input
+              label="Cidade"
+              name="city"
+              register={register}
+              error={errors.city}
+              disabled
+            />
 
-          <Input
-            label="Telefone"
-            icon={BiUser}
-            name="phone"
-            register={register}
-          />
+            <Input
+              label="Estado"
+              name="state"
+              register={register}
+              error={errors.state}
+              disabled
+            />
+            <Input
+              label="País"
+              name="country"
+              register={register}
+              error={errors.country}
+              disabled
+            />
+          </div>
+
           <Button type="submit">Salvar</Button>
         </form>
       </Container>
     </>
   )
 }
-
-// city: 'Recife',
-//   country: 'Brasil',
-//   line1: 'Rua Iolanda Rodrigues Sobral',
-//   postal_code: '50690220',
-//   state: 'PE',

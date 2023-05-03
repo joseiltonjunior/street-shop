@@ -4,14 +4,15 @@ export const Container = styled('main', {
   background: 'transparent',
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
-  height: '40px',
+  gap: '1rem',
+  height: '50px',
+  width: '100%',
 
   borderRadius: 8,
   border: '1.5px solid $gray100',
 
   overflow: 'hidden',
-  padding: '0 0.5rem',
+  padding: '0 1rem',
 
   svg: {
     fill: '$gray100',
@@ -36,10 +37,17 @@ export const Container = styled('main', {
   },
 
   variants: {
+    isCheck: {
+      true: {
+        border: '1.5px solid $green500',
+        svg: {
+          fill: '$green500',
+        },
+      },
+    },
     isFocused: {
       true: {
         border: '1.5px solid $orange500',
-
         svg: {
           fill: '$orange500',
         },
@@ -48,9 +56,18 @@ export const Container = styled('main', {
     isError: {
       true: {
         border: '1.5px solid $red500',
-
         svg: {
           fill: '$red500',
+        },
+      },
+    },
+
+    isDisabled: {
+      true: {
+        background: '$gray800',
+        border: '1.5px solid $gray800',
+        svg: {
+          fill: '$gray800',
         },
       },
     },

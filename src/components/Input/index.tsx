@@ -1,16 +1,15 @@
 import { Container } from './styles'
 
 import { FieldError, UseFormRegister } from 'react-hook-form'
-import { useState } from 'react'
+import { InputHTMLAttributes, useState } from 'react'
 
 import { IconType } from 'react-icons'
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: FieldError
   name: string
-  icon: IconType
+  icon?: IconType
   label: string
-
   register: UseFormRegister<any>
 }
 
@@ -20,17 +19,21 @@ export function Input({
   register,
   icon: Icon,
   name,
+  disabled,
+  ...rest
 }: InputProps) {
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <Container isError={!!error} isFocused={isFocused}>
-      <Icon size={22} />
+    <Container isError={!!error} isFocused={isFocused} isDisabled={disabled}>
+      {Icon && <Icon size={22} />}
       <input
         {...register(name)}
+        {...rest}
         placeholder={label}
         onBlur={() => setIsFocused(false)}
         onFocus={() => setIsFocused(true)}
+        disabled={disabled}
       />
     </Container>
   )
