@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import axios from 'axios'
+// import axios from 'axios'
 
-import { useToast } from '@/hooks/useToast'
+// import { useToast } from '@/hooks/useToast'
 
 import emptyCartIcon from '@/assets/luffy-confuso.png'
 
@@ -46,9 +46,9 @@ export default function Carrinho() {
   )
 
   const [totalValueCart, setTotalValueCart] = useState<string>()
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
 
-  const { showToast } = useToast()
+  // const { showToast } = useToast()
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -71,38 +71,38 @@ export default function Carrinho() {
     setTotalValueCart(valueFormat)
   }, [cart])
 
-  async function handleBuyProduct() {
-    if (!userId) {
-      router.push('/register')
+  // async function handleBuyProduct() {
+  //   if (!userId) {
+  //     router.push('/register')
 
-      return
-    }
+  //     return
+  //   }
 
-    setIsLoading(true)
+  //   setIsLoading(true)
 
-    const newPurchase = cart.map((item) => {
-      return {
-        price: item.defaultPriceId,
-        quantity: item.quantity,
-      }
-    })
+  //   const newPurchase = cart.map((item) => {
+  //     return {
+  //       price: item.defaultPriceId,
+  //       quantity: item.quantity,
+  //     }
+  //   })
 
-    await axios
-      .post('/api/checkout', { newPurchase })
-      .then((result) => {
-        // const { checkoutUrl } = result.data
-        console.log(result.data)
-        // window.location.href = checkoutUrl
-      })
-      .catch((e) => {
-        console.log(e)
-        showToast('Falha ao redirecionar ao checkout', {
-          type: 'error',
-          theme: 'colored',
-        })
-      })
-      .finally(() => setIsLoading(false))
-  }
+  //   await axios
+  //     .post('/api/checkout', { newPurchase })
+  //     .then((result) => {
+  //       // const { checkoutUrl } = result.data
+  //       console.log(result.data)
+  //       // window.location.href = checkoutUrl
+  //     })
+  //     .catch((e) => {
+  //       console.log(e)
+  //       showToast('Falha ao redirecionar ao checkout', {
+  //         type: 'error',
+  //         theme: 'colored',
+  //       })
+  //     })
+  //     .finally(() => setIsLoading(false))
+  // }
 
   function handleQuantity(param: 'add' | 'sub', product: ProductInfoProps) {
     if (param === 'add' && product.quantity < 10) {
@@ -195,7 +195,7 @@ export default function Carrinho() {
               <span>{totalValueCart}</span>
             </div>
 
-            <div className="alert">
+            {/* <div className="alert">
               <strong>Atenção: </strong>
               <span>
                 A compra e os produtos são fictícios e para testar o fluxo de
@@ -203,10 +203,13 @@ export default function Carrinho() {
                 número de cartão 4242 4242 4242 4242 (Cartão teste), os outros
                 campos podem ser dados aleartórios válidos.
               </span>
-            </div>
+            </div> */}
 
-            <Button isLoading={isLoading} onClick={handleBuyProduct}>
-              Finalizar compra
+            <Button
+              // isLoading={isLoading}
+              onClick={() => router.push('/checkout')}
+            >
+              Comprar agora
             </Button>
           </TotalContent>
         </Container>

@@ -10,7 +10,8 @@ export const Container = styled('button', {
   cursor: 'pointer',
   fontWeight: 'bolder',
   fontSize: '$md',
-  height: '3.813rem',
+  height: '3rem',
+  width: '100%',
   transition: 'all 0.3s',
 
   display: 'flex',
