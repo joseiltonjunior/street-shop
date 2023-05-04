@@ -34,21 +34,21 @@ export function Input({
         <InputMask
           {...register(name)}
           mask={mask}
-          {...rest}
           maskPlaceholder={null}
           placeholder={label}
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
           disabled={disabled}
+          {...rest}
         />
       ) : (
         <input
           {...register(name)}
-          {...rest}
           placeholder={label}
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
           disabled={disabled}
+          {...rest}
         />
       )}
     </Container>
