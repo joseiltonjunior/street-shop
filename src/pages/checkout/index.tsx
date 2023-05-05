@@ -4,6 +4,8 @@ import { Header } from '@/components/Header'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 
+import * as yup from 'yup'
+
 import Cards from 'react-credit-cards-2'
 
 import { useToast } from '@/hooks/useToast'
@@ -12,7 +14,7 @@ import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import { registerValidatorSchema } from './formValidator'
+
 import axios from 'axios'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
@@ -36,6 +38,23 @@ import {
 import { useRouter } from 'next/router'
 import { formatString } from '@/utils/formatString'
 
+const required = 'Este campo é obrigatório'
+
+const schema = yup.object().shape({
+  name: yup.string().required(required),
+  email: yup.string().email('E-mail inválido').required(required),
+  phone: yup.string().min(14, required),
+  zipCode: yup.string().min(9, required),
+  city: yup.string().required(required),
+  country: yup.string().required(required),
+  state: yup.string().required(required),
+  line1: yup.string().required(required),
+  line2: yup.string().min(1, required),
+  card: yup.string().min(19, required),
+  validate: yup.string().min(7, required),
+  cvc: yup.string().min(3, required),
+})
+
 export default function Checkout() {
   const {
     register,
@@ -45,7 +64,7 @@ export default function Checkout() {
     clearErrors,
     formState: { errors },
   } = useForm<customerProps>({
-    resolver: yupResolver(registerValidatorSchema),
+    resolver: yupResolver(schema),
   })
 
   const [isLoading, setIsLoading] = useState(false)
