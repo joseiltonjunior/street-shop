@@ -1,4 +1,5 @@
 import { stripe } from '@/lib/stripe'
+import { checkoutResponseProps } from '@/types/checkoutResponse'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 interface errorProps {
@@ -10,7 +11,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { address, email, name, phone, card, amount } = req.body
+  const { address, email, name, phone, card, amount } =
+    req.body as checkoutResponseProps
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
@@ -28,7 +30,6 @@ export default async function handler(
       name,
       email,
       phone,
-      shipping: { address, name, phone },
     })
 
     const paymentIntent = await stripe.paymentIntents.create({
@@ -38,6 +39,7 @@ export default async function handler(
       payment_method: payment.id,
       customer: customer.id,
       confirm: true,
+      receipt_email: email,
       shipping: {
         address,
         name,
@@ -45,11 +47,13 @@ export default async function handler(
       },
     })
 
+    // chamar api client
+
     return res.status(201).json({
       paymentIntent,
     })
   } catch (error) {
     const { rawType } = error as errorProps
-    return res.status(400).json({ type: rawType })
+    return res.status(400).json({ message: rawType })
   }
 }

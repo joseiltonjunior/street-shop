@@ -13,7 +13,7 @@ import {
   ButtonNext,
   ButtonPrev,
 } from '@/components/BestSellerCarouselMobile/styles'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { clearCart } from '@/storage/modules/cart/action'
 import { useRouter } from 'next/router'
 
@@ -24,8 +24,10 @@ import {
 } from '@/styles/pages/success'
 import { Button } from '@/components/Button'
 import { Header } from '@/components/Header'
-import { useEffect } from 'react'
+
 import { filterProducts } from '@/storage/modules/filterProducts/action'
+import { reduxProps } from '@/storage'
+import { ProductInfoProps } from '@/types/product'
 
 export default function Success({ salesInformation }: SuccessProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -35,17 +37,16 @@ export default function Success({ salesInformation }: SuccessProps) {
     },
   })
 
+  const cart = useSelector<reduxProps, ProductInfoProps[]>(
+    (state) => state.cart,
+  )
+
   const dispatch = useDispatch()
   const router = useRouter()
 
   const nameClient = salesInformation.clientName.split(' ', 1).toString()
   const nameformat =
     nameClient[0].toUpperCase() + nameClient.slice(1).toLowerCase()
-
-  useEffect(() => {
-    dispatch(clearCart())
-    dispatch(filterProducts(''))
-  }, [dispatch])
 
   return (
     <>
@@ -59,11 +60,8 @@ export default function Success({ salesInformation }: SuccessProps) {
 
       <Container>
         <div ref={sliderRef} className="ken-slider">
-          {salesInformation.products.map((item, index) => (
-            <ImageContainer
-              key={item.product.name}
-              className="keen-slider__slide"
-            >
+          {cart.map((item, index) => (
+            <ImageContainer key={item.name} className="keen-slider__slide">
               {index !== 0 && (
                 <ButtonPrev
                   onClick={(e) => {
@@ -74,14 +72,9 @@ export default function Success({ salesInformation }: SuccessProps) {
                   <Image src={caretLeft} alt="" />
                 </ButtonPrev>
               )}
-              <Image
-                src={item.product.images[0]}
-                alt=""
-                width={520}
-                height={480}
-              />
+              <Image src={item.imageUrl} alt="" width={520} height={480} />
 
-              {index + 1 !== salesInformation.products.length && (
+              {index + 1 !== cart.length && (
                 <ButtonNext
                   onClick={(e) => {
                     e.preventDefault()
@@ -113,6 +106,8 @@ export default function Success({ salesInformation }: SuccessProps) {
 
           <ButtonClearCart
             onClick={() => {
+              dispatch(clearCart())
+              dispatch(filterProducts(''))
               router.replace('/')
             }}
           >
@@ -125,7 +120,7 @@ export default function Success({ salesInformation }: SuccessProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  if (!query.session_id) {
+  if (!query.pi) {
     return {
       redirect: {
         destination: '/',
@@ -136,21 +131,17 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   let salesInformation = {} || null
 
-  const sessionId = String(query.session_id)
+  const paymentIntentId = String(query.pi)
 
-  await stripe.checkout.sessions
-    .retrieve(sessionId, {
-      expand: ['line_items', 'line_items.data.price.product'],
-    })
+  await stripe.paymentIntents
+    .retrieve(paymentIntentId, {})
     .then((result) => {
-      const clientName = result.customer_details?.name
-      const products = result.line_items?.data.map((item) => {
-        return { product: item.price?.product, quantity: item.quantity }
-      })
+      const clientName = result.shipping?.name
+      const amount = result.amount
 
-      salesInformation = { clientName, products, id: result.id }
+      salesInformation = { clientName, amount, id: result.id }
     })
-    .catch(() => {
+    .catch((e) => {
       salesInformation = null
     })
 

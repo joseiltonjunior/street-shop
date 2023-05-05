@@ -1,7 +1,7 @@
 import { styled } from '@/styles'
 
 export const Container = styled('main', {
-  background: 'transparent',
+  background: '$gray100',
   display: 'flex',
   alignItems: 'center',
   gap: '1rem',
@@ -23,17 +23,9 @@ export const Container = styled('main', {
     height: '100%',
     width: '100%',
     outline: 'none',
-    color: '$gray100',
+    color: '$gray800',
     fontSize: '0.9rem',
     padding: '0 1rem',
-
-    '&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &textarea:-webkit-autofill, &textarea:-webkit-autofill:hover, &textarea:-webkit-autofill:focus, &select:-webkit-autofill, &select:-webkit-autofill:hover, &select:-webkit-autofill:focus':
-      {
-        border: 'none',
-        WebkitTextFillColor: '#fff !important',
-        WebkitBoxShadow: '0 0 0px 1000px transparent inset',
-        transition: 'background-color 5000s ease-in-out 0s',
-      },
   },
 
   variants: {
@@ -64,8 +56,13 @@ export const Container = styled('main', {
 
     isDisabled: {
       true: {
-        background: '$gray800',
+        background: '$gray500',
         border: '1.5px solid $gray800',
+
+        input: {
+          color: '$gray300',
+        },
+
         svg: {
           fill: '$gray800',
         },

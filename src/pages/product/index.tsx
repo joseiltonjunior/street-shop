@@ -34,6 +34,7 @@ import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 import { ContentWeb } from '@/components/ContentWeb'
 import { ContentMobile } from '@/components/ContentMobile'
 import { formatValue } from '@/utils/formatValue'
+import { Footer } from '@/components/Footer'
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
@@ -158,6 +159,7 @@ export default function Product({ product }: ProductProps) {
           </div>
         )}
       </Container>
+      <Footer />
     </>
   )
 }

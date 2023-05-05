@@ -7,7 +7,7 @@ export const Container = styled('div', {
 
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
 
-  margin: '0 auto',
+  margin: '0 auto 2rem',
 
   h3: {
     fontSize: '$xl',

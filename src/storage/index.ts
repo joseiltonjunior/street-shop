@@ -6,14 +6,14 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './modules/rootReducer'
-import { userProps } from '@/types/user'
+import { customerProps } from '@/types/customer'
 
 export interface reduxProps {
   cart: ProductInfoProps[]
   products: ProductInfoProps[]
   sideMenu: sideMenuProps
   filterProducts: string
-  user: userProps
+  user: customerProps
 }
 
 const persistConfig = {

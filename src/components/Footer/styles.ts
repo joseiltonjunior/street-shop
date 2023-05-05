@@ -8,7 +8,7 @@ export const Container = styled('div', {
   borderRadius: '10px 10px 0 0 ',
   position: 'relative',
   padding: '0.5rem 1rem',
-  marginTop: '30px',
+  marginTop: 'auto',
 
   main: {
     display: 'flex',

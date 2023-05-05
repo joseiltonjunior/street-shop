@@ -1,3 +1,4 @@
+import { BaseSyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { Breadcrumb } from '@/components/BreadCrumb'
 import { Header } from '@/components/Header'
 import { useForm } from 'react-hook-form'
@@ -7,21 +8,33 @@ import Cards from 'react-credit-cards-2'
 
 import { useToast } from '@/hooks/useToast'
 
-import { Container } from '@/styles/pages/checkout'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { registerValidatorSchema } from './formValidator'
 import axios from 'axios'
-import { BaseSyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
 import { useSelector } from 'react-redux'
 
 import { customerProps } from '@/types/customer'
-import { ErrorCheckoutEnum } from '@/utils/enums/errorCheckout'
+import {
+  ErrorCheckoutTypeEnum,
+  ErrorCheckoutMessageEnum,
+} from '@/utils/enums/errorCheckout'
 import { FocusedType } from '@/types/focusedCard'
+import { formatValue } from '@/utils/formatValue'
+
+import {
+  Container,
+  Title,
+  Box,
+  ContentCard,
+  ContentForm,
+} from '@/styles/pages/checkout'
+import { useRouter } from 'next/router'
+import { formatString } from '@/utils/formatString'
 
 export default function Checkout() {
   const {
@@ -44,8 +57,8 @@ export default function Checkout() {
     cvc: '',
     name: '',
   })
-  // const dispatch = useDispatch()
-  // const router = useRouter()
+
+  const router = useRouter()
   const { showToast } = useToast()
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
@@ -113,17 +126,24 @@ export default function Checkout() {
 
     const dateFormat = form.validate.split('/')
 
+    const products = cart.map((item) => {
+      return {
+        price: item.defaultPriceId,
+        quantity: item.quantity,
+      }
+    })
+
     const data = {
       address: {
         city: form.city,
         country: form.country,
         line1: form.line1,
         line2: form.line2,
-        postal_code: form.zipCode.replace('-', ''),
+        postal_code: formatString(form.zipCode),
         state: form.state,
       },
       card: {
-        number: form.card,
+        number: formatString(form.card),
         exp_month: dateFormat[0],
         exp_year: dateFormat[1],
         cvc: form.cvc,
@@ -131,32 +151,28 @@ export default function Checkout() {
       amount: totalValueCart,
       name: form.name,
       email: form.email,
-      phone: form.phone
-        .replace('(', '')
-        .replace(')', '')
-        .replace(' ', '')
-        .replace('-', ''),
+      phone: formatString(form.phone),
+      products,
     }
 
     await axios
       .post('/api/checkout', { ...data })
       .then((result) => {
-        // pegar id da venda e redirecionar para tela de sucesso
-        // const successUrl = `/success?session_id=${result.data.confirmPayment.id}`
-        // router.push(successUrl)
-        console.log(result)
+        const successUrl = `/success?pi=${result.data.paymentIntent.id}`
+
+        router.push(successUrl)
       })
       .catch((e) => {
         let msg = ''
-        const type = String(e.response.data.type)
+        const message = String(e.response.data.message)
 
-        switch (type) {
-          case ErrorCheckoutEnum.card_error:
-            msg = ErrorCheckoutEnum.card_error
+        switch (message) {
+          case ErrorCheckoutTypeEnum.card_error:
+            msg = ErrorCheckoutMessageEnum.card_error
             break
 
           default:
-            msg = ErrorCheckoutEnum.generic_error
+            msg = ErrorCheckoutMessageEnum.generic_error
             break
         }
 
@@ -170,7 +186,7 @@ export default function Checkout() {
 
   useEffect(() => {
     handleValueCart()
-  }, [handleValueCart, errors])
+  }, [handleValueCart])
 
   return (
     <>
@@ -181,169 +197,188 @@ export default function Checkout() {
       <Breadcrumb actualPage="Checkout" />
 
       <Container>
-        <form onSubmit={handleSubmit(createSale)}>
-          <strong>Dados do cliente</strong>
-          <Input
-            label="Nome"
-            name="name"
-            register={register}
-            error={errors.name}
-            onFocus={handleInputFocus}
-            onChange={(e) => {
-              setValue('name', e.currentTarget.value)
-              setCard({ ...card, name: e.currentTarget.value })
-            }}
-          />
-
-          <div
-            style={{
-              display: 'grid',
-              gap: '1rem',
-              gridTemplateColumns: '200px auto',
-            }}
-          >
+        <ContentForm>
+          <form onSubmit={handleSubmit(createSale)}>
+            <Title>Dados do cliente</Title>
             <Input
-              mask="(99) 99999-9999"
-              label="Telefone"
-              name="phone"
+              label="Nome"
+              name="name"
               register={register}
-              error={errors.phone}
-              onChange={(e) => setValue('phone', e.currentTarget.value)}
-            />
-            <Input
-              label="E-mail"
-              name="email"
-              register={register}
-              error={errors.email}
-            />
-          </div>
-
-          <strong style={{ marginTop: '2rem' }}>Dados da entrega</strong>
-
-          <div
-            style={{
-              display: 'grid',
-              gap: '1rem',
-              gridTemplateColumns: '200px auto 100px',
-            }}
-          >
-            <Input
-              label="CEP"
-              name="zipCode"
-              mask="99999-999"
-              register={register}
-              error={errors.zipCode}
-              onChange={(e) => {
-                setValue('zipCode', e.currentTarget.value)
-                handleAddressWithZipCode(e.currentTarget.value)
-              }}
-            />
-            <Input
-              label="Logradouro"
-              name="line1"
-              register={register}
-              error={errors.line1}
-            />
-            <Input
-              label="Número"
-              name="line2"
-              register={register}
-              error={errors.line2}
-              maxLength={6}
-            />
-          </div>
-
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <Input
-              label="Cidade"
-              name="city"
-              register={register}
-              error={errors.city}
-              disabled
-            />
-
-            <Input
-              label="Estado"
-              name="state"
-              register={register}
-              error={errors.state}
-              disabled
-            />
-            <Input
-              label="País"
-              name="country"
-              register={register}
-              error={errors.country}
-              disabled
-            />
-          </div>
-
-          <strong style={{ marginTop: '2rem' }}>Dados do pagamento</strong>
-
-          <div
-            style={{
-              display: 'grid',
-              gap: '1rem',
-              gridTemplateColumns: 'auto 200px 100px',
-            }}
-          >
-            <Input
-              label="Número do cartão"
-              name="card"
-              register={register}
-              error={errors.card}
-              mask="9999 9999 9999 9999"
+              error={errors.name}
               onFocus={handleInputFocus}
               onChange={(e) => {
-                setValue('card', e.currentTarget.value)
-                setCard({ ...card, number: e.currentTarget.value })
+                setValue('name', e.currentTarget.value)
+                setCard({ ...card, name: e.currentTarget.value })
               }}
             />
-            <Input
-              label="MM/AAAA"
-              name="validate"
-              register={register}
-              error={errors.validate}
-              mask="99/9999"
-              onFocus={handleInputFocus}
-              onChange={(e) => {
-                setValue('validate', e.currentTarget.value)
-                setCard({ ...card, expiry: e.currentTarget.value })
+
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: '200px auto',
               }}
-            />
-            <Input
-              label="CVC"
-              name="cvc"
-              mask="9999"
-              register={register}
-              error={errors.cvc}
-              onFocus={handleInputFocus}
-              onChange={(e) => {
-                setValue('cvc', e.currentTarget.value)
-                setCard({ ...card, cvc: e.currentTarget.value })
+            >
+              <Input
+                mask="99 9 9999-9999"
+                label="Telefone"
+                name="phone"
+                register={register}
+                error={errors.phone}
+                onChange={(e) => setValue('phone', e.currentTarget.value)}
+              />
+              <Input
+                label="E-mail"
+                name="email"
+                register={register}
+                error={errors.email}
+              />
+            </div>
+
+            <Title isTopMargin>Dados da entrega</Title>
+
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: '200px auto 100px',
               }}
+            >
+              <Input
+                label="CEP"
+                name="zipCode"
+                mask="99999-999"
+                register={register}
+                error={errors.zipCode}
+                onChange={(e) => {
+                  setValue('zipCode', e.currentTarget.value)
+                  handleAddressWithZipCode(e.currentTarget.value)
+                }}
+              />
+              <Input
+                label="Logradouro"
+                name="line1"
+                register={register}
+                error={errors.line1}
+              />
+              <Input
+                label="Número"
+                name="line2"
+                register={register}
+                error={errors.line2}
+                maxLength={6}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <Input
+                label="Cidade"
+                name="city"
+                register={register}
+                error={errors.city}
+                disabled
+              />
+
+              <Input
+                label="Estado"
+                name="state"
+                register={register}
+                error={errors.state}
+                disabled
+              />
+              <Input
+                label="País"
+                name="country"
+                register={register}
+                error={errors.country}
+                disabled
+              />
+            </div>
+
+            <Title isTopMargin>Dados do pagamento</Title>
+
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'auto 200px 100px',
+              }}
+            >
+              <Input
+                label="Número do cartão"
+                name="card"
+                register={register}
+                error={errors.card}
+                mask="9999 9999 9999 9999"
+                onFocus={handleInputFocus}
+                onChange={(e) => {
+                  setValue('card', e.currentTarget.value)
+                  setCard({ ...card, number: e.currentTarget.value })
+                }}
+              />
+              <Input
+                label="MM/AAAA"
+                name="validate"
+                register={register}
+                error={errors.validate}
+                mask="99/9999"
+                onFocus={handleInputFocus}
+                onChange={(e) => {
+                  setValue('validate', e.currentTarget.value)
+                  setCard({ ...card, expiry: e.currentTarget.value })
+                }}
+              />
+              <Input
+                label="CVC"
+                name="cvc"
+                mask="9999"
+                register={register}
+                error={errors.cvc}
+                onFocus={handleInputFocus}
+                onChange={(e) => {
+                  setValue('cvc', e.currentTarget.value)
+                  setCard({ ...card, cvc: e.currentTarget.value })
+                }}
+              />
+            </div>
+
+            <Button type="submit" isLoading={isLoading}>
+              Finalizar compra
+            </Button>
+          </form>
+        </ContentForm>
+
+        <ContentCard>
+          <div>
+            <Cards
+              number={card.number}
+              expiry={card.expiry}
+              cvc={card.cvc}
+              name={card.name}
+              focused={isFocus}
+              placeholders={{ name: 'Nome do titular' }}
+              locale={{ valid: 'válido até' }}
             />
           </div>
 
-          <Button
-            type="submit"
-            isLoading={isLoading}
-            style={{ marginTop: '4rem' }}
-          >
+          <Box danger>
+            <strong>Atenção</strong>
+            <span>
+              A compra e os produtos são fictícios e para testar o fluxo de
+              pagamento, utilizar o número de cartão 4242 4242 4242 4242 (Cartão
+              teste), os outros campos podem ser dados aleartórios válidos.
+            </span>
+          </Box>
+
+          <Box total>
+            <strong>Total</strong>
+            <span>{formatValue(totalValueCart)}</span>
+          </Box>
+
+          <Button type="submit" isLoading={isLoading}>
             Finalizar compra
           </Button>
-        </form>
-        <div className="card">
-          <Cards
-            number={card.number}
-            expiry={card.expiry}
-            cvc={card.cvc}
-            name={card.name}
-            focused={isFocus}
-            placeholders={{ name: 'Nome do titular' }}
-            locale={{ valid: 'válido até' }}
-          />
-        </div>
+        </ContentCard>
       </Container>
     </>
   )

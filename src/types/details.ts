@@ -1,6 +1,7 @@
 export interface DetailsProps {
   salesInformation: {
     clientName: string
+    clientEmail: string
     products: {
       product: {
         name: string

@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
 import { Breadcrumb } from '@/components/BreadCrumb'
-import { ProductEnum } from '@/utils/productsEnum'
+import { ProductEnum } from '@/utils/enums/productsEnum'
 import { useEffect, useState } from 'react'
 import { CardProduct } from '@/components/CardProduct'
 import Head from 'next/head'
+import { Footer } from '@/components/Footer'
 
 export default function Products() {
   const { query } = useRouter()
@@ -61,6 +62,7 @@ export default function Products() {
           />
         ))}
       </Container>
+      <Footer />
     </>
   )
 }
