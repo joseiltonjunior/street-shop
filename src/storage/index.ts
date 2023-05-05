@@ -13,13 +13,12 @@ export interface reduxProps {
   products: ProductInfoProps[]
   sideMenu: sideMenuProps
   filterProducts: string
-  user: customerProps
 }
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart', 'products', 'sideMenu', 'filterProducts', 'user'],
+  whitelist: ['cart', 'products', 'sideMenu', 'filterProducts'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
