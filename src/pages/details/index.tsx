@@ -18,10 +18,19 @@ import { Button } from '@/components/Button'
 import { formatValue } from '@/utils/formatValue'
 import { useRouter } from 'next/router'
 import { formatCep } from '@/utils/formatCep'
-import { formatPhone } from '@/utils/formartPhone'
+import { formatPhone } from '@/utils/formatPhone'
+import { useDispatch, useSelector } from 'react-redux'
+import { reduxProps } from '@/storage'
+import { ProductInfoProps } from '@/types/product'
+import { clearCart } from '@/storage/modules/cart/action'
+import { filterProducts } from '@/storage/modules/filterProducts/action'
 
 export default function Details({ salesInformation }: DetailsProps) {
   const router = useRouter()
+  const dispatch = useDispatch()
+  const cart = useSelector<reduxProps, ProductInfoProps[]>(
+    (state) => state.cart,
+  )
 
   return (
     <>
@@ -37,17 +46,12 @@ export default function Details({ salesInformation }: DetailsProps) {
         <h1>Detalhes da compra</h1>
         <div className="content">
           <ProductsContent>
-            {salesInformation.products.map((item) => (
-              <Product key={item.product.id}>
-                <Image
-                  src={item.product.images[0]}
-                  alt=""
-                  width={100}
-                  height={100}
-                />
+            {cart.map((item) => (
+              <Product key={item.id}>
+                <Image src={item.imageUrl} alt="" width={100} height={100} />
 
                 <ProductInfoContent>
-                  <NameProduct>{item.product.name}</NameProduct>
+                  <NameProduct>{item.name}</NameProduct>
                   <RowContent>
                     <span>Qtde: {item.quantity}</span>
                     <strong>{item.price}</strong>
@@ -69,7 +73,7 @@ export default function Details({ salesInformation }: DetailsProps) {
 
                   <RowContent>
                     <strong>E-mail</strong>
-                    <span>{salesInformation.shippingDetails.email}</span>
+                    <span>{salesInformation.clientEmail}</span>
                   </RowContent>
 
                   <RowContent>
@@ -114,7 +118,13 @@ export default function Details({ salesInformation }: DetailsProps) {
               </div>
             </div>
 
-            <Button onClick={() => router.replace('/')}>
+            <Button
+              onClick={() => {
+                dispatch(clearCart())
+                dispatch(filterProducts(''))
+                router.replace('/')
+              }}
+            >
               Ir para página principal
             </Button>
           </TotalContent>
@@ -138,25 +148,17 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   const sessionId = String(query.id)
 
-  await stripe.checkout.sessions
-    .retrieve(sessionId, {
-      expand: ['line_items', 'line_items.data.price.product'],
-    })
+  await stripe.paymentIntents
+    .retrieve(sessionId, {})
     .then((result) => {
-      const clientName = result.customer_details?.name
-      const products = result.line_items?.data.map((item) => {
-        return {
-          product: item.price?.product,
-          quantity: item.quantity,
-          price: formatValue(item.amount_total),
-        }
-      })
+      const clientName = result.shipping?.name
 
       salesInformation = {
+        id: result.id,
         clientName,
-        products,
-        shippingDetails: result.customer_details,
-        amountTotal: formatValue(result.amount_total!),
+        clientEmail: result.receipt_email,
+        shippingDetails: result.shipping,
+        amountTotal: formatValue(result.amount!),
       }
     })
     .catch(() => {

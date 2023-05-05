@@ -4,6 +4,7 @@ import { Select } from '../Select'
 import separator from '@/assets/separator.png'
 
 import { Container, ActualPage, BreadCrumbLink, Separator } from './styles'
+import { useRouter } from 'next/router'
 
 interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
   actualPage?: string
@@ -17,9 +18,17 @@ export function Breadcrumb({
   setFilterProducts,
   ...rest
 }: BreadcrumbProps) {
+  const router = useRouter()
+
   return (
     <Container {...rest}>
-      <BreadCrumbLink href={'/'}>Voltar</BreadCrumbLink>
+      <BreadCrumbLink
+        onClick={() => {
+          router.back()
+        }}
+      >
+        Voltar
+      </BreadCrumbLink>
 
       <Separator src={separator} alt="" width={30} height={30} />
 

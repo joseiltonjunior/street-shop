@@ -8,9 +8,10 @@ export const Container = styled('button', {
   borderRadius: 8,
   padding: '1.25rem',
   cursor: 'pointer',
-  fontWeight: 'bold',
+  fontWeight: 'bolder',
   fontSize: '$md',
-  height: '3.813rem',
+  height: '3rem',
+  width: '100%',
   transition: 'all 0.3s',
 
   display: 'flex',
@@ -19,5 +20,9 @@ export const Container = styled('button', {
 
   '&:hover': {
     color: '$white',
+  },
+
+  svg: {
+    height: '100%',
   },
 })

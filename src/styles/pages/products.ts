@@ -4,7 +4,7 @@ export const Container = styled('div', {
   width: '100%',
   padding: '0 1rem 1rem',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  margin: '0 auto',
+  margin: '0 auto 4rem',
 
   display: 'grid',
   gridTemplateColumns: '1fr 1fr 1fr 1fr',

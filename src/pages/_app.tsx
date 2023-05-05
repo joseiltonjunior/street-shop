@@ -11,7 +11,7 @@ import { Container } from '@/styles/pages/app'
 import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
-
+import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Head from 'next/head'

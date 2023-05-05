@@ -1,6 +1,5 @@
 import { styled } from '@stitches/react'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export const Container = styled('div', {
   display: 'flex',
@@ -36,11 +35,13 @@ export const ActualPage = styled('div', {
 
 export const Separator = styled(Image, {})
 
-export const BreadCrumbLink = styled(Link, {
+export const BreadCrumbLink = styled('button', {
   cursor: 'pointer',
-  textDecoration: 'none',
+  fontSize: 'medium',
   color: '$orange500',
   fontWeight: 'bold',
+  background: 'transparent',
+  border: 'none',
 
   '&:hover': {
     color: '$white',

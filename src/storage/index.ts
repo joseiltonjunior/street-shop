@@ -6,6 +6,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './modules/rootReducer'
+import { customerProps } from '@/types/customer'
 
 export interface reduxProps {
   cart: ProductInfoProps[]
