@@ -4,9 +4,8 @@ import { Container, MoreInfo, ExpansiveButton, ButtonMoveTop } from './styles'
 import caret from '@/assets/caret-down.svg'
 import { useState } from 'react'
 import { Apresetation } from './Apresentation'
-import { Techs } from './Techs'
+
 import { Contact } from './Contact'
-import { Links } from './Links'
 
 export function Footer() {
   const [expand, setExpand] = useState(false)
@@ -25,17 +24,11 @@ export function Footer() {
           <>
             <Apresetation />
 
-            <Techs />
-
             <Contact />
 
-            <Links />
-
-            <div className="mobile">
+            {/* <div className="mobile">
               <Contact mobile />
-
-              <Links mobile />
-            </div>
+            </div> */}
           </>
         )}
       </MoreInfo>

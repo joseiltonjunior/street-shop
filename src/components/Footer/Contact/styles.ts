@@ -1,17 +1,11 @@
 import { styled } from '@/styles'
 
 export const Container = styled('div', {
-  '@media (max-width: 900px)': {
-    display: 'none',
-  },
+  display: 'flex',
+  gap: '2rem',
+  height: '100%',
 
-  variants: {
-    mobile: {
-      true: {
-        '@media (max-width: 900px)': {
-          display: 'block',
-        },
-      },
-    },
+  '@media (max-width: 900px)': {
+    gap: '1rem',
   },
 })
