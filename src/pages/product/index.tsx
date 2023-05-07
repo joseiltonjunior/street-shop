@@ -102,9 +102,13 @@ export default function Product({ product }: ProductProps) {
 
   if (!product) {
     return (
-      <Container>
-        <SkeletonProduct />
-      </Container>
+      <>
+        <Header />
+        <Breadcrumb isLoading />
+        <Container>
+          <SkeletonProduct />
+        </Container>
+      </>
     )
   }
 

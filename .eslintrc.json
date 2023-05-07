@@ -4,6 +4,6 @@
     "next/core-web-vitals"
   ],
   "rules": {
-    "no-unused-vars": "off"
+    // "no-unused-vars": "off"
   }
 }
