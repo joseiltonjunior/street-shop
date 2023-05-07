@@ -12,6 +12,12 @@ export const Container = styled('div', {
   padding: '0 1rem',
 
   gap: '0.5rem',
+
+  '@media (max-width: 900px)': {
+    '.skeleton': {
+      width: 'calc(100vw - 2rem) !important',
+    },
+  },
 })
 
 export const ActualPage = styled('div', {

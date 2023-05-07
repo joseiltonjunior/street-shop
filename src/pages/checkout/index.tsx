@@ -49,9 +49,31 @@ const schema = yup.object().shape({
   country: yup.string().required(required),
   state: yup.string().required(required),
   line1: yup.string().required(required),
-  line2: yup.string().min(1, required),
-  card: yup.string().min(19, required),
-  validate: yup.string().min(7, required),
+  line2: yup.string().required(required),
+  card: yup.string().min(17, required),
+  validate: yup
+    .string()
+    .min(7, required)
+    .test('verify-validation', (value) => {
+      if (value && value.length === 7) {
+        const format = value.split('/')
+        const month = Number(format[0])
+        const year = Number(format[1])
+
+        const actualYear = new Date().getFullYear()
+        const actualMonth = new Date().getMonth() + 1
+
+        const monthCheck = month > 0 && month <= 12
+        const yearCheck = year > actualYear && year <= actualYear + 10
+        const currentYearCheck = year === actualYear && month >= actualMonth
+
+        if ((monthCheck && yearCheck) || currentYearCheck) {
+          return true
+        }
+      }
+
+      return false
+    }),
   cvc: yup.string().min(3, required),
 })
 

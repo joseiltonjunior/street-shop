@@ -9,7 +9,7 @@ export const Container = styled('main', {
   width: '100%',
 
   borderRadius: 8,
-  border: '1.5px solid $gray100',
+  border: '2.5px solid $gray100',
 
   overflow: 'hidden',
 
@@ -31,7 +31,7 @@ export const Container = styled('main', {
   variants: {
     isCheck: {
       true: {
-        border: '1.5px solid $green500',
+        borderColor: '$green500',
         svg: {
           fill: '$green500',
         },
@@ -39,7 +39,7 @@ export const Container = styled('main', {
     },
     isFocused: {
       true: {
-        border: '1.5px solid $orange500',
+        borderColor: '$orange500',
         svg: {
           fill: '$orange500',
         },
@@ -47,7 +47,7 @@ export const Container = styled('main', {
     },
     isError: {
       true: {
-        border: '1.5px solid $red500',
+        borderColor: '$red500',
         svg: {
           fill: '$red500',
         },
@@ -57,7 +57,7 @@ export const Container = styled('main', {
     isDisabled: {
       true: {
         background: '$gray500',
-        border: '1.5px solid $gray800',
+        borderColor: '$gray800',
 
         input: {
           color: '$gray300',
