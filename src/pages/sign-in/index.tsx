@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header'
-import { Container, UserAlreadyExists } from '@/styles/pages/register'
+import { UserAlreadyExists } from '@/styles/pages/register'
 import * as yup from 'yup'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
@@ -15,6 +15,8 @@ import { useDispatch } from 'react-redux'
 
 import { useRouter } from 'next/router'
 import { setToken } from '@/storage/modules/user-token/action'
+
+import { Container, Grid } from '@/styles/pages/sign-in'
 
 const required = 'Este campo é obrigatório'
 
@@ -55,7 +57,7 @@ export default function SignIn() {
       })
       .catch(() => {
         showToast('Credenciais inválidas', {
-          type: 'warning',
+          type: 'error',
           theme: 'colored',
         })
       })
@@ -75,13 +77,7 @@ export default function SignIn() {
         >
           <h2>Entrar na conta</h2>
 
-          <div
-            style={{
-              display: 'grid',
-              gap: '1rem',
-              gridTemplateColumns: '1fr 230px',
-            }}
-          >
+          <Grid>
             <Input
               label="E-mail"
               name="email"
@@ -95,7 +91,7 @@ export default function SignIn() {
               error={errors.password}
               isPassword
             />
-          </div>
+          </Grid>
 
           <Button variant="primary" type="submit" isLoading={isLoading}>
             Entrar

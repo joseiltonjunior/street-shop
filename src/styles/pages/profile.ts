@@ -14,6 +14,10 @@ export const Content = styled('div', {
   borderRadius: 8,
   overflow: 'hidden',
 
+  '@media (max-width: 900px)': {
+    gridTemplateColumns: '1fr',
+  },
+
   aside: {
     background: '$gray500',
   },
