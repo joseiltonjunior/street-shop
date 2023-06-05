@@ -24,3 +24,26 @@ export const UserAlreadyExists = styled(Link, {
     textDecoration: 'underline',
   },
 })
+
+export const Grid = styled('div', {
+  display: 'grid',
+  gap: '1rem',
+
+  gridTemplateColumns: '13rem auto',
+
+  '@media (max-width: 900px)': {
+    gridTemplateColumns: '1fr',
+  },
+
+  variants: {
+    col2: {
+      true: {
+        gridTemplateColumns: '1fr 1fr',
+
+        '@media (max-width: 900px)': {
+          gridTemplateColumns: '1fr',
+        },
+      },
+    },
+  },
+})

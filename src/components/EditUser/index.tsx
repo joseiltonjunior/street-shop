@@ -13,6 +13,7 @@ import { Input } from '../Input'
 import { Button } from '../Button'
 import { ButtonEdit } from './styles'
 import { stripe } from '@/lib/stripe'
+import { Grid } from '@/styles/pages/sign-in'
 
 const required = 'Este campo é obrigatório'
 
@@ -143,13 +144,7 @@ export function EditUser() {
           disabled={!editUser}
         />
 
-        <div
-          style={{
-            display: 'grid',
-            gap: '1rem',
-            gridTemplateColumns: 'auto 1fr',
-          }}
-        >
+        <Grid>
           <Input
             mask="99 9 9999-9999"
             label="Telefone"
@@ -165,7 +160,7 @@ export function EditUser() {
             error={errors.email}
             disabled={!editUser}
           />
-        </div>
+        </Grid>
 
         {editUser && (
           <div style={{ display: 'flex', gap: '1rem' }}>

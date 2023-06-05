@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header'
-import { Container, UserAlreadyExists } from '@/styles/pages/register'
+import { Container, UserAlreadyExists, Grid } from '@/styles/pages/register'
 import * as yup from 'yup'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
@@ -14,6 +14,12 @@ import { useToast } from '@/hooks/useToast'
 import { useDispatch } from 'react-redux'
 import { setSaveUser } from '@/storage/modules/user/action'
 import { useRouter } from 'next/router'
+import { setToken } from '@/storage/modules/user-token/action'
+
+interface authProps {
+  email: string
+  password: string
+}
 
 const required = 'Este campo é obrigatório'
 
@@ -42,6 +48,28 @@ export default function Register() {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  async function handleAuthenticateUser(data: authProps) {
+    const authUser = {
+      email: data.email,
+      password: data.password,
+    }
+
+    await clientAPI
+      .post('/sessions', authUser)
+      .then((result) => {
+        const { token } = result.data
+        dispatch(setToken(token))
+        router.push('/profile')
+      })
+      .catch(() => {
+        showToast('Credenciais inválidas', {
+          type: 'error',
+          theme: 'colored',
+        })
+      })
+      .finally(() => setIsLoading(false))
+  }
+
   async function handleRegisterUser(data: RegisterUserProps) {
     setIsLoading(true)
 
@@ -63,7 +91,7 @@ export default function Register() {
       .post('/users', newUser)
       .then((result) => {
         dispatch(setSaveUser(result.data))
-        router.push('/profile')
+        handleAuthenticateUser({ email: data.email, password: data.password })
       })
       .catch(() => {
         showToast(
@@ -74,7 +102,6 @@ export default function Register() {
           },
         )
       })
-      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -96,13 +123,7 @@ export default function Register() {
             error={errors.name}
           />
 
-          <div
-            style={{
-              display: 'grid',
-              gap: '1rem',
-              gridTemplateColumns: 'auto 1fr',
-            }}
-          >
+          <Grid>
             <Input
               mask="99 9 9999-9999"
               label="Telefone"
@@ -116,9 +137,9 @@ export default function Register() {
               register={register}
               error={errors.email}
             />
-          </div>
+          </Grid>
 
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <Grid col2>
             <Input
               label="Senha"
               name="password"
@@ -133,7 +154,7 @@ export default function Register() {
               error={errors.confirmPassword}
               isPassword
             />
-          </div>
+          </Grid>
 
           <Button variant="primary" type="submit" isLoading={isLoading}>
             Cadastrar

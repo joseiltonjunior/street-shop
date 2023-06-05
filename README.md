@@ -3,9 +3,6 @@
 <h3 align="center">In progress</h3>
 
 
-
-
-
 <p align="center">
   <img src="https://i.ibb.co/GsYJ82V/home-screen.png" alt="home" border="0">
 
@@ -16,7 +13,7 @@
 
 ```sh
 $ git clone https://github.com/joseiltonjunior/dcoffee-shop.git
-$ open paste: cd 04-ignite-shop
+$ open paste: cd dcoffee-shop
 $ install dependencies: npm i
 $ run server: npm run dev
 $ open your browser at http://localhost:3000
