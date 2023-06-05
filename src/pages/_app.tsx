@@ -1,4 +1,5 @@
 import { globalStyles } from '@/styles/global'
+
 import type { AppProps } from 'next/app'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from '../storage'

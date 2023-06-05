@@ -72,7 +72,7 @@ export default function Home({ products }: ProductsProps) {
         <title>{`Home | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart lengthCart={cart.length} inputSearch isLink />
+      <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
 
       <Container>
         {bestSeller && (

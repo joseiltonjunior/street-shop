@@ -27,23 +27,8 @@ export const MoreInfo = styled('div', {
   justifyContent: 'space-between',
   gap: '1.5rem',
 
-  '.mobile': {
-    display: 'none',
-  },
-
   '@media (max-width: 900px)': {
     flexDirection: 'column',
-
-    '.mobile': {
-      display: 'flex',
-      justifyContent: 'space-between',
-
-      width: '100%',
-    },
-
-    '.web': {
-      display: 'none',
-    },
   },
 
   variants: {
@@ -101,7 +86,8 @@ export const ButtonMoveTop = styled('button', {
   height: 35,
   width: 35,
 
-  img: {
-    transform: 'rotate(180deg)',
+  svg: {
+    color: '$orange500',
+    margin: '0 auto',
   },
 })

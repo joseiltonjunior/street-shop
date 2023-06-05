@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import { Container, MoreInfo, ExpansiveButton, ButtonMoveTop } from './styles'
 
-import caret from '@/assets/caret-down.svg'
 import { useState } from 'react'
 import { Apresetation } from './Apresentation'
 
 import { Contact } from './Contact'
+import { FaCaretUp } from 'react-icons/fa'
 
 export function Footer() {
   const [expand, setExpand] = useState(false)
@@ -25,17 +24,13 @@ export function Footer() {
             <Apresetation />
 
             <Contact />
-
-            {/* <div className="mobile">
-              <Contact mobile />
-            </div> */}
           </>
         )}
       </MoreInfo>
       <main>
-        <div>
-          <p>{`D'Coffee Shop`} 2023</p>
-          <p>Todos os direitos reservados</p>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <strong>{`D'Coffee Shop`} 2023</strong>
+          <span>Todos os direitos reservados</span>
         </div>
 
         <ButtonMoveTop
@@ -43,7 +38,7 @@ export function Footer() {
             document.body.scrollTop = document.documentElement.scrollTop = 0
           }}
         >
-          <Image src={caret} alt="" />
+          <FaCaretUp size={25} />
         </ButtonMoveTop>
       </main>
     </Container>

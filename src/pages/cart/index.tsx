@@ -84,7 +84,7 @@ export default function Carrinho() {
         <title>{`Meu carrinho | D'Coffee Shop`}</title>
       </Head>
 
-      <Header />
+      <Header isUser />
 
       <Breadcrumb actualPage="Meu carrinho" />
 
@@ -152,7 +152,7 @@ export default function Carrinho() {
               <span>{totalValueCart}</span>
             </div>
 
-            <Button onClick={() => router.push('/checkout')}>
+            <Button onClick={() => router.push('/checkout')} variant="primary">
               Comprar agora
             </Button>
           </TotalContent>

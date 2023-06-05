@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
-import { filterProducts } from '@/storage/modules/filterProducts/action'
+import { filterProducts } from '@/storage/modules/filter-products/action'
 import { useRouter } from 'next/router'
 
 export function SearchInput() {

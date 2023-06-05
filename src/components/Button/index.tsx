@@ -5,11 +5,12 @@ import { Container } from './styles'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean
+  variant?: 'primary' | 'secondary'
 }
 
-export function Button({ children, isLoading, ...rest }: ButtonProps) {
+export function Button({ children, isLoading, variant, ...rest }: ButtonProps) {
   return (
-    <Container {...rest}>
+    <Container {...rest} theme={variant}>
       {isLoading ? (
         <ReactLoading type="bars" color={'#fff'} width={40} height={40} />
       ) : (

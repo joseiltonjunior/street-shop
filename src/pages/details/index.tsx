@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
 import { clearCart } from '@/storage/modules/cart/action'
-import { filterProducts } from '@/storage/modules/filterProducts/action'
+import { filterProducts } from '@/storage/modules/filter-products/action'
 
 export default function Details({ salesInformation }: DetailsProps) {
   const router = useRouter()

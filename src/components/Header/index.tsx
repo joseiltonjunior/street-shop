@@ -5,7 +5,7 @@ import { SearchInput } from '../SearchInput'
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 
 import listIcon from '@/assets/list.svg'
-import cartIcon from '@/assets/shopping-cart-simple.svg'
+// import cartIcon from '@/assets/shopping-cart-simple.svg'
 import returnIcon from '@/assets/arrow-u-up-left.svg'
 
 import { useRouter } from 'next/router'
@@ -13,8 +13,10 @@ import { useRouter } from 'next/router'
 import { HeaderProps } from '@/types/header'
 import Link from 'next/link'
 import { Select } from '../Select'
-import { useDispatch } from 'react-redux'
-import { setSideMenu } from '@/storage/modules/sideMenu/action'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSideMenu } from '@/storage/modules/side-menu/action'
+
+import { FaUserCircle, FaShoppingCart } from 'react-icons/fa'
 
 import {
   Container,
@@ -22,7 +24,10 @@ import {
   CartButton,
   ContentLinks,
   PrevButton,
+  UserButton,
 } from './styles'
+import { reduxProps } from '@/storage'
+import { ResponseUserProps } from '@/types/user'
 
 export function Header({
   buttonPrev,
@@ -30,9 +35,12 @@ export function Header({
   buttonCart,
   lengthCart,
   isLink,
+  isUser,
 }: HeaderProps) {
   const router = useRouter()
   const dispatch = useDispatch()
+
+  const user = useSelector<reduxProps, ResponseUserProps>((state) => state.user)
 
   return (
     <Container>
@@ -65,9 +73,17 @@ export function Header({
           <Image src={returnIcon} alt="" />
         </PrevButton>
       )}
+      {isUser && (
+        <UserButton
+          title="Minha conta"
+          href={user.id ? '/profile' : '/sign-in'}
+        >
+          <FaUserCircle />
+        </UserButton>
+      )}
       {buttonCart && (
         <CartButton href="/cart" title="Abrir carrinho">
-          <Image src={cartIcon} alt="" />
+          <FaShoppingCart />
           <div>{lengthCart}</div>
         </CartButton>
       )}
