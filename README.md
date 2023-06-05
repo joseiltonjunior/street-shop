@@ -15,7 +15,7 @@
 </p>
 
 ```sh
-$ git clone https://github.com/joseiltonjunior/04-ignite-shop.git
+$ git clone https://github.com/joseiltonjunior/dcoffee-shop.git
 $ open paste: cd 04-ignite-shop
 $ install dependencies: npm i
 $ run server: npm run dev
