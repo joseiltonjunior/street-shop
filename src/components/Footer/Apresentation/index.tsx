@@ -1,22 +1,23 @@
 import Image from 'next/image'
-import { Info, Redirect } from '../styles'
+import { Info } from '../styles'
 
 import logo from '@/assets/dcoffee-logo.png'
 
-import { Container } from './styles'
-
 export function Apresetation() {
   return (
-    <Container>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.5rem',
+        maxWidth: '300px',
+      }}
+    >
       <Image src={logo} alt="" height={40} />
-      <Info style={{ marginTop: '1rem' }}>
-        E-commerce fictício criado com intuito de desenvolver novas skills e
-        popular meu portfólio, o projeto faz parte da trilha React do curso da{' '}
-        <Redirect target="_blank" href={'https://www.rocketseat.com.br/'}>
-          Rocketseat
-        </Redirect>
-        .
+      <Info>
+        Este e-commerce é parte de uma seleção de produtos digitais criados de
+        forma autoral.
       </Info>
-    </Container>
+    </div>
   )
 }

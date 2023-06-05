@@ -30,6 +30,16 @@ export const PrevButton = styled('button', {
   cursor: 'pointer',
 })
 
+export const UserButton = styled(Link, {
+  marginLeft: 'auto',
+
+  svg: {
+    fill: '$gray800',
+    width: 30,
+    height: 30,
+  },
+})
+
 export const MenuButton = styled('button', {
   border: 'none',
   background: 'transparent',
@@ -47,13 +57,16 @@ export const MenuButton = styled('button', {
 })
 
 export const CartButton = styled(Link, {
-  color: '$orange500',
+  color: '$white',
   textDecoration: 'none',
-  cursor: 'pointer',
-
-  marginLeft: 'auto',
 
   position: 'relative',
+
+  svg: {
+    fill: '$gray800',
+    width: 30,
+    height: 30,
+  },
 
   div: {
     position: 'absolute',
@@ -61,15 +74,15 @@ export const CartButton = styled(Link, {
 
     left: 20,
     fontSize: '12px',
-
+    border: '1px solid $orange500',
     fontWeight: 'bold',
     borderRadius: '10px',
-    background: '$gray800',
+    background: '$gray900',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 16,
-    height: 16,
+    width: '1rem',
+    height: '1rem',
   },
 })
 

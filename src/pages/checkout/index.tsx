@@ -234,7 +234,7 @@ export default function Checkout() {
       <Head>
         <title>{`Checkout | D'Coffee Shop`}</title>
       </Head>
-      <Header />
+      <Header isUser />
       <Breadcrumb actualPage="Checkout" />
 
       <Container>
@@ -383,7 +383,7 @@ export default function Checkout() {
               />
             </div>
 
-            <Button type="submit" isLoading={isLoading}>
+            <Button type="submit" isLoading={isLoading} variant="primary">
               Finalizar compra
             </Button>
           </form>
@@ -416,7 +416,7 @@ export default function Checkout() {
             <span>{formatValue(totalValueCart)}</span>
           </Box>
 
-          <Button type="submit" isLoading={isLoading}>
+          <Button type="submit" isLoading={isLoading} variant="primary">
             Finalizar compra
           </Button>
         </ContentCard>

@@ -119,7 +119,7 @@ export default function Product({ product }: ProductProps) {
         <title>{`${product.name}  | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart lengthCart={cart.length} isLink inputSearch />
+      <Header buttonCart lengthCart={cart.length} isLink inputSearch isUser />
 
       <Breadcrumb actualPage={product.name} />
 

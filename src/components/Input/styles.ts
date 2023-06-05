@@ -17,6 +17,19 @@ export const Container = styled('main', {
     fill: '$gray100',
   },
 
+  button: {
+    border: 'none',
+    background: 'transparent',
+    marginRight: '1rem',
+    width: '1.875rem',
+    height: '1.875rem',
+    svg: {
+      fill: '$gray500',
+      width: '1.25rem',
+      height: '1.25rem',
+    },
+  },
+
   input: {
     border: 'none',
     background: 'transparent',

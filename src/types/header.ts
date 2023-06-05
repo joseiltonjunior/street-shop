@@ -5,4 +5,5 @@ export interface HeaderProps {
   inputSearch?: boolean
   isLink?: boolean
   noMenu?: boolean
+  isUser?: boolean
 }

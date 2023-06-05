@@ -5,6 +5,7 @@ import { InputHTMLAttributes, useState } from 'react'
 import InputMask from 'react-input-mask'
 
 import { IconType } from 'react-icons'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: FieldError
@@ -13,6 +14,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   register: UseFormRegister<any>
   mask?: string
+  isPassword?: boolean
 }
 
 export function Input({
@@ -23,9 +25,11 @@ export function Input({
   name,
   mask,
   disabled,
+  isPassword,
   ...rest
 }: InputProps) {
   const [isFocused, setIsFocused] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   return (
     <Container isError={!!error} isFocused={isFocused} isDisabled={disabled}>
@@ -48,8 +52,14 @@ export function Input({
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
           disabled={disabled}
+          type={isPassword ? (isVisible ? 'text' : 'password') : 'text'}
           {...rest}
         />
+      )}
+      {isPassword && (
+        <button onClick={() => setIsVisible(!isVisible)} type="button">
+          {isVisible ? <FaEye /> : <FaEyeSlash />}
+        </button>
       )}
     </Container>
   )

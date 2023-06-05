@@ -2,7 +2,7 @@ import { styled } from '@stitches/react'
 
 export const Container = styled('button', {
   marginTop: 'auto',
-  background: '$orange500',
+
   border: 0,
   color: '$gray900',
   borderRadius: 8,
@@ -18,11 +18,29 @@ export const Container = styled('button', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  '&:hover': {
-    color: '$white',
-  },
-
   svg: {
     height: '100%',
+  },
+
+  variants: {
+    theme: {
+      primary: {
+        background: '$orange500',
+
+        '&:hover': {
+          color: '$white',
+        },
+      },
+      secondary: {
+        background: 'transparent',
+        border: '1px solid $gray100',
+        color: '$gray100',
+
+        '&:hover': {
+          background: '$gray100',
+          color: '$gray800',
+        },
+      },
+    },
   },
 })
