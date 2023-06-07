@@ -5,7 +5,6 @@ export const Container = styled('div', {
   background: '$orange500',
   width: '100%',
 
-  borderRadius: '10px 10px 0 0 ',
   position: 'relative',
   padding: '0.5rem 1rem',
   marginTop: 'auto',
@@ -61,7 +60,7 @@ export const Redirect = styled(Link, {
 
 export const ExpansiveButton = styled('button', {
   top: -30,
-  right: '50%',
+  right: 'calc(50% - 2rem)',
   position: 'absolute',
   background: '$orange500',
   border: 'none',

@@ -9,7 +9,6 @@ export interface ResponseUserProps {
 }
 
 export interface RegisterUserProps {
-  id: string
   customerId: string
   name: string
   email: string
@@ -19,5 +18,5 @@ export interface RegisterUserProps {
 }
 
 export interface UserDataProps {
-  user: ResponseUserProps
+  user?: ResponseUserProps
 }

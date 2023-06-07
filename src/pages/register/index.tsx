@@ -55,7 +55,7 @@ export default function Register() {
     }
 
     await clientAPI
-      .post('/sessions', authUser)
+      .post('/sessions', authUser, { withCredentials: true })
       .then((result) => {
         const { token } = result.data
         dispatch(setToken(token))

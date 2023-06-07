@@ -9,6 +9,7 @@ import { Input } from '@/components/Input'
 import { useState } from 'react'
 import { Button } from '@/components/Button'
 import clientAPI from '@/services/client-api'
+// import Cookies from 'js-cookie'
 
 import { useToast } from '@/hooks/useToast'
 import { useDispatch } from 'react-redux'
@@ -17,6 +18,7 @@ import { useRouter } from 'next/router'
 import { setToken } from '@/storage/modules/user-token/action'
 
 import { Container, Grid } from '@/styles/pages/sign-in'
+// import { getCookieParser } from 'next/dist/server/api-utils'
 
 const required = 'Este campo é obrigatório'
 
@@ -49,13 +51,17 @@ export default function SignIn() {
     }
 
     await clientAPI
-      .post('/sessions', authUser)
+      .post('/sessions', authUser, {
+        withCredentials: true,
+      })
       .then((result) => {
         const { token } = result.data
+
         dispatch(setToken(token))
         router.push('/profile')
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e)
         showToast('Credenciais inválidas', {
           type: 'error',
           theme: 'colored',
