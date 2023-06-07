@@ -48,7 +48,7 @@ export default function Products() {
         <title>{`Produtos | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart lengthCart={cart.length} inputSearch isLink />
+      <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
       <Breadcrumb actualPage={title} />
       <Container>
         {listProducts?.map((product) => (

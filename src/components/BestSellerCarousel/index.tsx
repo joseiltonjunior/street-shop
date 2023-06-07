@@ -4,21 +4,14 @@ import { HomeContainer, Product } from './styles'
 
 import { ProductsProps } from '@/types/product'
 import { ButtonCarousel } from '../ButtonCarousel'
-import { useState } from 'react'
-import { DotCorousel } from '../DotCarousel'
 
 export function BestSellerCarousel({ products }: ProductsProps) {
-  const [currentSlide, setCurrentSlide] = useState(0)
-
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
     },
     loop: true,
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel)
-    },
   })
 
   return (
@@ -51,12 +44,6 @@ export function BestSellerCarousel({ products }: ProductsProps) {
           onClick={() => instanceRef.current?.next()}
         />
       </HomeContainer>
-
-      <DotCorousel
-        instanceRef={instanceRef}
-        currentSlide={currentSlide}
-        products={products}
-      />
     </>
   )
 }

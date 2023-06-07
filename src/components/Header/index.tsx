@@ -5,7 +5,7 @@ import { SearchInput } from '../SearchInput'
 import logoCoffeIcon from '@/assets/dcoffee-logo.png'
 
 import listIcon from '@/assets/list.svg'
-// import cartIcon from '@/assets/shopping-cart-simple.svg'
+
 import returnIcon from '@/assets/arrow-u-up-left.svg'
 
 import { useRouter } from 'next/router'
@@ -27,7 +27,6 @@ import {
   UserButton,
 } from './styles'
 import { reduxProps } from '@/storage'
-import { ResponseUserProps } from '@/types/user'
 
 export function Header({
   buttonPrev,
@@ -40,7 +39,7 @@ export function Header({
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const user = useSelector<reduxProps, ResponseUserProps>((state) => state.user)
+  const token = useSelector<reduxProps, string>((state) => state.token)
 
   return (
     <Container>
@@ -76,7 +75,7 @@ export function Header({
       {isUser && (
         <UserButton
           title="Minha conta"
-          href={user.id ? '/profile' : '/sign-in'}
+          href={token.length > 0 ? '/profile' : '/sign-in'}
         >
           <FaUserCircle />
         </UserButton>

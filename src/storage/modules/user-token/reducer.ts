@@ -14,6 +14,10 @@ const userToken: Reducer<tokenProps> = (state = INITIAL_STATE, action) => {
       return (state = token)
     }
 
+    case '@user/REMOVE_TOKEN': {
+      return (state = { token: '' })
+    }
+
     default: {
       return state
     }

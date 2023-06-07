@@ -1,13 +1,13 @@
 import { useToast } from '@/hooks/useToast'
 import clientAPI from '@/services/client-api'
-import { RegisterUserProps, ResponseUserProps } from '@/types/user'
-import { useCallback, useEffect, useState } from 'react'
+import { RegisterUserProps, UserDataProps } from '@/types/user'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { reduxProps } from '@/storage'
-import { setSaveUser } from '@/storage/modules/user/action'
+
 import { FaEdit } from 'react-icons/fa'
 import { Input } from '../Input'
 import { Button } from '../Button'
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   phone: yup.string().min(14, required),
 })
 
-export function EditUser() {
+export function EditUser({ user }: UserDataProps) {
   const {
     register,
     setValue,
@@ -36,38 +36,12 @@ export function EditUser() {
   const [editUser, setEditUser] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const token = useSelector<reduxProps, string>((state) => state.token)
-  const user = useSelector<reduxProps, ResponseUserProps>((state) => state.user)
 
   const { showToast } = useToast()
-  const dispatch = useDispatch()
-
-  const handleFetchUser = useCallback(async () => {
-    setIsLoading(true)
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    await clientAPI
-      .get('/me', config)
-      .then((result) => {
-        dispatch(setSaveUser(result.data))
-        setValue('name', result.data.name)
-        setValue('phone', result.data.phone)
-        setValue('email', result.data.email)
-      })
-      .catch(() => {
-        showToast('Opss. Ocorreu um erro ao buscar os dados do usuário.', {
-          type: 'error',
-          theme: 'colored',
-        })
-      })
-      .finally(() => setIsLoading(false))
-  }, [dispatch, setValue, showToast, token])
 
   async function handleEditUser(data: RegisterUserProps) {
+    if (!user) return
+
     setIsLoading(true)
 
     const editUser = {
@@ -86,10 +60,7 @@ export function EditUser() {
 
     await clientAPI
       .put('/me', editUser, config)
-      .then((result) => {
-        console.log(result)
-
-        dispatch(setSaveUser(result.data))
+      .then(() => {
         showToast('Dados atualizados com sucesso.', {
           type: 'success',
           theme: 'colored',
@@ -106,8 +77,12 @@ export function EditUser() {
   }
 
   useEffect(() => {
-    handleFetchUser()
-  }, [handleFetchUser])
+    if (user) {
+      setValue('name', user.name)
+      setValue('phone', user.phone)
+      setValue('email', user.email)
+    }
+  }, [setValue, user])
 
   return (
     <div>

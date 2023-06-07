@@ -59,7 +59,7 @@ export const Item = styled(Link, {
   marginBottom: '1px',
   textDecoration: 'none',
 
-  padding: '0.5rem',
+  padding: '1rem',
 
   color: '$gray100',
   fontWeight: 'bold',
@@ -72,7 +72,7 @@ export const Item = styled(Link, {
 })
 
 export const GroupItem = styled('div', {
-  padding: '0.5rem',
+  padding: '1rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',

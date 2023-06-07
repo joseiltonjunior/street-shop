@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import logoCoffeIcon from '@/assets/dcoffee-logo-orange.png'
 import closeSideMenu from '@/assets/x.svg'
-import separator from '@/assets/separator.png'
+
 import luffy from '@/assets/luffy.png'
 import caretDown from '@/assets/caret-down.svg'
 
 import {
   Container,
-  // Item,
   ContentGroupItem,
   ContentItemList,
   GroupItem,
@@ -24,6 +23,7 @@ import {
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
+import { FaHome, FaListUl, FaShoppingCart, FaUserAlt } from 'react-icons/fa'
 
 export function SideMenu() {
   const { isVisible } = useSelector<reduxProps, sideMenuProps>(
@@ -52,8 +52,22 @@ export function SideMenu() {
           href={'/'}
           onClick={() => dispatch(setSideMenu({ isVisible: false }))}
         >
-          <Image src={separator} alt="" width={30} />
+          <FaHome size={25} />
           <strong>Início</strong>
+        </Item>
+        <Item
+          href={'/cart'}
+          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+        >
+          <FaShoppingCart size={25} />
+          <strong>Carrinho</strong>
+        </Item>
+        <Item
+          href={'/profile'}
+          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
+        >
+          <FaUserAlt size={25} />
+          <strong>Minha conta</strong>
         </Item>
         <ContentGroupItem>
           <GroupItem
@@ -61,7 +75,7 @@ export function SideMenu() {
             onClick={() => setIsVisibleItemList(!isVisibleItemList)}
           >
             <div className="title">
-              <Image src={separator} alt="" width={30} />
+              <FaListUl size={25} />
               <strong>Categorias</strong>
             </div>
             <Image src={caretDown} alt="" width={20} className="caretDown" />
@@ -90,21 +104,6 @@ export function SideMenu() {
             </Link>
           </ContentItemList>
         </ContentGroupItem>
-        {/* <Item
-          href={'/contant'}
-          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
-        >
-          <Image src={separator} alt="" width={30} />
-          <strong>Contato</strong>
-        </Item>
-
-        <Item
-          href={'/about'}
-          onClick={() => dispatch(setSideMenu({ isVisible: false }))}
-        >
-          <Image src={separator} alt="" width={30} />
-          <strong>Sobre</strong>
-        </Item> */}
       </ContentMain>
 
       <ContentDown>

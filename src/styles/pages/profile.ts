@@ -48,34 +48,48 @@ export const Content = styled('div', {
       color: '$gray300',
     },
   },
-
-  nav: {
-    borderTop: '1px solid $gray800',
-
-    flexDirection: 'column',
-    display: 'flex',
-
-    button: {
-      background: 'transparent',
-      border: 'none',
-      color: '$gray100',
-      cursor: 'pointer',
-      transition: 'all 0.2s',
-      fontSize: '1rem',
-      padding: '1rem',
-      '&:hover': {
-        background: '$orange500',
-        color: '$gray800',
-      },
-    },
-
-    'button + button': {
-      borderTop: '1px solid $gray800',
-    },
-  },
 })
 
 export const Main = styled('main', {
   background: '$gray800',
   padding: '2rem',
+
+  '@media (max-width: 900px)': {
+    padding: '1rem',
+  },
+})
+
+export const Nav = styled('nav', {
+  borderTop: '1px solid $gray800',
+
+  flexDirection: 'column',
+  display: 'flex',
+
+  'button + button': {
+    borderTop: '1px solid $gray800',
+  },
+})
+
+export const Button = styled('button', {
+  background: 'transparent',
+  border: 'none',
+  color: '$gray100',
+  cursor: 'pointer',
+  transition: 'all 0.2s',
+  fontSize: '1rem',
+  padding: '1rem',
+
+  '&:hover': {
+    background: '$orange500',
+    color: '$gray800',
+  },
+
+  variants: {
+    actived: {
+      true: {
+        background: '$orange500',
+        color: '$gray800',
+      },
+    },
+  },
 })

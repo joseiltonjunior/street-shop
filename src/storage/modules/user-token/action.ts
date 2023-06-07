@@ -6,3 +6,9 @@ export function setToken(token: string) {
     },
   }
 }
+
+export function removeToken() {
+  return {
+    type: '@user/REMOVE_TOKEN',
+  }
+}
