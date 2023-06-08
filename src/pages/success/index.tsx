@@ -22,7 +22,7 @@ import {
   ImageContainer,
   ButtonClearCart,
 } from '@/styles/pages/success'
-import { Button } from '@/components/Button'
+import { Button } from '@/components/form/Button'
 import { Header } from '@/components/Header'
 
 import { filterProducts } from '@/storage/modules/filter-products/action'

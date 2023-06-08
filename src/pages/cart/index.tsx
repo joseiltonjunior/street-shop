@@ -1,4 +1,4 @@
-import { Breadcrumb } from '@/components/BreadCrumb'
+import { Breadcrumb } from '@/components/layout/BreadCrumb'
 
 import { reduxProps } from '@/storage'
 import { changeQuantity, removeProduct } from '@/storage/modules/cart/action'
@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 import emptyCartIcon from '@/assets/luffy-confuso.png'
 
-import { Button } from '@/components/Button'
+import { Button } from '@/components/form/Button'
 
 import { Header } from '@/components/Header'
 import { ProductInfoProps } from '@/types/product'

@@ -1,85 +1,47 @@
-import { useTransition, animated, useSpringRef } from '@react-spring/web'
-
 import { ProductsProps } from '@/types/product'
 
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import Link from 'next/link'
-import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
+
+import { useKeenSlider } from 'keen-slider/react'
 
 export function CarouselProductsMobile({ products }: ProductsProps) {
-  const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState(1)
-
-  const transRef = useSpringRef()
-  const transitions = useTransition(products[index], {
-    key: products[index]?.id,
-    ref: transRef,
-    trail: 200,
-    config: { duration: 300 },
-    from: { opacity: 0, transform: `translateX(${100 * direction}%)` },
-    enter: { opacity: 1, transform: 'translateX(0%)' },
-    leave: { opacity: 1, transform: `translateX(${-100 * direction}%)` },
+  const [sliderRef, instanceRef] = useKeenSlider({
+    slides: {
+      perView: 1,
+      spacing: 48,
+    },
+    loop: true,
   })
 
-  function handlePrev() {
-    setDirection(-1)
-    setIndex((index - 1 + products.length) % products.length)
-  }
-
-  function handleNext() {
-    setDirection(1)
-    setIndex((index + 1) % products.length)
-  }
-
   useEffect(() => {
-    transRef.start()
-  }, [index, transRef, products])
+    const interval = setInterval(() => {
+      instanceRef.current?.next()
+    }, 3000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [instanceRef])
 
   return (
-    <div className="flex  text-white overflow-hidden rounded">
-      {transitions((style, item) => (
-        <animated.div style={{ ...style }} className="w-full h-[200px]">
-          <Link
-            href={`/product?id=${item.id}`}
-            title="Abrir produto"
-            key={item.id}
-          >
-            {index !== 0 && (
-              <button
-                className="absolute bg-indigo-800 z-[999] top-1/2 left-[10px] rounded-full p-2"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handlePrev()
-                }}
-              >
-                <AiOutlineCaretLeft size={20} />
-              </button>
-            )}
-
-            <div className="flex justify-center items-center">
-              <Image
-                src={item.imageUrl}
-                width={200}
-                height={200}
-                alt="product"
-              />
-            </div>
-
-            {index + 1 !== products.length && (
-              <button
-                className="absolute bg-indigo-800 z-[999] top-1/2 right-[10px] rounded-full p-2"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNext()
-                }}
-              >
-                <AiOutlineCaretRight />
-              </button>
-            )}
-          </Link>
-        </animated.div>
+    <div
+      ref={sliderRef}
+      className="ken-slider flex overflow-hidden w-full bg-[#202024]"
+    >
+      {products.map((item) => (
+        <Link
+          href={`/product?id=${item.id}`}
+          title="Abrir produto"
+          key={item.id}
+          className="keen-slider__slide w-full flex items-center justify-center"
+        >
+          <div className="flex justify-center items-center">
+            <Image src={item.imageUrl} width={200} height={200} alt="product" />
+          </div>
+        </Link>
       ))}
     </div>
   )

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Container, Input, List } from './styles'
 
 import { InputHTMLAttributes, useState } from 'react'
-import { IoMdCloseCircleOutline } from 'react-icons/io'
+import { IoMdCloseCircleOutline, IoMdSearch } from 'react-icons/io'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
@@ -60,7 +60,7 @@ export function SearchInput({ ...rest }: SearchInputProps) {
           }}
         />
 
-        {valueFilter.length > 0 && (
+        {valueFilter.length > 0 ? (
           <button
             title="Limpar"
             onClick={() => {
@@ -75,6 +75,8 @@ export function SearchInput({ ...rest }: SearchInputProps) {
               className="fill-red-500 hover:fill-red-600"
             />
           </button>
+        ) : (
+          <IoMdSearch size={20} className="fill-gray-500 mr-2" />
         )}
       </Input>
 

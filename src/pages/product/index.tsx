@@ -6,11 +6,11 @@ import Stripe from 'stripe'
 
 import { Container } from '@/styles/pages/product'
 
-import { SkeletonProduct } from '@/components/SkeletonProduct'
+import { SkeletonProduct } from '@/components/layout/SkeletonProduct'
 
 import Head from 'next/head'
-import { Breadcrumb } from '@/components/BreadCrumb'
-import { Header } from '@/components/Header'
+import { Breadcrumb } from '@/components/layout/BreadCrumb'
+import { Header } from '@/components/layout/Header'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
@@ -22,13 +22,13 @@ import {
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
-import { ChangeQuantity } from '@/components/ChangeQuantity'
-import { Button } from '@/components/Button'
+import { ChangeQuantity } from '@/components/form/ChangeQuantity'
+import { Button } from '@/components/form/Button'
 import { CarouselProducts } from '@/components/CarouselProducts'
 import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 
 import { formatValue } from '@/utils/formatValue'
-import { Footer } from '@/components/Footer'
+import { Footer } from '@/components/layout/Footer'
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
@@ -152,7 +152,7 @@ export default function Product({ product }: ProductProps) {
           <div className="mt-12">
             <h3>Produtos similares</h3>
             <div className="md:hidden">
-              <CarouselProducts products={someProducts} />
+              <CarouselProducts products={someProducts} orientation="right" />
             </div>
             <div className="hidden md:block">
               <CarouselProductsMobile products={someProducts} />

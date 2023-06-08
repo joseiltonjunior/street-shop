@@ -17,8 +17,8 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Head from 'next/head'
-import { SideMenu } from '@/components/SideMenu'
-import { Overlay } from '@/components/Overlay'
+import { SideMenu } from '@/components/layout/SideMenu'
+import { Overlay } from '@/components/layout/Overlay'
 
 globalStyles()
 

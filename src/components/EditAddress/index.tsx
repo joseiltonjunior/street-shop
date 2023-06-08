@@ -11,8 +11,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { reduxProps } from '@/storage'
 
 import { FaEdit } from 'react-icons/fa'
-import { Input } from '../Input'
-import { Button } from '../Button'
+import { Input } from '../form/Input'
+import { Button } from '../form/Button'
 import { ButtonEdit, FormGrid } from './styles'
 
 import { AddressDataProps, RegisterAddressProps } from '@/types/address'

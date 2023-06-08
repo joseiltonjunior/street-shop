@@ -1,5 +1,5 @@
 import { BaseSyntheticEvent, useCallback, useEffect, useState } from 'react'
-import { Breadcrumb } from '@/components/BreadCrumb'
+import { Breadcrumb } from '@/components/layout/BreadCrumb'
 import { Header } from '@/components/Header'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
@@ -10,8 +10,8 @@ import Cards from 'react-credit-cards-2'
 
 import { useToast } from '@/hooks/useToast'
 
-import { Input } from '@/components/Input'
-import { Button } from '@/components/Button'
+import { Input } from '@/components/form/Input'
+import { Button } from '@/components/form/Button'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 

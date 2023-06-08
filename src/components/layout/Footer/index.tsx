@@ -1,13 +1,16 @@
-import logo from '@/assets/dcoffee-logo.png'
+import logo from '@/assets/new-logo.png'
 
 import Image from 'next/image'
 import Link from 'next/link'
 
 export function Footer() {
   return (
-    <footer className="bg-white pt-10 pb-5 md:pl-5 pl-10 md:pr-5 pr-10 text-gray-800 w-full mt-auto">
+    <footer className="bg-white border-t border-gray-800  pt-10 pb-5 md:pl-5 pl-10 md:pr-5 pr-10 text-gray-800 w-full mt-auto">
       <div className="flex justify-between mb-8 md:flex-col">
-        <Image src={logo} alt="" className="h-12 w-28 " />
+        <div className="flex items-center">
+          <Image src={logo} alt="" className="h-14 w-14 " />
+          <strong>{"D'Coffee Shop"}</strong>
+        </div>
         <div className="flex flex-col gap-3 md:mt-4">
           <Link href={'/'} className="hover:text-gray-500">
             Home
@@ -34,7 +37,7 @@ export function Footer() {
 
       <div className="flex justify-between items-center border-t-[1px] border-gray-400 mt-4 md:flex-col md:gap-4">
         <div className="flex flex-col mt-4 md:items-center">
-          <strong>{`D'Coffee Shop`} 2023</strong>
+          <span>{`D'Coffee Shop`} 2023</span>
           <span>Todos os direitos reservados</span>
         </div>
 

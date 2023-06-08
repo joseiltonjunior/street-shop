@@ -5,10 +5,8 @@ import { sideMenuProps } from '@/types/sideMenu'
 import { useDispatch, useSelector } from 'react-redux'
 
 import logoCoffeIcon from '@/assets/dcoffee-logo-orange.png'
-import closeSideMenu from '@/assets/x.svg'
 
 import luffy from '@/assets/luffy.png'
-import caretDown from '@/assets/caret-down.svg'
 
 import {
   Container,
@@ -23,7 +21,13 @@ import {
 import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
-import { FaHome, FaListUl, FaShoppingCart, FaUserAlt } from 'react-icons/fa'
+import {
+  FaCaretDown,
+  FaHome,
+  FaListUl,
+  FaShoppingCart,
+  FaUserAlt,
+} from 'react-icons/fa'
 
 export function SideMenu() {
   const { isVisible } = useSelector<reduxProps, sideMenuProps>(
@@ -44,7 +48,7 @@ export function SideMenu() {
           <Image src={logoCoffeIcon} alt="" width={100} />
         </Link>
         <button onClick={() => dispatch(setSideMenu({ isVisible: false }))}>
-          <Image src={closeSideMenu} alt="" width={30} />
+          {/* <Image src={closeSideMenu} alt="" width={30} /> */}
         </button>
       </ContentTop>
       <ContentMain>
@@ -78,7 +82,7 @@ export function SideMenu() {
               <FaListUl size={25} />
               <strong>Categorias</strong>
             </div>
-            <Image src={caretDown} alt="" width={20} className="caretDown" />
+            <FaCaretDown />
           </GroupItem>
           <ContentItemList
             isVisible={isVisibleItemList}

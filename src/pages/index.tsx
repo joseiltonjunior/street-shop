@@ -6,59 +6,41 @@ import 'keen-slider/keen-slider.min.css'
 
 import { stripe } from '@/lib/stripe'
 
-import { BestSellerCarousel } from '@/components/BestSellerCarousel'
-import { BestSellerCarouselMobile } from '@/components/BestSellerCarouselMobile'
-
 import Head from 'next/head'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 
 import { setProducts } from '@/storage/modules/products/action'
 
-import { Container } from '@/styles/pages/home'
 import { CarouselProducts } from '@/components/CarouselProducts'
 import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
 import { ContentWeb } from '@/components/ContentWeb'
 import { ContentMobile } from '@/components/ContentMobile'
 import { ProductInfoProps, ProductsProps } from '@/types/product'
 import { formatValue } from '@/utils/formatValue'
-import { Footer } from '@/components/Footer'
+import { Footer } from '@/components/layout/Footer'
+
+import { GridProductSecondary } from '@/components/GridProductSecondary'
+import { GridProductMain } from '@/components/GridProductMain'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
 
-  const [cupsCategory, setCupsCategory] = useState<ProductInfoProps[]>()
   const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
-  const [coffeeCategory, setCoffeeCategory] = useState<ProductInfoProps[]>()
-  const [actionFigureCategory, setActionFigureCategory] =
-    useState<ProductInfoProps[]>()
 
   const dispatch = useDispatch()
 
   const filterProducts = useCallback(() => {
-    const cupsList = products.filter(
-      (product) =>
-        product.unitLabel === 'copo' || product.unitLabel === 'garrafa',
-    )
-
     const coffeeList = products.filter(
       (product) => product.unitLabel === 'cafe',
     )
 
-    const actionFigureList = products.filter(
-      (product) => product.unitLabel === 'actionFigure',
-    )
-
-    setBestSeller([coffeeList[0], coffeeList[1], cupsList[0], cupsList[1]])
-
-    setActionFigureCategory(actionFigureList)
-    setCoffeeCategory(coffeeList)
-    setCupsCategory(cupsList)
+    setBestSeller(coffeeList)
   }, [products])
 
   useEffect(() => {
@@ -74,56 +56,33 @@ export default function Home({ products }: ProductsProps) {
 
       <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
 
-      <Container>
+      <main className="overflow-hidden w-full">
         {bestSeller && (
-          <div className="mt-8">
-            <h3>Mais vendidos</h3>
-            <ContentWeb>
-              <BestSellerCarousel products={bestSeller} />
-            </ContentWeb>
+          <div className="grid grid-cols-3 md:grid-cols-1">
+            <GridProductMain product={bestSeller[1]} />
 
-            <ContentMobile>
-              <BestSellerCarouselMobile products={bestSeller} />
-            </ContentMobile>
+            <aside className="flex flex-col">
+              <GridProductSecondary
+                product={bestSeller[0]}
+                className="bg-[#202024]"
+              />
+
+              <GridProductSecondary product={bestSeller[3]} />
+            </aside>
           </div>
         )}
 
-        {actionFigureCategory && (
-          <div className="mt-12">
-            <h3>Action Figures</h3>
+        {products && (
+          <>
             <ContentWeb>
-              <CarouselProducts products={actionFigureCategory} />
+              <CarouselProducts products={products} />
             </ContentWeb>
             <ContentMobile>
-              <CarouselProductsMobile products={actionFigureCategory} />
+              <CarouselProductsMobile products={products} />
             </ContentMobile>
-          </div>
+          </>
         )}
-
-        {coffeeCategory && (
-          <div className="mt-12">
-            <h3>Cafés</h3>
-            <ContentWeb>
-              <CarouselProducts products={coffeeCategory} />
-            </ContentWeb>
-            <ContentMobile>
-              <CarouselProductsMobile products={coffeeCategory} />
-            </ContentMobile>
-          </div>
-        )}
-
-        {cupsCategory && (
-          <div className="mt-12">
-            <h3>Copos, Canecas e Garrafas</h3>
-            <ContentWeb>
-              <CarouselProducts products={cupsCategory} />
-            </ContentWeb>
-            <ContentMobile>
-              <CarouselProductsMobile products={cupsCategory} />
-            </ContentMobile>
-          </div>
-        )}
-      </Container>
+      </main>
       <Footer />
     </>
   )

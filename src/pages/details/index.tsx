@@ -14,7 +14,7 @@ import {
   NameProduct,
 } from '@/styles/pages/details'
 import Image from 'next/image'
-import { Button } from '@/components/Button'
+import { Button } from '@/components/form/Button'
 import { formatValue } from '@/utils/formatValue'
 import { useRouter } from 'next/router'
 import { formatCep } from '@/utils/formatCep'
