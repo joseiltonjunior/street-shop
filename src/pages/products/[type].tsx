@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router'
 import { Container } from '@/styles/pages/products'
-import { Header } from '@/components/Header'
+import { Footer } from '@/components/layout/Footer'
 import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
 import { Breadcrumb } from '@/components/layout/BreadCrumb'
 import { ProductEnum } from '@/utils/enums/productsEnum'
 import { useEffect, useState } from 'react'
-import { CardProduct } from '@/components/CardProduct'
+// import { CardProduct } from '@/components/CardProduct'
 import Head from 'next/head'
-import { Footer } from '@/components/layout/Footer'
+import { Header } from '@/components/layout/Header'
 
 export default function Products() {
   const { query } = useRouter()
@@ -51,7 +51,7 @@ export default function Products() {
       <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
       <Breadcrumb actualPage={title} />
       <Container>
-        {listProducts?.map((product) => (
+        {/* {listProducts?.map((product) => (
           <CardProduct
             className="keen-slider__slide"
             key={product.id}
@@ -60,7 +60,7 @@ export default function Products() {
             price={product.price}
             href={`/product?id=${product.id}`}
           />
-        ))}
+        ))} */}
       </Container>
       <Footer />
     </>

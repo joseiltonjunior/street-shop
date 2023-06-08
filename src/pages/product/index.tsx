@@ -10,7 +10,7 @@ import { SkeletonProduct } from '@/components/SkeletonProduct'
 
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/layout/BreadCrumb'
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
@@ -152,7 +152,7 @@ export default function Product({ product }: ProductProps) {
           <div className="mt-12">
             <h3>Produtos similares</h3>
             <div className="md:hidden">
-              <CarouselProducts products={someProducts} orientation="right" />
+              <CarouselProducts products={someProducts} />
             </div>
             <div className="hidden md:block">
               <CarouselProductsMobile products={someProducts} />

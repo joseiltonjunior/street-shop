@@ -1,4 +1,4 @@
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 import { Container, UserAlreadyExists, Grid } from '@/styles/pages/register'
 import * as yup from 'yup'
 import Head from 'next/head'

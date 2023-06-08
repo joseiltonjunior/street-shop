@@ -13,7 +13,7 @@ import emptyCartIcon from '@/assets/luffy-confuso.png'
 
 import { Button } from '@/components/form/Button'
 
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 import { ProductInfoProps } from '@/types/product'
 import arrowIcon from '@/assets/caret-left-triangle.svg'
 

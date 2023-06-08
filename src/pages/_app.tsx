@@ -18,7 +18,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 import Head from 'next/head'
 import { SideMenu } from '@/components/layout/SideMenu'
-import { Overlay } from '@/components/layout/Overlay'
 
 globalStyles()
 
@@ -45,8 +44,6 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
 
               <SideMenu />
-
-              <Overlay />
 
               <ToastContainer />
             </SkeletonTheme>

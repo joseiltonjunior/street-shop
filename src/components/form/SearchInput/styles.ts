@@ -55,7 +55,7 @@ export const List = styled('div', {
   zIndex: 1000,
 
   '@media (max-width: 900px)': {
-    top: 60,
+    top: 120,
     left: 0,
   },
 

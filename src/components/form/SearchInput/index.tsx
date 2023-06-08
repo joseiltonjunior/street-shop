@@ -11,9 +11,11 @@ import { ProductInfoProps } from '@/types/product'
 import { filterProducts } from '@/storage/modules/filter-products/action'
 import { useRouter } from 'next/router'
 
-interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  action?: () => void
+}
 
-export function SearchInput({ ...rest }: SearchInputProps) {
+export function SearchInput({ action, ...rest }: SearchInputProps) {
   const [listProducts, setListProducts] = useState<ProductInfoProps[]>()
   const [showList, setShowList] = useState(false)
 
@@ -87,6 +89,7 @@ export function SearchInput({ ...rest }: SearchInputProps) {
               key={product.id}
               onClick={() => {
                 setShowList(!setShowList)
+                if (action) action()
                 router.push(`/product?id=${product.id}`)
               }}
             >

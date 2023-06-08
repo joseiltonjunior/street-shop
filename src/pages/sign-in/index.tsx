@@ -1,4 +1,4 @@
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 import { UserAlreadyExists } from '@/styles/pages/register'
 import * as yup from 'yup'
 import Head from 'next/head'
