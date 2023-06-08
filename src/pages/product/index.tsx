@@ -6,11 +6,11 @@ import Stripe from 'stripe'
 
 import { Container } from '@/styles/pages/product'
 
-import { SkeletonProduct } from '@/components/layout/SkeletonProduct'
+import { SkeletonProduct } from '@/components/SkeletonProduct'
 
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/layout/BreadCrumb'
-import { Header } from '@/components/layout/Header'
+import { Header } from '@/components/Header'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
@@ -22,7 +22,7 @@ import {
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
-import { ChangeQuantity } from '@/components/form/ChangeQuantity'
+import { ChangeQuantity } from '@/components/ChangeQuantity'
 import { Button } from '@/components/form/Button'
 import { CarouselProducts } from '@/components/CarouselProducts'
 import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'

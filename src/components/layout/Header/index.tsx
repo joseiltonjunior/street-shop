@@ -30,7 +30,7 @@ export function Header({ buttonCart, lengthCart, isUser }: HeaderProps) {
       </button>
 
       <Link href={'/'} title="Ir para a página inicial">
-        <Image src={logoCoffeIcon} alt="logo" width={50} height={50} />
+        <Image src={logoCoffeIcon} alt="logo" width={35} height={35} />
       </Link>
 
       <div className="flex items-center gap-4 text-gray-800 md:hidden">

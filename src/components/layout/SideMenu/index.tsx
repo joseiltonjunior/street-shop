@@ -4,7 +4,7 @@ import { sideMenuProps } from '@/types/sideMenu'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import logoCoffeIcon from '@/assets/dcoffee-logo-orange.png'
+import logoCoffeIcon from '@/assets/new-logo.png'
 
 import luffy from '@/assets/luffy.png'
 

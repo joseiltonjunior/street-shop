@@ -12,9 +12,6 @@ export function CarouselProducts({ products }: ProductsProps) {
       spacing: 48,
     },
     loop: true,
-
-    // renderMode: 'performance',
-    // rtl: true,
   })
 
   useEffect(() => {

@@ -62,12 +62,9 @@ export default function Home({ products }: ProductsProps) {
             <GridProductMain product={bestSeller[1]} />
 
             <aside className="flex flex-col">
-              <GridProductSecondary
-                product={bestSeller[0]}
-                className="bg-[#202024]"
-              />
+              <GridProductSecondary product={bestSeller[0]} />
 
-              <GridProductSecondary product={bestSeller[3]} />
+              <GridProductSecondary product={bestSeller[3]} bkgd="#79ca28" />
             </aside>
           </div>
         )}

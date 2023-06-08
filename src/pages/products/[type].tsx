@@ -9,7 +9,7 @@ import { ProductEnum } from '@/utils/enums/productsEnum'
 import { useEffect, useState } from 'react'
 import { CardProduct } from '@/components/CardProduct'
 import Head from 'next/head'
-import { Footer } from '@/components/Footer'
+import { Footer } from '@/components/layout/Footer'
 
 export default function Products() {
   const { query } = useRouter()

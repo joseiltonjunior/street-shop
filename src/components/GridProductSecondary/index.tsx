@@ -5,21 +5,24 @@ import { HTMLAttributes } from 'react'
 
 interface GridProductSecondaryProps extends HTMLAttributes<HTMLDivElement> {
   product: ProductInfoProps
+  bkgd?: string
 }
 
 export function GridProductSecondary({
   product,
-  ...rest
+  bkgd = '#202024',
 }: GridProductSecondaryProps) {
   return (
-    <section className="bg-[#79ca28] w-full h-full" {...rest}>
-      <article className="absolute z-[999]">
+    <section
+      className={`bg-[${bkgd}] w-full h-[500px] flex items-center justify-center relative`}
+    >
+      <article className="absolute z-[999] top-0 left-0 max-w-[80%]">
         <strong className="text-gray-900 bg-white w-fit p-4 flex items-center">
           {product?.name}
         </strong>
-        <span className="text-gray-900 bg-white w-fit p-4 flex items-center">
+        <strong className="text-gray-900 bg-white w-fit p-4 flex items-center">
           {product?.price}
-        </span>
+        </strong>
       </article>
       <figure>
         <Link
