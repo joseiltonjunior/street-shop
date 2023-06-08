@@ -17,7 +17,7 @@ export const globalStyles = globalCss({
     width: '0.4rem',
   },
   'body::-webkit-scrollbar-thumb': {
-    background: '$orange500',
+    background: '$gray500',
   },
 
   'body, input, textarea, button': {

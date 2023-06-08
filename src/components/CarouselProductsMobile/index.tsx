@@ -1,13 +1,12 @@
 import { useTransition, animated, useSpringRef } from '@react-spring/web'
 
-import { Container, Card } from './styles'
-
 import { ProductsProps } from '@/types/product'
 
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { ButtonCarousel } from '../ButtonCarousel'
-import { DotCorousel } from '../DotCarousel'
+
+import Link from 'next/link'
+import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 
 export function CarouselProductsMobile({ products }: ProductsProps) {
   const [index, setIndex] = useState(0)
@@ -17,6 +16,7 @@ export function CarouselProductsMobile({ products }: ProductsProps) {
   const transitions = useTransition(products[index], {
     key: products[index]?.id,
     ref: transRef,
+    trail: 200,
     config: { duration: 300 },
     from: { opacity: 0, transform: `translateX(${100 * direction}%)` },
     enter: { opacity: 1, transform: 'translateX(0%)' },
@@ -38,49 +38,49 @@ export function CarouselProductsMobile({ products }: ProductsProps) {
   }, [index, transRef, products])
 
   return (
-    <>
-      <Container>
-        {transitions((style, item) => (
-          <animated.div style={{ ...style }}>
-            <Card
-              href={`/product?id=${item.id}`}
-              title="Abrir produto"
-              key={item.id}
-            >
-              {index !== 0 && (
-                <ButtonCarousel
-                  orietation="Left"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handlePrev()
-                  }}
-                />
-              )}
-              <div className="img">
-                <Image src={item.imageUrl} width={200} height={200} alt="" />
-              </div>
-              <div className="info">
-                <strong>{item.price}</strong>
-                <span>{item.name}</span>
-              </div>
+    <div className="flex  text-white overflow-hidden rounded">
+      {transitions((style, item) => (
+        <animated.div style={{ ...style }} className="w-full h-[200px]">
+          <Link
+            href={`/product?id=${item.id}`}
+            title="Abrir produto"
+            key={item.id}
+          >
+            {index !== 0 && (
+              <button
+                className="absolute bg-indigo-800 z-[999] top-1/2 left-[10px] rounded-full p-2"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handlePrev()
+                }}
+              >
+                <AiOutlineCaretLeft size={20} />
+              </button>
+            )}
 
-              {index + 1 !== products.length && (
-                <ButtonCarousel
-                  orietation="Right"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNext()
-                  }}
-                />
-              )}
-            </Card>
-          </animated.div>
-        ))}
-      </Container>
+            <div className="flex justify-center items-center">
+              <Image
+                src={item.imageUrl}
+                width={200}
+                height={200}
+                alt="product"
+              />
+            </div>
 
-      {products.length > 1 && (
-        <DotCorousel currentSlide={index} products={products} />
-      )}
-    </>
+            {index + 1 !== products.length && (
+              <button
+                className="absolute bg-indigo-800 z-[999] top-1/2 right-[10px] rounded-full p-2"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleNext()
+                }}
+              >
+                <AiOutlineCaretRight />
+              </button>
+            )}
+          </Link>
+        </animated.div>
+      ))}
+    </div>
   )
 }

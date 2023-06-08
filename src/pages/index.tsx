@@ -76,7 +76,7 @@ export default function Home({ products }: ProductsProps) {
 
       <Container>
         {bestSeller && (
-          <div style={{ marginTop: '2rem' }}>
+          <div className="mt-8">
             <h3>Mais vendidos</h3>
             <ContentWeb>
               <BestSellerCarousel products={bestSeller} />
@@ -89,7 +89,7 @@ export default function Home({ products }: ProductsProps) {
         )}
 
         {actionFigureCategory && (
-          <div style={{ marginTop: '3rem' }}>
+          <div className="mt-12">
             <h3>Action Figures</h3>
             <ContentWeb>
               <CarouselProducts products={actionFigureCategory} />
@@ -101,7 +101,7 @@ export default function Home({ products }: ProductsProps) {
         )}
 
         {coffeeCategory && (
-          <div style={{ marginTop: '3rem' }}>
+          <div className="mt-12">
             <h3>Cafés</h3>
             <ContentWeb>
               <CarouselProducts products={coffeeCategory} />
@@ -113,7 +113,7 @@ export default function Home({ products }: ProductsProps) {
         )}
 
         {cupsCategory && (
-          <div style={{ marginTop: '3rem' }}>
+          <div className="mt-12">
             <h3>Copos, Canecas e Garrafas</h3>
             <ContentWeb>
               <CarouselProducts products={cupsCategory} />

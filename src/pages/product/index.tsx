@@ -4,12 +4,7 @@ import { GetServerSideProps } from 'next'
 
 import Stripe from 'stripe'
 
-import {
-  Container,
-  ProductContainer,
-  ImageContainer,
-  ProductDetails,
-} from '@/styles/pages/product'
+import { Container } from '@/styles/pages/product'
 
 import { SkeletonProduct } from '@/components/SkeletonProduct'
 
@@ -31,8 +26,7 @@ import { ChangeQuantity } from '@/components/ChangeQuantity'
 import { Button } from '@/components/Button'
 import { CarouselProducts } from '@/components/CarouselProducts'
 import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
-import { ContentWeb } from '@/components/ContentWeb'
-import { ContentMobile } from '@/components/ContentMobile'
+
 import { formatValue } from '@/utils/formatValue'
 import { Footer } from '@/components/Footer'
 
@@ -124,18 +118,21 @@ export default function Product({ product }: ProductProps) {
       <Breadcrumb actualPage={product.name} />
 
       <Container>
-        <ProductContainer>
-          <ImageContainer>
+        <div className="grid grid-cols-2 gap-24 md:gap-12 md:grid-cols-1">
+          <div className="bg-gradient-to-br from-indigo-800 to-indigo-100 rounded flex items-center justify-center">
             <Image src={product.imageUrl} width={520} height={480} alt="" />
-          </ImageContainer>
-          <ProductDetails>
-            <h1>{product.name}</h1>
-            <span>{product.price}</span>
+          </div>
+          <div className="flex flex-col">
+            <strong className="text-3xl">{product.name}</strong>
+            <strong className="text-indigo-800 text-2xl">
+              {product.price}
+            </strong>
 
-            <p style={{ marginBottom: '1rem' }}>{product.description}</p>
+            <p className="mt-8">{product.description}</p>
 
             {verifyProductAddCart && (
               <ChangeQuantity
+                className="mt-4"
                 quantity={quantity}
                 handleQuantity={handleQuantity}
               />
@@ -148,18 +145,18 @@ export default function Product({ product }: ProductProps) {
                   : 'Adicionar ao carrinho'}
               </Button>
             </div>
-          </ProductDetails>
-        </ProductContainer>
+          </div>
+        </div>
 
         {someProducts && (
-          <div style={{ marginTop: '4rem' }}>
+          <div className="mt-12">
             <h3>Produtos similares</h3>
-            <ContentWeb>
+            <div className="md:hidden">
               <CarouselProducts products={someProducts} />
-            </ContentWeb>
-            <ContentMobile>
+            </div>
+            <div className="hidden md:block">
               <CarouselProductsMobile products={someProducts} />
-            </ContentMobile>
+            </div>
           </div>
         )}
       </Container>

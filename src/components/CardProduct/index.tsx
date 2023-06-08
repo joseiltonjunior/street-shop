@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { AnchorHTMLAttributes } from 'react'
 
-import { Container } from './styles'
+import Link from 'next/link'
 
 interface CardProductProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   name: string
@@ -18,14 +18,18 @@ export function CardProduct({
   ...rest
 }: CardProductProps) {
   return (
-    <Container {...rest} href={href} title="Abrir produto">
-      <div className="img">
-        <Image src={imgUrl} width={200} height={200} alt="" />
-      </div>
-      <div className="info">
+    <Link
+      {...rest}
+      href={href}
+      title="Abrir produto"
+      className="bg-[#202024] rounded w-full flex flex-col items-center overflow-hidden"
+    >
+      <Image src={imgUrl} width={200} height={200} alt="" />
+
+      <div className="p-2 flex flex-col items-center justify-center h-full text-center border-t border-indigo-800 w-full">
         <strong>{price}</strong>
         <span>{name}</span>
       </div>
-    </Container>
+    </Link>
   )
 }

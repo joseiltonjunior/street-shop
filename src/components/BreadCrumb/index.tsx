@@ -1,42 +1,32 @@
 import React, { HTMLAttributes } from 'react'
-// import { Select } from '../Select'
 import Skeleton from 'react-loading-skeleton'
 
-import separator from '@/assets/separator.png'
+import { RxDotFilled } from 'react-icons/rx'
 
-import { Container, ActualPage, BreadCrumbLink, Separator } from './styles'
-import { useRouter } from 'next/router'
+import { Container, ActualPage } from './styles'
+
+import Link from 'next/link'
 
 interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
   actualPage?: string
-  // filterProducts?: string
-  // setFilterProducts?: (key: string) => void
   isLoading?: boolean
 }
 
 export function Breadcrumb({
   actualPage,
-  // filterProducts,
   isLoading,
-  // setFilterProducts,
   ...rest
 }: BreadcrumbProps) {
-  const router = useRouter()
-
   return (
     <Container {...rest}>
       {isLoading ? (
         <Skeleton width={400} height={25} className="skeleton" />
       ) : (
         <>
-          <BreadCrumbLink
-            onClick={() => {
-              router.back()
-            }}
-          >
+          <Link href={'/'} className="text-indigo-600 font-bold">
             Voltar
-          </BreadCrumbLink>
-          <Separator src={separator} alt="" width={30} height={30} />
+          </Link>
+          <RxDotFilled />
           {actualPage && (
             <ActualPage>
               <p>{actualPage}</p>
@@ -44,19 +34,6 @@ export function Breadcrumb({
           )}
         </>
       )}
-
-      {/* {filterProducts !== null && setFilterProducts && (
-        <ActualPage>
-          <Select
-            onAction={(e) => setFilterProducts(e.value)}
-            itens={[
-              { name: 'Categoria', value: '' },
-              { name: 'Café', value: 'cafe' },
-              { name: 'Copos e Garrafas', value: 'copo' },
-            ]}
-          />
-        </ActualPage>
-      )} */}
     </Container>
   )
 }

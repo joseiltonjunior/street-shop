@@ -2,11 +2,12 @@ import { styled } from '@/styles'
 
 export const Input = styled('div', {
   display: 'flex',
-  background: '$white',
+  border: '1px solid $gray300',
   alignItems: 'center',
   width: '100%',
+  background: '$white',
 
-  borderRadius: 5,
+  borderRadius: 3,
   overflow: 'hidden',
   height: '35px',
 

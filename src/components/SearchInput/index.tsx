@@ -1,10 +1,9 @@
 import Image from 'next/image'
 
-import xIcon from '@/assets/x-circle.svg'
-
 import { Container, Input, List } from './styles'
 
-import { useState } from 'react'
+import { InputHTMLAttributes, useState } from 'react'
+import { IoMdCloseCircleOutline } from 'react-icons/io'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
@@ -12,7 +11,9 @@ import { ProductInfoProps } from '@/types/product'
 import { filterProducts } from '@/storage/modules/filter-products/action'
 import { useRouter } from 'next/router'
 
-export function SearchInput() {
+interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+
+export function SearchInput({ ...rest }: SearchInputProps) {
   const [listProducts, setListProducts] = useState<ProductInfoProps[]>()
   const [showList, setShowList] = useState(false)
 
@@ -42,12 +43,12 @@ export function SearchInput() {
   }
 
   return (
-    <Container onMouseLeave={() => setShowList(!setShowList)}>
+    <Container onMouseLeave={() => setShowList(!setShowList)} {...rest}>
       <Input listIsVisible={showList}>
         <input
           name="search"
           type="text"
-          placeholder="Busque aqui"
+          placeholder="Buscar produtos"
           value={valueFilter}
           autoComplete="off"
           onClick={() => {
@@ -67,18 +68,12 @@ export function SearchInput() {
               setListProducts([])
               setShowList(false)
             }}
-            style={{
-              marginRight: 10,
-
-              border: 'none',
-              background: 'transparent',
-              fontSize: '1rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            className="mr-2"
           >
-            <Image src={xIcon} alt="" width={20} height={20} />
+            <IoMdCloseCircleOutline
+              size={20}
+              className="fill-red-500 hover:fill-red-600"
+            />
           </button>
         )}
       </Input>

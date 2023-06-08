@@ -1,10 +1,9 @@
 import { useKeenSlider } from 'keen-slider/react'
 import Image from 'next/image'
-import { HomeContainer, Product, ButtonPrev, ButtonNext } from './styles'
 
-import caretLeft from '@/assets/caret-left.svg'
-import caretRight from '@/assets/caret-right.svg'
 import { ProductsProps } from '@/types/product'
+import Link from 'next/link'
+import { useEffect } from 'react'
 
 export function BestSellerCarouselMobile({ products }: ProductsProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -15,47 +14,40 @@ export function BestSellerCarouselMobile({ products }: ProductsProps) {
     loop: true,
   })
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      instanceRef.current?.next()
+    }, 3000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [instanceRef])
+
   return (
-    <HomeContainer ref={sliderRef} className="ken-slider">
-      {products.map((product, index) => (
-        <Product
+    <div
+      ref={sliderRef}
+      className="ken-slider flex overflow-hidden bg-indigo-600 rounded"
+    >
+      {products.map((product) => (
+        <Link
           key={product.id}
-          className="keen-slider__slide"
+          className="keen-slider__slide "
           href={`/product?id=${product.id}`}
           prefetch={false}
         >
           <div>
-            {index !== 0 && (
-              <ButtonPrev
-                onClick={(e) => {
-                  e.preventDefault()
-                  instanceRef.current?.prev()
-                }}
-              >
-                <Image src={caretLeft} alt="" />
-              </ButtonPrev>
-            )}
-
-            <Image src={product.imageUrl} width={520} height={480} alt="" />
-
-            {index + 1 !== products.length && (
-              <ButtonNext
-                onClick={(e) => {
-                  e.preventDefault()
-                  instanceRef.current?.next()
-                }}
-              >
-                <Image src={caretRight} alt="" />
-              </ButtonNext>
-            )}
+            <p className="text-white bg-[#202024] w-fit p-2 truncate">
+              {product.name}
+            </p>
+            <p className="text-white text-lg bg-[#202024] w-fit p-2">
+              {product.price}
+            </p>
           </div>
 
-          <footer>
-            <strong>{product.name}</strong>
-            <span>{product.price}</span>
-          </footer>
-        </Product>
+          <Image src={product.imageUrl} width={520} height={480} alt="" />
+        </Link>
       ))}
-    </HomeContainer>
+    </div>
   )
 }

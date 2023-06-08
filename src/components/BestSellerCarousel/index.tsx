@@ -1,9 +1,10 @@
 import { useKeenSlider } from 'keen-slider/react'
 import Image from 'next/image'
-import { HomeContainer, Product } from './styles'
 
 import { ProductsProps } from '@/types/product'
-import { ButtonCarousel } from '../ButtonCarousel'
+
+import Link from 'next/link'
+import { useEffect } from 'react'
 
 export function BestSellerCarousel({ products }: ProductsProps) {
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -14,36 +15,37 @@ export function BestSellerCarousel({ products }: ProductsProps) {
     loop: true,
   })
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      instanceRef.current?.next()
+    }, 4000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [instanceRef])
+
   return (
-    <>
-      <HomeContainer ref={sliderRef} className="ken-slider">
-        <ButtonCarousel
-          orietation="Left"
-          onClick={() => instanceRef.current?.prev()}
-        />
-
-        {products.map((product) => (
-          <Product
-            title="Abrir produto"
-            key={product.id}
-            className="keen-slider__slide"
-            href={`/product?id=${product.id}`}
-            prefetch={false}
-          >
-            <Image src={product.imageUrl} width={480} height={400} alt="" />
-
-            <footer>
-              <strong>{product.name}</strong>
-              <span>{product.price}</span>
-            </footer>
-          </Product>
-        ))}
-
-        <ButtonCarousel
-          orietation="Right"
-          onClick={() => instanceRef.current?.next()}
-        />
-      </HomeContainer>
-    </>
+    <div ref={sliderRef} className="ken-slider flex overflow-hidden">
+      {products.map((product) => (
+        <Link
+          title="Abrir produto"
+          key={product.id}
+          className="keen-slider__slide bg-indigo-600 rounded"
+          href={`/product?id=${product.id}`}
+          prefetch={false}
+        >
+          <div className="overflow-hidden">
+            <p className="text-white bg-[#202024] w-fit p-2 truncate">
+              {product.name}
+            </p>
+            <p className="text-white text-lg bg-[#202024] w-fit p-2">
+              {product.price}
+            </p>
+          </div>
+          <Image src={product.imageUrl} width={480} height={400} alt="" />
+        </Link>
+      ))}
+    </div>
   )
 }
