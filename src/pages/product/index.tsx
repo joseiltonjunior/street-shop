@@ -24,11 +24,12 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import { ChangeQuantity } from '@/components/ChangeQuantity'
 import { Button } from '@/components/form/Button'
-import { CarouselProducts } from '@/components/CarouselProducts'
-import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
+// import { CarouselProducts } from '@/components/CarouselProducts'
+// import { CarouselProductsMobile } from '@/components/OffersMobile'
 
 import { formatValue } from '@/utils/formatValue'
 import { Footer } from '@/components/layout/Footer'
+import { ProductForCategory } from '@/components/ProductsForCategory'
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
@@ -150,13 +151,10 @@ export default function Product({ product }: ProductProps) {
 
         {someProducts && (
           <div className="mt-12">
-            <h3>Produtos similares</h3>
-            <div className="md:hidden">
-              <CarouselProducts products={someProducts} />
-            </div>
-            <div className="hidden md:block">
-              <CarouselProductsMobile products={someProducts} />
-            </div>
+            <ProductForCategory
+              products={products}
+              title="Produtos similares"
+            />
           </div>
         )}
       </Container>

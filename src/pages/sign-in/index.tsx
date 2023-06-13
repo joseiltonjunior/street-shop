@@ -61,7 +61,6 @@ export default function SignIn() {
         router.push('/profile')
       })
       .catch((e) => {
-        console.log(e)
         showToast('Credenciais inválidas', {
           type: 'error',
           theme: 'colored',

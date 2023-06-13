@@ -5,16 +5,18 @@ import { HTMLAttributes } from 'react'
 
 interface GridProductSecondaryProps extends HTMLAttributes<HTMLDivElement> {
   product: ProductInfoProps
-  bkgd?: string
+  dark?: boolean
 }
 
 export function GridProductSecondary({
   product,
-  bkgd = '#202024',
+  dark,
 }: GridProductSecondaryProps) {
   return (
     <section
-      className={`bg-[${bkgd}] w-full h-[500px] flex items-center justify-center relative`}
+      className={`${
+        dark ? 'bg-[#202024]' : 'bg-white'
+      }  w-full h-[400px] flex items-center justify-center relative`}
     >
       <article className="absolute z-[999] top-0 left-0 max-w-[80%]">
         <strong className="text-gray-900 bg-white w-fit p-4 flex items-center">

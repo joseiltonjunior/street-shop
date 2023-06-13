@@ -97,7 +97,6 @@ export default function Profile() {
         .post('/api/refreshToken')
         .then((result) => {
           dispatch(setToken(result.data.token))
-          console.log('token atualizado:', new Date())
         })
         .catch(() => {
           showToast('Opss. Ocorreu um error ao atualizar token do usuário.', {

@@ -1,4 +1,3 @@
-import { globalStyles } from '@/styles/global'
 import '../styles/globals.css'
 
 import type { AppProps } from 'next/app'
@@ -18,8 +17,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 import Head from 'next/head'
 import { SideMenu } from '@/components/layout/SideMenu'
-
-globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

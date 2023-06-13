@@ -13,7 +13,7 @@ export function GridProductMain({
 }: GridProductSecondaryProps) {
   return (
     <section
-      className="bg-[#7928ca] h-[1000px] col-span-2 overflow-hidden items-center justify-center flex relative"
+      className="bg-[#FFBA00] h-[800px] col-span-2 overflow-hidden items-center justify-center flex relative"
       {...rest}
     >
       <article className="absolute top-0 left-0 z-[999] w-10/12">

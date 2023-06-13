@@ -15,10 +15,8 @@ import { Header } from '@/components/layout/Header'
 
 import { setProducts } from '@/storage/modules/products/action'
 
-import { CarouselProducts } from '@/components/CarouselProducts'
-import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
-import { ContentWeb } from '@/components/ContentWeb'
-import { ContentMobile } from '@/components/ContentMobile'
+import { Offers } from '@/components/Offers'
+
 import { ProductInfoProps, ProductsProps } from '@/types/product'
 import { formatValue } from '@/utils/formatValue'
 import { Footer } from '@/components/layout/Footer'
@@ -26,10 +24,20 @@ import { Footer } from '@/components/layout/Footer'
 import { GridProductSecondary } from '@/components/GridProductSecondary'
 import { GridProductMain } from '@/components/GridProductMain'
 
+import { CategoryItems } from '@/components/CategoryItems'
+
+import { Container } from '@/styles/pages/home'
+import { ProductForPrice } from '@/components/ProductForPrice'
+import { ProductForCategory } from '@/components/ProductsForCategory'
+
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
+
+  const [upTo50, setUpTo50] = useState<ProductInfoProps[]>()
+  const [upTo100, setUpTo100] = useState<ProductInfoProps[]>()
+  const [up150, setUp150] = useState<ProductInfoProps[]>()
 
   const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
 
@@ -40,6 +48,22 @@ export default function Home({ products }: ProductsProps) {
       (product) => product.unitLabel === 'cafe',
     )
 
+    const itemsUpTo50 = products.filter(
+      (product) => product.defaultPrice <= 5000,
+    )
+
+    const itemsUpTo100 = products.filter(
+      (product) =>
+        product.defaultPrice >= 5000 && product.defaultPrice <= 10000,
+    )
+
+    const itemsUp150 = products.filter(
+      (product) => product.defaultPrice >= 15000,
+    )
+
+    setUp150(itemsUp150)
+    setUpTo100(itemsUpTo100)
+    setUpTo50(itemsUpTo50)
     setBestSeller(coffeeList)
   }, [products])
 
@@ -55,32 +79,77 @@ export default function Home({ products }: ProductsProps) {
       </Head>
 
       <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
+      <Container className="bg-white">
+        {products && <Offers products={products} />}
 
-      <main className="overflow-hidden w-full">
         {bestSeller && (
-          <div className="grid grid-cols-3 md:grid-cols-1">
-            <GridProductMain product={bestSeller[1]} />
-
-            <aside className="flex flex-col">
-              <GridProductSecondary product={bestSeller[0]} />
-
-              <GridProductSecondary product={bestSeller[3]} bkgd="#79ca28" />
-            </aside>
+          <div className="ml-auto mr-auto mt-4">
+            <strong className="text-2xl pl-4">
+              {String('Nossos queridinhos').toLocaleUpperCase()}
+            </strong>
+            <div className="grid grid-cols-3 md:grid-cols-1 mt-2">
+              <GridProductMain product={bestSeller[1]} />
+              <aside className="flex flex-col">
+                <GridProductSecondary product={bestSeller[3]} dark />
+                <GridProductSecondary product={bestSeller[0]} dark />
+              </aside>
+            </div>
           </div>
         )}
 
-        {products && (
-          <>
-            <ContentWeb>
-              <CarouselProducts products={products} />
-            </ContentWeb>
-            <ContentMobile>
-              <CarouselProductsMobile products={products} />
-            </ContentMobile>
-          </>
-        )}
-      </main>
-      <Footer />
+        <main className="overflow-hidden w-full flex flex-col justify-center items-center text-gray-800 mt-8 pl-4 pr-4">
+          <div className="w-full flex flex-col gap-6">
+            {upTo50 && upTo100 && up150 && (
+              <div className="flex flex-col justify-center ">
+                <strong className="text-lg text-center">
+                  {String(
+                    'Encontre o presente no valor que cabe no seu bolso',
+                  ).toLocaleUpperCase()}
+                </strong>
+                <div className="flex gap-4 mt-2 md:flex-col">
+                  <ProductForPrice
+                    imgUrl={upTo50[0].imageUrl}
+                    text="Até R$ 50"
+                    price="50"
+                  />
+
+                  <ProductForPrice
+                    imgUrl={upTo100[0].imageUrl}
+                    text=" Até R$ 100"
+                    price="100"
+                  />
+
+                  <ProductForPrice
+                    imgUrl={up150[0].imageUrl}
+                    text=" Acima de R$ 150"
+                    price="150"
+                  />
+                </div>
+              </div>
+            )}
+
+            <CategoryItems title="Categorias" products={products} />
+
+            <div className="flex flex-col gap-6">
+              <ProductForCategory
+                title="para os apaixonados por café"
+                products={products.filter((item) => item.unitLabel === 'cafe')}
+              />
+              <ProductForCategory
+                title="o item que falta na sua decoração"
+                products={products.filter(
+                  (item) => item.unitLabel === 'actionFigure',
+                )}
+              />
+              <ProductForCategory
+                title="para o seu dia a dia"
+                products={products.filter((item) => item.unitLabel === 'copo')}
+              />
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </Container>
     </>
   )
 }
@@ -100,6 +169,7 @@ export const getStaticProps: GetStaticProps = async () => {
       imageUrl: product.images[0],
       unitLabel: product.unit_label,
       price: formatValue(price.unit_amount!),
+      defaultPrice: price.unit_amount,
     }
   })
 
