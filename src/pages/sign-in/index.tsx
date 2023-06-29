@@ -80,7 +80,7 @@ export default function SignIn() {
           onSubmit={handleSubmit(handleAuthenticateUser)}
           style={{ gap: '1rem', display: 'flex', flexDirection: 'column' }}
         >
-          <h2>Entrar na conta</h2>
+          <p className="text-xl font-bold">Entrar</p>
 
           <Grid>
             <Input

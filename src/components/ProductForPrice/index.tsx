@@ -11,7 +11,7 @@ export function ProductForPrice({ imgUrl, text, price }: ProductForPriceProps) {
   return (
     <Link
       href={`/products?category=${price}`}
-      className="bg-gray-800 h-full w-full pt-6 pb-6 rounded flex items-center justify-center relative"
+      className="bg-gray-500 h-full w-full  rounded overflow-hidden flex flex-col items-center justify-center relative pb-5"
     >
       <Image
         src={imgUrl}
@@ -21,9 +21,7 @@ export function ProductForPrice({ imgUrl, text, price }: ProductForPriceProps) {
         className="object-contain transform hover:scale-110 transition duration-300"
       />
 
-      <strong className="absolute top-0 right-0 bg-orange-500 p-2 rounded-bl flex items-center justify-center text-gray-800 text-lg">
-        {text}
-      </strong>
+      <strong className="text-orange-500 text-lg">{text}</strong>
     </Link>
   )
 }

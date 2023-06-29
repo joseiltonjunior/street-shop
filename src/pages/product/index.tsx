@@ -118,18 +118,18 @@ export default function Product({ product }: ProductProps) {
 
       <Breadcrumb actualPage={product.name} />
 
-      <Container>
+      <Container className="md:px-3">
         <div className="grid grid-cols-2 gap-24 md:gap-12 md:grid-cols-1">
-          <div className="bg-gradient-to-br from-indigo-800 to-indigo-100 rounded flex items-center justify-center">
+          <div className="bg-gradient-to-b from-orange-500 to-gray-900 rounded flex items-center justify-center">
             <Image src={product.imageUrl} width={520} height={480} alt="" />
           </div>
           <div className="flex flex-col">
-            <strong className="text-3xl">{product.name}</strong>
-            <strong className="text-indigo-800 text-2xl">
+            <strong className="text-3xl text-gray-100">{product.name}</strong>
+            <strong className="text-orange-500 text-2xl">
               {product.price}
             </strong>
 
-            <p className="mt-8">{product.description}</p>
+            <p className="mt-8 text-gray-300">{product.description}</p>
 
             {verifyProductAddCart && (
               <ChangeQuantity
@@ -157,8 +157,11 @@ export default function Product({ product }: ProductProps) {
             />
           </div>
         )}
+
+        <div className="mt-8">
+          <Footer />
+        </div>
       </Container>
-      <Footer />
     </>
   )
 }

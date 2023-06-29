@@ -115,7 +115,7 @@ export default function Register() {
           onSubmit={handleSubmit(handleRegisterUser)}
           style={{ gap: '1rem', display: 'flex', flexDirection: 'column' }}
         >
-          <h2>Criar conta</h2>
+          <p className="text-xl font-bold">Cadastrar</p>
           <Input
             label="Nome"
             name="name"

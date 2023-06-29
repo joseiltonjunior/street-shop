@@ -1,6 +1,6 @@
 export enum ProductEnum {
   'actionFigure' = 'Action Figure',
-  'cafe' = 'Café',
-  'copo' = 'Copos e Garrafas',
+  'coffee' = 'Café',
+  'cups' = 'Copos e Garrafas',
   'all' = 'Todos os produtos',
 }

@@ -10,7 +10,7 @@ export function Button({ children, isLoading, variant, ...rest }: ButtonProps) {
   return (
     <button
       {...rest}
-      className="bg-indigo-800 p-4 rounded font-bold text-lg hover:bg-indigo-600"
+      className="bg-orange-500 h-12 flex items-center justify-center rounded-lg font-bold text-lg hover:bg-orange-500/70 text-gray-500 w-full"
     >
       {isLoading ? (
         <ReactLoading type="bars" color={'#fff'} width={40} height={40} />

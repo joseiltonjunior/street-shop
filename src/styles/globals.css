@@ -31,76 +31,8 @@
     textarea,
     button {
         font-family: Roboto, sans-serif;
-        color: #121214;
+        color: #fff;
         font-weight: 400;
     }
 }
 
-@layer utilities {
-    .text-white {
-        color: #fff;
-    }
-
-    .text-gray-100 {
-        color: #e1e1e6;
-    }
-
-    .text-gray-300 {
-        color: #c4c4cc;
-    }
-
-    .text-gray-500 {
-        color: #2e2e35;
-    }
-
-    .text-gray-800 {
-        color: #202024;
-    }
-
-    .text-gray-900 {
-        color: #121214;
-    }
-
-
-
-
-    .bg-white {
-        background-color: #fff;
-    }
-
-    .bg-gray-100 {
-        background-color: #e1e1e6;
-    }
-
-    .bg-gray-300 {
-        background-color: #c4c4cc;
-    }
-
-    .bg-gray-500 {
-        background-color: #2e2e35;
-    }
-
-    .bg-gray-800 {
-        background-color: #202024;
-    }
-
-    .bg-gray-900 {
-        background-color: #121214;
-    }
-
-
-
-
-
-    .text-orange-500 {
-        color: #ffba00;
-    }
-
-    .bg-orange-500 {
-        background-color: #ffba00;
-    }
-
-
-
-
-}

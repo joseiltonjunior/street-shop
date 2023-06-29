@@ -47,15 +47,15 @@ export function ProductForCategory({
 
   return (
     <div className="w-full ">
-      <h1 className="text-lg text-center font-bold">
+      <h1 className="text-lg text-left font-bold">
         {String(title).toLocaleUpperCase()}
       </h1>
-      <div ref={sliderRef} className="flex overflow-hidden">
+      <div ref={sliderRef} className="flex overflow-hidden rounded">
         {products.map((product) => (
           <Link
             key={product.id}
-            href={`/products?category=${product.id}`}
-            className="keen-slider__slide flex-col bg-gray-800 w-full rounded flex items-center justify-center"
+            href={`/product?id=${product.id}`}
+            className="keen-slider__slide flex-col bg-gray-500 w-full rounded overflow-hidden flex items-center justify-center"
           >
             <Image
               src={product.imageUrl}
@@ -65,9 +65,11 @@ export function ProductForCategory({
               className="object-contain transform hover:scale-110 transition duration-300"
             />
 
-            <div className="bg-gray-800 p-4 flex flex-col  justify-center  border-t border-gray-600 text-sm w-full h-full">
-              <p className="text-orange-500 font-bold">{product.price}</p>
-              <p className="text-gray-100">{product.name}</p>
+            <div className="bg-gray-800 p-4 flex flex-col  justify-center  text-sm w-full h-full">
+              <strong className="text-orange-500 text-base">
+                {product.price}
+              </strong>
+              <p className="text-gray-100 text-sm">{product.name}</p>
             </div>
           </Link>
         ))}

@@ -12,7 +12,18 @@ module.exports = {
     screens: {
       md: { max: '899px' },
     },
-    extend: {},
+    extend: {
+      colors: {
+        gray: {
+          500: '#2E2E35',
+          800: '#202024',
+          900: '#121214',
+        },
+        orange: {
+          500: '#FFBA00',
+        },
+      },
+    },
   },
   plugins: [],
 }

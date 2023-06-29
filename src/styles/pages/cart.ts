@@ -5,17 +5,15 @@ export const Container = styled('main', {
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   margin: '0 auto',
-  gap: '5rem',
+  gap: '2rem',
 
   display: 'grid',
   gridTemplateColumns: '1fr 0.7fr',
 
-  height: 'calc(100vh - 152px)',
-
   '@media (max-width: 900px)': {
     gridTemplateColumns: '1fr',
     gap: 0,
-    height: 'calc(100vh - 132px)',
+    height: 'calc(100vh - 126px)',
   },
 })
 
@@ -51,23 +49,6 @@ export const ProductInfoContent = styled('div', {
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-})
-
-export const ButtonQuantity = styled('button', {
-  background: 'transparent',
-  width: '20px',
-  height: '20px',
-  cursor: 'pointer',
-  border: 'none',
-
-  variants: {
-    increment: {
-      true: {
-        transform: 'rotate(180deg)',
-        bottom: 15,
-      },
-    },
-  },
 })
 
 export const QuantityContent = styled('div', {
@@ -122,7 +103,7 @@ export const TotalContent = styled('div', {
   '@media (max-width: 900px)': {
     borderRadius: 0,
     height: 'auto',
-    marginTop: 'auto',
+    // marginTop: 'auto',
   },
 })
 

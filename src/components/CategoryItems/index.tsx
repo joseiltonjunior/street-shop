@@ -14,10 +14,10 @@ export function CategoryItems({ title, products }: CategoryItemsProps) {
 
   const filterCategory = useCallback(() => {
     const filterCoffee = products.filter(
-      (product) => product.unitLabel === 'cafe',
+      (product) => product.unitLabel === 'coffee',
     )
     const filterCups = products.filter(
-      (product) => product.unitLabel === 'copo',
+      (product) => product.unitLabel === 'cups',
     )
 
     const filterActionFigure = products.filter(
@@ -35,18 +35,25 @@ export function CategoryItems({ title, products }: CategoryItemsProps) {
 
   return (
     <div className="flex flex-col justify-center ">
-      <strong className="text-lg text-center">
-        {title.toLocaleUpperCase()}
-      </strong>
+      <strong className="text-lg text-left">{title.toLocaleUpperCase()}</strong>
       <div className="flex gap-4 mt-2 md:flex-col">
         {coffee && (
-          <ItemCategory title="Cafés Gourmet" imgUrl={coffee[2].imageUrl} />
+          <ItemCategory
+            title="Cafés Gourmet"
+            imgUrl={coffee[2].imageUrl}
+            type="coffee"
+          />
         )}
         {cups && (
-          <ItemCategory title="Copos e Garrafas" imgUrl={cups[1].imageUrl} />
+          <ItemCategory
+            title="Copos e Garrafas"
+            imgUrl={cups[1].imageUrl}
+            type="cups"
+          />
         )}
         {actionFigures && (
           <ItemCategory
+            type="actionFigure"
             title="Action Figures"
             imgUrl={actionFigures[1].imageUrl}
           />

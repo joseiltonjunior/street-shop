@@ -45,7 +45,7 @@ export default function Home({ products }: ProductsProps) {
 
   const filterProducts = useCallback(() => {
     const coffeeList = products.filter(
-      (product) => product.unitLabel === 'cafe',
+      (product) => product.unitLabel === 'coffee',
     )
 
     const itemsUpTo50 = products.filter(
@@ -79,76 +79,90 @@ export default function Home({ products }: ProductsProps) {
       </Head>
 
       <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
-      <Container className="bg-white">
-        {products && <Offers products={products} />}
-
-        {bestSeller && (
-          <div className="ml-auto mr-auto mt-4">
-            <strong className="text-2xl pl-4">
-              {String('Nossos queridinhos').toLocaleUpperCase()}
+      <Container className="bg-gray-900 text-gray-100">
+        <div className="md:px-3">
+          <div className="mt-4">
+            <strong className="text-2xl">
+              {String('Ofertas da semana').toLocaleUpperCase()}
             </strong>
-            <div className="grid grid-cols-3 md:grid-cols-1 mt-2">
-              <GridProductMain product={bestSeller[1]} />
-              <aside className="flex flex-col">
-                <GridProductSecondary product={bestSeller[3]} dark />
-                <GridProductSecondary product={bestSeller[0]} dark />
-              </aside>
-            </div>
+            <Offers products={products} />
           </div>
-        )}
 
-        <main className="overflow-hidden w-full flex flex-col justify-center items-center text-gray-800 mt-8 pl-4 pr-4">
-          <div className="w-full flex flex-col gap-6">
-            {upTo50 && upTo100 && up150 && (
-              <div className="flex flex-col justify-center ">
-                <strong className="text-lg text-center">
-                  {String(
-                    'Encontre o presente no valor que cabe no seu bolso',
-                  ).toLocaleUpperCase()}
-                </strong>
-                <div className="flex gap-4 mt-2 md:flex-col">
-                  <ProductForPrice
-                    imgUrl={upTo50[0].imageUrl}
-                    text="Até R$ 50"
-                    price="50"
-                  />
-
-                  <ProductForPrice
-                    imgUrl={upTo100[0].imageUrl}
-                    text=" Até R$ 100"
-                    price="100"
-                  />
-
-                  <ProductForPrice
-                    imgUrl={up150[0].imageUrl}
-                    text=" Acima de R$ 150"
-                    price="150"
-                  />
+          {bestSeller && (
+            <div className="ml-auto mr-auto mt-4">
+              <strong className="text-2xl">
+                {String('Mais vendidos').toLocaleUpperCase()}
+              </strong>
+              <div className="grid grid-cols-3 md:grid-cols-1 mt-2 rounded overflow-hidden">
+                <GridProductMain product={bestSeller[1]} />
+                <div className="flex flex-col">
+                  <GridProductSecondary product={bestSeller[3]} dark />
+                  <GridProductSecondary product={bestSeller[0]} dark />
                 </div>
               </div>
-            )}
-
-            <CategoryItems title="Categorias" products={products} />
-
-            <div className="flex flex-col gap-6">
-              <ProductForCategory
-                title="para os apaixonados por café"
-                products={products.filter((item) => item.unitLabel === 'cafe')}
-              />
-              <ProductForCategory
-                title="o item que falta na sua decoração"
-                products={products.filter(
-                  (item) => item.unitLabel === 'actionFigure',
-                )}
-              />
-              <ProductForCategory
-                title="para o seu dia a dia"
-                products={products.filter((item) => item.unitLabel === 'copo')}
-              />
             </div>
-          </div>
-        </main>
-        <Footer />
+          )}
+
+          <main className="overflow-hidden w-full flex flex-col  mt-8">
+            <div className="w-full flex flex-col gap-6">
+              {upTo50 && upTo100 && up150 && (
+                <div className="flex flex-col justify-center ">
+                  <strong className="text-lg text-left">
+                    {String(
+                      'Encontre o presente no valor que cabe no seu bolso',
+                    ).toLocaleUpperCase()}
+                  </strong>
+                  <div className="flex gap-4 mt-2 md:flex-col">
+                    <ProductForPrice
+                      imgUrl={upTo50[0].imageUrl}
+                      text="Até R$ 50"
+                      price="50"
+                    />
+
+                    <ProductForPrice
+                      imgUrl={upTo100[0].imageUrl}
+                      text=" Até R$ 100"
+                      price="100"
+                    />
+
+                    <ProductForPrice
+                      imgUrl={up150[0].imageUrl}
+                      text=" Acima de R$ 150"
+                      price="150"
+                    />
+                  </div>
+                </div>
+              )}
+
+              <CategoryItems title="Categorias" products={products} />
+
+              <div className="flex flex-col gap-6">
+                <ProductForCategory
+                  title="para os apaixonados por café"
+                  products={products.filter(
+                    (item) => item.unitLabel === 'coffee',
+                  )}
+                />
+                <ProductForCategory
+                  title="o item que falta na sua decoração"
+                  products={products.filter(
+                    (item) => item.unitLabel === 'actionFigure',
+                  )}
+                />
+                <ProductForCategory
+                  title="para o seu dia a dia"
+                  products={products.filter(
+                    (item) => item.unitLabel === 'cups',
+                  )}
+                />
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <div className="mt-8">
+          <Footer />
+        </div>
       </Container>
     </>
   )

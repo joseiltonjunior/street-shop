@@ -5,7 +5,7 @@ export const Container = styled('main', {
   display: 'flex',
   alignItems: 'center',
   gap: '1rem',
-  height: '50px',
+  height: '48px',
   width: '100%',
 
   borderRadius: 8,

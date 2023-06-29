@@ -18,12 +18,12 @@ export function Breadcrumb({
   ...rest
 }: BreadcrumbProps) {
   return (
-    <Container {...rest}>
+    <Container {...rest} className="md:px-3">
       {isLoading ? (
         <Skeleton width={400} height={25} className="skeleton" />
       ) : (
         <>
-          <Link href={'/'} className="text-indigo-600 font-bold">
+          <Link href={'/'} className="text-orange-500 font-bold">
             Voltar
           </Link>
           <RxDotFilled />

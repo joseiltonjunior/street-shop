@@ -1,6 +1,6 @@
 import { BaseSyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { Breadcrumb } from '@/components/layout/BreadCrumb'
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 
@@ -169,7 +169,7 @@ export default function Checkout() {
 
     const products = cart.map((item) => {
       return {
-        price: item.defaultPriceId,
+        price: item.defaultPrice,
         quantity: item.quantity,
       }
     })

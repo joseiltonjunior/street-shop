@@ -16,18 +16,18 @@ export function ChangeQuantity({
     <Container {...rest}>
       <button
         onClick={() => handleQuantity('sub')}
-        className="bg-indigo-800 h-full w-10 flex items-center justify-center rounded-tl-lg rounded-bl-lg"
+        className="bg-orange-500 h-full w-10 flex items-center justify-center rounded-tl-lg rounded-bl-lg"
       >
-        <AiFillCaretLeft size={20} />
+        <AiFillCaretLeft size={20} className="fill-gray-500" />
       </button>
-      <span className="bg-[#202024] h-full flex items-center justify-center w-12">
+      <strong className="bg-gray-500 h-full flex items-center justify-center w-12 text-gray-100">
         {quantity}
-      </span>
+      </strong>
       <button
         onClick={() => handleQuantity('add')}
-        className="bg-indigo-800 h-full w-10 flex items-center justify-center rounded-tr-lg rounded-br-lg"
+        className="bg-orange-500 h-full w-10 flex items-center justify-center rounded-tr-lg rounded-br-lg"
       >
-        <AiFillCaretRight size={20} />
+        <AiFillCaretRight size={20} className="fill-gray-500" />
       </button>
     </Container>
   )

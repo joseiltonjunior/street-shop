@@ -13,14 +13,14 @@ export function GridProductMain({
 }: GridProductSecondaryProps) {
   return (
     <section
-      className="bg-[#FFBA00] h-[800px] col-span-2 overflow-hidden items-center justify-center flex relative"
+      className="bg-orange-500 h-[800px] col-span-2 items-center justify-center flex relative rounded-tl-md"
       {...rest}
     >
       <article className="absolute top-0 left-0 z-[999] w-10/12">
-        <strong className="text-gray-900 bg-white w-fit p-4 flex items-center">
+        <strong className="text-gray-100 bg-gray-500 w-fit p-4 flex items-center rounded-br">
           {product.name}
         </strong>
-        <strong className="text-gray-900 bg-white w-fit p-4 flex items-center">
+        <strong className="text-gray-100 bg-gray-500 w-fit p-4 flex items-center rounded-br">
           {product.price}
         </strong>
       </article>

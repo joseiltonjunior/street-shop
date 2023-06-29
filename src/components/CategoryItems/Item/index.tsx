@@ -1,15 +1,18 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface ItemCategoryProps {
   title: string
   imgUrl: string
+  type: 'actionFigure' | 'coffee' | 'cups'
 }
 
-export function ItemCategory({ imgUrl, title }: ItemCategoryProps) {
+export function ItemCategory({ imgUrl, title, type }: ItemCategoryProps) {
   return (
-    <div
-      className="bg-[#202024] h-full
-     w-full rounded flex flex-col items-center pt-6 pb-6 justify-center relative"
+    <Link
+      href={`/products/${type}`}
+      className="bg-gray-500 h-full
+     w-full rounded overflow-hidden flex flex-col items-center pb-5 justify-center relative cursor-pointer"
     >
       <Image
         src={imgUrl}
@@ -18,9 +21,8 @@ export function ItemCategory({ imgUrl, title }: ItemCategoryProps) {
         height={250}
         className="object-contain transform hover:scale-110 transition duration-300"
       />
-      <div className="z-[999] bg-orange-500 mt-auto text-center rounded-br p-3 absolute top-0 left-0 text-lg">
-        <strong>{title}</strong>
-      </div>
-    </div>
+
+      <strong className="text-orange-500 text-lg">{title}</strong>
+    </Link>
   )
 }

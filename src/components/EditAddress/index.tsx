@@ -277,7 +277,7 @@ export function EditAddress({ address, refresh }: AddressDataProps) {
             >
               Cancelar
             </Button>
-            <Button type="submit" variant="primary" isLoading={isLoading}>
+            <Button type="submit" variant="secondary" isLoading={isLoading}>
               Salvar
             </Button>
           </div>

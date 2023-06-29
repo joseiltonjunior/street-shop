@@ -9,8 +9,6 @@ export const Container = styled('div', {
 
   alignItems: 'center',
 
-  padding: '0 1rem',
-
   gap: '0.5rem',
 
   '@media (max-width: 900px)': {
