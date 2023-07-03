@@ -5,8 +5,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import caretLeft from '@/assets/caret-left.svg'
-import caretRight from '@/assets/caret-right.svg'
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 import { useKeenSlider } from 'keen-slider/react'
 
@@ -66,7 +65,7 @@ export default function Success({ salesInformation }: SuccessProps) {
                     instanceRef.current?.prev()
                   }}
                 >
-                  <Image src={caretLeft} alt="" />
+                  <AiFillCaretLeft />
                 </button>
               )}
               <Image src={item.imageUrl} alt="" width={520} height={480} />
@@ -78,7 +77,7 @@ export default function Success({ salesInformation }: SuccessProps) {
                     instanceRef.current?.next()
                   }}
                 >
-                  <Image src={caretRight} alt="" />
+                  <AiFillCaretRight />
                 </button>
               )}
             </ImageContainer>
