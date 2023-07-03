@@ -1,4 +1,4 @@
-import { Breadcrumb } from '@/components/BreadCrumb'
+import { Breadcrumb } from '@/components/layout/BreadCrumb'
 
 import { reduxProps } from '@/storage'
 import { changeQuantity, removeProduct } from '@/storage/modules/cart/action'
@@ -11,19 +11,16 @@ import Link from 'next/link'
 
 import emptyCartIcon from '@/assets/luffy-confuso.png'
 
-import { Button } from '@/components/Button'
+import { Button } from '@/components/form/Button'
 
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 import { ProductInfoProps } from '@/types/product'
-import arrowIcon from '@/assets/caret-left-triangle.svg'
 
 import {
   Container,
   Product,
-  TotalContent,
   ProductsContent,
   EmptyCartContent,
-  ButtonQuantity,
   ButtonRemoveProduct,
   ProductInfoContent,
   QuantityContent,
@@ -32,6 +29,7 @@ import {
 } from '@/styles/pages/cart'
 
 import { useRouter } from 'next/router'
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 export default function Carrinho() {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
@@ -109,25 +107,26 @@ export default function Carrinho() {
                     </RowContent>
 
                     <RowContent>
-                      <QuantityContent>
-                        <ButtonQuantity
+                      <QuantityContent className="gap-2">
+                        <button
+                          className="bg-orange-500 text-gray-500 items-center justify-center flex rounded-full w-5 h-5"
                           onClick={(e) => {
                             e.preventDefault()
                             handleQuantity('sub', product)
                           }}
                         >
-                          <Image src={arrowIcon} alt="" />
-                        </ButtonQuantity>
+                          <AiFillCaretLeft size={14} />
+                        </button>
                         <span>Qtde: {product.quantity}</span>
-                        <ButtonQuantity
-                          increment
+                        <button
+                          className="bg-orange-500 text-gray-500 items-center justify-center flex rounded-full w-5 h-5"
                           onClick={(e) => {
                             e.preventDefault()
                             handleQuantity('add', product)
                           }}
                         >
-                          <Image src={arrowIcon} alt="" />
-                        </ButtonQuantity>
+                          <AiFillCaretRight size={14} />
+                        </button>
                       </QuantityContent>
 
                       <ButtonRemoveProduct
@@ -144,18 +143,27 @@ export default function Carrinho() {
               ))}
           </ProductsContent>
 
-          <TotalContent>
-            <p>Resumo da compra</p>
+          <div className="bg-gray-500 flex flex-col p-3 h-80 md:h-fit md:mt-auto gap-4 rounded-md md:rounded-b-none">
+            <div className="flex flex-col gap-4">
+              <strong className="text-xl">Resumo da compra</strong>
 
-            <div className="value">
-              <strong>Total</strong>
-              <span>{totalValueCart}</span>
+              <div className="flex justify-between">
+                <strong className="text-xl">Total</strong>
+                <strong className="text-lg text-orange-500">
+                  {totalValueCart}
+                </strong>
+              </div>
             </div>
 
-            <Button onClick={() => router.push('/checkout')} variant="primary">
-              Comprar agora
-            </Button>
-          </TotalContent>
+            <div className="w-full mt-auto">
+              <Button
+                onClick={() => router.push('/checkout')}
+                variant="secondary"
+              >
+                Comprar agora
+              </Button>
+            </div>
+          </div>
         </Container>
       ) : (
         <EmptyCartContent>

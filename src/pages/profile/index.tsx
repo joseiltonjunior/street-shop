@@ -1,4 +1,4 @@
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
 
@@ -97,7 +97,6 @@ export default function Profile() {
         .post('/api/refreshToken')
         .then((result) => {
           dispatch(setToken(result.data.token))
-          console.log('token atualizado:', new Date())
         })
         .catch(() => {
           showToast('Opss. Ocorreu um error ao atualizar token do usuário.', {
@@ -127,9 +126,7 @@ export default function Profile() {
       </Head>
       <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
       <Container>
-        <header>
-          <h2>Minha conta</h2>
-        </header>
+        <p className="text-xl font-bold">Minha conta</p>
 
         <Content>
           <aside>

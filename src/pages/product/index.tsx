@@ -4,18 +4,13 @@ import { GetServerSideProps } from 'next'
 
 import Stripe from 'stripe'
 
-import {
-  Container,
-  ProductContainer,
-  ImageContainer,
-  ProductDetails,
-} from '@/styles/pages/product'
+import { Container } from '@/styles/pages/product'
 
 import { SkeletonProduct } from '@/components/SkeletonProduct'
 
 import Head from 'next/head'
-import { Breadcrumb } from '@/components/BreadCrumb'
-import { Header } from '@/components/Header'
+import { Breadcrumb } from '@/components/layout/BreadCrumb'
+import { Header } from '@/components/layout/Header'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
@@ -28,13 +23,13 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import { ChangeQuantity } from '@/components/ChangeQuantity'
-import { Button } from '@/components/Button'
-import { CarouselProducts } from '@/components/CarouselProducts'
-import { CarouselProductsMobile } from '@/components/CarouselProductsMobile'
-import { ContentWeb } from '@/components/ContentWeb'
-import { ContentMobile } from '@/components/ContentMobile'
+import { Button } from '@/components/form/Button'
+// import { CarouselProducts } from '@/components/CarouselProducts'
+// import { CarouselProductsMobile } from '@/components/OffersMobile'
+
 import { formatValue } from '@/utils/formatValue'
-import { Footer } from '@/components/Footer'
+import { Footer } from '@/components/layout/Footer'
+import { ProductForCategory } from '@/components/ProductsForCategory'
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
@@ -123,19 +118,22 @@ export default function Product({ product }: ProductProps) {
 
       <Breadcrumb actualPage={product.name} />
 
-      <Container>
-        <ProductContainer>
-          <ImageContainer>
+      <Container className="md:px-3">
+        <div className="grid grid-cols-2 gap-24 md:gap-12 md:grid-cols-1">
+          <div className="bg-gradient-to-b from-orange-500 to-gray-900 rounded flex items-center justify-center">
             <Image src={product.imageUrl} width={520} height={480} alt="" />
-          </ImageContainer>
-          <ProductDetails>
-            <h1>{product.name}</h1>
-            <span>{product.price}</span>
+          </div>
+          <div className="flex flex-col">
+            <strong className="text-3xl text-gray-100">{product.name}</strong>
+            <strong className="text-orange-500 text-2xl">
+              {product.price}
+            </strong>
 
-            <p style={{ marginBottom: '1rem' }}>{product.description}</p>
+            <p className="mt-8 text-gray-300">{product.description}</p>
 
             {verifyProductAddCart && (
               <ChangeQuantity
+                className="mt-4"
                 quantity={quantity}
                 handleQuantity={handleQuantity}
               />
@@ -148,22 +146,22 @@ export default function Product({ product }: ProductProps) {
                   : 'Adicionar ao carrinho'}
               </Button>
             </div>
-          </ProductDetails>
-        </ProductContainer>
+          </div>
+        </div>
 
         {someProducts && (
-          <div style={{ marginTop: '4rem' }}>
-            <h3>Produtos similares</h3>
-            <ContentWeb>
-              <CarouselProducts products={someProducts} />
-            </ContentWeb>
-            <ContentMobile>
-              <CarouselProductsMobile products={someProducts} />
-            </ContentMobile>
+          <div className="mt-12">
+            <ProductForCategory
+              products={products}
+              title="Produtos similares"
+            />
           </div>
         )}
+
+        <div className="mt-8">
+          <Footer />
+        </div>
       </Container>
-      <Footer />
     </>
   )
 }

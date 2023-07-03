@@ -1,13 +1,13 @@
-import { Header } from '@/components/Header'
+import { Header } from '@/components/layout/Header'
 import { Container, UserAlreadyExists, Grid } from '@/styles/pages/register'
 import * as yup from 'yup'
 import Head from 'next/head'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { RegisterUserProps } from '@/types/user'
-import { Input } from '@/components/Input'
+import { Input } from '@/components/form/Input'
 import { useState } from 'react'
-import { Button } from '@/components/Button'
+import { Button } from '@/components/form/Button'
 import clientAPI from '@/services/client-api'
 import { stripe } from '@/lib/stripe'
 import { useToast } from '@/hooks/useToast'
@@ -115,7 +115,7 @@ export default function Register() {
           onSubmit={handleSubmit(handleRegisterUser)}
           style={{ gap: '1rem', display: 'flex', flexDirection: 'column' }}
         >
-          <h2>Criar conta</h2>
+          <p className="text-xl font-bold">Cadastrar</p>
           <Input
             label="Nome"
             name="name"

@@ -5,14 +5,10 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import caretLeft from '@/assets/caret-left.svg'
-import caretRight from '@/assets/caret-right.svg'
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 import { useKeenSlider } from 'keen-slider/react'
-import {
-  ButtonNext,
-  ButtonPrev,
-} from '@/components/BestSellerCarouselMobile/styles'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCart } from '@/storage/modules/cart/action'
 import { useRouter } from 'next/router'
@@ -22,8 +18,8 @@ import {
   ImageContainer,
   ButtonClearCart,
 } from '@/styles/pages/success'
-import { Button } from '@/components/Button'
-import { Header } from '@/components/Header'
+import { Button } from '@/components/form/Button'
+import { Header } from '@/components/layout/Header'
 
 import { filterProducts } from '@/storage/modules/filter-products/action'
 import { reduxProps } from '@/storage'
@@ -63,26 +59,26 @@ export default function Success({ salesInformation }: SuccessProps) {
           {cart.map((item, index) => (
             <ImageContainer key={item.name} className="keen-slider__slide">
               {index !== 0 && (
-                <ButtonPrev
+                <button
                   onClick={(e) => {
                     e.preventDefault()
                     instanceRef.current?.prev()
                   }}
                 >
-                  <Image src={caretLeft} alt="" />
-                </ButtonPrev>
+                  <AiFillCaretLeft />
+                </button>
               )}
               <Image src={item.imageUrl} alt="" width={520} height={480} />
 
               {index + 1 !== cart.length && (
-                <ButtonNext
+                <button
                   onClick={(e) => {
                     e.preventDefault()
                     instanceRef.current?.next()
                   }}
                 >
-                  <Image src={caretRight} alt="" />
-                </ButtonNext>
+                  <AiFillCaretRight />
+                </button>
               )}
             </ImageContainer>
           ))}

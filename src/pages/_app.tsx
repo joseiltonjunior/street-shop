@@ -1,4 +1,4 @@
-import { globalStyles } from '@/styles/global'
+import '../styles/globals.css'
 
 import type { AppProps } from 'next/app'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -16,10 +16,7 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Head from 'next/head'
-import { SideMenu } from '@/components/SideMenu'
-import { Overlay } from '@/components/Overlay'
-
-globalStyles()
+import { SideMenu } from '@/components/layout/SideMenu'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -44,8 +41,6 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
 
               <SideMenu />
-
-              <Overlay />
 
               <ToastContainer />
             </SkeletonTheme>
