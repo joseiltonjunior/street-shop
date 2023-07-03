@@ -1,4 +1,3 @@
-import { Header } from '@/components/Header'
 import { stripe } from '@/lib/stripe'
 import { DetailsProps } from '@/types/details'
 import { GetServerSideProps } from 'next'
@@ -24,6 +23,7 @@ import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
 import { clearCart } from '@/storage/modules/cart/action'
 import { filterProducts } from '@/storage/modules/filter-products/action'
+import { Header } from '@/components/layout/Header'
 
 export default function Details({ salesInformation }: DetailsProps) {
   const router = useRouter()
