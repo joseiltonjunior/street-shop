@@ -15,20 +15,21 @@ import { Header } from '@/components/layout/Header'
 
 import { setProducts } from '@/storage/modules/products/action'
 
-import { Offers } from '@/components/Offers'
+// import { Offers } from '@/components/Offers'
 
 import { ProductInfoProps, ProductsProps } from '@/types/product'
 import { formatValue } from '@/utils/formatValue'
-import { Footer } from '@/components/layout/Footer'
+// import { Footer } from '@/components/layout/Footer'
 
-import { GridProductSecondary } from '@/components/GridProductSecondary'
-import { GridProductMain } from '@/components/GridProductMain'
+// import { GridProductSecondary } from '@/components/GridProductSecondary'
+// import { GridProductMain } from '@/components/GridProductMain'
 
-import { CategoryItems } from '@/components/CategoryItems'
+// import { CategoryItems } from '@/components/CategoryItems'
 
-import { Container } from '@/styles/pages/home'
-import { ProductForPrice } from '@/components/ProductForPrice'
-import { ProductForCategory } from '@/components/ProductsForCategory'
+// import { Container } from '@/styles/pages/home'
+// import { ProductForPrice } from '@/components/ProductForPrice'
+// import { ProductForCategory } from '@/components/ProductsForCategory'
+import { Carousel } from '@/components/Carousel'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
@@ -75,11 +76,12 @@ export default function Home({ products }: ProductsProps) {
   return (
     <>
       <Head>
-        <title>{`Home | D'Coffee Shop`}</title>
+        <title>{`Home | Street Shop`}</title>
       </Head>
 
       <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
-      <Container className="bg-gray-900 text-gray-100">
+      <Carousel />
+      {/* <Container className="bg-gray-900 text-gray-100">
         <div className="md:px-3">
           <div className="mt-4">
             <strong className="text-2xl">
@@ -163,7 +165,7 @@ export default function Home({ products }: ProductsProps) {
         <div className="mt-8">
           <Footer />
         </div>
-      </Container>
+      </Container> */}
     </>
   )
 }

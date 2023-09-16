@@ -14,7 +14,7 @@
     }
 
     body {
-        background-color: #121214;
+        background-color: #fff;
         -webkit-font-smoothing: antialiased;
     }
 
@@ -30,9 +30,14 @@
     input,
     textarea,
     button {
-        font-family: Roboto, sans-serif;
-        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        color: #202024;
         font-weight: 400;
     }
 }
 
+@layer components {
+    .container {
+        @apply max-w-[calc(100vw-((100vw-980px)/2))] ms-auto me-auto
+    }
+}

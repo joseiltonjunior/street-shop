@@ -23,16 +23,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          name="description"
-          content="Cafés Gourmet | Colecionavéis | Copos e Garrafas"
-        />
-        <meta
-          name="image"
-          content="https://i.ibb.co/jTQPhV8/C-pia-de-D-Coffee-Shop-3.png"
-        />
+        <meta name="description" content="Your store for outfit street" />
+        <meta name="image" content="https://i.ibb.co/hcnTN8P/street-shop.png" />
         <meta name="author" content="@dvlp.jr" />
-        <title>{`D'Coffee Shop`}</title>
+        <title>Street Shop</title>
       </Head>
       <Container>
         <Provider store={store}>
