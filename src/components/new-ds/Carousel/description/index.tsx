@@ -8,26 +8,26 @@ interface DescriptionProps {
 
 export function Description({ title, description }: DescriptionProps) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-2">
       <motion.h1
-        initial={{ opacity: 0, rotate: -45 }}
-        animate={{ opacity: 1, rotate: 0 }}
-        transition={{ duration: 0.7 }}
-        className="text-3xl"
+        className="text-3xl md:text-base font-medium"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
       >
         {title}
       </motion.h1>
       <motion.p
-        initial={{ opacity: 0, rotate: 45 }}
-        animate={{ opacity: 1, rotate: 0 }}
-        transition={{ duration: 0.7 }}
-        className="font-bold text-7xl font-serif"
+        className="font-bold text-7xl font-serif md:text-5xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
       >
         {description}
       </motion.p>
       <motion.div
         initial={{ opacity: 0, y: 200 }}
-        animate={{ opacity: 1, y: 20 }}
+        animate={{ opacity: 1, y: 50 }}
         transition={{ duration: 0.7 }}
       >
         <Link

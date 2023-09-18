@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     screens: {
       md: { max: '899px' },
+      base: { min: '900px' },
     },
     extend: {
       colors: {

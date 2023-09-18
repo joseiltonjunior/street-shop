@@ -4,16 +4,15 @@ import { motion } from 'framer-motion'
 
 import { useEffect, useState } from 'react'
 import { Description } from './description'
-import { mockCarousel } from './mock'
+import { mockCarousel } from '../../../utils/mock'
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 export function Carousel() {
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
       perView: 1,
-      spacing: 16,
+      spacing: 1,
     },
-    mode: 'snap',
   })
   const [activeSlide, setActiveSlide] = useState(0)
 
@@ -52,10 +51,10 @@ export function Carousel() {
   return (
     <div
       ref={sliderRef}
-      className="bg-gray-100 w-full h-screen flex overflow-hidden relative"
+      className="bg-gray-200 w-full h-screen md:h-[calc(100vh-70px)] flex overflow-hidden relative"
     >
       <button
-        className="absolute top-1/2 left-32 z-10"
+        className="absolute top-1/2 left-16 z-10 md:hidden"
         onClick={() => instanceRef.current?.prev()}
       >
         <AiFillCaretLeft
@@ -64,32 +63,36 @@ export function Carousel() {
         />
       </button>
       {mockCarousel.map((item, index) => (
-        <div
-          key={index}
-          className="keen-slider__slide h-full items-center justify-center flex gap-36"
-        >
+        <div key={index} className="keen-slider__slide relative">
           {activeSlide === index && (
-            <>
-              <Description title={item.title} description={item.description} />
+            <div className="h-full flex md:ps-4 base:items-center justify-center md:flex-col gap-36">
+              <div className="z-10">
+                <Description
+                  title={item.title}
+                  description={item.description}
+                />
+              </div>
+
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
+                className="md:absolute md:h-full md:w-full md:left-40"
               >
                 <Image
                   src={item.img}
                   alt="outfit"
-                  width={400}
-                  height={400}
-                  className="object-cover"
+                  width={300}
+                  height={300}
+                  className="object-contain md:h-full md:w-full"
                 />
               </motion.div>
-            </>
+            </div>
           )}
         </div>
       ))}
       <button
-        className="absolute top-1/2 right-32 z-10"
+        className="absolute top-1/2 right-16 z-10 md:hidden"
         onClick={() => instanceRef.current?.next()}
       >
         <AiFillCaretRight

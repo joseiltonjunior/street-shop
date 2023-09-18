@@ -1,77 +1,44 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GetStaticProps } from 'next'
 
 import Stripe from 'stripe'
-import 'keen-slider/keen-slider.min.css'
 
 import { stripe } from '@/lib/stripe'
 
 import Head from 'next/head'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 
 import { Header } from '@/components/layout/Header'
 
-import { setProducts } from '@/storage/modules/products/action'
-
-// import { Offers } from '@/components/Offers'
-
 import { ProductInfoProps, ProductsProps } from '@/types/product'
 import { formatValue } from '@/utils/formatValue'
-// import { Footer } from '@/components/layout/Footer'
 
-// import { GridProductSecondary } from '@/components/GridProductSecondary'
-// import { GridProductMain } from '@/components/GridProductMain'
-
-// import { CategoryItems } from '@/components/CategoryItems'
-
-// import { Container } from '@/styles/pages/home'
-// import { ProductForPrice } from '@/components/ProductForPrice'
-// import { ProductForCategory } from '@/components/ProductsForCategory'
-import { Carousel } from '@/components/Carousel'
+import { Carousel } from '@/components/new-ds/Carousel'
+import { CategoryCard } from '@/components/new-ds/CategoryCard'
+import { mockCarousel } from '@/utils/mock'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
 
-  const [upTo50, setUpTo50] = useState<ProductInfoProps[]>()
-  const [upTo100, setUpTo100] = useState<ProductInfoProps[]>()
-  const [up150, setUp150] = useState<ProductInfoProps[]>()
+  const [scrollY, setScrollY] = useState(0)
 
-  const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
-
-  const dispatch = useDispatch()
-
-  const filterProducts = useCallback(() => {
-    const coffeeList = products.filter(
-      (product) => product.unitLabel === 'coffee',
-    )
-
-    const itemsUpTo50 = products.filter(
-      (product) => product.defaultPrice <= 5000,
-    )
-
-    const itemsUpTo100 = products.filter(
-      (product) =>
-        product.defaultPrice >= 5000 && product.defaultPrice <= 10000,
-    )
-
-    const itemsUp150 = products.filter(
-      (product) => product.defaultPrice >= 15000,
-    )
-
-    setUp150(itemsUp150)
-    setUpTo100(itemsUpTo100)
-    setUpTo50(itemsUpTo50)
-    setBestSeller(coffeeList)
-  }, [products])
+  const handleScroll = () => {
+    setScrollY(window.scrollY)
+    console.log(window.scrollY)
+  }
 
   useEffect(() => {
-    dispatch(setProducts(products))
-    filterProducts()
-  }, [dispatch, filterProducts, products])
+    window.addEventListener('scroll', handleScroll)
+
+    // Limpe o event listener ao desmontar o componente
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <>
@@ -79,8 +46,20 @@ export default function Home({ products }: ProductsProps) {
         <title>{`Home | Street Shop`}</title>
       </Head>
 
-      <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
+      <Header lengthCart={cart.length} isTop={scrollY < 40} />
       <Carousel />
+
+      {/* <div className="container flex mt-20 gap-8">
+        {mockCarousel.map((item, index) => (
+          <CategoryCard
+            key={index}
+            description={item.description}
+            title={item.title}
+            imgUrl={item.img}
+          />
+        ))}
+      </div> */}
+
       {/* <Container className="bg-gray-900 text-gray-100">
         <div className="md:px-3">
           <div className="mt-4">
