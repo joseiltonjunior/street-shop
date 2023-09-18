@@ -8,17 +8,17 @@ export function Header({ lengthCart, isTop }: HeaderProps) {
   return (
     <motion.header
       initial={{
-        background: isTop ? '#fff' : 'transparent',
+        background: isTop ? '#fff' : 'rgba(255, 255, 255, 0)',
         height: isTop ? 70 : 80,
       }}
       animate={{
-        background: isTop ? 'transparent' : '#fff',
+        background: isTop ? 'rgba(255, 255, 255, 0)' : '#fff',
         height: isTop ? 80 : 70,
       }}
       transition={{ duration: 0.3 }}
       className={`w-full h-[70px] base:fixed z-20 ${
         !isTop && 'shadow'
-      } ps-4 pe-8 md:max-h-[70px]`}
+      } pe-4 md:max-h-[70px]`}
     >
       <main className="container flex gap-4 items-center h-full">
         <div className="flex gap-4 items-center">

@@ -5,17 +5,17 @@ import outfit3 from '@/assets/outfit3.png'
 export const mockCarousel = [
   {
     img: outfit3,
-    title: 'Street Collection 2023',
-    description: 'Shirts',
+    description: 'Street Collection 2023',
+    title: 'Shirts',
   },
   {
     img: outfit2,
-    title: 'Street Collection 2023',
-    description: 'Pants',
+    description: 'Street Collection 2023',
+    title: 'Pants',
   },
   {
     img: outfit1,
-    title: 'Street Collection 2023',
-    description: 'Shoes',
+    description: 'Street Collection 2023',
+    title: 'Shoes',
   },
 ]

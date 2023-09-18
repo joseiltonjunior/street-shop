@@ -10,7 +10,7 @@ export function Description({ title, description }: DescriptionProps) {
   return (
     <div className="flex flex-col gap-2">
       <motion.h1
-        className="text-3xl md:text-base font-medium"
+        className="font-bold text-7xl font-serif md:text-5xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
@@ -18,7 +18,7 @@ export function Description({ title, description }: DescriptionProps) {
         {title}
       </motion.h1>
       <motion.p
-        className="font-bold text-7xl font-serif md:text-5xl"
+        className="text-3xl md:text-base font-medium"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
