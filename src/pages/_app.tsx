@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'react-credit-cards-2/dist/es/styles-compiled.css'
 import 'react-loading-skeleton/dist/skeleton.css'
+import 'keen-slider/keen-slider.min.css'
 
 import Head from 'next/head'
 import { SideMenu } from '@/components/layout/SideMenu'
@@ -23,16 +24,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          name="description"
-          content="Cafés Gourmet | Colecionavéis | Copos e Garrafas"
-        />
-        <meta
-          name="image"
-          content="https://i.ibb.co/jTQPhV8/C-pia-de-D-Coffee-Shop-3.png"
-        />
+        <meta name="description" content="Your store for outfit streetwear" />
+        <meta name="image" content="https://i.ibb.co/hcnTN8P/street-shop.png" />
         <meta name="author" content="@dvlp.jr" />
-        <title>{`D'Coffee Shop`}</title>
+        <title>Street Shop</title>
       </Head>
       <Container>
         <Provider store={store}>

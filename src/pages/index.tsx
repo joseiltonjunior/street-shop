@@ -1,169 +1,68 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GetStaticProps } from 'next'
 
 import Stripe from 'stripe'
-import 'keen-slider/keen-slider.min.css'
 
 import { stripe } from '@/lib/stripe'
 
 import Head from 'next/head'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 
 import { Header } from '@/components/layout/Header'
 
-import { setProducts } from '@/storage/modules/products/action'
-
-import { Offers } from '@/components/Offers'
-
 import { ProductInfoProps, ProductsProps } from '@/types/product'
 import { formatValue } from '@/utils/formatValue'
+
+import { Carousel } from '@/components/new-ds/Carousel'
+import { CategoryCard } from '@/components/new-ds/CategoryCard'
+import { mockCarousel } from '@/utils/mock'
+import { CategoryByFilter } from '@/components/new-ds/CategoryByFilter'
 import { Footer } from '@/components/layout/Footer'
-
-import { GridProductSecondary } from '@/components/GridProductSecondary'
-import { GridProductMain } from '@/components/GridProductMain'
-
-import { CategoryItems } from '@/components/CategoryItems'
-
-import { Container } from '@/styles/pages/home'
-import { ProductForPrice } from '@/components/ProductForPrice'
-import { ProductForCategory } from '@/components/ProductsForCategory'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
 
-  const [upTo50, setUpTo50] = useState<ProductInfoProps[]>()
-  const [upTo100, setUpTo100] = useState<ProductInfoProps[]>()
-  const [up150, setUp150] = useState<ProductInfoProps[]>()
+  const [scrollY, setScrollY] = useState(0)
 
-  const [bestSeller, setBestSeller] = useState<ProductInfoProps[]>()
-
-  const dispatch = useDispatch()
-
-  const filterProducts = useCallback(() => {
-    const coffeeList = products.filter(
-      (product) => product.unitLabel === 'coffee',
-    )
-
-    const itemsUpTo50 = products.filter(
-      (product) => product.defaultPrice <= 5000,
-    )
-
-    const itemsUpTo100 = products.filter(
-      (product) =>
-        product.defaultPrice >= 5000 && product.defaultPrice <= 10000,
-    )
-
-    const itemsUp150 = products.filter(
-      (product) => product.defaultPrice >= 15000,
-    )
-
-    setUp150(itemsUp150)
-    setUpTo100(itemsUpTo100)
-    setUpTo50(itemsUpTo50)
-    setBestSeller(coffeeList)
-  }, [products])
+  const handleScroll = () => {
+    setScrollY(window.scrollY)
+  }
 
   useEffect(() => {
-    dispatch(setProducts(products))
-    filterProducts()
-  }, [dispatch, filterProducts, products])
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <>
       <Head>
-        <title>{`Home | D'Coffee Shop`}</title>
+        <title>{`Home`}</title>
       </Head>
 
-      <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
-      <Container className="bg-gray-900 text-gray-100">
-        <div className="md:px-3">
-          <div className="mt-4">
-            <strong className="text-2xl">
-              {String('Ofertas da semana').toLocaleUpperCase()}
-            </strong>
-            <Offers products={products} />
-          </div>
+      <Header lengthCart={cart.length} isTop={scrollY < 40} />
+      <Carousel />
 
-          {bestSeller && (
-            <div className="ml-auto mr-auto mt-4">
-              <strong className="text-2xl">
-                {String('Mais vendidos').toLocaleUpperCase()}
-              </strong>
-              <div className="grid grid-cols-3 md:grid-cols-1 mt-2 rounded overflow-hidden">
-                <GridProductMain product={bestSeller[1]} />
-                <div className="flex flex-col">
-                  <GridProductSecondary product={bestSeller[3]} dark />
-                  <GridProductSecondary product={bestSeller[0]} dark />
-                </div>
-              </div>
-            </div>
-          )}
+      <div className="container grid grid-cols-3 gap-8 my-20 md:grid-cols-1">
+        {mockCarousel.map((item, index) => (
+          <CategoryCard
+            key={index}
+            description={item.description}
+            title={item.title}
+            imgUrl={item.img}
+          />
+        ))}
+      </div>
 
-          <main className="overflow-hidden w-full flex flex-col  mt-8">
-            <div className="w-full flex flex-col gap-6">
-              {upTo50 && upTo100 && up150 && (
-                <div className="flex flex-col justify-center ">
-                  <strong className="text-lg text-left">
-                    {String(
-                      'Encontre o presente no valor que cabe no seu bolso',
-                    ).toLocaleUpperCase()}
-                  </strong>
-                  <div className="flex gap-4 mt-2 md:flex-col">
-                    <ProductForPrice
-                      imgUrl={upTo50[0].imageUrl}
-                      text="Até R$ 50"
-                      price="50"
-                    />
+      <CategoryByFilter products={products} />
 
-                    <ProductForPrice
-                      imgUrl={upTo100[0].imageUrl}
-                      text=" Até R$ 100"
-                      price="100"
-                    />
-
-                    <ProductForPrice
-                      imgUrl={up150[0].imageUrl}
-                      text=" Acima de R$ 150"
-                      price="150"
-                    />
-                  </div>
-                </div>
-              )}
-
-              <CategoryItems title="Categorias" products={products} />
-
-              <div className="flex flex-col gap-6">
-                <ProductForCategory
-                  title="para os apaixonados por café"
-                  products={products.filter(
-                    (item) => item.unitLabel === 'coffee',
-                  )}
-                />
-                <ProductForCategory
-                  title="o item que falta na sua decoração"
-                  products={products.filter(
-                    (item) => item.unitLabel === 'actionFigure',
-                  )}
-                />
-                <ProductForCategory
-                  title="para o seu dia a dia"
-                  products={products.filter(
-                    (item) => item.unitLabel === 'cups',
-                  )}
-                />
-              </div>
-            </div>
-          </main>
-        </div>
-
-        <div className="mt-8">
-          <Footer />
-        </div>
-      </Container>
+      <Footer />
     </>
   )
 }

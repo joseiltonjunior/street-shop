@@ -234,7 +234,7 @@ export default function Checkout() {
       <Head>
         <title>{`Checkout | D'Coffee Shop`}</title>
       </Head>
-      <Header isUser />
+      <Header />
       <Breadcrumb actualPage="Checkout" />
 
       <Container>

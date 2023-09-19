@@ -124,7 +124,7 @@ export default function Profile() {
       <Head>
         <title>{`Minha conta | D'Coffee Shop`}</title>
       </Head>
-      <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
+      <Header lengthCart={cart.length} />
       <Container>
         <p className="text-xl font-bold">Minha conta</p>
 
