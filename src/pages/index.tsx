@@ -18,6 +18,8 @@ import { formatValue } from '@/utils/formatValue'
 import { Carousel } from '@/components/new-ds/Carousel'
 import { CategoryCard } from '@/components/new-ds/CategoryCard'
 import { mockCarousel } from '@/utils/mock'
+import { CategoryByFilter } from '@/components/new-ds/CategoryByFilter'
+import { Footer } from '@/components/layout/Footer'
 
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
@@ -57,6 +59,10 @@ export default function Home({ products }: ProductsProps) {
           />
         ))}
       </div>
+
+      <CategoryByFilter products={products} />
+
+      <Footer />
     </>
   )
 }

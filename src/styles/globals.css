@@ -23,7 +23,7 @@
     }
 
     body::-webkit-scrollbar-thumb {
-        background: #202024;
+        background: #9ca3af;
     }
 
     body,
@@ -39,5 +39,9 @@
 @layer components {
     .container {
         @apply max-w-[calc(100vw-((100vw-980px)/2))] ms-auto me-auto md:px-4
+    }
+
+    .nav-button {
+        @apply text-gray-500/70 hover:text-gray-500 hover:border-b border-gray-500 transform delay-150 h-fit
     }
 }

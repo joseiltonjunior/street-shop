@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Your store for outfit street" />
+        <meta name="description" content="Your store for outfit streetwear" />
         <meta name="image" content="https://i.ibb.co/hcnTN8P/street-shop.png" />
         <meta name="author" content="@dvlp.jr" />
         <title>Street Shop</title>
