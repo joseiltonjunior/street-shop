@@ -82,7 +82,7 @@ export default function Carrinho() {
         <title>{`Meu carrinho | D'Coffee Shop`}</title>
       </Head>
 
-      <Header isUser />
+      <Header />
 
       <Breadcrumb actualPage="Meu carrinho" />
 

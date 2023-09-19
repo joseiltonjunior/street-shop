@@ -50,7 +50,7 @@ export default function Products() {
         <title>{`Produtos | D'Coffee Shop`}</title>
       </Head>
 
-      <Header buttonCart lengthCart={cart.length} inputSearch isLink isUser />
+      <Header lengthCart={cart.length} />
       <Breadcrumb actualPage={title} />
       <Container>
         <main className="h-screen grid grid-cols-4 gap-2 md:grid-cols-1 md:h-auto md:p-3 md:gap-3">

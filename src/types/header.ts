@@ -1,4 +1,4 @@
 export interface HeaderProps {
-  lengthCart: number
+  lengthCart?: number
   isTop?: boolean
 }
