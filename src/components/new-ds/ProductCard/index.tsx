@@ -18,7 +18,7 @@ export function ProductCard({ product }: ProductCardProps) {
       transition={{ duration: 0.3 }}
     >
       <div
-        className="bg-gray-200 relative flex justify-center h-[334px]"
+        className="bg-gray-200 relative flex justify-center h-[334px] overflow-hidden"
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -27,7 +27,7 @@ export function ProductCard({ product }: ProductCardProps) {
           alt={`${product.name}`}
           width={300}
           height={300}
-          className="object-contain transform hover:scale-110 transition duration-300"
+          className="object-fill transform hover:scale-110 transition duration-300"
         />
 
         <motion.button
