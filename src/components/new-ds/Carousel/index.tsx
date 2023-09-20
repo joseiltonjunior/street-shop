@@ -77,14 +77,14 @@ export function Carousel() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="md:absolute md:h-full md:w-full md:left-40"
+                className="md:absolute h-screen base:h-[calc(100vh-150px)] md:w-full md:left-40 "
               >
                 <Image
                   src={item.img}
-                  alt="outfit"
-                  width={300}
-                  height={300}
-                  className="object-contain md:h-full md:w-full"
+                  alt="outfit background"
+                  width={720}
+                  height={1280}
+                  className="object-fill w-full h-full "
                 />
               </motion.div>
             </div>

@@ -1,11 +1,11 @@
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 interface CategoryCardProps {
   title: string
   description: string
-  imgUrl: StaticImageData
+  imgUrl?: string
 }
 
 export function CategoryCard({
@@ -17,7 +17,7 @@ export function CategoryCard({
 
   return (
     <div
-      className="flex border relative cursor-pointer md:h-52 justify-around"
+      className="flex border relative cursor-pointer h-52 justify-around"
       onMouseEnter={() => setIsHover(!isHover)}
       onMouseLeave={() => setIsHover(!isHover)}
     >
@@ -51,13 +51,15 @@ export function CategoryCard({
           </div>
         )}
       </div>
-      <Image
-        src={imgUrl}
-        alt={`Category ${title}`}
-        width={100}
-        height={100}
-        // className="ms-auto"
-      />
+      {imgUrl && (
+        <Image
+          src={imgUrl}
+          alt={`Category ${title}`}
+          width={150}
+          height={150}
+          className="object-fill"
+        />
+      )}
     </div>
   )
 }

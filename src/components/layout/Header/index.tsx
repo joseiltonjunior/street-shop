@@ -32,26 +32,26 @@ export function Header({ lengthCart, isTop }: HeaderProps) {
               <Link href={'/'} className="hover:text-purple-600 ">
                 Home
               </Link>
-              <Link href={'/products'} className="hover:text-purple-600 ">
+              <Link href={'/'} className="hover:text-purple-600 ">
                 Shop
               </Link>
-              <Link href={'/features'} className="hover:text-purple-600 ">
+              <Link href={'/'} className="hover:text-purple-600 ">
                 Features
               </Link>
-              <Link href={'/blog'} className="hover:text-purple-600 ">
+              <Link href={'/'} className="hover:text-purple-600 ">
                 Blog
               </Link>
-              <Link href={'/about'} className="hover:text-purple-600 ">
+              <Link href={'/'} className="hover:text-purple-600 ">
                 About
               </Link>
-              <Link href={'/contact'} className="hover:text-purple-600 ">
+              <Link href={'/'} className="hover:text-purple-600 ">
                 Contact
               </Link>
             </nav>
           </div>
         </div>
 
-        <Link href="/cart" title="Abrir carrinho" className="ms-auto relative">
+        <Link href="/" title="Abrir carrinho" className="ms-auto relative">
           <HiShoppingCart size={26} className="fill-gray-500" />
           <strong className="absolute bg-purple-600 text-gray-100 w-4 h-4 flex items-center justify-center text-xs bottom-4 left-6">
             {lengthCart}

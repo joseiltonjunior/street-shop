@@ -32,6 +32,20 @@ export default function Home({ products }: ProductsProps) {
     setScrollY(window.scrollY)
   }
 
+  function handleImgCategory(type: 'tshirts' | 'pants' | 'shoes') {
+    if (type === 'tshirts') {
+      const filter = products.filter(
+        (product) => product.unitLabel === 'tshirts',
+      )
+      return filter[0].imageUrl
+    } else if (type === 'pants') {
+      const filter = products.filter((product) => product.unitLabel === 'pants')
+      return filter[0].imageUrl
+    }
+    const filter = products.filter((product) => product.unitLabel === 'shoes')
+    return filter[0].imageUrl
+  }
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
 
@@ -50,14 +64,23 @@ export default function Home({ products }: ProductsProps) {
       <Carousel />
 
       <div className="container grid grid-cols-3 gap-8 my-20 md:grid-cols-1">
-        {mockCarousel.map((item, index) => (
-          <CategoryCard
-            key={index}
-            description={item.description}
-            title={item.title}
-            imgUrl={item.img}
-          />
-        ))}
+        <CategoryCard
+          description={mockCarousel[0].description}
+          title={mockCarousel[0].title}
+          imgUrl={handleImgCategory('tshirts')}
+        />
+
+        <CategoryCard
+          description={mockCarousel[1].description}
+          title={mockCarousel[1].title}
+          imgUrl={handleImgCategory('pants')}
+        />
+
+        <CategoryCard
+          description={mockCarousel[2].description}
+          title={mockCarousel[2].title}
+          imgUrl={handleImgCategory('shoes')}
+        />
       </div>
 
       <CategoryByFilter products={products} />
