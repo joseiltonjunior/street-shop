@@ -31,7 +31,7 @@ export function Description({ title, description }: DescriptionProps) {
         transition={{ duration: 0.7 }}
       >
         <Link
-          href={'/products'}
+          href={'/'}
           className="bg-purple-600 py-2 px-8 rounded-lg w-fit text-white font-semibold hover:bg-purple-700  "
         >
           SHOP NOW
