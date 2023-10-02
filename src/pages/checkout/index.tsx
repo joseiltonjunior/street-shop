@@ -26,7 +26,7 @@ import {
   ErrorCheckoutMessageEnum,
 } from '@/utils/enums/errorCheckout'
 import { FocusedType } from '@/types/focusedCard'
-import { formatValue } from '@/utils/formatReal'
+import { formatReal } from '@/utils/formatReal'
 
 import {
   Container,
@@ -413,7 +413,7 @@ export default function Checkout() {
 
           <Box total>
             <strong>Total</strong>
-            <span>{formatValue(totalValueCart)}</span>
+            <span>{formatReal(totalValueCart)}</span>
           </Box>
 
           <Button type="submit" isLoading={isLoading} variant="primary">

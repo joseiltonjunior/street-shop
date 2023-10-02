@@ -24,10 +24,8 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import { ChangeQuantity } from '@/components/ChangeQuantity'
 import { Button } from '@/components/form/Button'
-// import { CarouselProducts } from '@/components/CarouselProducts'
-// import { CarouselProductsMobile } from '@/components/OffersMobile'
 
-import { formatValue } from '@/utils/formatReal'
+import { formatReal } from '@/utils/formatReal'
 import { Footer } from '@/components/layout/Footer'
 import { ProductForCategory } from '@/components/ProductsForCategory'
 
@@ -191,7 +189,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         id: result.id,
         name: result.name,
         imageUrl: result.images[0],
-        price: formatValue(price.unit_amount!),
+        price: formatReal(price.unit_amount!),
         description: result.description,
         defaultPriceId: price.id,
         unitLabel: result.unit_label,
