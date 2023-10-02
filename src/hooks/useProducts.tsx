@@ -138,7 +138,7 @@ export function useProducts({ products }: ProductsProps) {
     setProductsFiltered(newList)
   }, [filter, handleFilterByOrder, handleFilterByPrice, products])
 
-  const handleSarchProducts = useCallback(
+  const handleSearchProducts = useCallback(
     (text: string) => {
       setSearchValue(text)
       if (text === '') {
@@ -165,6 +165,6 @@ export function useProducts({ products }: ProductsProps) {
     handleFilter,
     handleSearch,
     handleFilterProducts,
-    handleSarchProducts,
+    handleSearchProducts,
   }
 }

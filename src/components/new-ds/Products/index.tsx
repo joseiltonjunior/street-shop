@@ -19,7 +19,7 @@ export function Products({ products }: ProductsProps) {
     setFilterList,
     handleFilter,
     handleNavCategory,
-    handleSarchProducts,
+    handleSearchProducts,
     handleSearch,
     handleFilterProducts,
   } = useProducts({ products })
@@ -49,7 +49,7 @@ export function Products({ products }: ProductsProps) {
 
       <Input
         isVisible={searchIsVisible}
-        onChange={(e) => handleSarchProducts(e.currentTarget.value)}
+        onChange={(e) => handleSearchProducts(e.currentTarget.value)}
         placeholder="Search"
         name="filter"
         value={searchValue}
