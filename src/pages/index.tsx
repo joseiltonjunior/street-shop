@@ -13,7 +13,7 @@ import { reduxProps } from '@/storage'
 import { Header } from '@/components/layout/Header'
 
 import { ProductInfoProps, ProductsProps } from '@/types/product'
-import { formatValue } from '@/utils/formatValue'
+import { formatReal } from '@/utils/formatReal'
 
 import { Carousel } from '@/components/new-ds/Carousel'
 import { CategoryCard } from '@/components/new-ds/CategoryCard'
@@ -104,8 +104,9 @@ export const getStaticProps: GetStaticProps = async () => {
       name: product.name,
       imageUrl: product.images[0],
       unitLabel: product.unit_label,
-      price: formatValue(price.unit_amount!),
+      price: formatReal(price.unit_amount!),
       defaultPrice: price.unit_amount,
+      metaData: product.metadata,
     }
   })
 

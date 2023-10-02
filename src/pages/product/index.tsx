@@ -27,7 +27,7 @@ import { Button } from '@/components/form/Button'
 // import { CarouselProducts } from '@/components/CarouselProducts'
 // import { CarouselProductsMobile } from '@/components/OffersMobile'
 
-import { formatValue } from '@/utils/formatValue'
+import { formatValue } from '@/utils/formatReal'
 import { Footer } from '@/components/layout/Footer'
 import { ProductForCategory } from '@/components/ProductsForCategory'
 

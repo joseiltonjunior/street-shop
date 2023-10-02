@@ -14,7 +14,7 @@ import {
 } from '@/styles/pages/details'
 import Image from 'next/image'
 import { Button } from '@/components/form/Button'
-import { formatValue } from '@/utils/formatValue'
+import { formatValue } from '@/utils/formatReal'
 import { useRouter } from 'next/router'
 import { formatCep } from '@/utils/formatCep'
 import { formatPhone } from '@/utils/formatPhone'

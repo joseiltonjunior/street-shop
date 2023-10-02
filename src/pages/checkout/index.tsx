@@ -26,7 +26,7 @@ import {
   ErrorCheckoutMessageEnum,
 } from '@/utils/enums/errorCheckout'
 import { FocusedType } from '@/types/focusedCard'
-import { formatValue } from '@/utils/formatValue'
+import { formatValue } from '@/utils/formatReal'
 
 import {
   Container,

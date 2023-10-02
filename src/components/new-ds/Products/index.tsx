@@ -21,12 +21,12 @@ export function Products({ products }: ProductsProps) {
     handleNavCategory,
     handleSarchProducts,
     handleSearch,
-    handleSelectedCategory,
+    handleFilterProducts,
   } = useProducts({ products })
 
   useEffect(() => {
-    handleSelectedCategory()
-  }, [handleSelectedCategory])
+    handleFilterProducts()
+  }, [handleFilterProducts])
 
   return (
     <div className="container mb-32">
