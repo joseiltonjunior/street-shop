@@ -14,7 +14,7 @@ import {
 } from '@/styles/pages/details'
 import Image from 'next/image'
 import { Button } from '@/components/form/Button'
-import { formatValue } from '@/utils/formatValue'
+import { formatReal } from '@/utils/formatReal'
 import { useRouter } from 'next/router'
 import { formatCep } from '@/utils/formatCep'
 import { formatPhone } from '@/utils/formatPhone'
@@ -158,7 +158,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         clientName,
         clientEmail: result.receipt_email,
         shippingDetails: result.shipping,
-        amountTotal: formatValue(result.amount!),
+        amountTotal: formatReal(result.amount!),
       }
     })
     .catch(() => {

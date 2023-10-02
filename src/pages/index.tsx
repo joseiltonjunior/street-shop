@@ -13,12 +13,12 @@ import { reduxProps } from '@/storage'
 import { Header } from '@/components/layout/Header'
 
 import { ProductInfoProps, ProductsProps } from '@/types/product'
-import { formatValue } from '@/utils/formatValue'
+import { formatReal } from '@/utils/formatReal'
 
 import { Carousel } from '@/components/new-ds/Carousel'
 import { CategoryCard } from '@/components/new-ds/CategoryCard'
 import { mockCarousel } from '@/utils/mock'
-import { CategoryByFilter } from '@/components/new-ds/CategoryByFilter'
+import { Products } from '@/components/new-ds/Products'
 import { Footer } from '@/components/layout/Footer'
 
 export default function Home({ products }: ProductsProps) {
@@ -83,7 +83,7 @@ export default function Home({ products }: ProductsProps) {
         />
       </div>
 
-      <CategoryByFilter products={products} />
+      <Products products={products} />
 
       <Footer />
     </>
@@ -104,8 +104,9 @@ export const getStaticProps: GetStaticProps = async () => {
       name: product.name,
       imageUrl: product.images[0],
       unitLabel: product.unit_label,
-      price: formatValue(price.unit_amount!),
+      price: formatReal(price.unit_amount!),
       defaultPrice: price.unit_amount,
+      metaData: product.metadata,
     }
   })
 

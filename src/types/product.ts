@@ -7,6 +7,9 @@ export interface ProductInfoProps {
   defaultPrice: number
   quantity: number
   unitLabel: string
+  metaData: {
+    [key: string]: string
+  }
 }
 
 export interface ProductsProps {
