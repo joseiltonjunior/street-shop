@@ -34,7 +34,10 @@ export function FiltersTag({
           className={`flex items-center justify-center text-sm px-2 py-0 border border-indigo-500 rounded-full bg-indigo-500 text-white gap-2`}
           onClick={() => setFilterList({ ...filterList, price: 'default' })}
         >
-          {formatReal(Number(filterList.price) * 100)} <MdClear />
+          {filterList.price === 'high'
+            ? 'R$ 200,00+'
+            : formatReal(Number(filterList.price) * 100)}
+          <MdClear />
         </button>
       )}
 
