@@ -13,7 +13,7 @@ export function Input({ isVisible, ...rest }: InputWithFilterProps) {
       animate={{
         height: isVisible ? 'auto' : 0,
       }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 0.5 }}
       className="overflow-hidden"
     >
       <div className="flex items-center relative">
