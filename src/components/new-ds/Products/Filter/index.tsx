@@ -19,7 +19,7 @@ export function Filter({
       animate={{
         height: isVisible ? 'auto' : 0,
       }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 1 }}
       className="overflow-hidden"
     >
       <div className="items-center grid bg-gray-100 grid-cols-4 md:grid-cols-1 gap-4 p-8">

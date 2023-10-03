@@ -119,12 +119,138 @@ export function useProducts({ products }: ProductsProps) {
     [filterList.sortBy],
   )
 
+  const handleFormatFilterColor = (key: string) => {
+    switch (key) {
+      case 'black':
+        return 'bg-black text-white border border-black'
+
+      case 'red':
+        return 'bg-red-500 text-white border border-red-500'
+
+      case 'blue':
+        return 'bg-blue-500 text-white border border-blue-500'
+
+      case 'gray':
+        return 'bg-gray-300 text-white border border-gray-300'
+
+      case 'green':
+        return 'bg-green-500 text-white border border-green-500'
+
+      case 'white':
+        return 'bg-white text-gray-500 border border-gray-500'
+
+      default:
+        return 'bg-transparent text-white'
+    }
+  }
+
+  const handleFilterByTag = useCallback(
+    (products: ProductInfoProps[]) => {
+      switch (filterList.tag) {
+        case 'streetstyle': {
+          const newList = products.filter(
+            (product) => product.metaData.tag === 'streetstyle',
+          )
+          return (products = newList)
+        }
+
+        case 'lifestyle': {
+          const newList = products.filter(
+            (product) => product.metaData.tag === 'lifestyle',
+          )
+          return (products = newList)
+        }
+
+        case 'cargo': {
+          const newList = products.filter(
+            (product) => product.metaData.tag === 'cargo',
+          )
+          return (products = newList)
+        }
+
+        case 'crafts': {
+          const newList = products.filter(
+            (product) => product.metaData.tag === 'crafts',
+          )
+          return (products = newList)
+        }
+
+        case 'promotion': {
+          const newList = products.filter(
+            (product) => product.metaData.tag === 'promotion',
+          )
+          return (products = newList)
+        }
+
+        default:
+          return (products = [...products])
+      }
+    },
+    [filterList.tag],
+  )
+
+  const handleFilterByColor = useCallback(
+    (products: ProductInfoProps[]) => {
+      switch (filterList.color) {
+        case 'black': {
+          const newList = products.filter(
+            (product) => product.metaData.color === 'black',
+          )
+          return (products = newList)
+        }
+
+        case 'white': {
+          const newList = products.filter(
+            (product) => product.metaData.color === 'white',
+          )
+          return (products = newList)
+        }
+
+        case 'blue': {
+          const newList = products.filter(
+            (product) => product.metaData.color === 'blue',
+          )
+          return (products = newList)
+        }
+
+        case 'gray': {
+          const newList = products.filter(
+            (product) => product.metaData.color === 'gray',
+          )
+          return (products = newList)
+        }
+
+        case 'green': {
+          const newList = products.filter(
+            (product) => product.metaData.color === 'green',
+          )
+          return (products = newList)
+        }
+
+        case 'red': {
+          const newList = products.filter(
+            (product) => product.metaData.color === 'red',
+          )
+          return (products = newList)
+        }
+
+        default:
+          return (products = [...products])
+      }
+    },
+    [filterList.color],
+  )
+
   const handleFilterProducts = useCallback(() => {
     let filterListProducts = products
 
     filterListProducts = handleFilterByPrice(filterListProducts)
 
     filterListProducts = handleFilterByOrder(filterListProducts)
+
+    filterListProducts = handleFilterByTag(filterListProducts)
+
+    filterListProducts = handleFilterByColor(filterListProducts)
 
     if (filter === 'all') {
       setProductsFiltered(filterListProducts)
@@ -135,8 +261,16 @@ export function useProducts({ products }: ProductsProps) {
     const newList = filterListProducts.filter(
       (product) => product.unitLabel === filter,
     )
+
     setProductsFiltered(newList)
-  }, [filter, handleFilterByOrder, handleFilterByPrice, products])
+  }, [
+    filter,
+    handleFilterByColor,
+    handleFilterByOrder,
+    handleFilterByPrice,
+    handleFilterByTag,
+    products,
+  ])
 
   const handleSearchProducts = useCallback(
     (text: string) => {
@@ -166,5 +300,6 @@ export function useProducts({ products }: ProductsProps) {
     handleSearch,
     handleFilterProducts,
     handleSearchProducts,
+    handleFormatFilterColor,
   }
 }

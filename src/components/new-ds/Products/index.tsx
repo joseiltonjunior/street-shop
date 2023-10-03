@@ -7,6 +7,7 @@ import { Filter } from './Filter'
 import { useProducts } from '@/hooks/useProducts'
 import { Nav } from './Nav'
 import { Buttons } from './Buttons'
+import { FiltersTag } from './FiltersTag'
 
 export function Products({ products }: ProductsProps) {
   const {
@@ -22,6 +23,7 @@ export function Products({ products }: ProductsProps) {
     handleSearchProducts,
     handleSearch,
     handleFilterProducts,
+    handleFormatFilterColor,
   } = useProducts({ products })
 
   useEffect(() => {
@@ -33,12 +35,21 @@ export function Products({ products }: ProductsProps) {
       <h1 className="font-bold text-4xl">PRODUCT OVERVIEW</h1>
       <div className="flex justify-between my-6 text-sm items-center md:flex-col">
         <Nav filter={filter} handleNavCategory={handleNavCategory} />
-        <Buttons
-          filterIsVisible={filterIsVisible}
-          handleFilter={handleFilter}
-          handleSearch={handleSearch}
-          searchIsVisible={searchIsVisible}
-        />
+
+        <div className="flex flex-col items-start gap-2">
+          <Buttons
+            filterIsVisible={filterIsVisible}
+            handleFilter={handleFilter}
+            handleSearch={handleSearch}
+            searchIsVisible={searchIsVisible}
+          />
+
+          <FiltersTag
+            filterList={filterList}
+            setFilterList={setFilterList}
+            handleFormatFilterColor={handleFormatFilterColor}
+          />
+        </div>
       </div>
 
       <Filter
