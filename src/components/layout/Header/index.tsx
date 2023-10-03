@@ -32,7 +32,7 @@ export function Header({ lengthCart, isTop }: HeaderProps) {
               <Link href={'/'} className="hover:text-purple-600 ">
                 Home
               </Link>
-              <Link href={'/'} className="hover:text-purple-600 ">
+              <Link href={'/products'} className="hover:text-purple-600 ">
                 Shop
               </Link>
               <Link href={'/'} className="hover:text-purple-600 ">

@@ -18,7 +18,7 @@ import { formatReal } from '@/utils/formatReal'
 import { Carousel } from '@/components/new-ds/Carousel'
 import { CategoryCard } from '@/components/new-ds/CategoryCard'
 import { mockCarousel } from '@/utils/mock'
-import { Products } from '@/components/new-ds/Products'
+import { ProductsComponent } from '@/components/new-ds/ProductsComponent'
 import { Footer } from '@/components/layout/Footer'
 
 export default function Home({ products }: ProductsProps) {
@@ -65,25 +65,28 @@ export default function Home({ products }: ProductsProps) {
 
       <div className="container grid grid-cols-3 gap-8 my-20 md:grid-cols-1">
         <CategoryCard
+          urlDirection="/products"
           description={mockCarousel[0].description}
           title={mockCarousel[0].title}
           imgUrl={handleImgCategory('tshirts')}
         />
 
         <CategoryCard
+          urlDirection="/products"
           description={mockCarousel[1].description}
           title={mockCarousel[1].title}
           imgUrl={handleImgCategory('pants')}
         />
 
         <CategoryCard
+          urlDirection="/products"
           description={mockCarousel[2].description}
           title={mockCarousel[2].title}
           imgUrl={handleImgCategory('shoes')}
         />
       </div>
 
-      <Products products={products} />
+      <ProductsComponent products={products} isTitle />
 
       <Footer />
     </>
