@@ -9,7 +9,14 @@ import { Nav } from './Nav'
 import { Buttons } from './Buttons'
 import { FiltersTag } from './FiltersTag'
 
-export function Products({ products }: ProductsProps) {
+interface ProductsComponentProps extends ProductsProps {
+  isTitle?: boolean
+}
+
+export function ProductsComponent({
+  products,
+  isTitle,
+}: ProductsComponentProps) {
   const {
     filter,
     filterList,
@@ -32,7 +39,7 @@ export function Products({ products }: ProductsProps) {
 
   return (
     <div className="container mb-32">
-      <h1 className="font-bold text-4xl">PRODUCT OVERVIEW</h1>
+      {isTitle && <h1 className="font-bold text-4xl">PRODUCT OVERVIEW</h1>}
       <div className="flex justify-between my-6 text-sm items-center md:flex-col">
         <Nav filter={filter} handleNavCategory={handleNavCategory} />
 

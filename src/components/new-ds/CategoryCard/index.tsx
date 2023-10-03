@@ -1,23 +1,27 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 interface CategoryCardProps {
   title: string
   description: string
   imgUrl?: string
+  urlDirection: string
 }
 
 export function CategoryCard({
   description,
   imgUrl,
   title,
+  urlDirection,
 }: CategoryCardProps) {
   const [isHover, setIsHover] = useState(false)
 
   return (
-    <div
-      className="flex border relative cursor-pointer h-52 justify-around"
+    <Link
+      href={urlDirection}
+      className="flex border relative cursor-pointer h-60 justify-around"
       onMouseEnter={() => setIsHover(!isHover)}
       onMouseLeave={() => setIsHover(!isHover)}
     >
@@ -36,7 +40,7 @@ export function CategoryCard({
         {isHover && (
           <div className="w-fit mt-auto">
             <motion.p
-              className={`  font-semibold text-white`}
+              className={`font-semibold text-white`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
@@ -60,6 +64,6 @@ export function CategoryCard({
           className="object-fill"
         />
       )}
-    </div>
+    </Link>
   )
 }

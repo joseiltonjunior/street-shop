@@ -31,9 +31,9 @@ export function ProductCard({ product }: ProductCardProps) {
         />
 
         <motion.button
-          animate={{ y: isHover ? 0 : 20, opacity: isHover ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
-          className="absolute bottom-4 bg-white px-4 py-2 rounded-full hover:bg-gray-950 hover:text-white transition duration-150"
+          animate={{ y: isHover ? 0 : 30, opacity: isHover ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+          className="absolute bottom-4 bg-white px-4 py-2 rounded-full hover:bg-gray-950 hover:text-white h-fit"
         >
           Quick View
         </motion.button>
