@@ -3,7 +3,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from '../storage'
-
+import { Analytics } from '@vercel/analytics/react'
 import { Provider } from 'react-redux'
 import { SkeletonTheme } from 'react-loading-skeleton'
 
@@ -29,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="author" content="@dvlp.jr" />
         <title>Street Shop</title>
       </Head>
+      <Analytics />
       <Container>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
