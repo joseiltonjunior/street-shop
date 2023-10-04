@@ -7,12 +7,13 @@ import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './modules/root-reducer'
 import { ResponseUserProps } from '@/types/user'
+import { FilterCategoryProps } from './modules/filterCategoryProducts/types'
 
 export interface reduxProps {
   cart: ProductInfoProps[]
   products: ProductInfoProps[]
   sideMenu: sideMenuProps
-  filterProducts: string
+  filterCategoryProducts: FilterCategoryProps
   user: ResponseUserProps
   token: string
 }
@@ -24,7 +25,7 @@ const persistConfig = {
     'cart',
     'products',
     'sideMenu',
-    'filterProducts',
+    'filterCategoryProducts',
     'user',
     'token',
   ],

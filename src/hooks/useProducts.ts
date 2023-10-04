@@ -1,8 +1,11 @@
+import { reduxProps } from '@/storage'
+import { FilterCategoryProps } from '@/storage/modules/filterCategoryProducts/types'
 import { FilterListProps } from '@/types/filterProducts'
 import { ProductInfoProps, ProductsProps } from '@/types/product'
 import { handleFormartValue } from '@/utils/formatValue'
 
 import { useCallback, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export type FilterTypes = 'all' | 'tshirts' | 'pants' | 'shoes' | 'accessories'
 
@@ -14,8 +17,14 @@ export function useProducts({ products }: ProductsProps) {
   const [searchIsVisible, setSearchIsVisible] = useState(false)
   const [filterIsVisible, setFilterIsVisible] = useState(false)
 
+  const filterCategoryProducts = useSelector<reduxProps, FilterCategoryProps>(
+    (state) => state.filterCategoryProducts,
+  )
+
   const [searchValue, setSearchValue] = useState('')
-  const [filter, setIsFilter] = useState<FilterTypes>('all')
+  const [filter, setIsFilter] = useState<FilterTypes>(
+    filterCategoryProducts.filter,
+  )
   const [filterList, setFilterList] = useState<FilterListProps>({
     sortBy: 'default',
     price: 'default',
@@ -295,6 +304,7 @@ export function useProducts({ products }: ProductsProps) {
     searchIsVisible,
     filterIsVisible,
     setFilterList,
+    setIsFilter,
     handleNavCategory,
     handleFilter,
     handleSearch,

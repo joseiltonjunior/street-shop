@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { MouseEventHandler, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
@@ -8,6 +8,7 @@ interface CategoryCardProps {
   description: string
   imgUrl?: string
   urlDirection: string
+  onClick?: MouseEventHandler<HTMLAnchorElement> | undefined
 }
 
 export function CategoryCard({
@@ -15,6 +16,7 @@ export function CategoryCard({
   imgUrl,
   title,
   urlDirection,
+  onClick,
 }: CategoryCardProps) {
   const [isHover, setIsHover] = useState(false)
 
@@ -24,6 +26,7 @@ export function CategoryCard({
       className="flex border relative cursor-pointer h-60 justify-around"
       onMouseEnter={() => setIsHover(!isHover)}
       onMouseLeave={() => setIsHover(!isHover)}
+      onClick={onClick}
     >
       {isHover && <div className="absolute bg-purple-500/70 w-full h-full" />}
       <div className="py-8 flex flex-col z-10">
