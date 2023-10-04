@@ -6,7 +6,7 @@ import Stripe from 'stripe'
 
 import { Container } from '@/styles/pages/product'
 
-import { SkeletonProduct } from '@/components/SkeletonProduct'
+// import { SkeletonProduct } from '@/components/SkeletonProduct'
 
 import Head from 'next/head'
 import { Breadcrumb } from '@/components/layout/BreadCrumb'
@@ -27,7 +27,7 @@ import { Button } from '@/components/form/Button'
 
 import { formatReal } from '@/utils/formatReal'
 import { Footer } from '@/components/layout/Footer'
-import { ProductForCategory } from '@/components/ProductsForCategory'
+// import { ProductForCategory } from '@/components/ProductsForCategory'
 
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch()
@@ -98,9 +98,7 @@ export default function Product({ product }: ProductProps) {
       <>
         <Header />
         <Breadcrumb isLoading />
-        <Container>
-          <SkeletonProduct />
-        </Container>
+        <Container>{/* <SkeletonProduct /> */}</Container>
       </>
     )
   }
@@ -149,10 +147,10 @@ export default function Product({ product }: ProductProps) {
 
         {someProducts && (
           <div className="mt-12">
-            <ProductForCategory
+            {/* <ProductForCategory
               products={products}
               title="Produtos similares"
-            />
+            /> */}
           </div>
         )}
 

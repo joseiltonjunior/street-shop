@@ -13,21 +13,21 @@ import {
   NameProduct,
 } from '@/styles/pages/details'
 import Image from 'next/image'
-import { Button } from '@/components/form/Button'
+// import { Button } from '@/components/form/Button'
 import { formatReal } from '@/utils/formatReal'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import { formatCep } from '@/utils/formatCep'
 import { formatPhone } from '@/utils/formatPhone'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
-import { clearCart } from '@/storage/modules/cart/action'
-import { filterProducts } from '@/storage/modules/filter-products/action'
+// import { clearCart } from '@/storage/modules/cart/action'
+// import { filterProducts } from '@/storage/modules/filter-products/action'
 import { Header } from '@/components/layout/Header'
 
 export default function Details({ salesInformation }: DetailsProps) {
-  const router = useRouter()
-  const dispatch = useDispatch()
+  // const router = useRouter()
+  // const dispatch = useDispatch()
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
@@ -118,7 +118,7 @@ export default function Details({ salesInformation }: DetailsProps) {
               </div>
             </div>
 
-            <Button
+            {/* <Button
               onClick={() => {
                 dispatch(clearCart())
                 dispatch(filterProducts(''))
@@ -126,7 +126,7 @@ export default function Details({ salesInformation }: DetailsProps) {
               }}
             >
               Ir para página principal
-            </Button>
+            </Button> */}
           </TotalContent>
         </div>
       </Container>

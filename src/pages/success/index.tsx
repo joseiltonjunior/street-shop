@@ -21,7 +21,7 @@ import {
 import { Button } from '@/components/form/Button'
 import { Header } from '@/components/layout/Header'
 
-import { filterProducts } from '@/storage/modules/filter-products/action'
+// import { filterProducts } from '@/storage/modules/filter-products/action'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
 
@@ -103,7 +103,7 @@ export default function Success({ salesInformation }: SuccessProps) {
           <ButtonClearCart
             onClick={() => {
               dispatch(clearCart())
-              dispatch(filterProducts(''))
+
               router.replace('/')
             }}
           >
