@@ -25,7 +25,7 @@ export default function Products({ products }: ProductsProps) {
 
       <Header lengthCart={cart.length} />
 
-      <main className="my-24 container">
+      <main className="my-24 md:my-12 container">
         <ProductsComponent products={products} />
       </main>
       <Footer />
