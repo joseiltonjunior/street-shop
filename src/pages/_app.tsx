@@ -17,7 +17,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import 'keen-slider/keen-slider.min.css'
 
 import Head from 'next/head'
-import { SideMenu } from '@/components/layout/SideMenu'
+// import { SideMenu } from '@/components/layout/SideMenu'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <SkeletonTheme baseColor={'#202024'} highlightColor={'#121214'}>
               <Component {...pageProps} />
 
-              <SideMenu />
+              {/* <SideMenu /> */}
 
               <ToastContainer />
             </SkeletonTheme>

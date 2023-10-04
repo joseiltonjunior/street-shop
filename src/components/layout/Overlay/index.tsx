@@ -1,5 +1,5 @@
 import { reduxProps } from '@/storage'
-import { setSideMenu } from '@/storage/modules/side-menu/action'
+import { setSideMenu } from '@/storage/modules/sideMenu/action'
 import { sideMenuProps } from '@/types/sideMenu'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
