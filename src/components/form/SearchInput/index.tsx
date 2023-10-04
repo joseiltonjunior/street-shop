@@ -6,7 +6,7 @@ import { IoMdSearch } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 import { ProductInfoProps } from '@/types/product'
-import { filterProducts } from '@/storage/modules/filter-products/action'
+// import { filterProducts } from '@/storage/modules/filter-products/action'
 import { useRouter } from 'next/router'
 
 interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -17,7 +17,7 @@ export function SearchInput({ action, ...rest }: SearchInputProps) {
   const [listProducts, setListProducts] = useState<ProductInfoProps[]>()
   const [showList, setShowList] = useState(false)
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const router = useRouter()
 
@@ -25,9 +25,9 @@ export function SearchInput({ action, ...rest }: SearchInputProps) {
     (state) => state.products,
   )
 
-  const valueFilter = useSelector<reduxProps, string>(
-    (state) => state.filterProducts,
-  )
+  // const valueFilter = useSelector<reduxProps, string>(
+  //   (state) => state.filterProducts,
+  // )
 
   function handleSearchProduct(key: string) {
     if (key.length <= 2) return setListProducts([])
@@ -56,18 +56,18 @@ export function SearchInput({ action, ...rest }: SearchInputProps) {
           name="search"
           type="text"
           placeholder="Buscar produtos"
-          value={valueFilter}
-          onClick={() => handleSearchProduct(valueFilter)}
+          // value={valueFilter}
+          // onClick={() => handleSearchProduct(valueFilter)}
           autoComplete="off"
-          onChange={(e) => {
-            dispatch(filterProducts(e.currentTarget.value))
-            handleSearchProduct(e.currentTarget.value)
-          }}
+          // onChange={(e) => {
+          //   dispatch(filterProducts(e.currentTarget.value))
+          //   handleSearchProduct(e.currentTarget.value)
+          // }}
         />
 
         <button
           className="bg-white flex items-center justify-center h-9 px-3 hover:bg-gray-300 hover:color-gray-800 border-l rounded-r"
-          onClick={() => handleSearchProduct(valueFilter)}
+          // onClick={() => handleSearchProduct(valueFilter)}
         >
           <IoMdSearch size={25} className="fill-gray-500/50" />
         </button>

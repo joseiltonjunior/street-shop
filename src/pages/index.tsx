@@ -7,7 +7,7 @@ import { stripe } from '@/lib/stripe'
 
 import Head from 'next/head'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
 
 import { Header } from '@/components/layout/Header'
@@ -21,10 +21,14 @@ import { mockCarousel } from '@/utils/mock'
 import { ProductsComponent } from '@/components/new-ds/ProductsComponent'
 import { Footer } from '@/components/layout/Footer'
 
+import { filterCategoryProducts } from '@/storage/modules/filterCategoryProducts/action'
+
 export default function Home({ products }: ProductsProps) {
   const cart = useSelector<reduxProps, ProductInfoProps[]>(
     (state) => state.cart,
   )
+
+  const dispatch = useDispatch()
 
   const [scrollY, setScrollY] = useState(0)
 
@@ -63,30 +67,40 @@ export default function Home({ products }: ProductsProps) {
       <Header lengthCart={cart.length} isTop={scrollY < 40} />
       <Carousel />
 
-      <div className="container grid grid-cols-3 gap-8 my-20 md:grid-cols-1">
-        <CategoryCard
-          urlDirection="/products"
-          description={mockCarousel[0].description}
-          title={mockCarousel[0].title}
-          imgUrl={handleImgCategory('tshirts')}
-        />
+      <main className="container mb-32">
+        <div className="grid grid-cols-3 gap-8 my-20 md:grid-cols-1">
+          <CategoryCard
+            urlDirection="/products"
+            description={mockCarousel[0].description}
+            title={mockCarousel[0].title}
+            imgUrl={handleImgCategory('tshirts')}
+            onClick={() =>
+              dispatch(filterCategoryProducts({ filter: 'tshirts' }))
+            }
+          />
 
-        <CategoryCard
-          urlDirection="/products"
-          description={mockCarousel[1].description}
-          title={mockCarousel[1].title}
-          imgUrl={handleImgCategory('pants')}
-        />
+          <CategoryCard
+            urlDirection="/products"
+            description={mockCarousel[1].description}
+            title={mockCarousel[1].title}
+            imgUrl={handleImgCategory('pants')}
+            onClick={() =>
+              dispatch(filterCategoryProducts({ filter: 'pants' }))
+            }
+          />
 
-        <CategoryCard
-          urlDirection="/products"
-          description={mockCarousel[2].description}
-          title={mockCarousel[2].title}
-          imgUrl={handleImgCategory('shoes')}
-        />
-      </div>
-
-      <ProductsComponent products={products} isTitle />
+          <CategoryCard
+            urlDirection="/products"
+            description={mockCarousel[2].description}
+            title={mockCarousel[2].title}
+            imgUrl={handleImgCategory('shoes')}
+            onClick={() =>
+              dispatch(filterCategoryProducts({ filter: 'shoes' }))
+            }
+          />
+        </div>
+        <ProductsComponent products={products} isTitle />
+      </main>
 
       <Footer />
     </>

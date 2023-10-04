@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux'
 import { reduxProps } from '@/storage'
-import { ProductInfoProps, ProductsProps } from '@/types/product'
-
 import Head from 'next/head'
+import Stripe from 'stripe'
+
 import { Header } from '@/components/layout/Header'
+import { ProductInfoProps, ProductsProps } from '@/types/product'
 
 import { formatReal } from '@/utils/formatReal'
 import { GetStaticProps } from 'next'
 import { stripe } from '@/lib/stripe'
-import Stripe from 'stripe'
 import { ProductsComponent } from '@/components/new-ds/ProductsComponent'
 import { Footer } from '@/components/layout/Footer'
 
@@ -20,15 +20,15 @@ export default function Products({ products }: ProductsProps) {
   return (
     <>
       <Head>
-        <title>{`Produtos | Street Shop`}</title>
+        <title>{`Products | Street Shop`}</title>
       </Head>
 
       <Header lengthCart={cart.length} />
 
-      <div className="mt-24 h-screen w-screen">
+      <main className="my-24 container">
         <ProductsComponent products={products} />
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </>
   )
 }

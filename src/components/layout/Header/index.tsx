@@ -3,8 +3,12 @@ import { HiShoppingCart } from 'react-icons/hi'
 import { motion } from 'framer-motion'
 
 import { HeaderProps } from '@/types/header'
+import { useDispatch } from 'react-redux'
+import { filterCategoryProducts } from '@/storage/modules/filterCategoryProducts/action'
 
 export function Header({ lengthCart, isTop }: HeaderProps) {
+  const dispatch = useDispatch()
+
   return (
     <motion.header
       initial={{
@@ -29,7 +33,13 @@ export function Header({ lengthCart, isTop }: HeaderProps) {
 
           <div className="ms-10 md:hidden">
             <nav className="flex items-center text-sm gap-6 font-medium">
-              <Link href={'/'} className="hover:text-purple-600 ">
+              <Link
+                href={'/'}
+                className="hover:text-purple-600"
+                onClick={() =>
+                  dispatch(filterCategoryProducts({ filter: 'all' }))
+                }
+              >
                 Home
               </Link>
               <Link href={'/products'} className="hover:text-purple-600 ">

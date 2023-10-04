@@ -38,7 +38,7 @@ export function ProductsComponent({
   }, [handleFilterProducts])
 
   return (
-    <div className="container mb-32">
+    <div>
       {isTitle && <h1 className="font-bold text-4xl">PRODUCT OVERVIEW</h1>}
       <div className="flex justify-between my-6 text-sm items-center md:flex-col">
         <Nav filter={filter} handleNavCategory={handleNavCategory} />
