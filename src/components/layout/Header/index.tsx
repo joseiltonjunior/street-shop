@@ -89,11 +89,12 @@ export function Header({ lengthCart, isTop }: HeaderProps) {
       </motion.header>
 
       <motion.div
+        initial={{ height: 0 }}
         animate={{
           height: isVisible ? 'auto' : 0,
         }}
-        transition={{ duration: 0.3 }}
-        className="bg-purple-600 w-full text-white"
+        transition={{ duration: 0.5 }}
+        className="bg-purple-600 w-full text-white base:hidden"
       >
         <nav className="flex flex-col items-start text-sm font-medium py-2">
           <Link

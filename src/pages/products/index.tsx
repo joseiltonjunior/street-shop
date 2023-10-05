@@ -23,12 +23,13 @@ export default function Products({ products }: ProductsProps) {
         <title>{`Products | Street Shop`}</title>
       </Head>
 
-      <Header lengthCart={cart.length} />
-
-      <main className="my-24 md:my-12 container">
-        <ProductsComponent products={products} />
-      </main>
-      <Footer />
+      <div className="w-full h-screen flex flex-col">
+        <Header lengthCart={cart.length} />
+        <main className="my-24 md:my-12 container">
+          <ProductsComponent products={products} />
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }

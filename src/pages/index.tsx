@@ -64,45 +64,49 @@ export default function Home({ products }: ProductsProps) {
         <title>{`Home`}</title>
       </Head>
 
-      <Header lengthCart={cart.length} isTop={scrollY < 40} />
-      <Carousel />
+      <div className="w-full h-screen flex flex-col">
+        <Header lengthCart={cart.length} isTop={scrollY < 40} />
 
-      <main className="container mb-32">
-        <div className="grid grid-cols-3 gap-8 my-20 md:grid-cols-1">
-          <CategoryCard
-            urlDirection="/products"
-            description={mockCarousel[0].description}
-            title={mockCarousel[0].title}
-            imgUrl={handleImgCategory('tshirts')}
-            onClick={() =>
-              dispatch(filterCategoryProducts({ filter: 'tshirts' }))
-            }
-          />
+        <main>
+          <Carousel />
+          <div className="container mb-32">
+            <div className="grid grid-cols-3 gap-8 my-20 md:grid-cols-1">
+              <CategoryCard
+                urlDirection="/products"
+                description={mockCarousel[0].description}
+                title={mockCarousel[0].title}
+                imgUrl={handleImgCategory('tshirts')}
+                onClick={() =>
+                  dispatch(filterCategoryProducts({ filter: 'tshirts' }))
+                }
+              />
 
-          <CategoryCard
-            urlDirection="/products"
-            description={mockCarousel[1].description}
-            title={mockCarousel[1].title}
-            imgUrl={handleImgCategory('pants')}
-            onClick={() =>
-              dispatch(filterCategoryProducts({ filter: 'pants' }))
-            }
-          />
+              <CategoryCard
+                urlDirection="/products"
+                description={mockCarousel[1].description}
+                title={mockCarousel[1].title}
+                imgUrl={handleImgCategory('pants')}
+                onClick={() =>
+                  dispatch(filterCategoryProducts({ filter: 'pants' }))
+                }
+              />
 
-          <CategoryCard
-            urlDirection="/products"
-            description={mockCarousel[2].description}
-            title={mockCarousel[2].title}
-            imgUrl={handleImgCategory('shoes')}
-            onClick={() =>
-              dispatch(filterCategoryProducts({ filter: 'shoes' }))
-            }
-          />
-        </div>
-        <ProductsComponent products={products} isTitle />
-      </main>
+              <CategoryCard
+                urlDirection="/products"
+                description={mockCarousel[2].description}
+                title={mockCarousel[2].title}
+                imgUrl={handleImgCategory('shoes')}
+                onClick={() =>
+                  dispatch(filterCategoryProducts({ filter: 'shoes' }))
+                }
+              />
+            </div>
+            <ProductsComponent products={products} isTitle />
+          </div>
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </>
   )
 }
